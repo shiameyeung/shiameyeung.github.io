@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>楊　天楽 のホームページ</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            /* 稍微缩小了间距，让社交链接更紧凑 */
+        }
+
+        /* 提取通用的社交链接样式 */
+        a.sns-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #24292e;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        a.sns-link:active {
+            transform: scale(0.98);
+        }
+
+        /* 为每个平台设置专属的 Hover 品牌色 */
+        a.github-link:hover {
+            color: #0366d6;
+        }
+
+        a.instagram-link:hover {
+            color: #E1306C;
+        }
+
+        a.jglobal-link:hover {
+            color: #004098;
+            /* JST 蓝色 */
+        }
+
+        a.wantedly-link:hover {
+            color: #20bca3;
+            /* Wantedly 标志性青绿色 */
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>楊　天楽</h1>
+    <p class="subtitle">ようこそ、私のポートフォリオへ</p>
+
+    <div class="links-container">
+
+        <a href="https://github.com/shiameyeung" target="_blank" class="sns-link github-link">
+            <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor">
+                <path
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub プロフィール
+        </a>
+
+        <a href="https://www.wantedly.com/id/yotenra" target="_blank" class="sns-link wantedly-link">
+            <svg height="24" width="24" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M20 7h-4V5c0-1.103-.897-2-2-2h-4c-1.103 0-2 .897-2 2v2H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V9c0-1.103-.897-2-2-2zM10 5h4v2h-4V5zm10 14H4V9h16v10z">
+                </path>
+                <path d="M11 11h2v4h-2z"></path>
+            </svg>
+            Wantedly プロフィール
+        </a>
+
+        <a href="https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202601017079474606" target="_blank"
+            class="sns-link jglobal-link">
+            <svg height="24" width="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 3v17a2 2 0 0 0 2 2h15v-2H5V3H3z"></path>
+                <path d="M8 3h13v15H8z"></path>
+                <path d="M10 6h9v2h-9zM10 10h9v2h-9zM10 14h6v2h-6z"></path>
+            </svg>
+            J-GLOBAL 研究者情報
+        </a>
+
+        <a href="https://www.instagram.com/tenra.yo/" target="_blank" class="sns-link instagram-link">
+            <svg height="24" width="24" viewBox="0 0 448 512" fill="currentColor">
+                <path
+                    d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z">
+                </path>
+            </svg>
+            Instagram (@tenra.yo)
+        </a>
+
+    </div>
+
+</body>
+
+</html>
