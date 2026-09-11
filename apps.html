@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>つくったもの — 楊　天楽</title>
-<meta name="description" content="自分のために作った Web アプリ四つと、修士研究の分析デモ。使う場面つき。">
+<meta name="description" content="自分で作った Web アプリと分析デモ。それぞれ使う場面つきで。">
 <meta property="og:title" content="つくったもの — 楊　天楽">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://yotenra.com/apps.html">
@@ -108,6 +108,25 @@ const APPS = [
             </div>
             <div class="ui-note">${t['aws.ui.sync']}</div>` ] },
 
+  { id:'corp', url:'https://github.com/shiameyeung/CorpLink-AI', host:'github.com/shiameyeung/CorpLink-AI', locked:false, mark:'🔍',
+    tint:'#f1efe6', tone:'#8a7534', paper:'#fdfcf7',
+    scenes:[
+      t => `<div class="ui-bar"><span class="ui-title">${t['corp.ui.in']}</span><span>37.8M</span></div>
+            <div class="ui-note">${t['corp.ui.raw']}</div>
+            <div class="ui-list">
+              <div class="ui-li"><span>LexisNexis</span><b>—</b></div>
+              <div class="ui-li"><span>Factiva</span><b>—</b></div>
+            </div>
+            <div class="ui-note">${t['corp.ui.problem']}</div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['corp.ui.pipe']}</span></div>
+            <div class="ui-row"><span class="ui-chip on">spaCy</span><span class="ui-note">${t['corp.ui.local']}</span></div>
+            <div class="ui-row"><span class="ui-chip on">DB</span><span class="ui-note">${t['corp.ui.cache']}</span></div>
+            <div class="ui-row"><span class="ui-chip">LLM</span><span class="ui-note">${t['corp.ui.only']}</span></div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['corp.ui.out']}</span></div>
+            <div class="ui-stat"><b>60,595</b><span class="ui-note">${t['corp.ui.ents']}</span></div>
+            <div class="ui-stat"><b>$0.25</b><span class="ui-note">${t['corp.ui.cost']}</span></div>
+            <div class="ui-note">${t['corp.ui.matrix']}</div>` ] },
+
   { id:'sna', url:'oss-dependency-sna/', host:'yotenra.com/oss-dependency-sna/', locked:false, mark:'🔗',
     tint:'#e9f0f8', tone:'#3a6ea5', paper:'#f9fbfd',
     scenes:[
@@ -136,7 +155,7 @@ function render(lang, t) {
         </div>
         <div>
           <a class="enter" href="${a.url}" target="_blank" rel="noopener">${t.enter}${ARROW}</a>
-          ${a.locked ? `<span class="locked">${LOCK}${t.locked}</span>` : `<span class="locked">${t.open}</span>`}
+          ${a.locked ? `<span class="locked">${LOCK}${t.locked}</span>` : `<span class="locked">${t[a.id + '.open'] || t.open}</span>`}
         </div>
       </div>
       <p class="app-desc">${t[a.id + '.desc']}</p>
@@ -155,7 +174,7 @@ function render(lang, t) {
 
 const T = {
   zh: {
-    'back':'返回','step':'步骤','enter':'打开','locked':'需要登录','open':'公开 Demo',
+    'back':'返回','step':'步骤','enter':'打开','locked':'需要登录','open':'公开','sna.open':'公开 Demo',
     'page.title':'我做的东西','page.lead':'都是先有自己的需求，才动手写的。下面按「什么时候会用到」分三步演示，界面文字跟着上方语言走。',
     'footer.left':'© 2026 楊 天楽','footer.right':'GitHub Pages 托管',
 
@@ -189,6 +208,15 @@ const T = {
     'aws.ui.why':'为什么选它、为什么不选别的','aws.ui.review':'错题本',
     'aws.ui.t1':'存储','aws.ui.t2':'网络','aws.ui.t3':'安全','aws.ui.sync':'进度跨设备同步 · 可离线',
 
+    'corp.title':'CorpLink-AI · 从新闻里抽企业关系',
+    'corp.desc':'研究室要把新闻数据变成能做社会网络分析的邻接矩阵，原本靠人手清洗，成本高、标准也不齐。做成 Web 应用后，非技术背景的同学也能直接用。',
+    'corp.s1':'输入是 LexisNexis、Factiva 这类非结构化新闻，三千七百多万字。企业名有大量别称和简称，直接喂给大模型既贵又不稳。',
+    'corp.s2':'先用本地 NLP 挑出真正含合作语义的句子，本地库里命中的直接复用，只有新出现的复杂别称才调一次 API，结果再写回库。',
+    'corp.s3':'单核 2GB 的机器上跑了三小时零四分，抽出六万条企业名。全文直接喂模型要九百多美元，这条路走下来是 0.25 美元。',
+    'corp.ui.in':'输入','corp.ui.raw':'非结构化新闻全文','corp.ui.problem':'别称、简称、媒体噪声',
+    'corp.ui.pipe':'处理流程','corp.ui.local':'先在本地挑句子','corp.ui.cache':'命中就复用','corp.ui.only':'只给新别称',
+    'corp.ui.out':'产出','corp.ui.ents':'条企业名','corp.ui.cost':'API 花费','corp.ui.matrix':'可直接用于网络分析的邻接矩阵',
+
     'sna.title':'OSS 依赖网络分析 Demo',
     'sna.desc':'硕士研究。把开源生态的依赖关系画成网络，用中心性等指标找出关键包和断点。诊断文字由规则和模板生成，不经过 AI。',
     'sna.s1':'先选生态和指标：数据科学系还是云原生系，看被依赖数还是中介中心性。',
@@ -200,7 +228,7 @@ const T = {
   },
 
   en: {
-    'back':'Back','step':'Step','enter':'Open','locked':'Sign-in required','open':'Public demo',
+    'back':'Back','step':'Step','enter':'Open','locked':'Sign-in required','open':'Public','sna.open':'Public demo',
     'page.title':'What I’ve built','page.lead':'Each one started from something I needed. Below, each app is shown in three steps of everyday use. The screens follow the language you pick above.',
     'footer.left':'© 2026 Yo Tenra','footer.right':'Hosted on GitHub Pages',
 
@@ -234,6 +262,15 @@ const T = {
     'aws.ui.why':'Why this one, and why not the others','aws.ui.review':'Review list',
     'aws.ui.t1':'Storage','aws.ui.t2':'Network','aws.ui.t3':'Security','aws.ui.sync':'Syncs across devices · works offline',
 
+    'corp.title':'CorpLink-AI · Company relationships from news',
+    'corp.desc':'The lab needed news text turned into an adjacency matrix for network analysis. Doing it by hand was expensive and inconsistent. It is a web app now, so people with no technical background can run it themselves.',
+    'corp.s1':'The input is 37.8 million characters of unstructured news from LexisNexis and Factiva. The same company turns up under many aliases and abbreviations, so sending all of it to a model would be costly and unreliable.',
+    'corp.s2':'A local NLP pass keeps only the sentences that describe a partnership. Names already in the database are reused. The API is called only when an alias is new, and the result goes back into the database.',
+    'corp.s3':'Three hours and four minutes on a single-core machine with 2 GB of memory produced 60,595 company names. Sending the full text to a model would have cost over $900. This route came to $0.25.',
+    'corp.ui.in':'Input','corp.ui.raw':'Unstructured news text','corp.ui.problem':'Aliases, abbreviations, wire-service noise',
+    'corp.ui.pipe':'Pipeline','corp.ui.local':'Filter sentences locally','corp.ui.cache':'Reuse known names','corp.ui.only':'New aliases only',
+    'corp.ui.out':'Output','corp.ui.ents':'company names','corp.ui.cost':'API cost','corp.ui.matrix':'Adjacency matrix, ready for network analysis',
+
     'sna.title':'OSS Dependency Network Demo',
     'sna.desc':'From my master’s research. Open-source dependencies drawn as a network, where centrality measures point to the packages everything leans on and the ones that would split the graph. The readings come from rules and templates, not a model.',
     'sna.s1':'Start by choosing an ecosystem and a measure: data science or cloud native, dependents or betweenness.',
@@ -245,7 +282,7 @@ const T = {
   },
 
   ja: {
-    'back':'もどる','step':'STEP','enter':'ひらく','locked':'ログインが必要','open':'公開デモ',
+    'back':'もどる','step':'STEP','enter':'ひらく','locked':'ログインが必要','open':'公開','sna.open':'公開デモ',
     'page.title':'つくったもの','page.lead':'どれも、自分が困ったところから始まっています。下では、それぞれを「使う場面」の三コマで見せます。画面の中の文字も、上で選んだ言語に合わせて変わります。',
     'footer.left':'© 2026 楊 天楽','footer.right':'GitHub Pages で公開',
 
@@ -278,6 +315,15 @@ const T = {
     'aws.ui.stem':'ゾーンをまたいで可用性を保つ保存先…','aws.ui.oa':'単一 AZ のインスタンスストア','aws.ui.ob':'複数 AZ のマネージド保存',
     'aws.ui.why':'なぜこれで、なぜ他は違うのか','aws.ui.review':'復習リスト',
     'aws.ui.t1':'ストレージ','aws.ui.t2':'ネットワーク','aws.ui.t3':'セキュリティ','aws.ui.sync':'端末をまたいで同期・オフライン可',
+
+    'corp.title':'CorpLink-AI｜ニュースから企業どうしの関係を取り出す',
+    'corp.desc':'研究室では、ニュース記事からネットワーク分析用の隣接行列を作る必要がありました。手作業では費用がかさみ、判断の基準もそろいません。Web アプリにして、技術に詳しくないメンバーでもそのまま使えるようにしました。',
+    'corp.s1':'入力は LexisNexis や Factiva の記事全文、3,780 万字。企業名は別名や略称だらけです。まるごとモデルに渡すと、費用がふくらみ、結果もぶれます。',
+    'corp.s2':'まず手元の NLP で、提携を示す文だけを選びます。すでに DB にある名前はそのまま使い、初めて見る別名に限って API を一度呼びます。結果は DB に書き戻します。',
+    'corp.s3':'1 コア・2GB のマシンで 3 時間 4 分、企業名は 60,595 件。全文をモデルに入れれば 900 ドルを超える見込みでしたが、実際にかかったのは 0.25 ドルでした。',
+    'corp.ui.in':'入力','corp.ui.raw':'ニュース記事の全文','corp.ui.problem':'別名・略称・配信元のノイズ',
+    'corp.ui.pipe':'処理の流れ','corp.ui.local':'まず手元で文を選ぶ','corp.ui.cache':'DB にある名前はそのまま','corp.ui.only':'初めて見る別名だけ',
+    'corp.ui.out':'出力','corp.ui.ents':'件の企業名','corp.ui.cost':'API 費用','corp.ui.matrix':'そのまま分析に使える隣接行列',
 
     'sna.title':'OSS 依存ネットワークの分析デモ',
     'sna.desc':'修士研究です。オープンソースの依存関係をネットワークとして描き、中心性などの指標から、広く頼られているパッケージと、抜けると分断される箇所を見つけます。説明の文章はルールとテンプレートで組み立てています。',
