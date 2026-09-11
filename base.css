@@ -1,0 +1,80 @@
+:root{
+  --ink:#23201f; --muted:#6f6763; --line:#e7e0d9; --bg:#fbf9f6; --card:#fff;
+  --accent:#2f6f5e; --accent-soft:#eef4f1;
+  --radius:20px;
+  --latin:"Helvetica Neue",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* 中日で同じ字形になると、どちらの読者にも違和感が残る：言語ごとに和文フォントを切り替える。
+   palt（詰め組み）は日本語だけ。中国語にかけると句読点が半角のように見える。 */
+body{margin:0;color:var(--ink);background:var(--bg);line-height:1.75;letter-spacing:.01em;
+     font-family:var(--latin),"Hiragino Sans","Noto Sans JP",sans-serif;position:relative;z-index:0}
+html[lang^="ja"] body{font-family:var(--latin),"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",Meiryo,sans-serif;
+                      font-feature-settings:"palt"}
+html[lang^="zh"] body{font-family:var(--latin),"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif}
+html[lang^="en"] body{font-family:var(--latin),sans-serif}
+a{color:inherit}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px}
+
+.langbar{display:flex;justify-content:flex-end;gap:4px;padding:20px 0 0}
+.langbar button{font:inherit;font-size:13px;padding:6px 13px;border:1px solid transparent;border-radius:999px;
+                background:none;color:var(--muted);cursor:pointer;transition:background .15s,color .15s}
+.langbar button:hover{background:#f2ede7;color:var(--ink)}
+.langbar button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+
+/* ── トップ：名刺として読める並び ── */
+.card-me{display:flex;align-items:center;gap:34px;padding:44px 0 46px;position:relative}
+.card-me::before{content:'';position:absolute;inset:-30px -12% 0 -12%;z-index:-1;pointer-events:none;
+  background:radial-gradient(42% 62% at 80% 20%,#f6dfe9aa,transparent 70%),
+             radial-gradient(38% 55% at 58% 74%,#dcecdfaa,transparent 70%);
+  filter:blur(6px)}
+.portrait{flex:0 0 148px;width:148px;height:148px;border-radius:50%;overflow:hidden;background:#efe7e0;
+          box-shadow:0 8px 26px #b9a79c33;position:relative}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait.empty img{display:none}
+.portrait.empty::after{content:'楊';position:absolute;inset:0;display:grid;place-items:center;font-size:52px;color:#c3b4aa}
+.me-body{min-width:0}
+.name{font-size:clamp(30px,5.4vw,44px);line-height:1.2;margin:0 0 14px;letter-spacing:.06em;font-weight:700}
+.name .romaji{display:block;font-size:13px;letter-spacing:.2em;color:var(--muted);font-weight:500;margin-top:10px}
+.tagline{font-size:clamp(14.5px,2vw,16.5px);color:var(--muted);margin:0;max-width:32em}
+
+section{padding:44px 0}
+section+section{border-top:1px solid var(--line)}
+.card-me+section{border-top:1px solid var(--line)}
+.section-label{font-size:12px;letter-spacing:.18em;color:var(--accent);margin:0 0 18px;font-weight:600}
+
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:11px}
+.links a{display:flex;align-items:center;gap:13px;padding:15px 17px;background:var(--card);
+         border:1px solid var(--line);border-radius:15px;text-decoration:none;transition:border-color .15s,transform .15s}
+.links a:hover{border-color:#cfc5ba;transform:translateY(-1px)}
+.links svg{width:19px;height:19px;flex:0 0 19px;color:var(--muted)}
+.links span{display:flex;flex-direction:column;min-width:0}
+.links strong{font-size:14.5px;font-weight:600}
+.links small{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.big-button{display:flex;align-items:center;gap:18px;padding:22px 26px;background:var(--card);
+            border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;
+            transition:border-color .15s,transform .15s,box-shadow .15s}
+.big-button:hover{border-color:#c6bcaf;transform:translateY(-2px);box-shadow:0 10px 26px #b9a79c22}
+.bb-icon{flex:0 0 46px;width:46px;height:46px;border-radius:14px;background:var(--accent-soft);
+         display:grid;place-items:center;color:var(--accent)}
+.bb-icon svg{width:23px;height:23px}
+.bb-text{display:flex;flex-direction:column;min-width:0;flex:1}
+.bb-text strong{font-size:17px;letter-spacing:.03em}
+.bb-text small{font-size:13px;color:var(--muted)}
+.bb-arrow{width:19px;height:19px;color:var(--accent);flex:0 0 19px}
+
+footer{padding:34px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;
+       display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media(max-width:760px){
+  .wrap{padding:0 18px}
+  .card-me{flex-direction:column;align-items:flex-start;gap:22px;padding:26px 0 32px}
+  .portrait{flex-basis:112px;width:112px;height:112px}
+  section{padding:32px 0}
+  .big-button{padding:18px 18px;gap:14px}
+  .bb-icon{flex-basis:40px;width:40px;height:40px}
+  .bb-text strong{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}

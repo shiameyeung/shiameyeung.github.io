@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>つくったもの — 楊　天楽</title>
+<meta name="description" content="自分のために作った Web アプリ四つと、修士研究の分析デモ。使う場面つき。">
+<meta property="og:title" content="つくったもの — 楊　天楽">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yotenra.com/apps.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌿%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="apps.css">
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="langbar" aria-label="Language">
+    <button type="button" data-lang="zh" lang="zh-Hans">简体中文</button>
+    <button type="button" data-lang="en" lang="en">English</button>
+    <button type="button" data-lang="ja" lang="ja">日本語</button>
+  </nav>
+
+  <a class="back" href="index.html">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10H5M9 5.5 4.5 10 9 14.5"/></svg>
+    <span data-t="back"></span></a>
+
+  <header class="page-head">
+    <h1 data-t="page.title"></h1>
+    <p data-t="page.lead"></p>
+  </header>
+
+  <main id="apps"></main>
+
+  <footer>
+    <span data-t="footer.left"></span>
+    <span data-t="footer.right"></span>
+  </footer>
+</div>
+
+<script src="shared.js"></script>
+<script>
+const ARROW = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg>';
+const LOCK  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg>';
+
+// 各アプリ：色と、三コマぶんの画面の作り方。文字は t から引くので言語と一緒に変わる。
+const APPS = [
+  { id:'ootd', url:'https://ootd.yotenra.com', host:'ootd.yotenra.com', locked:true, mark:'👚',
+    tint:'#fbeaf1', tone:'#a4527c', paper:'#fefafc',
+    scenes:[
+      t => `<div class="ui-bar"><span class="ui-title">${t['ootd.ui.title']}</span><span>${t['ootd.ui.date']}</span></div>
+            <div class="ui-note">${t['ootd.ui.season']}</div>
+            <div class="ui-thumbs"><i class="ui-thumb"></i><i class="ui-thumb"></i><i class="ui-thumb"></i><i class="ui-thumb"></i></div>
+            <div class="ui-note">${t['ootd.ui.hint']}</div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['ootd.ui.title']}</span><span>${t['ootd.ui.picked']}</span></div>
+            <div class="ui-thumbs"><i class="ui-thumb pick"></i><i class="ui-thumb pick"></i><i class="ui-thumb"></i><i class="ui-thumb"></i></div>
+            <div class="ui-btn">${t['ootd.ui.record']}</div>
+            <div class="ui-note">${t['ootd.ui.once']}</div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['ootd.ui.review']}</span></div>
+            <div class="ui-stat"><b>¥89,210</b><span class="ui-note">${t['ootd.ui.total']}</span></div>
+            <div class="ui-stat"><b>508</b><span class="ui-note">${t['ootd.ui.unworn']}</span></div>
+            <div class="ui-bars">
+              <div class="ui-barline"><span class="ui-note">9</span><span class="ui-track"><i class="ui-fill" style="width:72%"></i></span></div>
+              <div class="ui-barline"><span class="ui-note">10</span><span class="ui-track"><i class="ui-fill" style="width:44%"></i></span></div>
+              <div class="ui-barline"><span class="ui-note">11</span><span class="ui-track"><i class="ui-fill" style="width:86%"></i></span></div>
+            </div>` ] },
+
+  { id:'cal', url:'https://cal.yotenra.com', host:'cal.yotenra.com', locked:true, mark:'🍑',
+    tint:'#eaf3ea', tone:'#5d8b5f', paper:'#fafcf9',
+    scenes:[
+      t => `<div class="ui-bar"><span class="ui-title">${t['cal.ui.add']}</span></div>
+            <div class="ui-chip" style="width:100%;text-align:left">${t['cal.ui.search']}</div>
+            <div class="ui-list">
+              <div class="ui-li"><span>${t['cal.ui.f1']}</span><b>168 kcal</b></div>
+              <div class="ui-li"><span>${t['cal.ui.f2']}</span><b>240 kcal</b></div>
+              <div class="ui-li"><span>${t['cal.ui.f3']}</span><b>96 kcal</b></div>
+            </div>
+            <div class="ui-note">${t['cal.ui.own']}</div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['cal.ui.today']}</span><span>${t['cal.ui.jst']}</span></div>
+            <div class="ui-ring"><span>1280</span></div>
+            <div class="ui-note" style="text-align:center">${t['cal.ui.goal']}</div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['cal.ui.trend']}</span><span>30</span></div>
+            <div class="ui-bars">
+              <div class="ui-barline"><span class="ui-note">75.1</span><span class="ui-track"><i class="ui-fill" style="width:92%"></i></span></div>
+              <div class="ui-barline"><span class="ui-note">74.8</span><span class="ui-track"><i class="ui-fill" style="width:78%"></i></span></div>
+              <div class="ui-barline"><span class="ui-note">74.6</span><span class="ui-track"><i class="ui-fill" style="width:64%"></i></span></div>
+              <div class="ui-barline"><span class="ui-note">74.4</span><span class="ui-track"><i class="ui-fill" style="width:52%"></i></span></div>
+            </div>
+            <div class="ui-note">${t['cal.ui.calc']}</div>` ] },
+
+  { id:'aws', url:'https://aws.yotenra.com', host:'aws.yotenra.com', locked:true, mark:'☁️',
+    tint:'#eeecfa', tone:'#6a5ab0', paper:'#fbfaff',
+    scenes:[
+      t => `<div class="ui-bar"><span class="ui-title">SAA-C03</span><span>${t['aws.ui.lang']}</span></div>
+            <div class="ui-row"><span class="ui-chip on">${t['aws.ui.l1']}</span><span class="ui-chip">${t['aws.ui.l2']}</span><span class="ui-chip">${t['aws.ui.l3']}</span></div>
+            <div class="ui-note">${t['aws.ui.pick']}</div>
+            <div class="ui-btn">${t['aws.ui.start']}</div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['aws.ui.q']}</span><span>12 / 65</span></div>
+            <div class="ui-note">${t['aws.ui.stem']}</div>
+            <div class="ui-opt">A. ${t['aws.ui.oa']}</div>
+            <div class="ui-opt right">B. ${t['aws.ui.ob']}</div>
+            <div class="ui-note">${t['aws.ui.why']}</div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['aws.ui.review']}</span><span>8</span></div>
+            <div class="ui-list">
+              <div class="ui-li"><span>${t['aws.ui.t1']}</span><b>3</b></div>
+              <div class="ui-li"><span>${t['aws.ui.t2']}</span><b>3</b></div>
+              <div class="ui-li"><span>${t['aws.ui.t3']}</span><b>2</b></div>
+            </div>
+            <div class="ui-note">${t['aws.ui.sync']}</div>` ] },
+
+  { id:'sna', url:'oss-dependency-sna/', host:'yotenra.com/oss-dependency-sna/', locked:false, mark:'🔗',
+    tint:'#e9f0f8', tone:'#3a6ea5', paper:'#f9fbfd',
+    scenes:[
+      t => `<div class="ui-bar"><span class="ui-title">${t['sna.ui.title']}</span><span>709</span></div>
+            <div class="ui-row"><span class="ui-chip on">${t['sna.ui.d1']}</span><span class="ui-chip">${t['sna.ui.d2']}</span></div>
+            <div class="ui-row"><span class="ui-chip on">${t['sna.ui.m1']}</span><span class="ui-chip">${t['sna.ui.m2']}</span></div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['sna.ui.graph']}</span></div>
+            <div class="ui-graph"></div>
+            <div class="ui-note">${t['sna.ui.cut']}</div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['sna.ui.top']}</span></div>
+            <div class="ui-list">
+              <div class="ui-li"><span>numpy</span><b>178</b></div>
+              <div class="ui-li"><span>typing-extensions</span><b>78</b></div>
+              <div class="ui-li"><span>packaging</span><b>74</b></div>
+            </div>
+            <div class="ui-note">${t['sna.ui.rule']}</div>` ] },
+];
+
+function render(lang, t) {
+  document.getElementById('apps').innerHTML = APPS.map(a => `
+    <section class="app" style="--tint:${a.tint};--tone:${a.tone};--paper:${a.paper}">
+      <div class="app-head">
+        <div class="app-title">
+          <span class="app-badge" aria-hidden="true">${a.mark}</span>
+          <div><h2>${t[a.id + '.title']}</h2><p class="host">${a.host}</p></div>
+        </div>
+        <div>
+          <a class="enter" href="${a.url}" target="_blank" rel="noopener">${t.enter}${ARROW}</a>
+          ${a.locked ? `<span class="locked">${LOCK}${t.locked}</span>` : `<span class="locked">${t.open}</span>`}
+        </div>
+      </div>
+      <p class="app-desc">${t[a.id + '.desc']}</p>
+      <div class="scenes">
+        ${a.scenes.map((build, i) => `
+          <article class="scene">
+            <div class="ui">${build(t)}</div>
+            <div class="scene-body">
+              <div class="scene-step">${t.step} ${i + 1}</div>
+              <p class="scene-cap">${t[a.id + '.s' + (i + 1)]}</p>
+            </div>
+          </article>`).join('')}
+      </div>
+    </section>`).join('');
+}
+
+const T = {
+  zh: {
+    'back':'返回','step':'步骤','enter':'打开','locked':'需要登录','open':'公开 Demo',
+    'page.title':'我做的东西','page.lead':'都是先有自己的需求，才动手写的。下面按「什么时候会用到」分三步演示，界面文字跟着上方语言走。',
+    'footer.left':'© 2026 楊 天楽','footer.right':'GitHub Pages 托管',
+
+    'ootd.title':'OOTD · 我的衣橱',
+    'ootd.desc':'把买过的衣服和彩妆建成档案，记下每天穿了什么，再算出每件的单次成本。购物订单能直接导进来，标签由 AI 先标好，风格和配色在衣服与彩妆之间共用一套。',
+    'ootd.s1':'早上出门前打开，「今天穿了什么」已经把当季还没上身的、最近常穿的排在前面，不用在五百多件里翻。',
+    'ootd.s2':'点两下选中今天这身，一次记完。同一件同一天只算一次，重复点也不会多加。',
+    'ootd.s3':'过一阵看消费回顾：这一季花了多少、哪些买了还没穿过，点进去就是那份清单。',
+    'ootd.ui.title':'今天穿了什么','ootd.ui.date':'9月11日','ootd.ui.season':'当季 · 还没穿过',
+    'ootd.ui.hint':'点一下就记','ootd.ui.picked':'已选 2 件','ootd.ui.record':'记录今天穿了',
+    'ootd.ui.once':'同一天只算一次','ootd.ui.review':'消费回顾','ootd.ui.total':'合计',
+    'ootd.ui.unworn':'件还没穿过',
+
+    'cal.title':'CalTracker · 要杜杜，不要肚肚',
+    'cal.desc':'按日本时间记录每天吃了多少、体重多少，看三十天的趋势。食品库可以搜索和自定义，每天的目标按原本用惯的表格公式算。',
+    'cal.s1':'吃完一餐搜一下，选好份量加进去。常吃的自己存一条，下次直接点。',
+    'cal.s2':'当天总热量立刻更新，环里是已经吃掉的部分。跨日按日本时间切，凌晨吃的还算前一天。',
+    'cal.s3':'三十天的体重和热量摆在一起看趋势，每天的目标沿用原来表格里的公式，不另起一套。',
+    'cal.ui.add':'添加记录','cal.ui.search':'搜索食品…','cal.ui.f1':'蒸蛋','cal.ui.f2':'鸡胸肉','cal.ui.f3':'味噌汤',
+    'cal.ui.own':'也可以自己加一条','cal.ui.today':'今天','cal.ui.jst':'日本时间','cal.ui.goal':'目标 2000 kcal',
+    'cal.ui.trend':'体重趋势','cal.ui.calc':'目标按原表公式推算',
+
+    'aws.title':'AWS Pass It',
+    'aws.desc':'自己考 AWS 认证时做的刷题应用。题目和术语表都有中英日三份，做错的题会留在错题本里，进度跨设备同步，离线也能刷。',
+    'aws.s1':'选题库和语言。同一道题可以换语言看，术语表也跟着换，不确定的词当场能查。',
+    'aws.s2':'答完立刻给对错和解释。选项写清楚为什么对、为什么不对，不只是标个答案。',
+    'aws.s3':'错的题自动进错题本，按知识点归类。通勤路上刷，进度跨设备同步，没信号也能继续。',
+    'aws.ui.lang':'语言','aws.ui.l1':'中文','aws.ui.l2':'English','aws.ui.l3':'日本語',
+    'aws.ui.pick':'选一个题库开始','aws.ui.start':'开始练习','aws.ui.q':'题目',
+    'aws.ui.stem':'需要跨可用区的高可用存储…','aws.ui.oa':'单可用区实例存储','aws.ui.ob':'多可用区托管存储',
+    'aws.ui.why':'为什么选它、为什么不选别的','aws.ui.review':'错题本',
+    'aws.ui.t1':'存储','aws.ui.t2':'网络','aws.ui.t3':'安全','aws.ui.sync':'进度跨设备同步 · 可离线',
+
+    'sna.title':'OSS 依赖网络分析 Demo',
+    'sna.desc':'硕士研究。把开源生态的依赖关系画成网络，用中心性等指标找出关键包和断点。诊断文字由规则和模板生成，不经过 AI。',
+    'sna.s1':'先选生态和指标：数据科学系还是云原生系，看被依赖数还是中介中心性。',
+    'sna.s2':'网络图里，圈越大越被依赖，黄圈是断点——去掉它，图就断成几块。',
+    'sna.s3':'右边是排行和诊断。同样的数据永远得到同样的结论，因为文字是规则加模板拼的，不经过模型。',
+    'sna.ui.title':'领域与指标','sna.ui.d1':'数据科学系','sna.ui.d2':'云原生系',
+    'sna.ui.m1':'被依赖数','sna.ui.m2':'中介中心性','sna.ui.graph':'网络图',
+    'sna.ui.cut':'黄圈 = 去掉会让图断开','sna.ui.top':'被依赖数 Top','sna.ui.rule':'诊断由规则生成，不用 AI',
+  },
+
+  en: {
+    'back':'Back','step':'Step','enter':'Open','locked':'Sign-in required','open':'Public demo',
+    'page.title':'What I’ve built','page.lead':'Each one started from something I needed. Below, each app is shown in three steps of everyday use. The screens follow the language you pick above.',
+    'footer.left':'© 2026 Yo Tenra','footer.right':'Hosted on GitHub Pages',
+
+    'ootd.title':'OOTD · My Wardrobe',
+    'ootd.desc':'Every piece of clothing and makeup I own, with what I wore each day and what each piece costs per wear. Orders import straight from the shops I buy from. Tags come pre-filled by AI. Clothing and makeup share one vocabulary of style and colour.',
+    'ootd.s1':'Open it before heading out. What I haven’t worn this season, and what I reach for often, come first — no scrolling through five hundred items.',
+    'ootd.s2':'Two taps to mark today’s outfit. A piece counts once per day, so tapping twice changes nothing.',
+    'ootd.s3':'Later, the spending view shows what the season cost and how much of it has never been worn. The number is a link to that list.',
+    'ootd.ui.title':'Worn today','ootd.ui.date':'11 Sep','ootd.ui.season':'In season · not worn yet',
+    'ootd.ui.hint':'One tap to log','ootd.ui.picked':'2 selected','ootd.ui.record':'Log today',
+    'ootd.ui.once':'Once per day','ootd.ui.review':'Spending','ootd.ui.total':'total',
+    'ootd.ui.unworn':'never worn',
+
+    'cal.title':'CalTracker',
+    'cal.desc':'Daily calories and weight on Japan time, with thirty-day trends. The food list is searchable, and I can add to it. The daily target uses the same formula as the spreadsheet I kept before.',
+    'cal.s1':'After a meal, search the food and pick the portion. Anything I eat often I save once, then tap it next time.',
+    'cal.s2':'The day’s total updates right away; the ring shows how much is used. Days break on Japan time, so a late-night snack still counts as yesterday.',
+    'cal.s3':'Weight and calories sit side by side over thirty days. The daily target follows my old spreadsheet formula rather than a new one.',
+    'cal.ui.add':'Add entry','cal.ui.search':'Search food…','cal.ui.f1':'Steamed egg','cal.ui.f2':'Chicken breast','cal.ui.f3':'Miso soup',
+    'cal.ui.own':'Or add your own','cal.ui.today':'Today','cal.ui.jst':'Japan time','cal.ui.goal':'Target 2,000 kcal',
+    'cal.ui.trend':'Weight trend','cal.ui.calc':'Target from the original formula',
+
+    'aws.title':'AWS Pass It',
+    'aws.desc':'A practice app I wrote while studying for an AWS certification. The questions and glossary come in Chinese, English and Japanese. Wrong answers stay in a review list, progress syncs across devices, and the app works offline.',
+    'aws.s1':'Pick a question bank and a language. The same question can be read in another language, and the glossary follows, so an unfamiliar term is one tap away.',
+    'aws.s2':'Answers are marked straight away, with a reason for the right option and for each wrong one.',
+    'aws.s3':'Missed questions go to a review list, grouped by topic. Practise on the train — progress syncs across devices and works without a signal.',
+    'aws.ui.lang':'Language','aws.ui.l1':'中文','aws.ui.l2':'English','aws.ui.l3':'日本語',
+    'aws.ui.pick':'Choose a bank to start','aws.ui.start':'Start practice','aws.ui.q':'Question',
+    'aws.ui.stem':'Highly available storage across zones…','aws.ui.oa':'Single-AZ instance store','aws.ui.ob':'Multi-AZ managed storage',
+    'aws.ui.why':'Why this one, and why not the others','aws.ui.review':'Review list',
+    'aws.ui.t1':'Storage','aws.ui.t2':'Network','aws.ui.t3':'Security','aws.ui.sync':'Syncs across devices · works offline',
+
+    'sna.title':'OSS Dependency Network Demo',
+    'sna.desc':'From my master’s research. Open-source dependencies drawn as a network, where centrality measures point to the packages everything leans on and the ones that would split the graph. The readings come from rules and templates, not a model.',
+    'sna.s1':'Start by choosing an ecosystem and a measure: data science or cloud native, dependents or betweenness.',
+    'sna.s2':'In the graph, a larger circle means more packages depend on it. Circled in yellow are the cut points — remove one and the graph falls apart.',
+    'sna.s3':'The panel on the right ranks and explains. The same data always gives the same reading, because the text is assembled from rules rather than generated.',
+    'sna.ui.title':'Ecosystem and measure','sna.ui.d1':'Data science','sna.ui.d2':'Cloud native',
+    'sna.ui.m1':'Dependents','sna.ui.m2':'Betweenness','sna.ui.graph':'Network',
+    'sna.ui.cut':'Yellow = removing it splits the graph','sna.ui.top':'Most depended on','sna.ui.rule':'Readings from rules, no AI',
+  },
+
+  ja: {
+    'back':'もどる','step':'STEP','enter':'ひらく','locked':'ログインが必要','open':'公開デモ',
+    'page.title':'つくったもの','page.lead':'どれも、自分が困ったところから始まっています。下では、それぞれを「使う場面」の三コマで見せます。画面の中の文字も、上で選んだ言語に合わせて変わります。',
+    'footer.left':'© 2026 楊 天楽','footer.right':'GitHub Pages で公開',
+
+    'ootd.title':'OOTD・わたしのクローゼット',
+    'ootd.desc':'持っている服とコスメを登録して、その日着たものと、一回あたりの値段を残しています。買い物の履歴はそのまま取り込めます。タグは AI が先に付けます。スタイルと色の分類は服とコスメで共通です。',
+    'ootd.s1':'出かける前にひらくと、今の季節でまだ着ていないものと、よく着るものが先に並びます。五百点の中から探さずにすみます。',
+    'ootd.s2':'その日の組み合わせを二回タップして、まとめて記録。同じものは一日に一回しか数えないので、押しすぎても増えません。',
+    'ootd.s3':'しばらくして「消費のふりかえり」を見ると、この季節にいくら使って、そのうち何着がまだ袖を通していないかが出ます。数字はそのまま一覧に飛べます。',
+    'ootd.ui.title':'今日着たもの','ootd.ui.date':'9月11日','ootd.ui.season':'今の季節・未着用',
+    'ootd.ui.hint':'タップで記録','ootd.ui.picked':'2点えらび中','ootd.ui.record':'今日の分を記録',
+    'ootd.ui.once':'一日一回まで','ootd.ui.review':'ふりかえり','ootd.ui.total':'合計',
+    'ootd.ui.unworn':'点が未着用',
+
+    'cal.title':'CalTracker',
+    'cal.desc':'その日のカロリーと体重を日本時間で記録して、30日分の推移を見ます。食品は検索でき、自分で足せます。一日の目標は、もともと使っていた表計算の式そのままです。',
+    'cal.s1':'食べ終わったら検索して、量を選んで足すだけ。よく食べるものは一度登録しておけば、次からは一回のタップで入ります。',
+    'cal.s2':'その日の合計はすぐ更新されます。輪は食べた分。日付の変わり目は日本時間なので、夜中に食べた分も前の日に入ります。',
+    'cal.s3':'体重とカロリーを30日ぶん並べて見ます。一日の目標は、新しく決め直さず、もとの表計算の式をそのまま使っています。',
+    'cal.ui.add':'記録をたす','cal.ui.search':'食品をさがす…','cal.ui.f1':'茶碗蒸し','cal.ui.f2':'鶏むね肉','cal.ui.f3':'味噌汁',
+    'cal.ui.own':'自分で足すこともできます','cal.ui.today':'今日','cal.ui.jst':'日本時間','cal.ui.goal':'目標 2,000 kcal',
+    'cal.ui.trend':'体重の推移','cal.ui.calc':'目標はもとの式から',
+
+    'aws.title':'AWS Pass It',
+    'aws.desc':'AWS の資格を受けるときに作った問題演習アプリです。問題と用語集は中国語・英語・日本語の三言語。間違えたものは復習リストに残ります。進捗は端末をまたいで同期します。オフラインでも解けます。',
+    'aws.s1':'問題集と言語を選びます。同じ問題を別の言語でも読めて、用語集も一緒に切り替わるので、分からない語はその場で引けます。',
+    'aws.s2':'答えるとすぐ正誤が出ます。なぜその選択肢なのか、他がなぜ違うのかまで出します。',
+    'aws.s3':'間違えたものは分野ごとに復習リストへ。通勤中に解いて、進捗は端末をまたいで同期します。電波がなくても続けられます。',
+    'aws.ui.lang':'言語','aws.ui.l1':'中文','aws.ui.l2':'English','aws.ui.l3':'日本語',
+    'aws.ui.pick':'問題集を選んではじめる','aws.ui.start':'はじめる','aws.ui.q':'問題',
+    'aws.ui.stem':'ゾーンをまたいで可用性を保つ保存先…','aws.ui.oa':'単一 AZ のインスタンスストア','aws.ui.ob':'複数 AZ のマネージド保存',
+    'aws.ui.why':'なぜこれで、なぜ他は違うのか','aws.ui.review':'復習リスト',
+    'aws.ui.t1':'ストレージ','aws.ui.t2':'ネットワーク','aws.ui.t3':'セキュリティ','aws.ui.sync':'端末をまたいで同期・オフライン可',
+
+    'sna.title':'OSS 依存ネットワークの分析デモ',
+    'sna.desc':'修士研究です。オープンソースの依存関係をネットワークとして描き、中心性などの指標から、広く頼られているパッケージと、抜けると分断される箇所を見つけます。説明の文章はルールとテンプレートで組み立てています。',
+    'sna.s1':'まず領域と指標を選びます。データサイエンス系かクラウドネイティブ系か、被依存数か媒介中心性か。',
+    'sna.s2':'図では、丸が大きいほど多くから頼られています。黄色い丸は切断点で、抜くとネットワークが分かれます。',
+    'sna.s3':'右側に順位と読み取りが出ます。文章はルールとテンプレートの組み立てなので、同じデータなら何度やっても同じ結論になります。',
+    'sna.ui.title':'領域と指標','sna.ui.d1':'データサイエンス系','sna.ui.d2':'クラウドネイティブ系',
+    'sna.ui.m1':'被依存数','sna.ui.m2':'媒介中心性','sna.ui.graph':'ネットワーク図',
+    'sna.ui.cut':'黄色 = 抜くと分断される','sna.ui.top':'被依存数の上位','sna.ui.rule':'読み取りはルールで生成・AI 不使用',
+  },
+};
+
+Site.mount(T, render);
+</script>
+</body>
+</html>
