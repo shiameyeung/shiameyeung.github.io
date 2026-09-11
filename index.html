@@ -1,125 +1,288 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>楊　天楽 のホームページ</title>
-    <style>
-        body {
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            text-align: center;
-            margin: 0;
-            padding: 60px 20px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>楊　天楽</title>
+<meta name="description" content="楊 天楽 のホームページ。自分のために作った Web アプリと、修士研究のデモ。">
+<meta property="og:title" content="楊　天楽">
+<meta property="og:description" content="自分のために作った Web アプリと、修士研究のデモ。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yotenra.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌿%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --ink:#23201f; --muted:#6f6763; --line:#e7e0d9; --bg:#fbf9f6; --card:#fff;
+    --accent:#2f6f5e; --accent-soft:#eef4f1;
+    --radius:20px;
+    --latin:"Helvetica Neue",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  /* 中日で同じ字形になると、どちらの読者にも違和感が残る：言語ごとに和文フォントを切り替える。
+     palt（詰め組み）は日本語だけ。中国語にかけると句読点が半角のように見える。 */
+  body{margin:0;color:var(--ink);background:var(--bg);line-height:1.75;letter-spacing:.01em;
+       font-family:var(--latin),"Hiragino Sans","Noto Sans JP",sans-serif}
+  html[lang^="ja"] body{font-family:var(--latin),"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",Meiryo,sans-serif;
+                        font-feature-settings:"palt"}
+  html[lang^="zh"] body{font-family:var(--latin),"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif}
+  html[lang^="en"] body{font-family:var(--latin),sans-serif}
+  a{color:inherit}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
 
-        h1 {
-            font-size: 32px;
-            color: #1a1a1a;
-            margin-bottom: 10px;
-        }
+  /* 語言切り替え：右上に固定せず、内容の一部として置く */
+  .langbar{display:flex;justify-content:flex-end;gap:4px;padding:20px 0 0}
+  .langbar button{font:inherit;font-size:13px;padding:6px 13px;border:1px solid transparent;border-radius:999px;
+                  background:none;color:var(--muted);cursor:pointer;transition:background .15s,color .15s}
+  .langbar button:hover{background:#f2ede7;color:var(--ink)}
+  .langbar button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
 
-        p.subtitle {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 40px;
-        }
+  header{padding:64px 0 66px;border-bottom:1px solid var(--line);position:relative}
+  header::before{content:'';position:absolute;inset:-40px -30% 0 -10%;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(42% 62% at 82% 18%,#f6dfe9aa,transparent 70%),
+      radial-gradient(38% 55% at 62% 72%,#dcecdfaa,transparent 70%),
+      radial-gradient(34% 50% at 96% 62%,#e2e0f3aa,transparent 70%);
+    filter:blur(6px)}
+  body{position:relative;z-index:0}
+  .name{font-size:clamp(34px,6vw,52px);line-height:1.2;margin:0 0 16px;letter-spacing:.06em;font-weight:700}
+  .name .romaji{display:block;font-size:14px;letter-spacing:.2em;color:var(--muted);font-weight:500;margin-top:12px}
+  .tagline{font-size:clamp(15px,2.2vw,18px);color:var(--muted);margin:0;max-width:34em}
 
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            /* 稍微缩小了间距，让社交链接更紧凑 */
-        }
+  section{padding:60px 0}
+  section+section{border-top:1px solid var(--line)}
+  .eyebrow{font-size:12px;letter-spacing:.18em;color:var(--accent);margin:0 0 10px;font-weight:600}
+  h2{font-size:clamp(22px,3.4vw,28px);margin:0 0 10px;letter-spacing:.04em}
+  .lead{color:var(--muted);margin:0 0 34px;max-width:40em}
 
-        /* 提取通用的社交链接样式 */
-        a.sns-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: #24292e;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            transition: color 0.3s, transform 0.2s;
-        }
+  .works{display:grid;gap:26px}
+  .work{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+        display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+  .work:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+  .work:nth-child(even) .shot{order:2}
+  .shot{background:#f4f0ec;overflow:hidden;display:block}
+  .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:var(--pos,center top)}
+  .work-body{padding:30px 30px 28px;display:flex;flex-direction:column;gap:12px}
+  .work h3{margin:0;font-size:20px;letter-spacing:.03em}
+  .work .sub{margin:0;color:var(--muted);font-size:13px}
+  .work p.desc{margin:0;font-size:14.5px;color:#4a4340}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+  .tags span{font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:#fdfcfa}
+  .work-links{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:auto;padding-top:6px}
+  .go{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;color:var(--accent);text-decoration:none}
+  .go:hover{text-decoration:underline}
+  .go svg{width:14px;height:14px}
+  .note{font-size:12px;color:var(--muted);display:inline-flex;align-items:center;gap:5px}
+  .note svg{width:12px;height:12px;opacity:.7}
 
-        a.sns-link:active {
-            transform: scale(0.98);
-        }
+  .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+  .links a{display:flex;align-items:center;gap:12px;padding:16px 18px;background:var(--card);
+           border:1px solid var(--line);border-radius:15px;text-decoration:none;font-size:14.5px;transition:border-color .15s,transform .15s}
+  .links a:hover{border-color:#cfc5ba;transform:translateY(-1px)}
+  .links svg{width:19px;height:19px;flex:0 0 19px;color:var(--muted)}
 
-        /* 为每个平台设置专属的 Hover 品牌色 */
-        a.github-link:hover {
-            color: #0366d6;
-        }
+  footer{padding:44px 0 56px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;
+         justify-content:space-between;gap:16px;flex-wrap:wrap}
 
-        a.instagram-link:hover {
-            color: #E1306C;
-        }
-
-        a.jglobal-link:hover {
-            color: #004098;
-            /* JST 蓝色 */
-        }
-
-        a.wantedly-link:hover {
-            color: #20bca3;
-            /* Wantedly 标志性青绿色 */
-        }
-
-    </style>
+  @media(max-width:760px){
+    .wrap{padding:0 18px}
+    header{padding:34px 0 42px}
+    section{padding:44px 0}
+    .work,.work:nth-child(even){grid-template-columns:1fr}
+    .work:nth-child(even) .shot{order:0}
+    .shot img{height:auto;aspect-ratio:16/10}
+    .work-body{padding:22px 20px 24px}
+    .works{gap:20px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
-
 <body>
+<div class="wrap">
 
-    <h1>楊　天楽</h1>
-    <p class="subtitle">ようこそ、私のポートフォリオへ</p>
+  <nav class="langbar" aria-label="Language">
+    <button type="button" data-lang="zh" lang="zh-Hans">简体中文</button>
+    <button type="button" data-lang="en" lang="en">English</button>
+    <button type="button" data-lang="ja" lang="ja">日本語</button>
+  </nav>
 
-    <div class="links-container">
+  <header>
+    <h1 class="name"><span data-t="name">楊　天楽</span><span class="romaji" data-t="romaji"></span></h1>
+    <p class="tagline" data-t="tagline"></p>
+  </header>
 
-        <a href="https://github.com/shiameyeung" target="_blank" class="sns-link github-link">
-            <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor">
-                <path
-                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-                </path>
-            </svg>
-            GitHub プロフィール
-        </a>
+  <section id="works">
+    <p class="eyebrow" data-t="works.eyebrow"></p>
+    <h2 data-t="works.title"></h2>
+    <p class="lead" data-t="works.lead"></p>
+    <div class="works" id="work-list"></div>
+  </section>
 
-        <a href="https://www.wantedly.com/id/yotenra" target="_blank" class="sns-link wantedly-link">
-            <svg height="24" width="24" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                    d="M20 7h-4V5c0-1.103-.897-2-2-2h-4c-1.103 0-2 .897-2 2v2H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V9c0-1.103-.897-2-2-2zM10 5h4v2h-4V5zm10 14H4V9h16v10z">
-                </path>
-                <path d="M11 11h2v4h-2z"></path>
-            </svg>
-            Wantedly プロフィール
-        </a>
-
-        <a href="https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202601017079474606" target="_blank"
-            class="sns-link jglobal-link">
-            <svg height="24" width="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3 3v17a2 2 0 0 0 2 2h15v-2H5V3H3z"></path>
-                <path d="M8 3h13v15H8z"></path>
-                <path d="M10 6h9v2h-9zM10 10h9v2h-9zM10 14h6v2h-6z"></path>
-            </svg>
-            J-GLOBAL 研究者情報
-        </a>
-
-        <a href="https://www.instagram.com/tenra.yo/" target="_blank" class="sns-link instagram-link">
-            <svg height="24" width="24" viewBox="0 0 448 512" fill="currentColor">
-                <path
-                    d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z">
-                </path>
-            </svg>
-            Instagram (@tenra.yo)
-        </a>
-
+  <section id="links">
+    <p class="eyebrow" data-t="links.eyebrow"></p>
+    <h2 data-t="links.title"></h2>
+    <p class="lead" data-t="links.lead"></p>
+    <div class="links">
+      <a href="https://github.com/shiameyeung" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        <span data-t="links.github"></span></a>
+      <a href="https://www.wantedly.com/id/yo_tenra" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+        <span data-t="links.wantedly"></span></a>
+      <a href="https://jglobal.jst.go.jp/search/researchers?q=%E6%A5%8A%20%E5%A4%A9%E6%A5%BD" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5V5.5Z"/><path d="M20 18v3H6.5"/></svg>
+        <span data-t="links.jglobal"></span></a>
+      <a href="https://www.instagram.com/tenra.yo/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+        <span data-t="links.instagram"></span></a>
     </div>
+  </section>
 
+  <footer>
+    <span data-t="footer.left"></span>
+    <span data-t="footer.right"></span>
+  </footer>
+</div>
+
+<script>
+const ARROW = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg>';
+const LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg>';
+
+const WORKS = [
+  { id:'ootd', url:'https://ootd.yotenra.com', shot:'assets/ootd-items.jpg', pos:'70% top', private:true,
+    tags:['Cloudflare Workers (Python)','SQLite Durable Object','R2','MCP'] },
+  { id:'ootd2', url:'https://ootd.yotenra.com', shot:'assets/ootd-spending.jpg', skip:true },
+  { id:'cal', url:'https://cal.yotenra.com', shot:'assets/cal-og.jpg', pos:'center center', private:true,
+    tags:['Next.js','Cloudflare D1','Drizzle ORM'] },
+  { id:'aws', url:'https://aws.yotenra.com', shot:'assets/aws-og.jpg', pos:'center center', private:true,
+    tags:['Cloudflare Pages','Workers KV','PWA'] },
+  { id:'sna', url:'oss-dependency-sna/', shot:'assets/oss-demo.jpg', pos:'center center', private:false,
+    tags:['NetworkX','D3.js','GitHub Pages'] },
+];
+
+const T = {
+  zh: {
+    'name':'楊　天楽','romaji':'YO TENRA',
+    'tagline':'把每天都要做的事，写成自己真的会用的工具。这里放我做的几个 Web 应用，和硕士研究的分析 Demo。',
+    'works.eyebrow':'作品',
+    'works.title':'我做的东西',
+    'works.lead':'都是先有自己的需求，才动手写的。前三个存着个人数据，需要登录才能进；研究 Demo 可以直接打开。',
+    'links.eyebrow':'联系',
+    'links.title':'在别处找我',
+    'links.lead':'代码、职业经历、研究信息和日常。',
+    'links.github':'GitHub','links.wantedly':'Wantedly','links.jglobal':'J-GLOBAL 研究者信息','links.instagram':'Instagram',
+    'footer.left':'© 2026 楊 天楽','footer.right':'用 Cloudflare 与 GitHub Pages 托管',
+    'open':'打开','private':'需要登录','demo':'公开 Demo',
+    'ootd.title':'OOTD · 我的衣橱',
+    'ootd.sub':'ootd.yotenra.com',
+    'ootd.desc':'把买过的衣服和彩妆建成档案，记下每天穿了什么，再算出每件的单次成本。购物订单能直接导进来，标签由 AI 先标好，风格和配色在衣服与彩妆之间共用一套，所以选好一身衣服可以顺着找妆。',
+    'cal.title':'CalTracker · 要杜杜，不要肚肚',
+    'cal.sub':'cal.yotenra.com',
+    'cal.desc':'按日本时间记录每天吃了多少、体重多少，看三十天的趋势。食品库可以搜索和自定义，每天的目标按原本用惯的表格公式算。',
+    'aws.title':'AWS Pass It',
+    'aws.sub':'aws.yotenra.com',
+    'aws.desc':'自己考 AWS 认证时做的刷题应用。题目和术语表都有中英日三份，做错的题会留在错题本里，进度跨设备同步，离线也能刷。',
+    'sna.title':'OSS 依赖网络分析 Demo',
+    'sna.sub':'硕士研究',
+    'sna.desc':'把开源生态的依赖关系画成网络，用中心性等指标找出关键包和断点。诊断文字由规则和模板生成，不经过 AI，同样的数据永远得到同样的结论。',
+  },
+  en: {
+    'name':'Yo Tenra','romaji':'楊　天楽',
+    'tagline':'I build small tools for the things I do every day. Here are a few web apps I made for myself, plus the demo from my master’s research.',
+    'works.eyebrow':'WORK',
+    'works.title':'What I’ve built',
+    'works.lead':'Each one started from something I needed. The first three hold personal data and ask you to sign in. The research demo is open to anyone.',
+    'links.eyebrow':'ELSEWHERE',
+    'links.title':'Find me',
+    'links.lead':'Code, career, research and everyday life.',
+    'links.github':'GitHub','links.wantedly':'Wantedly','links.jglobal':'J-GLOBAL researcher profile','links.instagram':'Instagram',
+    'footer.left':'© 2026 Yo Tenra','footer.right':'Hosted on Cloudflare and GitHub Pages',
+    'open':'Open','private':'Sign-in required','demo':'Public demo',
+    'ootd.title':'OOTD · My Wardrobe',
+    'ootd.sub':'ootd.yotenra.com',
+    'ootd.desc':'Every piece of clothing and makeup I own, with what I wore each day and what each piece costs per wear. Orders import straight from the shops I buy from. Tags come pre-filled by AI. Clothing and makeup share one vocabulary of style and colour, so picking an outfit also narrows down the makeup.',
+    'cal.title':'CalTracker',
+    'cal.sub':'cal.yotenra.com',
+    'cal.desc':'Daily calories and weight on Japan time, with thirty-day trends. The food list is searchable, and I can add to it. The daily target uses the same formula as the spreadsheet I kept before.',
+    'aws.title':'AWS Pass It',
+    'aws.sub':'aws.yotenra.com',
+    'aws.desc':'A practice app I wrote while studying for an AWS certification. The questions and glossary come in Chinese, English and Japanese. Wrong answers stay in a review list, progress syncs across devices, and the app works offline.',
+    'sna.title':'OSS Dependency Network Demo',
+    'sna.sub':'Master’s research',
+    'sna.desc':'Open-source dependencies drawn as a network. Centrality measures point to the packages everything leans on, and to the ones that would split the graph. The readings come from rules and templates rather than a model, so the same data always gives the same conclusion.',
+  },
+  ja: {
+    'name':'楊　天楽','romaji':'YO TENRA',
+    'tagline':'毎日くり返すことを、自分が本当に使う道具にしています。ここに置いてあるのは、自分のために作った Web アプリと、修士研究のデモです。',
+    'works.eyebrow':'制作',
+    'works.title':'つくったもの',
+    'works.lead':'どれも、自分が困ったところから始まっています。上の三つは中身が個人の記録なので、ログインが要ります。研究のデモはそのまま開けます。',
+    'links.eyebrow':'リンク',
+    'links.title':'ほかの場所',
+    'links.lead':'コード、経歴、研究、日常。',
+    'links.github':'GitHub','links.wantedly':'Wantedly','links.jglobal':'J-GLOBAL 研究者情報','links.instagram':'Instagram',
+    'footer.left':'© 2026 楊 天楽','footer.right':'Cloudflare と GitHub Pages で公開',
+    'open':'ひらく','private':'ログインが必要','demo':'公開デモ',
+    'ootd.title':'OOTD・わたしのクローゼット',
+    'ootd.sub':'ootd.yotenra.com',
+    'ootd.desc':'持っている服とコスメを登録して、その日着たものと、一回あたりの値段を残しています。買い物の履歴はそのまま取り込めます。タグは AI が先に付けます。スタイルと色の分類は服とコスメで共通なので、服を選ぶとコスメも一緒に絞り込めます。',
+    'cal.title':'CalTracker',
+    'cal.sub':'cal.yotenra.com',
+    'cal.desc':'その日のカロリーと体重を日本時間で記録して、30日分の推移を見ます。食品は検索でき、自分で足せます。一日の目標は、もともと使っていた表計算の式そのままです。',
+    'aws.title':'AWS Pass It',
+    'aws.sub':'aws.yotenra.com',
+    'aws.desc':'AWS の資格を受けるときに作った問題演習アプリです。問題と用語集は中国語・英語・日本語の三言語。間違えたものは復習リストに残ります。進捗は端末をまたいで同期します。オフラインでも解けます。',
+    'sna.title':'OSS 依存ネットワークの分析デモ',
+    'sna.sub':'修士研究',
+    'sna.desc':'オープンソースの依存関係をネットワークとして描きます。中心性などの指標から、広く頼られているパッケージと、抜けると分断される箇所を見つけます。説明の文章はルールとテンプレートで組み立てていて、モデルは使っていません。同じデータなら、何度やっても同じ結論になります。',
+  },
+};
+
+function renderWorks(lang) {
+  const t = T[lang];
+  document.getElementById('work-list').innerHTML = WORKS.filter(w => !w.skip).map(w => `
+    <article class="work">
+      <a class="shot" href="${w.url}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+        <img src="${w.shot}" alt="" loading="lazy" decoding="async" style="--pos:${w.pos || 'center top'}">
+      </a>
+      <div class="work-body">
+        <h3>${t[w.id + '.title']}</h3>
+        <p class="sub">${t[w.id + '.sub']}</p>
+        <p class="desc">${t[w.id + '.desc']}</p>
+        <div class="tags">${(w.tags || []).map(x => `<span>${x}</span>`).join('')}</div>
+        <div class="work-links">
+          <a class="go" href="${w.url}" target="_blank" rel="noopener">${t.open}${ARROW}</a>
+          <span class="note">${w.private ? LOCK + t.private : t.demo}</span>
+        </div>
+      </div>
+    </article>`).join('');
+}
+
+function apply(lang) {
+  const t = T[lang];
+  document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : lang;
+  document.querySelectorAll('[data-t]').forEach(el => { const v = t[el.dataset.t]; if (v !== undefined) el.textContent = v; });
+  document.querySelectorAll('.langbar button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+  renderWorks(lang);
+  try { localStorage.setItem('yotenra.lang', lang); } catch (_) { /* プライベートモードでは記憶しない */ }
+}
+
+function initialLang() {
+  try { const saved = localStorage.getItem('yotenra.lang'); if (T[saved]) return saved; } catch (_) {}
+  for (const l of navigator.languages || [navigator.language || '']) {
+    const code = l.toLowerCase();
+    if (code.startsWith('ja')) return 'ja';
+    if (code.startsWith('zh')) return 'zh';
+    if (code.startsWith('en')) return 'en';
+  }
+  return 'ja';
+}
+
+document.querySelector('.langbar').addEventListener('click', e => {
+  const b = e.target.closest('[data-lang]');
+  if (b) apply(b.dataset.lang);
+});
+apply(initialLang());
+</script>
 </body>
-
 </html>
