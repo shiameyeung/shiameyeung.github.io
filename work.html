@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>やっていること — 楊　天楽</title>
+<meta name="description" content="企業データ抽出パイプラインの開発と精度改善。進め方だけを書いています。">
+<meta property="og:title" content="やっていること — 楊　天楽">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yotenra.com/work.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌿%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="apps.css">
+<link rel="stylesheet" href="work.css">
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="langbar" aria-label="Language">
+    <button type="button" data-lang="zh" lang="zh-Hans">简体中文</button>
+    <button type="button" data-lang="en" lang="en">English</button>
+    <button type="button" data-lang="ja" lang="ja">日本語</button>
+  </nav>
+
+  <a class="back" href="index.html">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10H5M9 5.5 4.5 10 9 14.5"/></svg>
+    <span data-t="back"></span></a>
+
+  <header class="page-head">
+    <h1 data-t="page.title"></h1>
+    <p data-t="page.lead"></p>
+  </header>
+
+  <main id="jobs"></main>
+
+  <section class="method">
+    <h2 data-t="method.title"></h2>
+    <p data-t="method.body"></p>
+  </section>
+
+  <footer>
+    <span data-t="footer.left"></span>
+    <span data-t="footer.right"></span>
+  </footer>
+</div>
+
+<script src="shared.js"></script>
+<script>
+// 四つの仕事。右の図は画面写真ではなく HTML で組む：文字は t から引くので言語と一緒に変わる。
+const JOBS = [
+  { id:'m1', mark:'⛏', tint:'#e8f0e8', tone:'#4f7a58', paper:'#fafcfa',
+    figure: t => `<div class="flow">
+      <div class="flow-step">${t['m1.f1']}</div><i class="flow-arrow"></i>
+      <div class="flow-step">${t['m1.f2']}</div><i class="flow-arrow"></i>
+      <div class="flow-step">${t['m1.f3']}</div><i class="flow-arrow"></i>
+      <div class="flow-step done">${t['m1.f4']}</div></div>` },
+
+  { id:'m2', mark:'📏', tint:'#eceaf4', tone:'#5d5789', paper:'#fbfafd',
+    figure: t => `<div class="ui-bar"><span class="ui-title">${t['m2.d.title']}</span></div>
+      <div class="ui-bars">
+        <div class="ui-barline"><span>${t['m2.d.before']}</span><span class="ui-track"><i class="ui-fill" style="width:52%"></i></span></div>
+        <div class="ui-barline"><span>${t['m2.d.after']}</span><span class="ui-track"><i class="ui-fill" style="width:84%"></i></span></div>
+      </div>
+      <div class="ui-note">${t['m2.d.same']}</div>
+      <div class="ui-note">${t['m2.d.worse']}</div>` },
+
+  { id:'m3', mark:'⚖️', tint:'#f6ece2', tone:'#9a6435', paper:'#fdfaf7',
+    figure: t => `<div class="ui-bar"><span class="ui-title">${t['m3.d.title']}</span></div>
+      <div class="ui-opt right">${t['m3.d.rule']}</div>
+      <div class="ui-note">${t['m3.d.else']}</div>
+      <div class="ui-opt">${t['m3.d.model']}</div>
+      <div class="ui-opt">${t['m3.d.guard']}</div>` },
+
+  { id:'m4', mark:'🧹', tint:'#f9e9ec', tone:'#a1526a', paper:'#fefafb',
+    figure: t => `<div class="ui-bar"><span class="ui-title">${t['m4.d.title']}</span></div>
+      <div class="layers">
+        <div class="layer"><b>1</b><span>${t['m4.d.l1']}</span></div>
+        <div class="layer"><b>2</b><span>${t['m4.d.l2']}</span></div>
+        <div class="layer"><b>3</b><span>${t['m4.d.l3']}</span></div>
+      </div>
+      <div class="ui-note">${t['m4.d.note']}</div>` },
+];
+
+function render(lang, t) {
+  document.getElementById('jobs').innerHTML = JOBS.map(j => `
+    <section class="job" style="--tint:${j.tint};--tone:${j.tone};--paper:${j.paper}">
+      <div class="job-head">
+        <span class="app-badge" aria-hidden="true">${j.mark}</span>
+        <div><h2>${t[j.id + '.title']}</h2><p class="step">${t[j.id + '.sub']}</p></div>
+      </div>
+      <div class="job-body">
+        <p>${t[j.id + '.desc']}</p>
+        <div class="ui">${j.figure(t)}</div>
+      </div>
+    </section>`).join('');
+}
+
+const T = {
+  zh: {
+    'back':'返回',
+    'page.title':'我在做的事',
+    'page.lead':'我在 Baseconnect 做企业数据抽取 pipeline 的开发和精度改善。这页写的是做法本身，具体的数据和公司内部系统的名字不写在这里。',
+    'm1.title':'把公开信息变成能用的数据','m1.sub':'收集 → 抽取 → 校验 → 入库',
+    'm1.desc':'企业的信息散在官网和各种页面里，写法各不相同。我做的是这条流水线本身：页面怎么取回来，一段话里哪部分该填进哪个字段，写进库之前拿什么去验。',
+    'm1.f1':'收集','m1.f2':'抽取','m1.f3':'校验','m1.f4':'入库',
+    'm2.title':'先能量出来，再谈改好了','m2.sub':'正解数据与判定基准',
+    'm2.desc':'「感觉变准了」不算数。先把正解数据和判定基准定下来，改动前后用同一把尺子量。只看变好的部分不够，被改坏的地方也要一起看。没量过的改动不上线。',
+    'm2.d.title':'同一把尺子','m2.d.before':'改动前','m2.d.after':'改动后',
+    'm2.d.same':'同一份正解数据','m2.d.worse':'也要看被改坏的',
+    'm3.title':'能写成规则的，不交给模型','m3.sub':'规则 → 模型 → 检查',
+    'm3.desc':'能用确定的条件判断的部分就写成规则：结果稳定，错了也查得出是哪一步。剩下那段没法穷举的才交给模型。模型给的结果再过一道检查，明显不对的拦住不放行。',
+    'm3.d.title':'怎么分工','m3.d.rule':'规则能定 → 直接确定','m3.d.else':'定不了的才往下走',
+    'm3.d.model':'交给模型','m3.d.guard':'结果再过一道检查',
+    'm4.title':'修一条，就把同一类都修掉','m4.sub':'三段检查',
+    'm4.desc':'发现一条错的，先数清同一类在全量里有多少，再把修法写成能重跑的形式，而不是手工改那几条。采集和入库两处也要拦住，不然修完还会再流进来。',
+    'm4.d.title':'三段检查','m4.d.l1':'采集时就拦住','m4.d.l2':'入库时再核一遍','m4.d.l3':'存量成批修复',
+    'm4.d.note':'修完要能再跑一次确认',
+    'method.title':'做法',
+    'method.body':'每个结论都要指得出证据：日志的哪一行、数出来多少件、改动前后差了多少。指不出来的，就是还没查完。',
+    'footer.left':'© 2026 楊 天楽','footer.right':'GitHub Pages 托管',
+  },
+  en: {
+    'back':'Back',
+    'page.title':'What I work on',
+    'page.lead':'At Baseconnect I develop the company-data extraction pipeline and work on its accuracy. This page is about how the work is done; it leaves out the data itself and the names of internal systems.',
+    'm1.title':'Turning public information into usable data','m1.sub':'Collect → Extract → Verify → Store',
+    'm1.desc':'Company information sits across official sites and all kinds of pages, written in no consistent format. My work is the pipeline itself: how a page is fetched, which part of a sentence belongs in which field, and what the result is checked against before it lands in the database.',
+    'm1.f1':'Collect','m1.f2':'Extract','m1.f3':'Verify','m1.f4':'Store',
+    'm2.title':'Make it measurable before fixing it','m2.sub':'Ground truth and judging criteria',
+    'm2.desc':'“It feels better” is not evidence. Ground truth and judging criteria come first, then the same yardstick is used before and after. Looking only at what improved is not enough: what got worse has to be counted too. A change that has not been measured does not ship.',
+    'm2.d.title':'Same yardstick','m2.d.before':'Before','m2.d.after':'After',
+    'm2.d.same':'Same ground-truth set','m2.d.worse':'Count what got worse, too',
+    'm3.title':'If a rule can decide it, the model should not','m3.sub':'Rules → Model → Checks',
+    'm3.desc':'Anything that can be decided by a fixed condition is written as a rule: the result is stable, and when it is wrong you can tell which step got it wrong. Only the part that cannot be enumerated goes to the model, and what comes back passes through checks that stop the obvious errors.',
+    'm3.d.title':'Who decides what','m3.d.rule':'A rule can decide it → settled','m3.d.else':'Only the rest goes on',
+    'm3.d.model':'Hand it to the model','m3.d.guard':'Run the result past checks',
+    'm4.title':'Fix one, fix the whole class','m4.sub':'Checks at three stages',
+    'm4.desc':'When one bad row turns up, the first job is counting how many of the same kind exist across the whole dataset. The fix is written so it can be run again, not applied by hand to a few rows. Collecting and loading need their own checks too, or the same errors come straight back.',
+    'm4.d.title':'Three stages','m4.d.l1':'Stop it while collecting','m4.d.l2':'Check again on the way in','m4.d.l3':'Repair what is already stored',
+    'm4.d.note':'Re-run afterwards to confirm',
+    'method.title':'How I work',
+    'method.body':'Every conclusion should point at its evidence: which log line, how many rows when counted, how far the numbers moved before and after. If a conclusion cannot do that, the digging is not finished.',
+    'footer.left':'© 2026 Yo Tenra','footer.right':'Hosted on GitHub Pages',
+  },
+  ja: {
+    'back':'もどる',
+    'page.title':'やっていること',
+    'page.lead':'Baseconnect で企業データ抽出パイプラインの開発と精度改善を担当しています。ここに書くのは進め方だけで、扱っているデータや社内システムの名前は出していません。',
+    'm1.title':'公開情報を、使えるデータにする','m1.sub':'収集 → 抽出 → 検証 → 反映',
+    'm1.desc':'企業の情報は公式サイトやいろいろなページに散らばっていて、書き方もばらばらです。担当しているのはその流れ自体で、どう取ってくるか、文章のどこをどの項目として読むか、入れる前に何と突き合わせて確かめるかを作っています。',
+    'm1.f1':'収集','m1.f2':'抽出','m1.f3':'検証','m1.f4':'反映',
+    'm2.title':'測れるようにしてから、直す','m2.sub':'正解データと判定基準',
+    'm2.desc':'「よくなった気がする」は根拠になりません。先に正解データと判定基準を決めて、変更の前後を同じ物差しで測ります。よくなった所だけ見ても足りず、悪くなった所も数えます。測っていない変更は出しません。',
+    'm2.d.title':'同じ物差し','m2.d.before':'変更前','m2.d.after':'変更後',
+    'm2.d.same':'同じ正解データで','m2.d.worse':'悪くなった所も数える',
+    'm3.title':'規則で書けるものは、モデルに渡さない','m3.sub':'規則 → モデル → 検査',
+    'm3.desc':'決まった条件で判断できる所は規則にします。結果が安定しますし、間違えた時にどこで間違えたかをたどれます。数え上げられない所だけモデルに任せ、返ってきた結果は検査に通して、明らかな誤りはそこで止めます。',
+    'm3.d.title':'どこまでを誰が決めるか','m3.d.rule':'規則で決まる → 確定','m3.d.else':'決まらない分だけ先へ',
+    'm3.d.model':'モデルに任せる','m3.d.guard':'結果を検査に通す',
+    'm4.title':'一件直すときは、同じ型をまとめて直す','m4.sub':'三段のチェック',
+    'm4.desc':'誤りを一件見つけたら、まず同じ型が全体に何件あるかを数えます。直し方は何度でも実行できる形にして、手で数件だけ直すことはしません。集める所と入れる所でも止めておかないと、直したそばからまた入ってきます。',
+    'm4.d.title':'三段のチェック','m4.d.l1':'集める時に止める','m4.d.l2':'入れる時にもう一度見る','m4.d.l3':'入っている分をまとめて直す',
+    'm4.d.note':'直した後にもう一度数える',
+    'method.title':'進め方',
+    'method.body':'どの結論にも根拠を出せるようにしています。ログのどの行か、数えて何件か、前後でどれだけ動いたか。出せないものは、まだ調べ終わっていないということです。',
+    'footer.left':'© 2026 楊 天楽','footer.right':'GitHub Pages で公開',
+  },
+};
+Site.mount(T, render);
+</script>
+</body>
+</html>

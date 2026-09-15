@@ -1,0 +1,30 @@
+/* 仕事ページ。図は画面写真ではなく HTML で組む：言語を切り替えると図の中の文字も変わる。 */
+.job{padding:42px 0;border-top:1px solid var(--line)}
+.job-head{display:flex;align-items:center;gap:13px;margin-bottom:14px}
+.job-head h2{margin:0;font-size:20px;letter-spacing:.03em}
+.job-head .step{margin:2px 0 0;font-size:12px;color:var(--muted);letter-spacing:.06em}
+.job-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:26px;align-items:start}
+.job-body p{margin:0;color:#4a4340;font-size:14.5px;max-width:40em}
+
+/* 流れ：上から下へ四段 */
+.flow{display:flex;flex-direction:column;gap:0}
+.flow-step{border:1px solid #e3d9d1;background:#fff;border-radius:9px;padding:7px 10px;font-size:11px;text-align:center}
+.flow-step.done{border-color:var(--tone,#555);background:var(--tint,#eee);font-weight:700;color:var(--tone,#555)}
+.flow-arrow{height:13px;width:1px;margin:0 auto;background:#d9cec5;position:relative}
+.flow-arrow::after{content:'';position:absolute;left:-3px;bottom:0;border:3px solid transparent;border-top-color:#d9cec5}
+
+/* 三つの防線：外から内へ */
+.layers{display:flex;flex-direction:column;gap:7px}
+.layer{display:flex;align-items:center;gap:9px;border:1px solid #e3d9d1;background:#fff;border-radius:9px;padding:7px 10px;font-size:11px}
+.layer b{flex:0 0 19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:10px;
+         background:var(--tint,#eee);color:var(--tone,#555)}
+
+.method{border-top:1px solid var(--line);padding:38px 0 8px}
+.method h2{margin:0 0 10px;font-size:17px;letter-spacing:.03em}
+.method p{margin:0;color:#4a4340;font-size:14.5px;max-width:40em}
+
+@media(max-width:860px){
+  .job{padding:32px 0}
+  .job-body{grid-template-columns:1fr;gap:18px}
+  .job-body .ui{max-width:340px}
+}
