@@ -41,6 +41,7 @@
 
   <footer>
     <span data-t="footer.left"></span>
+    <a class="text-link" href="resume.html" data-t="resume.button">職務経歴書</a>
     <span data-t="footer.right"></span>
   </footer>
 </div>
@@ -129,7 +130,7 @@ const T = {
     "m3.d.guard": "检查输出与原文是否一致",
     "m4.title": "从一条错误追查到一类问题",
     "m4.sub": "确认范围、批量修复、检查结果",
-    "m4.desc": "发现错误后，我会检查同类问题的范围，区分需要修复的数据与应该保留的正常数据，再通过可重复执行的流程批量处理。修复后重新检查结果，并回到采集或入库环节寻找防止复发的办法。",
+    "m4.desc": "发现错误后，我会检查同类问题的范围，区分需要修复的数据与应该保留的正常数据。我参与历史数据修复的调查、材料准备、执行协调和结果核对，由有权限的同事执行处理。修复后重新检查结果，并回到采集或入库环节寻找防止复发的办法。",
     "m4.d.title": "修复与预防",
     "m4.d.l1": "检查采集环节",
     "m4.d.l2": "完善入库校验",
@@ -147,7 +148,8 @@ const T = {
     "m5.desc": "数据质量调查会跨多轮对话推进。为了减少反复说明和信息遗漏，我为自己搭建了带数据库的进度面板，把问题、证据、状态和后续动作存下来。新会话可以先读记录，再继续调查；已有记录也能不断补充和修正。它用于我的个人工作。",
     "m5.f1": "记录问题与依据",
     "m5.f2": "查看进展与下一步",
-    "m5.f3": "继续调查，补充记录"
+    "m5.f3": "继续调查，补充记录",
+    "resume.button": "简历"
   },
   "en": {
     "back": "Back",
@@ -178,7 +180,7 @@ const T = {
     "m3.d.guard": "Check outputs against the source",
     "m4.title": "Following one error to a wider pattern",
     "m4.sub": "Find the scope, repair the data, check the result",
-    "m4.desc": "When I find an error, I investigate how far the same issue extends and distinguish records that need repair from those that should be kept. I then use a repeatable process to repair affected records in batches, check the results and look for ways to prevent a recurrence during collection or storage.",
+    "m4.desc": "When I find an error, I investigate how far the same issue extends and distinguish records that need repair from those that should be kept. I help prepare historical-data corrections, coordinate execution with authorised colleagues, and check results and outstanding issues.",
     "m4.d.title": "Repair and prevention",
     "m4.d.l1": "Review data collection",
     "m4.d.l2": "Improve checks before storage",
@@ -196,7 +198,8 @@ const T = {
     "footer.right": "Hosted on GitHub Pages",
     "figure.note": "Illustrative workflow.",
     "meta.title": "Work — Yo Tenra",
-    "meta.description": "My internship work at Baseconnect: investigating company data errors, designing evaluations, choosing between rules and models, and repairing data."
+    "meta.description": "My internship work at Baseconnect: investigating company data errors, designing evaluations, choosing between rules and models, and repairing data.",
+    "resume.button": "Résumé"
   },
   "ja": {
     "back": "戻る",
@@ -227,7 +230,7 @@ const T = {
     "m3.d.guard": "出力が原文と合っているか確認",
     "m4.title": "一件の誤りから、同じ原因の問題を探る",
     "m4.sub": "範囲を調べ、まとめて修正し、結果を確かめる",
-    "m4.desc": "誤りを見つけたら、同じような問題がどこまで広がっているかを調べます。修正が必要なデータと、そのまま残すべき正しいデータを分け、繰り返し実行できる手順でまとめて処理します。修正後の結果を確かめたうえで、収集や保存の段階に戻り、再発を防ぐ方法も検討します。",
+    "m4.desc": "誤りを見つけたら、同じような問題がどこまで広がっているかを調べます。既存データの修正に向けた調査、実行資料の準備、担当者との調整、処理後の結果確認に携わっています。実装にはAIを活用し、レビューや本番環境での実行を担う同僚と協力して進めています。",
     "m4.d.title": "修正と再発防止",
     "m4.d.l1": "収集時の処理を確認",
     "m4.d.l2": "保存前のチェックを改善",
@@ -245,7 +248,8 @@ const T = {
     "footer.right": "GitHub Pages で公開",
     "figure.note": "図は処理の流れを示したものです。",
     "meta.title": "仕事での取り組み — 楊 天楽",
-    "meta.description": "Baseconnect での企業データ抽出・品質改善への取り組みを紹介します。原因の調査、評価方法の設計、ルールとモデルの選択、既存データの修正など。"
+    "meta.description": "Baseconnect での企業データ抽出・品質改善への取り組みを紹介します。原因の調査、評価方法の設計、ルールとモデルの選択、既存データの修正など。",
+    "resume.button": "職務経歴書"
   }
 };
 Site.mount(T, render);

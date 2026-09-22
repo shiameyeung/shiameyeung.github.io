@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>職務経歴書 — 楊 天楽</title>
+<meta name="description" content="関西大学大学院の修士課程に在籍し、Baseconnect でインターンをしています。企業データの品質改善、研究用ツール、学習や日々の暮らしのためにつくったアプリを紹介します。">
+<meta property="og:title" content="職務経歴書 — 楊 天楽">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yotenra.com/resume.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌿%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="apps.css">
+<link rel="stylesheet" href="resume.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="langbar" aria-label="Language">
+    <button type="button" data-lang="zh" lang="zh-Hans">简体中文</button>
+    <button type="button" data-lang="en" lang="en">English</button>
+    <button type="button" data-lang="ja" lang="ja">日本語</button>
+  </nav>
+
+  <a class="back" href="index.html">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10H5M9 5.5 4.5 10 9 14.5"/></svg>
+    <span data-t="back">もどる</span>
+  </a>
+
+  <header class="page-head">
+    <h1 data-t="page.title">職務経歴書</h1>
+    <p data-t="page.lead">PDF / Word (.docx) · 2026-09-23</p>
+  </header>
+
+  <main class="resume-grid">
+    <article class="resume-card" aria-labelledby="projects-title">
+      <p class="eyebrow" data-t="natural.desc">プロジェクト重視</p>
+      <h2 id="projects-title" data-t="natural.title">プロジェクト・取り組み</h2>
+      <div class="resume-downloads">
+        <a class="primary-link" data-style="projects" data-format="pdf" href="assets/resumes/yo-tenra-ja-projects.pdf" download="yo-tenra-ja-projects.pdf" hreflang="ja" data-t="download.pdf">PDF をダウンロード</a>
+        <a class="text-link" data-style="projects" data-format="docx" href="assets/resumes/yo-tenra-ja-projects.docx" download="yo-tenra-ja-projects.docx" hreflang="ja" data-t="download.docx">Word (.docx) をダウンロード</a>
+      </div>
+    </article>
+    <article class="resume-card" aria-labelledby="experience-title">
+      <p class="eyebrow" data-t="formal.desc">職務経歴重視</p>
+      <h2 id="experience-title" data-t="formal.title">職務経歴・担当業務</h2>
+      <div class="resume-downloads">
+        <a class="primary-link" data-style="experience" data-format="pdf" href="assets/resumes/yo-tenra-ja-experience.pdf" download="yo-tenra-ja-experience.pdf" hreflang="ja" data-t="download.pdf">PDF をダウンロード</a>
+        <a class="text-link" data-style="experience" data-format="docx" href="assets/resumes/yo-tenra-ja-experience.docx" download="yo-tenra-ja-experience.docx" hreflang="ja" data-t="download.docx">Word (.docx) をダウンロード</a>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <span data-t="footer.left">© 2026 楊 天楽</span>
+    <span data-t="footer.right">GitHub Pages で公開</span>
+  </footer>
+</div>
+
+<script src="shared.js"></script>
+<script>
+function render(lang, t) {
+  document.querySelectorAll('[data-style][data-format]').forEach(link => {
+    const style = link.dataset.style;
+    const format = link.dataset.format;
+    const filename = `yo-tenra-${lang}-${style}.${format}`;
+    link.href = `assets/resumes/${filename}`;
+    link.download = filename;
+    link.hreflang = lang;
+    const title = t[style === 'projects' ? 'natural.title' : 'formal.title'];
+    link.setAttribute('aria-label', `${title} — ${t[`download.${format}`]}`);
+  });
+}
+
+const T = {
+  "zh": {
+    "back": "返回",
+    "page.title": "简历",
+    "page.lead": "PDF / Word (.docx) · 2026-09-23",
+    "natural.title": "项目与工作方式",
+    "natural.desc": "自然版",
+    "formal.title": "经历与职责",
+    "formal.desc": "正式版",
+    "download.pdf": "下载 PDF",
+    "download.docx": "下载 Word (.docx)",
+    "footer.left": "© 2026 楊 天楽",
+    "footer.right": "GitHub Pages 托管",
+    "meta.title": "简历 — 楊 天楽",
+    "meta.description": "关西大学硕士生，Baseconnect 实习生。企业数据质量改善、研究工具，以及为学习和日常生活开发的应用。"
+  },
+  "en": {
+    "back": "Back",
+    "page.title": "Résumé",
+    "page.lead": "PDF / Word (.docx) · 2026-09-23",
+    "natural.title": "Projects and approach",
+    "natural.desc": "Project-led résumé",
+    "formal.title": "Experience and responsibilities",
+    "formal.desc": "Traditional résumé",
+    "download.pdf": "Download PDF",
+    "download.docx": "Download Word (.docx)",
+    "footer.left": "© 2026 Yo Tenra",
+    "footer.right": "Hosted on GitHub Pages",
+    "meta.title": "Résumé — Yo Tenra",
+    "meta.description": "Master’s student at Kansai University and intern at Baseconnect. Company data quality, research tools, and apps for studying and everyday life."
+  },
+  "ja": {
+    "back": "戻る",
+    "page.title": "職務経歴書",
+    "page.lead": "PDF / Word (.docx) · 2026-09-23",
+    "natural.title": "プロジェクト・取り組み",
+    "natural.desc": "プロジェクト重視",
+    "formal.title": "職務経歴・担当業務",
+    "formal.desc": "職務経歴重視",
+    "download.pdf": "PDF をダウンロード",
+    "download.docx": "Word (.docx) をダウンロード",
+    "footer.left": "© 2026 楊 天楽",
+    "footer.right": "GitHub Pages で公開",
+    "meta.title": "職務経歴書 — 楊 天楽",
+    "meta.description": "関西大学大学院の修士課程に在籍し、Baseconnect でインターンをしています。企業データの品質改善、研究用ツール、学習や日々の暮らしのためにつくったアプリを紹介します。"
+  }
+};
+Site.mount(T, render);
+</script>
+</body>
+</html>
