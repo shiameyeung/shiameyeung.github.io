@@ -47,8 +47,14 @@
 
 <script src="shared.js"></script>
 <script>
-// 四つの仕事。右の図は画面写真ではなく HTML で組む：文字は t から引くので言語と一緒に変わる。
+// 取り組みの図解。画面写真ではなく HTML で組み、文字は各言語の文案から表示する。
 const JOBS = [
+  { id:'m5', mark:'🗂', tint:'#e9eff4', tone:'#527285', paper:'#f9fbfd',
+    figure: t => `<div class="flow">
+      <div class="flow-step">${t['m5.f1']}</div><i class="flow-arrow"></i>
+      <div class="flow-step">${t['m5.f2']}</div><i class="flow-arrow"></i>
+      <div class="flow-step done">${t['m5.f3']}</div></div>` },
+
   { id:'m1', mark:'⛏', tint:'#e8f0e8', tone:'#4f7a58', paper:'#fafcfa',
     figure: t => `<div class="flow">
       <div class="flow-step">${t['m1.f1']}</div><i class="flow-arrow"></i>
@@ -135,7 +141,13 @@ const T = {
     "footer.right": "GitHub Pages 托管",
     "figure.note": "图为流程示意。",
     "meta.title": "工作实践 — 楊 天楽",
-    "meta.description": "在 Baseconnect 参与企业数据抽取与质量改善：问题定位、评估设计、规则与模型的选择，以及数据修复。"
+    "meta.description": "在 Baseconnect 参与企业数据抽取与质量改善：问题定位、评估设计、规则与模型的选择，以及数据修复。",
+    "m5.title": "把调查记录做成能接着用的工作台",
+    "m5.sub": "问题、证据、进展和下一步，放在一起",
+    "m5.desc": "数据质量调查会跨多轮对话推进。为了减少反复说明和信息遗漏，我为自己搭建了带数据库的进度面板，把问题、证据、状态和后续动作存下来。新会话可以先读记录，再继续调查；已有记录也能不断补充和修正。它用于我的个人工作。",
+    "m5.f1": "记录问题与依据",
+    "m5.f2": "查看进展与下一步",
+    "m5.f3": "继续调查，补充记录"
   },
   "en": {
     "back": "Back",
@@ -172,6 +184,12 @@ const T = {
     "m4.d.l2": "Improve checks before storage",
     "m4.d.l3": "Verify and repair existing data",
     "m4.d.note": "Check the results after repair",
+    "m5.title": "A personal workspace for ongoing investigations",
+    "m5.sub": "Issues, evidence, progress and next steps in one place",
+    "m5.desc": "Data quality investigations can span several conversations with AI. I set up a database and progress dashboard for my own use to keep the context together and reduce repeated explanations. It stores issues, evidence, status and next steps, so a new session can read the records and pick up the investigation. I can add to and correct the records as the work develops.",
+    "m5.f1": "Record issues and evidence",
+    "m5.f2": "Review progress and next steps",
+    "m5.f3": "Investigate further and update records",
     "method.title": "How I work with AI",
     "method.body": "I use Claude and other AI tools to help with development, and ask a separate agent with no prior discussion context to look for counterexamples and review a proposed approach. For complex implementations, I first ask for a plain-language explanation, then question and refine the approach in light of the business problem. My focus is defining the problem, weighing trade-offs and checking that the result meets the actual need.",
     "footer.left": "© 2026 Yo Tenra",
@@ -215,6 +233,12 @@ const T = {
     "m4.d.l2": "保存前のチェックを改善",
     "m4.d.l3": "既存データを確認して修正",
     "m4.d.note": "修正後に結果をもう一度確認",
+    "m5.title": "調査の続きを、記録から始められるように",
+    "m5.sub": "課題・根拠・進捗・次の作業を一か所に",
+    "m5.desc": "データ品質の調査は、AI との複数の会話にまたがって進みます。同じ説明の繰り返しや情報の抜けを減らすため、データベースと進捗を確認する画面を自分用につくり、課題、根拠、状況、次にやることを保存しています。新しい会話では記録を読んでから調査を再開でき、既存の記録も追加・修正できます。自分の業務で使うためのものです。",
+    "m5.f1": "課題と根拠を記録",
+    "m5.f2": "進捗と次の作業を確認",
+    "m5.f3": "調査を続け、記録を追加",
     "method.title": "AI と一緒に、どう進めるか",
     "method.body": "Claude などの AI ツールを開発に活用し、それまでの議論に参加していない別の AI エージェントにも、案の見直しや反例探しを頼んでいます。実装が複雑なときは、まず平易な言葉で説明してもらい、実際の業務に照らして疑問点を挙げ、案を調整します。課題を明確にすること、選択肢を見比べて判断すること、結果が実際の必要に合っているかを確かめることを大切にしています。",
     "footer.left": "© 2026 楊 天楽",
