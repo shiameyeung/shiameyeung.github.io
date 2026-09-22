@@ -6,8 +6,10 @@
 .page-head{padding:22px 0 40px}
 .page-head h1{font-size:clamp(26px,4.4vw,36px);margin:0 0 12px;letter-spacing:.05em}
 .page-head p{color:var(--muted);margin:0;max-width:36em}
+.page-head .page-note{font-size:12px;margin-top:16px;max-width:58em}
 
 .app{padding:46px 0;border-top:1px solid var(--line)}
+.app{scroll-margin-top:24px}
 .app-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:8px}
 .app-title{display:flex;align-items:center;gap:13px;min-width:0}
 .app-badge{flex:0 0 42px;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;

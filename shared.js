@@ -1,4 +1,4 @@
-// 二つのページで言語の選び方と切り替えを共有する。文言は各ページの T に置く。
+// 各ページで言語の選び方と切り替えを共有する。文言は各ページの T に置く。
 window.Site = (() => {
   const LANGS = ['zh', 'en', 'ja'];
   const KEY = 'yotenra.lang';
@@ -18,6 +18,14 @@ window.Site = (() => {
     const apply = lang => {
       const t = T[lang];
       document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : lang;
+      if (t['meta.title']) {
+        document.title = t['meta.title'];
+        document.querySelector('meta[property="og:title"]')?.setAttribute('content', t['meta.title']);
+      }
+      if (t['meta.description']) {
+        document.querySelector('meta[name="description"]')?.setAttribute('content', t['meta.description']);
+        document.querySelector('meta[property="og:description"]')?.setAttribute('content', t['meta.description']);
+      }
       document.querySelectorAll('[data-t]').forEach(el => {
         const v = t[el.dataset.t];
         if (v !== undefined) el.innerHTML = v;

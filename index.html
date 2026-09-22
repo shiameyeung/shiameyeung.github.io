@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>楊　天楽</title>
-<meta name="description" content="楊 天楽 のホームページ。連絡先と、自分のために作った Web アプリ。">
-<meta property="og:title" content="楊　天楽">
-<meta property="og:description" content="連絡先と、自分のために作った Web アプリ。">
+<title>楊 天楽｜仕事での取り組みと個人開発・研究</title>
+<meta name="description" content="関西大学大学院の修士課程に在籍し、Baseconnect でインターンをしています。企業データの品質改善、研究用ツール、学習や日々の暮らしのためにつくったアプリを紹介します。">
+<meta property="og:title" content="楊 天楽｜仕事での取り組みと個人開発・研究">
+<meta property="og:description" content="関西大学大学院の修士課程に在籍し、Baseconnect でインターンをしています。企業データの品質改善、研究用ツール、学習や日々の暮らしのためにつくったアプリを紹介します。">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://yotenra.com/">
 <meta property="og:image" content="https://yotenra.com/assets/portrait.jpg">
@@ -32,6 +32,56 @@
     </div>
   </header>
 
+  <main>
+    <div class="introduction">
+      <p data-t="intro"></p>
+      <p class="direction" data-t="direction"></p>
+      <nav class="explore" aria-label="Portfolio">
+        <a class="primary-link" href="apps.html" data-t="apps.button"></a>
+        <a class="quiet-link" href="work.html"><span data-t="work.button"></span><span aria-hidden="true"> ↗</span></a>
+      </nav>
+    </div>
+
+    <section class="selected-projects">
+      <h2 class="section-heading" data-t="projects.title"></h2>
+      <p class="section-intro" data-t="projects.lead"></p>
+      <div class="featured-grid">
+        <a class="feature-card corp-card" href="apps.html#corp">
+          <span class="eyebrow" data-t="corp.category"></span>
+          <h3 data-t="corp.title"></h3>
+          <p class="feature-purpose" data-t="corp.desc"></p>
+          <p class="feature-thought" data-t="corp.thought"></p>
+          <span class="card-link"><span data-t="project.more"></span><span aria-hidden="true"> ↗</span></span>
+        </a>
+        <a class="feature-card sna-card" href="apps.html#sna">
+          <span class="eyebrow" data-t="sna.category"></span>
+          <h3 data-t="sna.title"></h3>
+          <p class="feature-purpose" data-t="sna.desc"></p>
+          <p class="feature-thought" data-t="sna.thought"></p>
+          <span class="card-link"><span data-t="project.more"></span><span aria-hidden="true"> ↗</span></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="work-preview">
+      <span class="eyebrow">Baseconnect</span>
+      <h2 class="section-heading" data-t="work.title"></h2>
+      <p data-t="work.desc"></p>
+      <a class="text-link" href="work.html"><span data-t="work.link"></span><span aria-hidden="true"> ↗</span></a>
+    </section>
+
+    <section>
+      <h2 class="section-heading" data-t="everyday.title"></h2>
+      <p class="section-intro" data-t="everyday.lead"></p>
+      <div class="everyday-grid">
+        <a class="small-project" href="apps.html#aws"><span class="small-mark" aria-hidden="true">☁️</span><h3 data-t="aws.title"></h3><p data-t="aws.desc"></p></a>
+        <a class="small-project" href="apps.html#ootd"><span class="small-mark" aria-hidden="true">👚</span><h3 data-t="ootd.title"></h3><p data-t="ootd.desc"></p></a>
+        <a class="small-project" href="apps.html#cal"><span class="small-mark" aria-hidden="true">🍑</span><h3 data-t="cal.title"></h3><p data-t="cal.desc"></p></a>
+      </div>
+      <a class="text-link all-projects" href="apps.html"><span data-t="all.projects"></span><span aria-hidden="true"> ↗</span></a>
+    </section>
+  </main>
+
   <section>
     <h2 class="section-label" data-t="contact.title"></h2>
     <div class="links">
@@ -50,23 +100,6 @@
     </div>
   </section>
 
-  <section>
-    <a class="big-button" href="work.html">
-      <span class="bb-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V9m5 9V5m5 13v-6m5 6V8"/></svg>
-      </span>
-      <span class="bb-text"><strong data-t="work.button"></strong><small data-t="work.buttonSub"></small></span>
-      <svg class="bb-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg>
-    </a>
-    <a class="big-button" href="apps.html">
-      <span class="bb-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>
-      </span>
-      <span class="bb-text"><strong data-t="apps.button"></strong><small data-t="apps.buttonSub"></small></span>
-      <svg class="bb-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg>
-    </a>
-  </section>
-
   <footer>
     <span data-t="footer.left"></span>
     <span data-t="footer.right"></span>
@@ -76,33 +109,129 @@
 <script src="shared.js"></script>
 <script>
 const T = {
-  zh: {
-    'name':'楊　天楽','romaji':'YO TENRA',
-    'tagline':'关西大学 综合信息学研究科在读<br>在 Baseconnect 负责企业数据抽取 pipeline 的开发与精度改善',
-    'contact.title':'联系方式',
-    'contact.wantedly':'职业经历','contact.jglobal':'研究者信息',
-    'work.button':'我在做的事','work.buttonSub':'在 Baseconnect 做的工作，和怎么做的',
-    'apps.button':'我做的东西','apps.buttonSub':'五个自己做的 Web 应用与分析 Demo',
-    'footer.left':'© 2026 楊 天楽','footer.right':'GitHub Pages 托管',
+  "zh": {
+    "name": "楊　天楽",
+    "romaji": "YO TENRA",
+    "tagline": "关西大学综合信息学研究科硕士在读。<br>在 Baseconnect 实习，参与企业数据抽取与质量改善。",
+    "contact.title": "更多关于我",
+    "contact.wantedly": "职业经历",
+    "contact.jglobal": "研究者信息",
+    "work.button": "工作实践",
+    "work.buttonSub": "企业数据从哪里出错、怎样查清、如何改进",
+    "apps.button": "个人项目",
+    "apps.buttonSub": "从新闻分析、开源研究，到备考和日常记录",
+    "footer.left": "© 2026 楊 天楽",
+    "footer.right": "GitHub Pages 托管",
+    "intro": "研究里的新闻数据、工作中的抽取错误、衣柜里没穿过的衣服——我喜欢从具体的麻烦出发，借助 AI 和软件工具，做出能用的解决办法。",
+    "projects.title": "从研究问题出发",
+    "projects.lead": "两个代表项目：先把问题拆清楚，再设计数据和工具怎么配合。",
+    "corp.category": "研究工具 · 数据处理",
+    "corp.title": "CorpLink-AI",
+    "corp.desc": "上传新闻文件，整理企业名称和合作线索，导出可用于网络分析的关系矩阵。",
+    "corp.thought": "我把重复的名称处理留给本地库，只让模型判断未知名称。",
+    "sna.category": "硕士研究 · 开源软件",
+    "sna.title": "开源软件依赖分析",
+    "sna.desc": "把 Python 和 Go 软件包的依赖关系画成网络，让排名、图和说明可以对应着看。",
+    "sna.thought": "除了看谁被依赖得多，也比较谁连接了网络中的不同部分。",
+    "project.more": "看用途与设计",
+    "work.title": "在真实业务里，把问题查清楚",
+    "work.desc": "在 Baseconnect，我参与企业数据抽取和质量改善。从原始页面、日志和样本定位错误，再比较方案、验证改动、修复已有数据。",
+    "work.link": "了解我的工作方式",
+    "everyday.title": "也为自己的生活做工具",
+    "everyday.lead": "备考、穿搭、记录饮食。需求不一定宏大，但我想把每天用的东西做得顺手一点。",
+    "aws.title": "AWS Pass It",
+    "aws.desc": "三语练习、答案解释和按知识点复习错题。",
+    "ootd.title": "OOTD",
+    "ootd.desc": "记录衣服和彩妆，看看哪些常穿、哪些一直闲置。",
+    "cal.title": "CalTracker",
+    "cal.desc": "随手记饮食和体重，把最近 30 天的变化放在一起看。",
+    "all.projects": "查看全部个人项目",
+    "meta.title": "楊 天楽｜工作实践与个人项目",
+    "meta.description": "关西大学硕士生，Baseconnect 实习生。企业数据质量改善、研究工具，以及为学习和日常生活开发的应用。",
+    "direction": "接下来，我希望更多参与新产品的探索，把实际需求变成可以试用、验证的产品原型。"
   },
-  en: {
-    'name':'Yo Tenra','romaji':'楊　天楽',
-    'tagline':'Studying at the Graduate School of Informatics, Kansai University<br>Developing the company-data extraction pipeline and improving its accuracy at Baseconnect',
-    'contact.title':'Get in touch',
-    'contact.wantedly':'Career','contact.jglobal':'Researcher profile',
-    'work.button':'What I work on','work.buttonSub':'My work at Baseconnect, and how it gets done',
-    'apps.button':'What I’ve built','apps.buttonSub':'Five web apps and demos I built myself',
-    'footer.left':'© 2026 Yo Tenra','footer.right':'Hosted on GitHub Pages',
+  "en": {
+    "name": "Yo Tenra",
+    "romaji": "楊　天楽",
+    "tagline": "Master’s student in informatics at Kansai University.<br>Intern at Baseconnect, working on company data extraction and quality.",
+    "contact.title": "More about me",
+    "contact.wantedly": "Work experience",
+    "contact.jglobal": "Researcher profile",
+    "work.button": "Work",
+    "work.buttonSub": "Finding where company data goes wrong, and how to improve it",
+    "apps.button": "Personal Projects",
+    "apps.buttonSub": "Tools for research, studying and everyday life",
+    "footer.left": "© 2026 Yo Tenra",
+    "footer.right": "Hosted on GitHub Pages",
+    "intro": "News articles for research, errors in company data, clothes I’ve bought but never worn: I like starting with a specific problem and using AI and software to make something useful.",
+    "direction": "I’d like to focus more on exploring new product ideas, turning real needs into working prototypes that can be tried out and tested.",
+    "projects.title": "Tools that started with research",
+    "projects.lead": "Two projects where understanding the problem shaped how the data and tools fit together.",
+    "corp.category": "Research tool · Data processing",
+    "corp.title": "CorpLink-AI",
+    "corp.desc": "Turn news files into company names and partnership links, then export a matrix for network analysis.",
+    "corp.thought": "I reuse known names from a local database, leaving unfamiliar ones for the model.",
+    "sna.category": "Master’s research · Open-source software",
+    "sna.title": "Open-source dependency analysis",
+    "sna.desc": "Explore Python and Go package dependencies through linked network graphs, rankings and explanations.",
+    "sna.thought": "I look at both how many packages depend on a package and how it connects different parts of the network.",
+    "project.more": "Explore the tool and its design",
+    "work.title": "Tracing data problems back to their source",
+    "work.desc": "At Baseconnect, I help improve company data extraction and quality. I use source pages, logs and samples to investigate errors, compare approaches, check changes and repair existing data.",
+    "work.link": "See how I work",
+    "everyday.title": "Tools for my own everyday life, too",
+    "everyday.lead": "Studying, choosing what to wear, logging meals. Small needs are a good reason to make everyday tools a little easier to use.",
+    "aws.title": "AWS Pass It",
+    "aws.desc": "Practice in three languages, with answer explanations and missed questions organised by topic.",
+    "ootd.title": "OOTD",
+    "ootd.desc": "Keep track of clothes and makeup, including what I wear often and what sits unused.",
+    "cal.title": "CalTracker",
+    "cal.desc": "Log food and weight, then view the past 30 days together.",
+    "all.projects": "View all personal projects",
+    "meta.title": "Yo Tenra | Work and Personal Projects",
+    "meta.description": "Master’s student at Kansai University and intern at Baseconnect. Company data quality, research tools, and apps for studying and everyday life."
   },
-  ja: {
-    'name':'楊　天楽','romaji':'YO TENRA',
-    'tagline':'関西大学大学院　総合情報学研究科に在学中<br>Baseconnect で企業データ抽出パイプラインの開発と精度改善を担当',
-    'contact.title':'連絡先',
-    'contact.wantedly':'経歴','contact.jglobal':'研究者情報',
-    'work.button':'やっていること','work.buttonSub':'Baseconnect での仕事と、その進め方',
-    'apps.button':'つくったもの','apps.buttonSub':'自分で作った Web アプリと分析デモ、5 つ',
-    'footer.left':'© 2026 楊 天楽','footer.right':'GitHub Pages で公開',
-  },
+  "ja": {
+    "name": "楊　天楽",
+    "romaji": "YO TENRA",
+    "tagline": "関西大学大学院 総合情報学研究科の修士課程に在籍。<br>Baseconnect のインターンとして、企業データの抽出・品質改善に取り組んでいます。",
+    "contact.title": "プロフィールをもっと見る",
+    "contact.wantedly": "これまでの経歴",
+    "contact.jglobal": "研究者情報",
+    "work.button": "仕事での取り組み",
+    "work.buttonSub": "企業データの誤りを見つけ、原因を調べ、改善する",
+    "apps.button": "個人開発・研究",
+    "apps.buttonSub": "ニュース分析や OSS 研究から、試験勉強と日々の記録まで",
+    "footer.left": "© 2026 楊 天楽",
+    "footer.right": "GitHub Pages で公開",
+    "intro": "研究で扱うニュースデータ、仕事で見つけた抽出ミス、買ったまま着ていない服。具体的な困りごとを出発点に、AI やソフトウェアの力を借りて、実際に使える道具や仕組みをつくるのが好きです。",
+    "direction": "これからは、新しいプロダクトづくりにもっと関わりたいと考えています。実際のニーズを出発点に、使って試せるプロトタイプをつくり、検証するところまで取り組んでいきたいです。",
+    "projects.title": "研究の問いから生まれたもの",
+    "projects.lead": "代表的な二つのプロジェクトです。まず課題を整理し、データと道具をどう組み合わせるかを考えました。",
+    "corp.category": "研究用ツール・データ処理",
+    "corp.title": "CorpLink-AI",
+    "corp.desc": "ニュースのファイルから企業名と提携の手がかりを整理し、ネットワーク分析に使える関係行列を出力します。",
+    "corp.thought": "繰り返し出てくる企業名は手元のデータベースで処理し、未登録の名前だけをモデルに渡す設計にしました。",
+    "sna.category": "修士研究・オープンソースソフトウェア",
+    "sna.title": "オープンソースの依存関係分析",
+    "sna.desc": "Python と Go のパッケージの依存関係をネットワーク図にし、ランキングや説明と照らし合わせて見られるようにしました。",
+    "sna.thought": "どこに依存が集まるかに加え、どのパッケージがネットワークの異なる部分をつないでいるかも比較します。",
+    "project.more": "できることと設計を見る",
+    "work.title": "実務の中で、問題の原因を探る",
+    "work.desc": "Baseconnect で企業データの抽出・品質改善に携わっています。元のページ、ログ、サンプルをたどって誤りの原因を調べ、改善案の比較、変更の検証、既存データの修正に取り組んでいます。",
+    "work.link": "仕事の進め方を見る",
+    "everyday.title": "自分の暮らしにも、小さな道具を",
+    "everyday.lead": "試験勉強、服選び、食事の記録。毎日使うものを、もう少し自分にとって使いやすくしたい。そんな気持ちでつくっています。",
+    "aws.title": "AWS Pass It",
+    "aws.desc": "三言語で問題を解き、解説を読み、間違えた問題を学習項目ごとに復習。",
+    "ootd.title": "OOTD",
+    "ootd.desc": "服やコスメを記録して、よく使うものと眠ったままのものを見返す。",
+    "cal.title": "CalTracker",
+    "cal.desc": "食事と体重を手軽に記録し、直近 30 日の変化をまとめて見る。",
+    "all.projects": "個人開発・研究をすべて見る",
+    "meta.title": "楊 天楽｜仕事での取り組みと個人開発・研究",
+    "meta.description": "関西大学大学院の修士課程に在籍し、Baseconnect でインターンをしています。企業データの品質改善、研究用ツール、学習や日々の暮らしのためにつくったアプリを紹介します。"
+  }
 };
 Site.mount(T);
 </script>

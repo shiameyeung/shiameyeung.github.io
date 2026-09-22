@@ -5,6 +5,7 @@
 .job-head .step{margin:2px 0 0;font-size:12px;color:var(--muted);letter-spacing:.06em}
 .job-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:26px;align-items:start}
 .job-body p{margin:0;color:#4a4340;font-size:14.5px;max-width:40em}
+.comparison{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #e3d9d1;border-radius:9px;padding:14px 10px;background:#fff;font-size:12px}
 
 /* 流れ：上から下へ四段 */
 .flow{display:flex;flex-direction:column;gap:0}

@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>つくったもの — 楊　天楽</title>
-<meta name="description" content="自分で作った Web アプリと分析デモ。それぞれ使う場面つきで。">
-<meta property="og:title" content="つくったもの — 楊　天楽">
+<title>個人開発・研究 — 楊 天楽</title>
+<meta name="description" content="ニュースからの企業関係抽出、OSS の依存関係分析、AWS の試験対策、服と食事の記録。五つのプロジェクトの用途や設計、実現したことを紹介します。">
+<meta property="og:title" content="個人開発・研究 — 楊 天楽">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://yotenra.com/apps.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌿%3C/text%3E%3C/svg%3E">
@@ -28,6 +28,7 @@
   <header class="page-head">
     <h1 data-t="page.title"></h1>
     <p data-t="page.lead"></p>
+    <p class="page-note" data-t="page.note"></p>
   </header>
 
   <main id="apps"></main>
@@ -45,6 +46,62 @@ const LOCK  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 
 // 各アプリ：色と、三コマぶんの画面の作り方。文字は t から引くので言語と一緒に変わる。
 const APPS = [
+  { id:'corp', url:'https://github.com/shiameyeung/CorpLink-AI', host:'github.com/shiameyeung/CorpLink-AI', locked:false, mark:'🔍',
+    tint:'#f1efe6', tone:'#8a7534', paper:'#fdfcf7',
+    scenes:[
+      t => `<div class="ui-bar"><span class="ui-title">${t['corp.ui.in']}</span><span>DOCX / RTF</span></div>
+            <div class="ui-note">${t['corp.ui.raw']}</div>
+            <div class="ui-list">
+              <div class="ui-li"><span>LexisNexis</span><b>—</b></div>
+              <div class="ui-li"><span>Factiva</span><b>—</b></div>
+            </div>
+            <div class="ui-note">${t['corp.ui.problem']}</div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['corp.ui.pipe']}</span></div>
+            <div class="ui-row"><span class="ui-chip on">spaCy</span><span class="ui-note">${t['corp.ui.local']}</span></div>
+            <div class="ui-row"><span class="ui-chip on">DB</span><span class="ui-note">${t['corp.ui.cache']}</span></div>
+            <div class="ui-row"><span class="ui-chip">LLM</span><span class="ui-note">${t['corp.ui.only']}</span></div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['corp.ui.out']}</span></div>
+            <div class="ui-stat"><b>✓</b><span class="ui-note">${t['corp.ui.ents']}</span></div>
+            <div class="ui-stat"><b>↗</b><span class="ui-note">${t['corp.ui.cost']}</span></div>
+            <div class="ui-note">${t['corp.ui.matrix']}</div>` ] },
+
+  { id:'sna', url:'https://yotenra.com/oss-dependency-sna/', host:'yotenra.com/oss-dependency-sna/', locked:false, mark:'🔗',
+    tint:'#e9f0f8', tone:'#3a6ea5', paper:'#f9fbfd',
+    scenes:[
+      t => `<div class="ui-bar"><span class="ui-title">${t['sna.ui.title']}</span><span>709</span></div>
+            <div class="ui-row"><span class="ui-chip on">${t['sna.ui.d1']}</span><span class="ui-chip">${t['sna.ui.d2']}</span></div>
+            <div class="ui-row"><span class="ui-chip on">${t['sna.ui.m1']}</span><span class="ui-chip">${t['sna.ui.m2']}</span></div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['sna.ui.graph']}</span></div>
+            <div class="ui-graph"></div>
+            <div class="ui-note">${t['sna.ui.cut']}</div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['sna.ui.top']}</span></div>
+            <div class="ui-list">
+              <div class="ui-li"><span>numpy</span><b>178</b></div>
+              <div class="ui-li"><span>typing-extensions</span><b>78</b></div>
+              <div class="ui-li"><span>packaging</span><b>74</b></div>
+            </div>
+            <div class="ui-note">${t['sna.ui.rule']}</div>` ] },
+
+  { id:'aws', url:'https://aws.yotenra.com', host:'aws.yotenra.com', locked:true, mark:'☁️',
+    tint:'#eeecfa', tone:'#6a5ab0', paper:'#fbfaff',
+    scenes:[
+      t => `<div class="ui-bar"><span class="ui-title">SAA-C03</span><span>${t['aws.ui.lang']}</span></div>
+            <div class="ui-row"><span class="ui-chip on">${t['aws.ui.l1']}</span><span class="ui-chip">${t['aws.ui.l2']}</span><span class="ui-chip">${t['aws.ui.l3']}</span></div>
+            <div class="ui-note">${t['aws.ui.pick']}</div>
+            <div class="ui-btn">${t['aws.ui.start']}</div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['aws.ui.q']}</span><span>12 / 65</span></div>
+            <div class="ui-note">${t['aws.ui.stem']}</div>
+            <div class="ui-opt">A. ${t['aws.ui.oa']}</div>
+            <div class="ui-opt right">B. ${t['aws.ui.ob']}</div>
+            <div class="ui-note">${t['aws.ui.why']}</div>`,
+      t => `<div class="ui-bar"><span class="ui-title">${t['aws.ui.review']}</span><span>8</span></div>
+            <div class="ui-list">
+              <div class="ui-li"><span>${t['aws.ui.t1']}</span><b>3</b></div>
+              <div class="ui-li"><span>${t['aws.ui.t2']}</span><b>3</b></div>
+              <div class="ui-li"><span>${t['aws.ui.t3']}</span><b>2</b></div>
+            </div>
+            <div class="ui-note">${t['aws.ui.sync']}</div>` ] },
+
   { id:'ootd', url:'https://ootd.yotenra.com', host:'ootd.yotenra.com', locked:true, mark:'👚',
     tint:'#fbeaf1', tone:'#a4527c', paper:'#fefafc',
     scenes:[
@@ -57,8 +114,8 @@ const APPS = [
             <div class="ui-btn">${t['ootd.ui.record']}</div>
             <div class="ui-note">${t['ootd.ui.once']}</div>`,
       t => `<div class="ui-bar"><span class="ui-title">${t['ootd.ui.review']}</span></div>
-            <div class="ui-stat"><b>¥89,210</b><span class="ui-note">${t['ootd.ui.total']}</span></div>
-            <div class="ui-stat"><b>508</b><span class="ui-note">${t['ootd.ui.unworn']}</span></div>
+            <div class="ui-stat"><b>¥12,800</b><span class="ui-note">${t['ootd.ui.total']}</span></div>
+            <div class="ui-stat"><b>8</b><span class="ui-note">${t['ootd.ui.unworn']}</span></div>
             <div class="ui-bars">
               <div class="ui-barline"><span class="ui-note">9</span><span class="ui-track"><i class="ui-fill" style="width:72%"></i></span></div>
               <div class="ui-barline"><span class="ui-note">10</span><span class="ui-track"><i class="ui-fill" style="width:44%"></i></span></div>
@@ -87,74 +144,18 @@ const APPS = [
               <div class="ui-barline"><span class="ui-note">74.4</span><span class="ui-track"><i class="ui-fill" style="width:52%"></i></span></div>
             </div>
             <div class="ui-note">${t['cal.ui.calc']}</div>` ] },
-
-  { id:'aws', url:'https://aws.yotenra.com', host:'aws.yotenra.com', locked:true, mark:'☁️',
-    tint:'#eeecfa', tone:'#6a5ab0', paper:'#fbfaff',
-    scenes:[
-      t => `<div class="ui-bar"><span class="ui-title">SAA-C03</span><span>${t['aws.ui.lang']}</span></div>
-            <div class="ui-row"><span class="ui-chip on">${t['aws.ui.l1']}</span><span class="ui-chip">${t['aws.ui.l2']}</span><span class="ui-chip">${t['aws.ui.l3']}</span></div>
-            <div class="ui-note">${t['aws.ui.pick']}</div>
-            <div class="ui-btn">${t['aws.ui.start']}</div>`,
-      t => `<div class="ui-bar"><span class="ui-title">${t['aws.ui.q']}</span><span>12 / 65</span></div>
-            <div class="ui-note">${t['aws.ui.stem']}</div>
-            <div class="ui-opt">A. ${t['aws.ui.oa']}</div>
-            <div class="ui-opt right">B. ${t['aws.ui.ob']}</div>
-            <div class="ui-note">${t['aws.ui.why']}</div>`,
-      t => `<div class="ui-bar"><span class="ui-title">${t['aws.ui.review']}</span><span>8</span></div>
-            <div class="ui-list">
-              <div class="ui-li"><span>${t['aws.ui.t1']}</span><b>3</b></div>
-              <div class="ui-li"><span>${t['aws.ui.t2']}</span><b>3</b></div>
-              <div class="ui-li"><span>${t['aws.ui.t3']}</span><b>2</b></div>
-            </div>
-            <div class="ui-note">${t['aws.ui.sync']}</div>` ] },
-
-  { id:'corp', url:'https://github.com/shiameyeung/CorpLink-AI', host:'github.com/shiameyeung/CorpLink-AI', locked:false, mark:'🔍',
-    tint:'#f1efe6', tone:'#8a7534', paper:'#fdfcf7',
-    scenes:[
-      t => `<div class="ui-bar"><span class="ui-title">${t['corp.ui.in']}</span><span>37.8M</span></div>
-            <div class="ui-note">${t['corp.ui.raw']}</div>
-            <div class="ui-list">
-              <div class="ui-li"><span>LexisNexis</span><b>—</b></div>
-              <div class="ui-li"><span>Factiva</span><b>—</b></div>
-            </div>
-            <div class="ui-note">${t['corp.ui.problem']}</div>`,
-      t => `<div class="ui-bar"><span class="ui-title">${t['corp.ui.pipe']}</span></div>
-            <div class="ui-row"><span class="ui-chip on">spaCy</span><span class="ui-note">${t['corp.ui.local']}</span></div>
-            <div class="ui-row"><span class="ui-chip on">DB</span><span class="ui-note">${t['corp.ui.cache']}</span></div>
-            <div class="ui-row"><span class="ui-chip">LLM</span><span class="ui-note">${t['corp.ui.only']}</span></div>`,
-      t => `<div class="ui-bar"><span class="ui-title">${t['corp.ui.out']}</span></div>
-            <div class="ui-stat"><b>60,595</b><span class="ui-note">${t['corp.ui.ents']}</span></div>
-            <div class="ui-stat"><b>$0.25</b><span class="ui-note">${t['corp.ui.cost']}</span></div>
-            <div class="ui-note">${t['corp.ui.matrix']}</div>` ] },
-
-  { id:'sna', url:'oss-dependency-sna/', host:'yotenra.com/oss-dependency-sna/', locked:false, mark:'🔗',
-    tint:'#e9f0f8', tone:'#3a6ea5', paper:'#f9fbfd',
-    scenes:[
-      t => `<div class="ui-bar"><span class="ui-title">${t['sna.ui.title']}</span><span>709</span></div>
-            <div class="ui-row"><span class="ui-chip on">${t['sna.ui.d1']}</span><span class="ui-chip">${t['sna.ui.d2']}</span></div>
-            <div class="ui-row"><span class="ui-chip on">${t['sna.ui.m1']}</span><span class="ui-chip">${t['sna.ui.m2']}</span></div>`,
-      t => `<div class="ui-bar"><span class="ui-title">${t['sna.ui.graph']}</span></div>
-            <div class="ui-graph"></div>
-            <div class="ui-note">${t['sna.ui.cut']}</div>`,
-      t => `<div class="ui-bar"><span class="ui-title">${t['sna.ui.top']}</span></div>
-            <div class="ui-list">
-              <div class="ui-li"><span>numpy</span><b>178</b></div>
-              <div class="ui-li"><span>typing-extensions</span><b>78</b></div>
-              <div class="ui-li"><span>packaging</span><b>74</b></div>
-            </div>
-            <div class="ui-note">${t['sna.ui.rule']}</div>` ] },
 ];
 
 function render(lang, t) {
   document.getElementById('apps').innerHTML = APPS.map(a => `
-    <section class="app" style="--tint:${a.tint};--tone:${a.tone};--paper:${a.paper}">
+    <section class="app" id="${a.id}" style="--tint:${a.tint};--tone:${a.tone};--paper:${a.paper}">
       <div class="app-head">
         <div class="app-title">
           <span class="app-badge" aria-hidden="true">${a.mark}</span>
           <div><h2>${t[a.id + '.title']}</h2><p class="host">${a.host}</p></div>
         </div>
         <div>
-          <a class="enter" href="${a.url}" target="_blank" rel="noopener">${t.enter}${ARROW}</a>
+          <a class="enter" href="${a.url}" target="_blank" rel="noopener">${t[a.id + '.enter'] || t.enter}${ARROW}</a>
           ${a.locked ? `<span class="locked">${LOCK}${t.locked}</span>` : `<span class="locked">${t[a.id + '.open'] || t.open}</span>`}
         </div>
       </div>
@@ -164,7 +165,7 @@ function render(lang, t) {
           <article class="scene">
             <div class="ui">${build(t)}</div>
             <div class="scene-body">
-              <div class="scene-step">${t.step} ${i + 1}</div>
+              <div class="scene-step">${t['story.' + (i + 1)]}</div>
               <p class="scene-cap">${t[a.id + '.s' + (i + 1)]}</p>
             </div>
           </article>`).join('')}
@@ -173,169 +174,310 @@ function render(lang, t) {
 }
 
 const T = {
-  zh: {
-    'back':'返回','step':'步骤','enter':'打开','locked':'需要登录','open':'公开','sna.open':'公开 Demo',
-    'page.title':'我做的东西','page.lead':'都是先有自己的需求，才动手写的。下面按「什么时候会用到」分三步演示，界面文字跟着上方语言走。',
-    'footer.left':'© 2026 楊 天楽','footer.right':'GitHub Pages 托管',
-
-    'ootd.title':'OOTD · 我的衣橱',
-    'ootd.desc':'把买过的衣服和彩妆建成档案，记下每天穿了什么，再算出每件的单次成本。购物订单能直接导进来，标签由 AI 先标好，风格和配色在衣服与彩妆之间共用一套。',
-    'ootd.s1':'早上出门前打开，「今天穿了什么」已经把当季还没上身的、最近常穿的排在前面，不用在五百多件里翻。',
-    'ootd.s2':'点两下选中今天这身，一次记完。同一件同一天只算一次，重复点也不会多加。',
-    'ootd.s3':'过一阵看消费回顾：这一季花了多少、哪些买了还没穿过，点进去就是那份清单。',
-    'ootd.ui.title':'今天穿了什么','ootd.ui.date':'9月11日','ootd.ui.season':'当季 · 还没穿过',
-    'ootd.ui.hint':'点一下就记','ootd.ui.picked':'已选 2 件','ootd.ui.record':'记录今天穿了',
-    'ootd.ui.once':'同一天只算一次','ootd.ui.review':'消费回顾','ootd.ui.total':'合计',
-    'ootd.ui.unworn':'件还没穿过',
-
-    'cal.title':'CalTracker · 要杜杜，不要肚肚',
-    'cal.desc':'按日本时间记录每天吃了多少、体重多少，看三十天的趋势。食品库可以搜索和自定义，每天的目标按原本用惯的表格公式算。',
-    'cal.s1':'吃完一餐搜一下，选好份量加进去。常吃的自己存一条，下次直接点。',
-    'cal.s2':'当天总热量立刻更新，环里是已经吃掉的部分。跨日按日本时间切，凌晨吃的还算前一天。',
-    'cal.s3':'三十天的体重和热量摆在一起看趋势，每天的目标沿用原来表格里的公式，不另起一套。',
-    'cal.ui.add':'添加记录','cal.ui.search':'搜索食品…','cal.ui.f1':'蒸蛋','cal.ui.f2':'鸡胸肉','cal.ui.f3':'味噌汤',
-    'cal.ui.own':'也可以自己加一条','cal.ui.today':'今天','cal.ui.jst':'日本时间','cal.ui.goal':'目标 2000 kcal',
-    'cal.ui.trend':'体重趋势','cal.ui.calc':'目标按原表公式推算',
-
-    'aws.title':'AWS Pass It',
-    'aws.desc':'自己考 AWS 认证时做的刷题应用。题目和术语表都有中英日三份，做错的题会留在错题本里，进度跨设备同步，离线也能刷。',
-    'aws.s1':'选题库和语言。同一道题可以换语言看，术语表也跟着换，不确定的词当场能查。',
-    'aws.s2':'答完立刻给对错和解释。选项写清楚为什么对、为什么不对，不只是标个答案。',
-    'aws.s3':'错的题自动进错题本，按知识点归类。通勤路上刷，进度跨设备同步，没信号也能继续。',
-    'aws.ui.lang':'语言','aws.ui.l1':'中文','aws.ui.l2':'English','aws.ui.l3':'日本語',
-    'aws.ui.pick':'选一个题库开始','aws.ui.start':'开始练习','aws.ui.q':'题目',
-    'aws.ui.stem':'需要跨可用区的高可用存储…','aws.ui.oa':'单可用区实例存储','aws.ui.ob':'多可用区托管存储',
-    'aws.ui.why':'为什么选它、为什么不选别的','aws.ui.review':'错题本',
-    'aws.ui.t1':'存储','aws.ui.t2':'网络','aws.ui.t3':'安全','aws.ui.sync':'进度跨设备同步 · 可离线',
-
-    'corp.title':'CorpLink-AI · 从新闻里抽企业关系',
-    'corp.desc':'研究室要把新闻数据变成能做社会网络分析的邻接矩阵，原本靠人手清洗，成本高、标准也不齐。做成 Web 应用后，非技术背景的同学也能直接用。',
-    'corp.s1':'输入是 LexisNexis、Factiva 这类非结构化新闻，三千七百多万字。企业名有大量别称和简称，直接喂给大模型既贵又不稳。',
-    'corp.s2':'先用本地 NLP 挑出真正含合作语义的句子，本地库里命中的直接复用，只有新出现的复杂别称才调一次 API，结果再写回库。',
-    'corp.s3':'单核 2GB 的机器上跑了三小时零四分，抽出六万条企业名。全文直接喂模型要九百多美元，这条路走下来是 0.25 美元。',
-    'corp.ui.in':'输入','corp.ui.raw':'非结构化新闻全文','corp.ui.problem':'别称、简称、媒体噪声',
-    'corp.ui.pipe':'处理流程','corp.ui.local':'先在本地挑句子','corp.ui.cache':'命中就复用','corp.ui.only':'只给新别称',
-    'corp.ui.out':'产出','corp.ui.ents':'条企业名','corp.ui.cost':'API 花费','corp.ui.matrix':'可直接用于网络分析的邻接矩阵',
-
-    'sna.title':'OSS 依赖网络分析 Demo',
-    'sna.desc':'硕士研究。把开源生态的依赖关系画成网络，用中心性等指标找出关键包和断点。诊断文字由规则和模板生成，不经过 AI。',
-    'sna.s1':'先选生态和指标：数据科学系还是云原生系，看被依赖数还是中介中心性。',
-    'sna.s2':'网络图里，圈越大越被依赖，黄圈是断点——去掉它，图就断成几块。',
-    'sna.s3':'右边是排行和诊断。同样的数据永远得到同样的结论，因为文字是规则加模板拼的，不经过模型。',
-    'sna.ui.title':'领域与指标','sna.ui.d1':'数据科学系','sna.ui.d2':'云原生系',
-    'sna.ui.m1':'被依赖数','sna.ui.m2':'中介中心性','sna.ui.graph':'网络图',
-    'sna.ui.cut':'黄圈 = 去掉会让图断开','sna.ui.top':'被依赖数 Top','sna.ui.rule':'诊断由规则生成，不用 AI',
+  "zh": {
+    "back": "返回",
+    "enter": "打开",
+    "locked": "需要登录",
+    "open": "公开",
+    "sna.open": "公开 Demo",
+    "page.title": "个人项目",
+    "page.lead": "有些来自研究中反复遇到的麻烦，有些来自我自己的生活。这里介绍它们能做什么，以及我为什么这样设计。",
+    "footer.left": "© 2026 楊 天楽",
+    "footer.right": "GitHub Pages 托管",
+    "ootd.title": "OOTD · 衣橱与穿搭记录",
+    "ootd.desc": "把衣服和彩妆整理成可查找的档案，记录每天穿了什么，查看闲置单品和每次穿着的平均成本。购物订单可以导入，AI 会辅助标注标签。",
+    "ootd.s1": "喜欢买衣服，也想知道哪些真的在穿。只看订单和衣柜，很难把“买过什么”和“用过多少次”对应起来。",
+    "ootd.s2": "我把订单、单品和穿搭记录连在一起。衣服与彩妆使用相通的风格、配色标签；同一件衣服同一天只计一次，避免重复点击影响统计。",
+    "ootd.s3": "现在可以从一件单品查到穿着记录和单次成本，也能直接找出买了却没穿过的衣服。挑今天穿什么、回看自己的购物习惯，都从同一份档案开始。",
+    "ootd.ui.title": "今天穿了什么",
+    "ootd.ui.date": "9月11日",
+    "ootd.ui.season": "当季 · 还没穿过",
+    "ootd.ui.hint": "点一下就记",
+    "ootd.ui.picked": "已选 2 件",
+    "ootd.ui.record": "记录今天穿了",
+    "ootd.ui.once": "同一天只算一次",
+    "ootd.ui.review": "消费回顾",
+    "ootd.ui.total": "合计",
+    "ootd.ui.unworn": "件未穿 · 示例",
+    "cal.title": "CalTracker · 饮食与体重记录",
+    "cal.desc": "记录每天的饮食热量和体重，把 30 天的变化放在一起看。支持搜索食品、保存常吃的食物，以及查看当天记录与目标的差距。",
+    "cal.s1": "我原本用表格记录热量和体重，希望保留自己熟悉的计算方式，同时让吃完饭后的记录更方便。",
+    "cal.s2": "我把原来表格里的计算公式搬进应用，加入食品搜索和自定义食品。重复吃的东西不用每次重新输入，记录后当天合计会更新。",
+    "cal.s3": "做成了能随手记录、回看近期趋势的小工具。热量、体重和每日目标可以一起查看，原来的记录习惯也能延续下来。",
+    "cal.ui.add": "添加记录",
+    "cal.ui.search": "搜索食品…",
+    "cal.ui.f1": "蒸蛋",
+    "cal.ui.f2": "鸡胸肉",
+    "cal.ui.f3": "味噌汤",
+    "cal.ui.own": "也可以自己加一条",
+    "cal.ui.today": "今天",
+    "cal.ui.jst": "日本时间",
+    "cal.ui.goal": "目标 2000 kcal",
+    "cal.ui.trend": "体重趋势",
+    "cal.ui.calc": "沿用原表格的计算方式",
+    "aws.title": "AWS Pass It · 三语备考工具",
+    "aws.desc": "用中、日、英三种语言练习 AWS 认证题目，查看答案解释，并按知识点复习错题。学习进度可以跨设备同步，也支持离线练习。",
+    "aws.s1": "备考时，我既需要理解技术概念，也需要认清不同语言里的术语。只记住选项，很难知道自己究竟是哪一部分没有理解。",
+    "aws.s2": "我把三语题目、术语表和选项解释放在一起，并按知识点整理错题。这样复习时既能对照语言，也能回到具体概念。",
+    "aws.s3": "做成了一个可以随手练习、查看解释和回看错题的学习工具。切换设备还能接着做，通勤没有信号时也能继续练习。",
+    "aws.ui.lang": "语言",
+    "aws.ui.l1": "中文",
+    "aws.ui.l2": "English",
+    "aws.ui.l3": "日本語",
+    "aws.ui.pick": "选一个题库开始",
+    "aws.ui.start": "开始练习",
+    "aws.ui.q": "题目",
+    "aws.ui.stem": "需要跨可用区的高可用存储…",
+    "aws.ui.oa": "单可用区实例存储",
+    "aws.ui.ob": "多可用区托管存储",
+    "aws.ui.why": "为什么选它、为什么不选别的",
+    "aws.ui.review": "错题本",
+    "aws.ui.t1": "存储",
+    "aws.ui.t2": "网络",
+    "aws.ui.t3": "安全",
+    "aws.ui.sync": "进度跨设备同步 · 可离线",
+    "corp.title": "CorpLink-AI · 新闻中的企业关系分析",
+    "corp.desc": "把新闻文件中的企业名和合作线索整理成关系表，导出可用于网络分析的矩阵。研究者可以通过网页上传文件、运行处理、下载结果。",
+    "corp.s1": "研究室需要从大量新闻中整理企业关系。同一家公司的简称、别称混在一起，手工统一名称费时，直接让模型处理全文又会产生大量重复请求。",
+    "corp.s2": "我把流程拆成筛选相关句子、查本地名称库、处理未知名称三步。已有记录直接复用，需要进一步判断的名称才交给模型，并把结果存下来供下次使用。",
+    "corp.s3": "做成了从新闻文件到企业关系矩阵的 Web 工具。把名称处理集中在同一条流程里，也让使用者可以在浏览器中操作，无需自己配置开发环境。",
+    "corp.ui.in": "输入",
+    "corp.ui.raw": "上传新闻文件",
+    "corp.ui.problem": "同一家公司，多种名称",
+    "corp.ui.pipe": "处理流程",
+    "corp.ui.local": "筛选相关句子",
+    "corp.ui.cache": "复用已有名称",
+    "corp.ui.only": "判断未知名称",
+    "corp.ui.out": "产出",
+    "corp.ui.ents": "统一企业名称",
+    "corp.ui.cost": "导出关系矩阵",
+    "corp.ui.matrix": "用于后续网络分析",
+    "sna.title": "开源软件依赖分析 · 硕士研究",
+    "sna.desc": "把 Python 和 Go 软件包之间的依赖关系画成可交互的网络图，结合排名和说明，帮助读者查看哪些包被广泛依赖、哪些处在连接不同部分的位置。",
+    "sna.s1": "依赖列表能告诉我一个软件用了什么，却很难直接看出它在整个网络中的位置。我的研究将这些关系整理成可以比较、探索的图。",
+    "sna.s2": "我把依赖数量、连接位置等不同指标放在一起，并将排名与图中的节点关联。说明文字依据指标和规则生成，方便回到图和数据检查依据。",
+    "sna.s3": "公开 Demo 展示了含 709 个包的 Python 网络与 591 个包的 Go 网络，可以切换指标查看。它呈现的是依赖结构，为进一步调查提供线索，尚不直接判断软件是否可靠。",
+    "sna.ui.title": "选择网络与指标",
+    "sna.ui.d1": "Python",
+    "sna.ui.d2": "Go",
+    "sna.ui.m1": "被依赖数",
+    "sna.ui.m2": "连接位置",
+    "sna.ui.graph": "网络图",
+    "sna.ui.cut": "标出连接网络不同部分的节点",
+    "sna.ui.top": "被依赖数 Top",
+    "sna.ui.rule": "说明可对应到指标和规则",
+    "page.note": "这些项目采用 AI 辅助开发；下方用简化示意图说明功能，并非产品截图。",
+    "story.1": "遇到的问题",
+    "story.2": "设计与取舍",
+    "story.3": "做成了什么",
+    "meta.title": "个人项目 — 楊 天楽",
+    "meta.description": "新闻企业关系抽取、开源软件依赖分析、AWS 备考、衣橱和饮食记录：五个项目的用途、设计思路与实现。",
+    "corp.enter": "查看源码",
+    "sna.enter": "打开演示"
   },
-
-  en: {
-    'back':'Back','step':'Step','enter':'Open','locked':'Sign-in required','open':'Public','sna.open':'Public demo',
-    'page.title':'What I’ve built','page.lead':'Each one started from something I needed. Below, each app is shown in three steps of everyday use. The screens follow the language you pick above.',
-    'footer.left':'© 2026 Yo Tenra','footer.right':'Hosted on GitHub Pages',
-
-    'ootd.title':'OOTD · My Wardrobe',
-    'ootd.desc':'Every piece of clothing and makeup I own, with what I wore each day and what each piece costs per wear. Orders import straight from the shops I buy from. Tags come pre-filled by AI. Clothing and makeup share one vocabulary of style and colour.',
-    'ootd.s1':'Open it before heading out. What I haven’t worn this season, and what I reach for often, come first — no scrolling through five hundred items.',
-    'ootd.s2':'Two taps to mark today’s outfit. A piece counts once per day, so tapping twice changes nothing.',
-    'ootd.s3':'Later, the spending view shows what the season cost and how much of it has never been worn. The number is a link to that list.',
-    'ootd.ui.title':'Worn today','ootd.ui.date':'11 Sep','ootd.ui.season':'In season · not worn yet',
-    'ootd.ui.hint':'One tap to log','ootd.ui.picked':'2 selected','ootd.ui.record':'Log today',
-    'ootd.ui.once':'Once per day','ootd.ui.review':'Spending','ootd.ui.total':'total',
-    'ootd.ui.unworn':'never worn',
-
-    'cal.title':'CalTracker',
-    'cal.desc':'Daily calories and weight on Japan time, with thirty-day trends. The food list is searchable, and I can add to it. The daily target uses the same formula as the spreadsheet I kept before.',
-    'cal.s1':'After a meal, search the food and pick the portion. Anything I eat often I save once, then tap it next time.',
-    'cal.s2':'The day’s total updates right away; the ring shows how much is used. Days break on Japan time, so a late-night snack still counts as yesterday.',
-    'cal.s3':'Weight and calories sit side by side over thirty days. The daily target follows my old spreadsheet formula rather than a new one.',
-    'cal.ui.add':'Add entry','cal.ui.search':'Search food…','cal.ui.f1':'Steamed egg','cal.ui.f2':'Chicken breast','cal.ui.f3':'Miso soup',
-    'cal.ui.own':'Or add your own','cal.ui.today':'Today','cal.ui.jst':'Japan time','cal.ui.goal':'Target 2,000 kcal',
-    'cal.ui.trend':'Weight trend','cal.ui.calc':'Target from the original formula',
-
-    'aws.title':'AWS Pass It',
-    'aws.desc':'A practice app I wrote while studying for an AWS certification. The questions and glossary come in Chinese, English and Japanese. Wrong answers stay in a review list, progress syncs across devices, and the app works offline.',
-    'aws.s1':'Pick a question bank and a language. The same question can be read in another language, and the glossary follows, so an unfamiliar term is one tap away.',
-    'aws.s2':'Answers are marked straight away, with a reason for the right option and for each wrong one.',
-    'aws.s3':'Missed questions go to a review list, grouped by topic. Practise on the train — progress syncs across devices and works without a signal.',
-    'aws.ui.lang':'Language','aws.ui.l1':'中文','aws.ui.l2':'English','aws.ui.l3':'日本語',
-    'aws.ui.pick':'Choose a bank to start','aws.ui.start':'Start practice','aws.ui.q':'Question',
-    'aws.ui.stem':'Highly available storage across zones…','aws.ui.oa':'Single-AZ instance store','aws.ui.ob':'Multi-AZ managed storage',
-    'aws.ui.why':'Why this one, and why not the others','aws.ui.review':'Review list',
-    'aws.ui.t1':'Storage','aws.ui.t2':'Network','aws.ui.t3':'Security','aws.ui.sync':'Syncs across devices · works offline',
-
-    'corp.title':'CorpLink-AI · Company relationships from news',
-    'corp.desc':'The lab needed news text turned into an adjacency matrix for network analysis. Doing it by hand was expensive and inconsistent. It is a web app now, so people with no technical background can run it themselves.',
-    'corp.s1':'The input is 37.8 million characters of unstructured news from LexisNexis and Factiva. The same company turns up under many aliases and abbreviations, so sending all of it to a model would be costly and unreliable.',
-    'corp.s2':'A local NLP pass keeps only the sentences that describe a partnership. Names already in the database are reused. The API is called only when an alias is new, and the result goes back into the database.',
-    'corp.s3':'Three hours and four minutes on a single-core machine with 2 GB of memory produced 60,595 company names. Sending the full text to a model would have cost over $900. This route came to $0.25.',
-    'corp.ui.in':'Input','corp.ui.raw':'Unstructured news text','corp.ui.problem':'Aliases, abbreviations, wire-service noise',
-    'corp.ui.pipe':'Pipeline','corp.ui.local':'Filter sentences locally','corp.ui.cache':'Reuse known names','corp.ui.only':'New aliases only',
-    'corp.ui.out':'Output','corp.ui.ents':'company names','corp.ui.cost':'API cost','corp.ui.matrix':'Adjacency matrix, ready for network analysis',
-
-    'sna.title':'OSS Dependency Network Demo',
-    'sna.desc':'From my master’s research. Open-source dependencies drawn as a network, where centrality measures point to the packages everything leans on and the ones that would split the graph. The readings come from rules and templates, not a model.',
-    'sna.s1':'Start by choosing an ecosystem and a measure: data science or cloud native, dependents or betweenness.',
-    'sna.s2':'In the graph, a larger circle means more packages depend on it. Circled in yellow are the cut points — remove one and the graph falls apart.',
-    'sna.s3':'The panel on the right ranks and explains. The same data always gives the same reading, because the text is assembled from rules rather than generated.',
-    'sna.ui.title':'Ecosystem and measure','sna.ui.d1':'Data science','sna.ui.d2':'Cloud native',
-    'sna.ui.m1':'Dependents','sna.ui.m2':'Betweenness','sna.ui.graph':'Network',
-    'sna.ui.cut':'Yellow = removing it splits the graph','sna.ui.top':'Most depended on','sna.ui.rule':'Readings from rules, no AI',
+  "en": {
+    "back": "Back",
+    "enter": "Open",
+    "corp.enter": "View source",
+    "sna.enter": "Open demo",
+    "locked": "Sign-in required",
+    "open": "Public",
+    "sna.open": "Public demo",
+    "page.title": "Personal Projects",
+    "page.lead": "Some began with recurring problems in my research; others came from everyday life. Here’s what each tool does and the decisions behind it.",
+    "footer.left": "© 2026 Yo Tenra",
+    "footer.right": "Hosted on GitHub Pages",
+    "ootd.title": "OOTD · Wardrobe and Outfit Log",
+    "ootd.desc": "A searchable record of my clothes and makeup, with daily outfit logs, unworn items and average cost per wear. Shopping orders can be imported, with AI helping to tag the items.",
+    "ootd.s1": "I enjoy buying clothes, and I want to know which ones I actually wear. Orders tell me what I bought, but neither an order history nor a wardrobe tells me how often I use each piece.",
+    "ootd.s2": "I linked orders, individual items and outfit logs. Clothes and makeup share style and colour tags, and each item counts only once per day so repeated taps don’t inflate the totals.",
+    "ootd.s3": "I can now look up an item’s wear history and cost per wear, or find clothes I’ve bought but never worn. The same records help me choose an outfit and look back at my shopping habits.",
+    "ootd.ui.title": "Worn today",
+    "ootd.ui.date": "11 Sep",
+    "ootd.ui.season": "In season · not worn yet",
+    "ootd.ui.hint": "Tap to log",
+    "ootd.ui.picked": "2 selected",
+    "ootd.ui.record": "Log today’s outfit",
+    "ootd.ui.once": "Counts once per day",
+    "ootd.ui.review": "Spending review",
+    "ootd.ui.total": "Total",
+    "ootd.ui.unworn": "unworn items · example",
+    "cal.title": "CalTracker · Food and Weight Log",
+    "cal.desc": "Log daily calories and weight, then view 30 days of changes together. Search for foods, save frequently eaten foods and compare the day’s total with a daily target.",
+    "cal.s1": "I used to track calories and weight in a spreadsheet. I wanted to keep the calculations I was familiar with while making it easier to log a meal just after eating.",
+    "cal.s2": "I brought the spreadsheet’s formulas into an app and added food search and custom entries. Regular foods don’t need to be entered from scratch, and each new entry updates the day’s total.",
+    "cal.s3": "The result is a small tool for logging on the go and looking back at recent trends. Calories, weight and daily targets sit together, so I can keep using the approach I started with.",
+    "cal.ui.add": "Add entry",
+    "cal.ui.search": "Search foods…",
+    "cal.ui.f1": "Steamed egg",
+    "cal.ui.f2": "Chicken breast",
+    "cal.ui.f3": "Miso soup",
+    "cal.ui.own": "Or add your own",
+    "cal.ui.today": "Today",
+    "cal.ui.jst": "Japan time",
+    "cal.ui.goal": "Target 2,000 kcal",
+    "cal.ui.trend": "Weight trend",
+    "cal.ui.calc": "Uses the original spreadsheet formulas",
+    "aws.title": "AWS Pass It · Study in Three Languages",
+    "aws.desc": "Practise AWS certification questions in Chinese, Japanese and English, read answer explanations and revisit missed questions by topic. Progress syncs across devices, and practice is available offline.",
+    "aws.s1": "Studying for the exam means understanding both the technical concepts and their names in different languages. Remembering the right option alone doesn’t tell me what I haven’t understood.",
+    "aws.s2": "I brought questions, a glossary and option explanations together in three languages, with missed questions grouped by topic. That lets me compare terminology and return to the underlying concept when reviewing.",
+    "aws.s3": "The app gives me a place to practise, read explanations and revisit mistakes. I can pick up where I left off on another device or keep practising without a signal on my commute.",
+    "aws.ui.lang": "Language",
+    "aws.ui.l1": "中文",
+    "aws.ui.l2": "English",
+    "aws.ui.l3": "日本語",
+    "aws.ui.pick": "Choose a question bank",
+    "aws.ui.start": "Start practice",
+    "aws.ui.q": "Question",
+    "aws.ui.stem": "Highly available storage across availability zones…",
+    "aws.ui.oa": "Single-AZ instance store",
+    "aws.ui.ob": "Multi-AZ managed storage",
+    "aws.ui.why": "Why this option, and why not the others",
+    "aws.ui.review": "Missed questions",
+    "aws.ui.t1": "Storage",
+    "aws.ui.t2": "Networking",
+    "aws.ui.t3": "Security",
+    "aws.ui.sync": "Syncs across devices · works offline",
+    "corp.title": "CorpLink-AI · Company Relationships from News",
+    "corp.desc": "Extract company names and partnership links from news files, organise them into a table and export a matrix for network analysis. Researchers can upload files, run the process and download the results in a browser.",
+    "corp.s1": "The lab needed to identify company relationships across large collections of news articles. Companies appeared under different names and abbreviations. Standardising them by hand took time, while sending the full text to a model meant repeating many of the same requests.",
+    "corp.s2": "I split the process into three stages: select relevant sentences, check a local name database and resolve unfamiliar names. Existing records are reused; only names that need further interpretation go to the model. The results are saved for future use.",
+    "corp.s3": "The web tool takes news files through to a company relationship matrix in one workflow. Name handling follows the same process throughout, and users can work in a browser without setting up a development environment.",
+    "corp.ui.in": "Input",
+    "corp.ui.raw": "Upload news files",
+    "corp.ui.problem": "One company, several names",
+    "corp.ui.pipe": "Process",
+    "corp.ui.local": "Select relevant sentences",
+    "corp.ui.cache": "Reuse known names",
+    "corp.ui.only": "Resolve unfamiliar names",
+    "corp.ui.out": "Output",
+    "corp.ui.ents": "Standardised company names",
+    "corp.ui.cost": "Export relationship matrix",
+    "corp.ui.matrix": "For further network analysis",
+    "sna.title": "Open-source Dependency Analysis · Master’s Research",
+    "sna.desc": "Explore dependencies between Python and Go packages in an interactive network. Linked rankings and explanations show which packages have many dependents and which connect different parts of the network.",
+    "sna.s1": "A dependency list tells me what a piece of software uses, but it is harder to see that software’s place in the wider network. My research brings those relationships into graphs that can be explored and compared.",
+    "sna.s2": "I brought together measures of dependency counts and network position, linking ranked entries to their nodes in the graph. Explanations follow the metrics and defined rules, so readers can check them against the graph and data.",
+    "sna.s3": "The public demo contains a Python sample network of 709 packages and a Go sample network of 591 packages, with several measures to explore. It shows dependency structure and offers leads for further investigation; it does not establish whether a package is reliable.",
+    "sna.ui.title": "Choose a network and measure",
+    "sna.ui.d1": "Python",
+    "sna.ui.d2": "Go",
+    "sna.ui.m1": "Dependents",
+    "sna.ui.m2": "Network position",
+    "sna.ui.graph": "Network graph",
+    "sna.ui.cut": "Highlight nodes connecting different parts",
+    "sna.ui.top": "Most depended on",
+    "sna.ui.rule": "Explanations trace back to metrics and rules",
+    "page.note": "These projects were developed with AI assistance. The simplified illustrations below explain the features; they are not product screenshots.",
+    "story.1": "The problem",
+    "story.2": "Design decisions",
+    "story.3": "The result",
+    "meta.title": "Personal Projects — Yo Tenra",
+    "meta.description": "Five projects: company relationships in news, open-source dependencies, AWS study, a wardrobe log and a food log. What they do and how they were designed."
   },
-
-  ja: {
-    'back':'もどる','step':'STEP','enter':'ひらく','locked':'ログインが必要','open':'公開','sna.open':'公開デモ',
-    'page.title':'つくったもの','page.lead':'どれも、自分が困ったところから始まっています。下では、それぞれを「使う場面」の三コマで見せます。画面の中の文字も、上で選んだ言語に合わせて変わります。',
-    'footer.left':'© 2026 楊 天楽','footer.right':'GitHub Pages で公開',
-
-    'ootd.title':'OOTD・わたしのクローゼット',
-    'ootd.desc':'持っている服とコスメを登録して、その日着たものと、一回あたりの値段を残しています。買い物の履歴はそのまま取り込めます。タグは AI が先に付けます。スタイルと色の分類は服とコスメで共通です。',
-    'ootd.s1':'出かける前にひらくと、今の季節でまだ着ていないものと、よく着るものが先に並びます。五百点の中から探さずにすみます。',
-    'ootd.s2':'その日の組み合わせを二回タップして、まとめて記録。同じものは一日に一回しか数えないので、押しすぎても増えません。',
-    'ootd.s3':'しばらくして「消費のふりかえり」を見ると、この季節にいくら使って、そのうち何着がまだ袖を通していないかが出ます。数字はそのまま一覧に飛べます。',
-    'ootd.ui.title':'今日着たもの','ootd.ui.date':'9月11日','ootd.ui.season':'今の季節・未着用',
-    'ootd.ui.hint':'タップで記録','ootd.ui.picked':'2点えらび中','ootd.ui.record':'今日の分を記録',
-    'ootd.ui.once':'一日一回まで','ootd.ui.review':'ふりかえり','ootd.ui.total':'合計',
-    'ootd.ui.unworn':'点が未着用',
-
-    'cal.title':'CalTracker',
-    'cal.desc':'その日のカロリーと体重を日本時間で記録して、30日分の推移を見ます。食品は検索でき、自分で足せます。一日の目標は、もともと使っていた表計算の式そのままです。',
-    'cal.s1':'食べ終わったら検索して、量を選んで足すだけ。よく食べるものは一度登録しておけば、次からは一回のタップで入ります。',
-    'cal.s2':'その日の合計はすぐ更新されます。輪は食べた分。日付の変わり目は日本時間なので、夜中に食べた分も前の日に入ります。',
-    'cal.s3':'体重とカロリーを30日ぶん並べて見ます。一日の目標は、新しく決め直さず、もとの表計算の式をそのまま使っています。',
-    'cal.ui.add':'記録をたす','cal.ui.search':'食品をさがす…','cal.ui.f1':'茶碗蒸し','cal.ui.f2':'鶏むね肉','cal.ui.f3':'味噌汁',
-    'cal.ui.own':'自分で足すこともできます','cal.ui.today':'今日','cal.ui.jst':'日本時間','cal.ui.goal':'目標 2,000 kcal',
-    'cal.ui.trend':'体重の推移','cal.ui.calc':'目標はもとの式から',
-
-    'aws.title':'AWS Pass It',
-    'aws.desc':'AWS の資格を受けるときに作った問題演習アプリです。問題と用語集は中国語・英語・日本語の三言語。間違えたものは復習リストに残ります。進捗は端末をまたいで同期します。オフラインでも解けます。',
-    'aws.s1':'問題集と言語を選びます。同じ問題を別の言語でも読めて、用語集も一緒に切り替わるので、分からない語はその場で引けます。',
-    'aws.s2':'答えるとすぐ正誤が出ます。なぜその選択肢なのか、他がなぜ違うのかまで出します。',
-    'aws.s3':'間違えたものは分野ごとに復習リストへ。通勤中に解いて、進捗は端末をまたいで同期します。電波がなくても続けられます。',
-    'aws.ui.lang':'言語','aws.ui.l1':'中文','aws.ui.l2':'English','aws.ui.l3':'日本語',
-    'aws.ui.pick':'問題集を選んではじめる','aws.ui.start':'はじめる','aws.ui.q':'問題',
-    'aws.ui.stem':'ゾーンをまたいで可用性を保つ保存先…','aws.ui.oa':'単一 AZ のインスタンスストア','aws.ui.ob':'複数 AZ のマネージド保存',
-    'aws.ui.why':'なぜこれで、なぜ他は違うのか','aws.ui.review':'復習リスト',
-    'aws.ui.t1':'ストレージ','aws.ui.t2':'ネットワーク','aws.ui.t3':'セキュリティ','aws.ui.sync':'端末をまたいで同期・オフライン可',
-
-    'corp.title':'CorpLink-AI｜ニュースから企業どうしの関係を取り出す',
-    'corp.desc':'研究室では、ニュース記事からネットワーク分析用の隣接行列を作る必要がありました。手作業では費用がかさみ、判断の基準もそろいません。Web アプリにして、技術に詳しくないメンバーでもそのまま使えるようにしました。',
-    'corp.s1':'入力は LexisNexis や Factiva の記事全文、3,780 万字。企業名は別名や略称だらけです。まるごとモデルに渡すと、費用がふくらみ、結果もぶれます。',
-    'corp.s2':'まず手元の NLP で、提携を示す文だけを選びます。すでに DB にある名前はそのまま使い、初めて見る別名に限って API を一度呼びます。結果は DB に書き戻します。',
-    'corp.s3':'1 コア・2GB のマシンで 3 時間 4 分、企業名は 60,595 件。全文をモデルに入れれば 900 ドルを超える見込みでしたが、実際にかかったのは 0.25 ドルでした。',
-    'corp.ui.in':'入力','corp.ui.raw':'ニュース記事の全文','corp.ui.problem':'別名・略称・配信元のノイズ',
-    'corp.ui.pipe':'処理の流れ','corp.ui.local':'まず手元で文を選ぶ','corp.ui.cache':'DB にある名前はそのまま','corp.ui.only':'初めて見る別名だけ',
-    'corp.ui.out':'出力','corp.ui.ents':'件の企業名','corp.ui.cost':'API 費用','corp.ui.matrix':'そのまま分析に使える隣接行列',
-
-    'sna.title':'OSS 依存ネットワークの分析デモ',
-    'sna.desc':'修士研究です。オープンソースの依存関係をネットワークとして描き、中心性などの指標から、広く頼られているパッケージと、抜けると分断される箇所を見つけます。説明の文章はルールとテンプレートで組み立てています。',
-    'sna.s1':'まず領域と指標を選びます。データサイエンス系かクラウドネイティブ系か、被依存数か媒介中心性か。',
-    'sna.s2':'図では、丸が大きいほど多くから頼られています。黄色い丸は切断点で、抜くとネットワークが分かれます。',
-    'sna.s3':'右側に順位と読み取りが出ます。文章はルールとテンプレートの組み立てなので、同じデータなら何度やっても同じ結論になります。',
-    'sna.ui.title':'領域と指標','sna.ui.d1':'データサイエンス系','sna.ui.d2':'クラウドネイティブ系',
-    'sna.ui.m1':'被依存数','sna.ui.m2':'媒介中心性','sna.ui.graph':'ネットワーク図',
-    'sna.ui.cut':'黄色 = 抜くと分断される','sna.ui.top':'被依存数の上位','sna.ui.rule':'読み取りはルールで生成・AI 不使用',
-  },
+  "ja": {
+    "back": "戻る",
+    "enter": "開く",
+    "locked": "ログインが必要",
+    "open": "公開",
+    "sna.open": "公開デモ",
+    "page.title": "個人開発・研究",
+    "page.lead": "研究で何度もつまずいたことや、日々の暮らしで気になったことから始まったプロジェクトです。何に使えるのか、なぜこうつくったのかを紹介します。",
+    "footer.left": "© 2026 楊 天楽",
+    "footer.right": "GitHub Pages で公開",
+    "ootd.title": "OOTD · クローゼットとコーデの記録",
+    "ootd.desc": "服やコスメを検索できる一覧にまとめ、毎日のコーデを記録するアプリです。着ていない服や、着用一回あたりの費用を確認できます。購入履歴の取り込みに対応し、タグ付けは AI が補助します。",
+    "ootd.s1": "服を買うのが好きだからこそ、何を実際に着ているのかも知りたい。購入履歴やクローゼットを見るだけでは、買ったものと使った回数を結び付けるのが難しいと感じていました。",
+    "ootd.s2": "購入履歴、アイテム、コーデの記録をつなげました。服とコスメには共通のスタイル・配色タグを使い、同じ服は一日に一回だけ数えるようにして、重複した操作が集計に影響しないようにしています。",
+    "ootd.s3": "アイテムごとの着用履歴や一回あたりの費用を確認し、買ったまま着ていない服も探せるようになりました。今日の服を選ぶときも、自分の買い方を振り返るときも、同じ記録を使えます。",
+    "ootd.ui.title": "今日着たもの",
+    "ootd.ui.date": "9月11日",
+    "ootd.ui.season": "今の季節・まだ着ていない服",
+    "ootd.ui.hint": "タップで記録",
+    "ootd.ui.picked": "2 点を選択中",
+    "ootd.ui.record": "今日着たものを記録",
+    "ootd.ui.once": "同じ服は一日一回だけ",
+    "ootd.ui.review": "買い物の振り返り",
+    "ootd.ui.total": "合計",
+    "ootd.ui.unworn": "点が未着用・表示例",
+    "cal.title": "CalTracker · 食事と体重の記録",
+    "cal.desc": "毎日の摂取カロリーと体重を記録し、30 日間の変化をまとめて見られるアプリです。食品を検索したり、よく食べるものを登録したり、その日の摂取量と目標との差を確認したりできます。",
+    "cal.s1": "もともとは表計算ソフトでカロリーと体重を記録していました。使い慣れた計算方法は残しつつ、食後の記録をもっと手軽にしたいと考えました。",
+    "cal.s2": "使っていた表の計算式をアプリに移し、食品の検索と自分で食品を登録できる機能を加えました。よく食べるものを毎回入力し直す必要がなく、記録するとその日の合計も更新されます。",
+    "cal.s3": "気軽に記録を続け、最近の変化を振り返れる道具になりました。カロリー、体重、一日の目標をまとめて確認でき、もとの記録習慣も引き継げます。",
+    "cal.ui.add": "記録を追加",
+    "cal.ui.search": "食品を検索…",
+    "cal.ui.f1": "茶碗蒸し",
+    "cal.ui.f2": "鶏むね肉",
+    "cal.ui.f3": "味噌汁",
+    "cal.ui.own": "食品を自分で登録することもできます",
+    "cal.ui.today": "今日",
+    "cal.ui.jst": "日本時間",
+    "cal.ui.goal": "目標 2,000 kcal",
+    "cal.ui.trend": "体重の推移",
+    "cal.ui.calc": "もとの表と同じ計算方法",
+    "aws.title": "AWS Pass It · 三言語で学ぶ試験対策",
+    "aws.desc": "中国語・日本語・英語で AWS 認定試験の問題を解き、解説を確認できる学習ツールです。間違えた問題は学習項目ごとに復習できます。学習の進み具合を端末間で同期でき、オフラインの演習にも対応しています。",
+    "aws.s1": "試験勉強では、技術の概念を理解すると同時に、それぞれの言語で使われる用語にも慣れる必要がありました。選択肢を覚えるだけでは、自分がどこを理解できていないのか分かりにくいと感じていました。",
+    "aws.s2": "三言語の問題、用語集、選択肢ごとの解説を一緒に確認できるようにし、間違えた問題を学習項目ごとに整理しました。言語の違いを見比べながら、理解が曖昧だった概念に戻って復習できます。",
+    "aws.s3": "空いた時間に問題を解き、解説を読み、間違いを振り返れる学習ツールになりました。端末を替えても続きから取り組め、通勤中に電波が届かない場所でも演習を続けられます。",
+    "aws.ui.lang": "言語",
+    "aws.ui.l1": "中文",
+    "aws.ui.l2": "English",
+    "aws.ui.l3": "日本語",
+    "aws.ui.pick": "問題集を選んで始める",
+    "aws.ui.start": "演習を始める",
+    "aws.ui.q": "問題",
+    "aws.ui.stem": "複数の AZ にまたがる高可用性ストレージが必要…",
+    "aws.ui.oa": "単一 AZ のインスタンスストア",
+    "aws.ui.ob": "複数 AZ のマネージドストレージ",
+    "aws.ui.why": "正解の理由と、ほかの選択肢が違う理由",
+    "aws.ui.review": "間違えた問題の復習",
+    "aws.ui.t1": "ストレージ",
+    "aws.ui.t2": "ネットワーク",
+    "aws.ui.t3": "セキュリティ",
+    "aws.ui.sync": "端末間で進捗を同期・オフライン対応",
+    "corp.title": "CorpLink-AI · ニュースから企業間の関係を整理",
+    "corp.desc": "ニュースのファイルから企業名と提携の手がかりを表にまとめ、ネットワーク分析用の行列を出力するツールです。研究者がブラウザーからファイルをアップロードし、処理を実行して結果をダウンロードできます。",
+    "corp.s1": "研究室では、大量のニュースから企業間の関係を整理する必要がありました。同じ会社でも略称や別名が混在し、手作業で名前をそろえるには時間がかかります。一方、全文をそのままモデルに渡すと、同じ名前を何度も処理することになります。",
+    "corp.s2": "関連する文を選ぶ、手元の企業名データベースを調べる、未登録の名前を処理する、という三段階に分けました。登録済みの結果は再利用し、判断が必要な名前だけをモデルに渡します。その結果も保存し、次回の処理に使えるようにしました。",
+    "corp.s3": "ニュースのファイルから企業間の関係行列を作れる Web ツールになりました。企業名の処理を一つの流れにまとめ、利用者が開発環境を用意しなくても、ブラウザーから操作できるようにしています。",
+    "corp.ui.in": "入力",
+    "corp.ui.raw": "ニュースのファイルをアップロード",
+    "corp.ui.problem": "同じ会社に複数の名前",
+    "corp.ui.pipe": "処理の流れ",
+    "corp.ui.local": "関連する文を選ぶ",
+    "corp.ui.cache": "登録済みの企業名を再利用",
+    "corp.ui.only": "未登録の名前を判断",
+    "corp.ui.out": "出力",
+    "corp.ui.ents": "企業名の表記を統一",
+    "corp.ui.cost": "関係行列を出力",
+    "corp.ui.matrix": "その後のネットワーク分析に利用",
+    "sna.title": "OSS の依存関係分析 · 修士研究",
+    "sna.desc": "Python と Go のパッケージの依存関係を、操作しながら調べられるネットワーク図にしたものです。ランキングや説明と照らし合わせて、どこに依存が集まり、どのパッケージがネットワークの異なる部分をつないでいるかを確認できます。",
+    "sna.s1": "依存先の一覧を見れば、そのソフトウェアが何を使っているかは分かります。でも、ネットワーク全体の中でどこに位置するかは、一覧だけでは見えてきません。研究では、こうした関係を比較し、探索できる図にまとめています。",
+    "sna.s2": "依存されている数や、ほかのパッケージをつなぐ位置など、複数の指標を見比べられるようにし、ランキングと図の中の点を対応させました。説明文は指標とルールに基づいて組み立て、図やデータに戻って根拠を確かめられるようにしています。",
+    "sna.s3": "公開デモでは、709 パッケージの Python ネットワークと、591 パッケージの Go ネットワークを、指標を切り替えながら見られます。依存関係の構造を示し、詳しく調べるための手がかりを得るものです。この分析だけで、ソフトウェアの信頼性を判断することはできません。",
+    "sna.ui.title": "ネットワークと指標を選ぶ",
+    "sna.ui.d1": "Python",
+    "sna.ui.d2": "Go",
+    "sna.ui.m1": "依存されている数",
+    "sna.ui.m2": "ネットワーク上の位置",
+    "sna.ui.graph": "ネットワーク図",
+    "sna.ui.cut": "ネットワークの異なる部分をつなぐ点を表示",
+    "sna.ui.top": "依存されている数の上位",
+    "sna.ui.rule": "説明は指標とルールに基づく",
+    "page.note": "これらのプロジェクトは、AI を活用して開発しています。下の図は機能を説明するための模式図で、実際の画面ではありません。",
+    "story.1": "きっかけになった課題",
+    "story.2": "設計で考えたこと",
+    "story.3": "できるようになったこと",
+    "meta.title": "個人開発・研究 — 楊 天楽",
+    "meta.description": "ニュースからの企業関係抽出、OSS の依存関係分析、AWS の試験対策、服と食事の記録。五つのプロジェクトの用途や設計、実現したことを紹介します。",
+    "corp.enter": "ソースコードを見る",
+    "sna.enter": "デモを開く"
+  }
 };
-
 Site.mount(T, render);
 </script>
 </body>

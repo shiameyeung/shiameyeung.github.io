@@ -25,7 +25,7 @@ a{color:inherit}
 
 /* ── トップ：名刺として読める並び ── */
 .card-me{display:flex;align-items:center;gap:34px;padding:44px 0 46px;position:relative}
-.card-me::before{content:'';position:absolute;inset:-30px -12% 0 -12%;z-index:-1;pointer-events:none;
+.card-me::before{content:'';position:absolute;inset:-30px -24px 0 -24px;z-index:-1;pointer-events:none;
   background:radial-gradient(42% 62% at 80% 20%,#f6dfe9aa,transparent 70%),
              radial-gradient(38% 55% at 58% 74%,#dcecdfaa,transparent 70%);
   filter:blur(6px)}
@@ -68,13 +68,54 @@ section+section{border-top:1px solid var(--line)}
 footer{padding:34px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;
        display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
+/* The home page leads with useful projects and the choices behind them. */
+.introduction{padding:0 0 42px;max-width:740px}
+.introduction>p{font-size:clamp(19px,2.6vw,23px);line-height:1.75;margin:0 0 24px;letter-spacing:.01em}
+.introduction>.direction{font-size:14px;line-height:1.8;color:var(--muted);max-width:46em}
+.explore{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.primary-link{display:inline-block;padding:10px 22px;border-radius:999px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;text-decoration:none}
+.quiet-link,.text-link{font-size:14px;color:var(--accent);text-decoration:none;font-weight:600}
+.quiet-link:hover,.text-link:hover{text-decoration:underline;text-underline-offset:5px}
+.selected-projects{border-top:1px solid var(--line)}
+.section-heading{font-size:clamp(21px,3vw,26px);margin:0 0 10px;line-height:1.5;letter-spacing:.01em}
+.section-intro{color:var(--muted);margin:0 0 24px;max-width:46em;font-size:14px}
+.featured-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.feature-card{display:flex;flex-direction:column;padding:28px;border:1px solid var(--line);border-radius:20px;text-decoration:none;transition:transform .15s,border-color .15s}
+.feature-card:hover,.small-project:hover{transform:translateY(-3px);border-color:#bdb4a9}
+.corp-card{background:linear-gradient(140deg,#f5f1e4,#fffdf8)}
+.sna-card{background:linear-gradient(140deg,#eaf1f8,#fcfdff)}
+.eyebrow{font-size:11px;letter-spacing:.06em;color:var(--muted);font-weight:600;display:block;margin-bottom:12px}
+.feature-card h3{font-size:22px;line-height:1.45;margin:0 0 16px}
+.feature-purpose{font-size:15px;line-height:1.8;margin:0 0 22px;flex:1}
+.feature-thought{font-size:13px;line-height:1.8;padding-top:16px;border-top:1px solid #c9c6bb77;margin:0 0 20px;color:#605c55}
+.card-link{font-size:13px;font-weight:600}
+.work-preview{padding:38px;margin:0 0 8px;background:var(--accent-soft);border:1px solid #dce5dd;border-radius:20px}
+.work-preview .eyebrow{color:var(--accent);margin-bottom:10px}
+.work-preview>p{margin:0 0 20px;max-width:47em;font-size:15px;color:#4a534b}
+.work-preview+section{border-top:0}
+.everyday-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.small-project{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:22px;text-decoration:none;transition:transform .15s,border-color .15s}
+.small-mark{font-size:22px}
+.small-project h3{font-size:17px;margin:12px 0 8px}
+.small-project p{font-size:13px;color:var(--muted);margin:0;line-height:1.8}
+.all-projects{display:inline-block;margin-top:23px}
+a:focus-visible,button:focus-visible{outline:3px solid #5a8879;outline-offset:5px}
+.host{overflow-wrap:anywhere}
+
 @media(max-width:760px){
   .wrap{padding:0 18px}
   .card-me{flex-direction:column;align-items:flex-start;gap:22px;padding:26px 0 32px}
+  .card-me::before{inset:-30px -18px 0 -18px}
   .portrait{flex-basis:112px;width:112px;height:112px}
   section{padding:32px 0}
   .big-button{padding:18px 18px;gap:14px}
   .bb-icon{flex-basis:40px;width:40px;height:40px}
   .bb-text strong{font-size:16px}
+  .featured-grid{grid-template-columns:1fr}
+  .feature-card{padding:24px}
+  .work-preview{padding:26px}
+  .everyday-grid{grid-template-columns:1fr}
+  .small-project{padding:20px}
+  .introduction{padding-bottom:32px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
