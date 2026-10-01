@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="base.css">
 
 <link rel="stylesheet" href="apps.css">
-<link rel="stylesheet" href="navigation.css">
+<link rel="stylesheet" href="navigation.css?v=20261002">
 </head>
 <body>
 <div class="wrap">
@@ -37,14 +37,12 @@
   <main id="apps"></main>
 
   <footer>
-    <a class="text-link" href="challenge.html" data-t="challenge.button"></a>
     <span data-t="footer.left"></span>
-    <a class="text-link" href="resume.html" data-t="resume.button">職務経歴書</a>
     <span data-t="footer.right"></span>
   </footer>
 </div>
 
-<script src="navigation.js"></script>
+<script src="navigation.js?v=20261002"></script>
 <script src="shared.js"></script>
 <script src="apps-demo.js"></script>
 <script>
@@ -170,7 +168,7 @@ function render(lang,t) {
   } else head.querySelector('.page-note').hidden=true;
   const card=id=>{const a=APPS.find(x=>x.id===id), actual=!!SHOTS[id];return `<a class="project-overview-card" href="apps.html?project=${id}">${actual?`<img src="assets/shots/${id}_${id==='aws'?'home':id==='cal'?'today':'wardrobe'}_${lang}.webp" alt="" loading="lazy">`:`<span class="overview-mark" aria-hidden="true">${a.mark}</span>`}<div><h2>${t[id+'.title'].split(' · ')[0]}</h2><p>${t[id+'.desc']}</p><span class="card-link">${SiteNavigation.label(lang,'nav.read')} →</span></div></a>`;};
   if(!selected) {
-    document.getElementById('apps').innerHTML=`<div class="project-overview-grid">${all.slice(0,3).map(card).join('')}</div><section class="research-overview"><h2 class="section-heading">${SiteNavigation.label(lang,'story.research')}</h2><div class="project-overview-grid research-grid">${all.slice(3).map(card).join('')}</div></section>`;
+    document.getElementById('apps').innerHTML=`<div class="project-overview-grid">${all.slice(0,3).map(card).join('')}</div><section class="research-overview"><h2 class="section-heading" data-rail-key="chapter.research">${SiteNavigation.label(lang,'story.research')}</h2><div class="project-overview-grid research-grid">${all.slice(3).map(card).join('')}</div></section>`;
     return;
   }
   document.getElementById('apps').innerHTML=order.map(id=>{
@@ -178,7 +176,7 @@ function render(lang,t) {
     return `<section class="app" id="${id}" style="--tint:${a.tint};--tone:${a.tone};--paper:${a.paper}">
     <div class="app-head"><div class="app-title"><span class="app-badge" aria-hidden="true">${a.mark}</span><div><p class="host">${a.host}</p></div></div><div><a class="enter" href="${a.url}" target="_blank" rel="noopener">${t['enter']} ↗</a>${a.locked?`<span class="locked">${t[id+'.locked']||t['locked']}</span>`:''}</div></div>
 
-    ${actual?`<h3>${t['sec.problem']}</h3><p>${t[id+'.problem']}</p><h3 id="project-features">${t['sec.features']}</h3><ul class="feature-list">${Array.from({length:id==='aws'?12:10},(_,i)=>`<li>${t[id+'.f'+(i+1)]}</li>`).join('')}</ul><h3 id="project-demo">${t['sec.demo']}</h3><div class="demo-grid" id="demos-${id}">${AppDemos.html(id,t)}</div><h3 id="project-screens">${t['sec.shots']}</h3><div class="shots">${SHOTS[id].map(v=>{const file=`assets/shots/${id}_${v}_${v==='guide'?'zh':lang}.webp`;return `<figure><a href="${file}" target="_blank" rel="noopener"><img src="${file}" loading="lazy" alt="${String(t[id+'.shot.'+v]).replaceAll('&','&amp;').replaceAll('"','&quot;')}" data-shot="${id}_${v}"></a><figcaption>${t[id+'.shot.'+v]}</figcaption></figure>`;}).join('')}</div><h3 id="project-design">${t['sec.design']}</h3><p>${t[id+'.design']}</p><p class="stack"><b>${t['sec.stack']}</b> · ${t[id+'.stack']}</p>`:
+    ${actual?`<h2 class="app-section-heading" id="project-problem">${t['sec.problem']}</h2><p>${t[id+'.problem']}</p><h2 class="app-section-heading" id="project-features" data-rail-key="nav.features">${t['sec.features']}</h2><ul class="feature-list">${Array.from({length:id==='aws'?12:10},(_,i)=>`<li>${t[id+'.f'+(i+1)]}</li>`).join('')}</ul><h2 class="app-section-heading" id="project-demo" data-rail-key="nav.demo">${t['sec.demo']}</h2><div class="demo-grid" id="demos-${id}">${AppDemos.html(id,t)}</div><h2 class="app-section-heading" id="project-screens" data-rail-key="nav.screens">${t['sec.shots']}</h2><div class="shots">${SHOTS[id].map(v=>{const file=`assets/shots/${id}_${v}_${v==='guide'?'zh':lang}.webp`;return `<figure><a href="${file}" target="_blank" rel="noopener"><img src="${file}" loading="lazy" alt="${String(t[id+'.shot.'+v]).replaceAll('&','&amp;').replaceAll('"','&quot;')}" data-shot="${id}_${v}"></a><figcaption>${t[id+'.shot.'+v]}</figcaption></figure>`;}).join('')}</div><h2 class="app-section-heading" id="project-design" data-rail-key="nav.design">${t['sec.design']}</h2><p>${t[id+'.design']}</p><p class="stack"><b>${t['sec.stack']}</b> · ${t[id+'.stack']}</p>`:
     `<div class="scenes">${a.scenes.map((f,i)=>`<article class="scene"><div class="ui">${f(t)}</div><div class="scene-body"><span class="scene-step">${t['story.'+(i+1)]}</span><p class="scene-cap">${t[id+'.s'+(i+1)]}</p></div></article>`).join('')}</div>`}</section>`;
   }).join('');
   order.filter(id=>SHOTS[id]).forEach(id=>AppDemos.bind(id,t));

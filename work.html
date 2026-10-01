@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="apps.css">
 <link rel="stylesheet" href="work.css">
-<link rel="stylesheet" href="navigation.css">
+<link rel="stylesheet" href="navigation.css?v=20261002">
 </head>
 <body>
 <div class="wrap">
@@ -37,20 +37,18 @@
   <aside class="lead-card"><p data-t="lead.card"></p><a class="text-link" href="challenge.html" data-t="lead.link"></a></aside>
   <main id="jobs"></main>
 
-  <section class="method">
+  <section class="method" id="work-method">
     <h2 data-t="method.title"></h2>
     <p data-t="method.body"></p>
   </section>
 
   <footer>
-    <a class="text-link" href="challenge.html" data-t="challenge.button"></a>
     <span data-t="footer.left"></span>
-    <a class="text-link" href="resume.html" data-t="resume.button">職務経歴書</a>
     <span data-t="footer.right"></span>
   </footer>
 </div>
 
-<script src="navigation.js"></script>
+<script src="navigation.js?v=20261002"></script>
 <script src="shared.js"></script>
 <script>
 // 取り組みの図解。画面写真ではなく HTML で組み、文字は各言語の文案から表示する。
@@ -94,7 +92,7 @@ const JOBS = [
 
 function render(lang, t) {
   document.getElementById('jobs').innerHTML = JOBS.map(j => `
-    <section class="job" style="--tint:${j.tint};--tone:${j.tone};--paper:${j.paper}">
+    <section class="job" id="work-${j.id}" data-rail-icon="work" style="--tint:${j.tint};--tone:${j.tone};--paper:${j.paper}">
       <div class="job-head">
         <span class="app-badge" aria-hidden="true">${j.mark}</span>
         <div><h2>${t[j.id + '.title']}</h2><p class="step">${t[j.id + '.sub']}</p></div>

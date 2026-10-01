@@ -13,7 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌿%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="base.css">
 
-<link rel="stylesheet" href="navigation.css">
+<link rel="stylesheet" href="navigation.css?v=20261002">
 </head>
 <body>
 <div class="wrap">
@@ -38,7 +38,7 @@
     <div class="introduction">
       <p data-t="intro"></p>
 
-      <nav class="explore" aria-label="Explore"><a href="apps.html"><span data-t="apps.button"></span> →</a><a href="work.html"><span data-t="work.button"></span> →</a><a href="resume.html"><span data-t="resume.button"></span> →</a></nav>
+      <nav class="explore" aria-label="Explore"><a href="apps.html"><span data-t="apps.button"></span> →</a><a href="work.html"><span data-t="work.button"></span> →</a></nav>
     </div>
 
     <section class="everyday-feature" id="daily-tools">
@@ -52,7 +52,7 @@
       <a class="text-link all-projects" href="apps.html"><span data-t="all.projects"></span><span aria-hidden="true"> ↗</span></a>
     </section>
 
-    <section class="work-preview">
+    <section class="work-preview" id="work-practice">
       <span class="eyebrow">Baseconnect</span>
       <h2 class="section-heading" data-nav="story.work"></h2>
       <p data-t="work.desc"></p><div class="stat-grid"><div class="stat"><strong data-t="stat.hours.v"></strong><span data-t="stat.hours.l"></span></div><div class="stat"><strong data-t="stat.prs.v"></strong><span data-t="stat.prs.l"></span></div><div class="stat"><strong data-t="stat.tasks.v"></strong><span data-t="stat.tasks.l"></span></div><div class="stat"><strong data-t="stat.quality.v"></strong><span data-t="stat.quality.l"></span></div></div><p class="stat-note" data-t="stat.note"></p>
@@ -60,7 +60,7 @@
     </section>
 
 
-    <section class="selected-projects">
+    <section class="selected-projects" id="research-projects">
       <h2 class="section-heading" data-nav="story.research"></h2>
       <p class="section-intro" data-t="projects.lead"></p>
       <div class="featured-grid">
@@ -80,11 +80,11 @@
         </a>
       </div>
     </section>
-    <section class="career-next"><h2 class="section-heading" data-nav="story.next"></h2><p data-t="direction"></p><a class="text-link" href="resume.html"><span data-t="resume.button"></span> →</a></section>
+    <section class="career-next" id="career-next"><h2 class="section-heading" data-nav="story.next"></h2><p data-t="direction"></p></section>
   </main>
 
   <p class="qualification" data-t="qualification.aws"></p>
-  <section>
+  <section id="profile-links" data-rail-exclude>
     <h2 class="section-label" data-t="contact.title"></h2>
     <div class="links">
       <a href="https://github.com/shiameyeung" target="_blank" rel="noopener">
@@ -108,7 +108,7 @@
   </footer>
 </div>
 
-<script src="navigation.js"></script>
+<script src="navigation.js?v=20261002"></script>
 <script src="shared.js"></script>
 <script>
 const T = {
