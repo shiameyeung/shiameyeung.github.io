@@ -33,7 +33,14 @@ window.Site = (() => {
         if (v !== undefined) el.innerHTML = v;
       });
       document.querySelectorAll('.langbar button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+      const url=new URL(location); url.searchParams.set('lang',lang); history.replaceState(null,'',url);
       if (after) after(lang, t);
+      if(window.SiteNavigation) SiteNavigation.mount(lang);
+      document.querySelectorAll('[data-home-shot]').forEach(img=>{img.src=`assets/shots/${img.dataset.homeShot}_${lang}.webp`;});
+      document.querySelectorAll('a[href]').forEach(a=>{
+        const u=new URL(a.getAttribute('href'),location);
+        if(u.origin===location.origin && /(?:index|apps|work|challenge|resume)\.html$/.test(u.pathname)){u.searchParams.set('lang',lang);a.setAttribute('href',u.pathname.split('/').pop()+u.search+u.hash);}
+      });
       try { localStorage.setItem(KEY, lang); } catch (_) { /* プライベートモードでは覚えない */ }
     };
     document.querySelector('.langbar')?.addEventListener('click', e => {

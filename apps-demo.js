@@ -66,7 +66,7 @@ const AppDemos = (() => {
       `<div class="item-picks">${Array.from({length:6},(_,i)=>`<button type="button" data-item="${i+1}" aria-pressed="false"><span class="clothing-photo photo-${i+1}" aria-hidden="true"></span><span>${t[`demo.item.${i+1}`]}</span></button>`).join('')}</div><output id="ootd-picked" aria-live="polite"></output><button type="button" id="ootd-record">${t['ootd.demo.d1.record']}</button><output id="ootd-today" aria-live="polite"></output>`,
       number('ootd-price',t['demo.price'],300,.01)+`<button type="button" id="ootd-wear">${t['ootd.demo.d2.wear']}</button><output id="ootd-cost" aria-live="polite"></output>`,
       `<div class="storage-grid">${[5,3,4,6,11,16,14,15,20].map((n,i)=>`<button type="button" data-cell="${i}" aria-pressed="${i===0}">A${Math.floor(i/3)+1}${i%3+1}<span>${n}</span></button>`).join('')}</div><output id="ootd-place" aria-live="polite"></output><button type="button" id="ootd-remove">${t['ootd.demo.d3.takeOut']}</button><output id="ootd-unplaced" aria-live="polite"></output>`,
-      check('ootd-never',t['demo.never'],false)+`<label>${t['sec.features']}<select id="ootd-sort"><option value="newest">${t['demo.newest']}</option><option value="worn">${t['demo.worn']}</option></select></label><ul id="ootd-list" class="mini-list"></ul>`
+      check('ootd-never',t['demo.never'],false)+`<label>${t['demo.sort']}<select id="ootd-sort"><option value="newest">${t['demo.newest']}</option><option value="worn">${t['demo.worn']}</option></select></label><ul id="ootd-list" class="mini-list"></ul>`
     ].map((b,i)=>tile(app,i+1,t,b)).join('');
     return '';
   }

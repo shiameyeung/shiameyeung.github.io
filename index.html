@@ -12,6 +12,8 @@
 <meta property="og:image" content="https://yotenra.com/assets/portrait.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌿%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="base.css">
+
+<link rel="stylesheet" href="navigation.css">
 </head>
 <body>
 <div class="wrap">
@@ -32,30 +34,44 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <div class="introduction">
       <p data-t="intro"></p>
-      <p class="direction" data-t="direction"></p>
-      <nav class="explore" aria-label="Portfolio">
-        <a class="primary-link" href="apps.html" data-t="apps.button"></a>
-        <a class="quiet-link" href="work.html"><span data-t="work.button"></span><span aria-hidden="true"> ↗</span></a>
-        <a class="quiet-link" href="challenge.html" data-t="challenge.button"></a>
-        <a class="quiet-link" href="resume.html" data-t="resume.button">職務経歴書</a>
-      </nav>
+
+      <nav class="explore" aria-label="Explore"><a href="apps.html"><span data-t="apps.button"></span> →</a><a href="work.html"><span data-t="work.button"></span> →</a><a href="resume.html"><span data-t="resume.button"></span> →</a></nav>
     </div>
 
+    <section class="everyday-feature" id="daily-tools">
+      <h2 class="section-heading" data-nav="story.tools"></h2>
+      <p class="section-intro" data-t="everyday.lead"></p>
+      <div class="everyday-grid">
+        <a class="small-project" href="apps.html?project=aws"><img class="project-cover" src="assets/shots/aws_home_ja.webp" data-home-shot="aws_home" alt="" loading="lazy"><h3 data-t="aws.title"></h3><p data-t="aws.desc"></p><span class="card-link"><span data-nav="nav.read"></span> →</span></a>
+        <a class="small-project" href="apps.html?project=ootd"><img class="project-cover" src="assets/shots/ootd_wardrobe_ja.webp" data-home-shot="ootd_wardrobe" alt="" loading="lazy"><h3 data-t="ootd.title"></h3><p data-t="ootd.desc"></p><span class="card-link"><span data-nav="nav.read"></span> →</span></a>
+        <a class="small-project" href="apps.html?project=cal"><img class="project-cover" src="assets/shots/cal_today_ja.webp" data-home-shot="cal_today" alt="" loading="lazy"><h3 data-t="cal.title"></h3><p data-t="cal.desc"></p><span class="card-link"><span data-nav="nav.read"></span> →</span></a>
+      </div>
+      <a class="text-link all-projects" href="apps.html"><span data-t="all.projects"></span><span aria-hidden="true"> ↗</span></a>
+    </section>
+
+    <section class="work-preview">
+      <span class="eyebrow">Baseconnect</span>
+      <h2 class="section-heading" data-nav="story.work"></h2>
+      <p data-t="work.desc"></p><div class="stat-grid"><div class="stat"><strong data-t="stat.hours.v"></strong><span data-t="stat.hours.l"></span></div><div class="stat"><strong data-t="stat.prs.v"></strong><span data-t="stat.prs.l"></span></div><div class="stat"><strong data-t="stat.tasks.v"></strong><span data-t="stat.tasks.l"></span></div><div class="stat"><strong data-t="stat.quality.v"></strong><span data-t="stat.quality.l"></span></div></div><p class="stat-note" data-t="stat.note"></p>
+      <div class="work-links"><a class="text-link" href="work.html"><span data-t="work.link"></span> ↗</a><a class="text-link" href="challenge.html"><span data-t="work.challenge"></span> ↗</a></div>
+    </section>
+
+
     <section class="selected-projects">
-      <h2 class="section-heading" data-t="projects.title"></h2>
+      <h2 class="section-heading" data-nav="story.research"></h2>
       <p class="section-intro" data-t="projects.lead"></p>
       <div class="featured-grid">
-        <a class="feature-card corp-card" href="apps.html#corp">
+        <a class="feature-card corp-card" href="apps.html?project=corp">
           <span class="eyebrow" data-t="corp.category"></span>
           <h3 data-t="corp.title"></h3>
           <p class="feature-purpose" data-t="corp.desc"></p>
           <p class="feature-thought" data-t="corp.thought"></p>
           <span class="card-link"><span data-t="project.more"></span><span aria-hidden="true"> ↗</span></span>
         </a>
-        <a class="feature-card sna-card" href="apps.html#sna">
+        <a class="feature-card sna-card" href="apps.html?project=sna">
           <span class="eyebrow" data-t="sna.category"></span>
           <h3 data-t="sna.title"></h3>
           <p class="feature-purpose" data-t="sna.desc"></p>
@@ -64,24 +80,7 @@
         </a>
       </div>
     </section>
-
-    <section class="work-preview">
-      <span class="eyebrow">Baseconnect</span>
-      <h2 class="section-heading" data-t="work.title"></h2>
-      <p data-t="work.desc"></p><div class="stat-grid"><div class="stat"><strong data-t="stat.hours.v"></strong><span data-t="stat.hours.l"></span></div><div class="stat"><strong data-t="stat.prs.v"></strong><span data-t="stat.prs.l"></span></div><div class="stat"><strong data-t="stat.tasks.v"></strong><span data-t="stat.tasks.l"></span></div><div class="stat"><strong data-t="stat.quality.v"></strong><span data-t="stat.quality.l"></span></div></div><p class="stat-note" data-t="stat.note"></p>
-      <div class="work-links"><a class="text-link" href="work.html"><span data-t="work.link"></span> ↗</a><a class="text-link" href="challenge.html"><span data-t="work.challenge"></span> ↗</a></div>
-    </section>
-
-    <section>
-      <h2 class="section-heading" data-t="everyday.title"></h2>
-      <p class="section-intro" data-t="everyday.lead"></p>
-      <div class="everyday-grid">
-        <a class="small-project" href="apps.html#aws"><span class="small-mark" aria-hidden="true">☁️</span><h3 data-t="aws.title"></h3><p data-t="aws.desc"></p></a>
-        <a class="small-project" href="apps.html#ootd"><span class="small-mark" aria-hidden="true">👚</span><h3 data-t="ootd.title"></h3><p data-t="ootd.desc"></p></a>
-        <a class="small-project" href="apps.html#cal"><span class="small-mark" aria-hidden="true">🍑</span><h3 data-t="cal.title"></h3><p data-t="cal.desc"></p></a>
-      </div>
-      <a class="text-link all-projects" href="apps.html"><span data-t="all.projects"></span><span aria-hidden="true"> ↗</span></a>
-    </section>
+    <section class="career-next"><h2 class="section-heading" data-nav="story.next"></h2><p data-t="direction"></p><a class="text-link" href="resume.html"><span data-t="resume.button"></span> →</a></section>
   </main>
 
   <p class="qualification" data-t="qualification.aws"></p>
@@ -109,6 +108,7 @@
   </footer>
 </div>
 
+<script src="navigation.js"></script>
 <script src="shared.js"></script>
 <script>
 const T = {
@@ -138,10 +138,10 @@ const T = {
     "sna.thought": "除了看谁被依赖得多，也比较谁连接了网络中的不同部分。",
     "project.more": "看用途与设计",
     "work.title": "在真实业务里，把问题查清楚，再从源头改掉",
-    "work.desc": "在 Baseconnect，我参与企业数据抽取与质量改善：在自己搭建的生产同等环境里，直接处理S3 中直接提供给客户使用的生产数据，修改数据生产 pipeline。三个月里提出并合并 190 个 PR；对反复出现的错误数据，不止逐件修正，而是写可复用的 transform 清理工具，再用镜像 PR 修正生产 pipeline。",
+    "work.desc": "在 Baseconnect，我参与企业数据抽取与质量改善：自己搭建工作环境，直接处理 S3 中提供给客户的生产数据，修改数据生产 pipeline。三个月里提出并合并 190 个 PR；对反复出现的错误数据，不止逐件修正，而是写可复用的 transform 清理工具，亲自执行生产数据修正，再用镜像 PR 修正生产 pipeline，减少同类问题再次出现。",
     "work.link": "了解我的工作方式",
     "everyday.title": "也为自己的生活做工具",
-    "everyday.lead": "备考、穿搭、记录饮食——每天都在用的东西，我想把它们做得顺手一点。三个应用都在线上跑着，下面可以直接试。",
+    "everyday.lead": "备考、穿搭、记录饮食——每天都在用的东西，我想把它们做得顺手一点。点开项目，可以查看功能、交互演示和实际截图。",
     "aws.title": "AWS Pass It",
     "aws.desc": "7 种 AWS 认证、中日英题库与界面、模拟考分数预测、错题本、术语悬停解释、一键复制题目给 AI。",
     "ootd.title": "OOTD",
@@ -195,7 +195,7 @@ const T = {
     "work.desc": "At Baseconnect, I work on company data extraction and quality. I set up my own working environment to investigate issues, modify the data pipeline, and correct production data in S3 that is delivered directly to clients. Over three months, I authored 190 PRs that were merged. For recurring data errors, I build reusable transformation tools to clean existing records, then submit corresponding fixes to the production pipeline.",
     "work.link": "How I work",
     "everyday.title": "Tools for my daily life, too",
-    "everyday.lead": "Studying for exams, choosing outfits, logging food: I build tools to make these daily tasks easier. All three apps are running online, with demos you can try below.",
+    "everyday.lead": "Studying for exams, choosing outfits, logging food: I build tools to make these daily tasks easier. Open a project to see its features, interactive demos, and screenshots.",
     "aws.title": "AWS Pass It",
     "aws.desc": "Practice for seven AWS certifications, with Chinese, Japanese, and English question banks and interfaces, score estimates, a mistake review list, glossary tooltips, and questions you can copy into an AI chat.",
     "ootd.title": "OOTD",
@@ -246,10 +246,10 @@ const T = {
     "sna.thought": "多くのパッケージから依存されているものに加え、ネットワークの異なる部分をつなぐものも比較しています。",
     "project.more": "用途と設計を見る",
     "work.title": "業務の中で原因を確かめ、発生源を直す",
-    "work.desc": "Baseconnectで、企業データの抽出と品質改善に取り組んでいます。本番と同等の検証環境を自分で構築し、S3上の、顧客に直接提供される本番データを使ってデータ生成パイプラインを改善しました。3か月で190件のPRを作成し、マージまで進めました。繰り返し発生するデータの誤りには、再利用できるtransformを作成。既存データを修正するとともに、対応する本番パイプラインの修正PRを作成しています。",
+    "work.desc": "Baseconnectで、企業データの抽出と品質改善に取り組んでいます。自分で作業環境を構築し、顧客に直接提供される本番データをS3上で扱い、データ生成パイプラインを改善しています。3か月で190件のPRを作成し、マージまで進めました。繰り返し発生するデータの誤りには、再利用できるtransformを作成し、本番データの修正も自分で実行しています。さらに、同じ修正方針を対応する本番パイプラインの修正PRにも反映し、同じ問題の再発を減らしています。",
     "work.link": "仕事の進め方を見る",
     "everyday.title": "日々の暮らしにも、使えるツールを",
-    "everyday.lead": "資格の勉強、服選び、食事の記録。毎日使うものを少し使いやすくしたくて、3つのアプリをつくりました。いずれも運用中で、このページのデモで操作を試せます。",
+    "everyday.lead": "資格の勉強、服選び、食事の記録。毎日使うものを少し使いやすくしたくて、3つのアプリをつくりました。各プロジェクトを開くと、機能、操作デモ、実際の画面を確認できます。",
     "aws.title": "AWS Pass It",
     "aws.desc": "7種類のAWS認定試験に対応。日中英の問題集と画面、模試からのスコア予測、間違えた問題の復習、用語解説、AIへの質問用コピーを備えています。",
     "ootd.title": "OOTD",

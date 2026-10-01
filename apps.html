@@ -10,7 +10,9 @@
 <meta property="og:url" content="https://yotenra.com/apps.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌿%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="base.css">
+
 <link rel="stylesheet" href="apps.css">
+<link rel="stylesheet" href="navigation.css">
 </head>
 <body>
 <div class="wrap">
@@ -31,7 +33,7 @@
     <p class="page-note" data-t="page.note"></p>
   </header>
 
-  <nav class="app-index" aria-label="Projects"><a href="#aws" data-t="aws.title"></a><a href="#cal" data-t="cal.title"></a><a href="#ootd" data-t="ootd.title"></a><a href="#corp" data-t="corp.title"></a><a href="#sna" data-t="sna.title"></a></nav>
+
   <main id="apps"></main>
 
   <footer>
@@ -42,6 +44,7 @@
   </footer>
 </div>
 
+<script src="navigation.js"></script>
 <script src="shared.js"></script>
 <script src="apps-demo.js"></script>
 <script>
@@ -152,16 +155,33 @@ const APPS = [
 
 const SHOTS={aws:['home','mock','modes','question','glossary','nav','result','guide'],cal:['today','trend','formula','daily','body'],ootd:['wardrobe','today','looks','places','item','spending']};
 function render(lang,t) {
-  const order=['aws','cal','ootd','corp','sna'];
+  const all=['aws','cal','ootd','corp','sna'];
+  let selected=new URLSearchParams(location.search).get('project');
+  const legacy=location.hash.slice(1);
+  if(!selected && all.includes(legacy)) { selected=legacy; const u=new URL(location);u.searchParams.set('project',selected);u.hash='';history.replaceState(null,'',u); }
+  if(!all.includes(selected)) selected=null;
+  const order=selected?[selected]:[];
+  const head=document.querySelector('.page-head');
+  if(selected) {
+    head.querySelector('h1').textContent=t[selected+'.title'];
+    head.querySelector('[data-t="page.lead"]').textContent=t[selected+'.desc'];
+    head.querySelector('.page-note').hidden=true;
+    document.title=t[selected+'.title']+' — '+(lang==='en'?'Yo Tenra':'楊 天楽');
+  } else head.querySelector('.page-note').hidden=true;
+  const card=id=>{const a=APPS.find(x=>x.id===id), actual=!!SHOTS[id];return `<a class="project-overview-card" href="apps.html?project=${id}">${actual?`<img src="assets/shots/${id}_${id==='aws'?'home':id==='cal'?'today':'wardrobe'}_${lang}.webp" alt="" loading="lazy">`:`<span class="overview-mark" aria-hidden="true">${a.mark}</span>`}<div><h2>${t[id+'.title'].split(' · ')[0]}</h2><p>${t[id+'.desc']}</p><span class="card-link">${SiteNavigation.label(lang,'nav.read')} →</span></div></a>`;};
+  if(!selected) {
+    document.getElementById('apps').innerHTML=`<div class="project-overview-grid">${all.slice(0,3).map(card).join('')}</div><section class="research-overview"><h2 class="section-heading">${SiteNavigation.label(lang,'story.research')}</h2><div class="project-overview-grid research-grid">${all.slice(3).map(card).join('')}</div></section>`;
+    return;
+  }
   document.getElementById('apps').innerHTML=order.map(id=>{
     const a=APPS.find(x=>x.id===id), actual=!!SHOTS[id];
     return `<section class="app" id="${id}" style="--tint:${a.tint};--tone:${a.tone};--paper:${a.paper}">
-    <div class="app-head"><div class="app-title"><span class="app-badge" aria-hidden="true">${a.mark}</span><div><h2>${t[id+'.title']}</h2><p class="host">${a.host}</p></div></div><div><a class="enter" href="${a.url}" target="_blank" rel="noopener">${t['enter']} ↗</a>${a.locked?`<span class="locked">${t[id+'.locked']||t['locked']}</span>`:''}</div></div>
-    <p class="app-desc">${t[id+'.desc']}</p>
-    ${actual?`<h3>${t['sec.problem']}</h3><p>${t[id+'.problem']}</p><h3>${t['sec.features']}</h3><ul class="feature-list">${Array.from({length:id==='aws'?12:10},(_,i)=>`<li>${t[id+'.f'+(i+1)]}</li>`).join('')}</ul><h3>${t['sec.demo']}</h3><div class="demo-grid" id="demos-${id}">${AppDemos.html(id,t)}</div><h3>${t['sec.shots']}</h3><div class="shots">${SHOTS[id].map(v=>{const file=`assets/shots/${id}_${v}_${v==='guide'?'zh':lang}.webp`;return `<figure><a href="${file}" target="_blank" rel="noopener"><img src="${file}" loading="lazy" alt="${String(t[id+'.shot.'+v]).replaceAll('&','&amp;').replaceAll('"','&quot;')}" data-shot="${id}_${v}"></a><figcaption>${t[id+'.shot.'+v]}</figcaption></figure>`;}).join('')}</div><h3>${t['sec.design']}</h3><p>${t[id+'.design']}</p><p class="stack"><b>${t['sec.stack']}</b> · ${t[id+'.stack']}</p>`:
+    <div class="app-head"><div class="app-title"><span class="app-badge" aria-hidden="true">${a.mark}</span><div><p class="host">${a.host}</p></div></div><div><a class="enter" href="${a.url}" target="_blank" rel="noopener">${t['enter']} ↗</a>${a.locked?`<span class="locked">${t[id+'.locked']||t['locked']}</span>`:''}</div></div>
+
+    ${actual?`<h3>${t['sec.problem']}</h3><p>${t[id+'.problem']}</p><h3 id="project-features">${t['sec.features']}</h3><ul class="feature-list">${Array.from({length:id==='aws'?12:10},(_,i)=>`<li>${t[id+'.f'+(i+1)]}</li>`).join('')}</ul><h3 id="project-demo">${t['sec.demo']}</h3><div class="demo-grid" id="demos-${id}">${AppDemos.html(id,t)}</div><h3 id="project-screens">${t['sec.shots']}</h3><div class="shots">${SHOTS[id].map(v=>{const file=`assets/shots/${id}_${v}_${v==='guide'?'zh':lang}.webp`;return `<figure><a href="${file}" target="_blank" rel="noopener"><img src="${file}" loading="lazy" alt="${String(t[id+'.shot.'+v]).replaceAll('&','&amp;').replaceAll('"','&quot;')}" data-shot="${id}_${v}"></a><figcaption>${t[id+'.shot.'+v]}</figcaption></figure>`;}).join('')}</div><h3 id="project-design">${t['sec.design']}</h3><p>${t[id+'.design']}</p><p class="stack"><b>${t['sec.stack']}</b> · ${t[id+'.stack']}</p>`:
     `<div class="scenes">${a.scenes.map((f,i)=>`<article class="scene"><div class="ui">${f(t)}</div><div class="scene-body"><span class="scene-step">${t['story.'+(i+1)]}</span><p class="scene-cap">${t[id+'.s'+(i+1)]}</p></div></article>`).join('')}</div>`}</section>`;
   }).join('');
-  ['aws','cal','ootd'].forEach(id=>AppDemos.bind(id,t));
+  order.filter(id=>SHOTS[id]).forEach(id=>AppDemos.bind(id,t));
   document.querySelectorAll('[data-shot]').forEach(img=>img.onerror=()=>{if(!img.dataset.fallback){img.dataset.fallback='true';img.src=`assets/shots/${img.dataset.shot}_zh.webp`;img.closest('a').href=img.src;}});
 }
 const T = {
@@ -468,7 +488,8 @@ const T = {
     "ootd.demo.d3.unplaced": "未记位置：{n} 件",
     "ootd.demo.d4.t": "把还没穿过的找出来",
     "ootd.demo.d4.h": "筛选与排序帮助发现一直闲置的单品。",
-    "ootd.demo.d4.wornTimes": "穿过 {n} 天"
+    "ootd.demo.d4.wornTimes": "穿过 {n} 天",
+    "demo.sort": "排序"
   },
   "en": {
     "back": "Back",
@@ -773,7 +794,8 @@ const T = {
     "ootd.demo.d3.unplaced": "{n} items without a recorded location",
     "ootd.demo.d4.t": "Find items you have never worn",
     "ootd.demo.d4.h": "Use filters and sorting to find items that have been sitting unused.",
-    "ootd.demo.d4.wornTimes": "Worn on {n} days"
+    "ootd.demo.d4.wornTimes": "Worn on {n} days",
+    "demo.sort": "Sort by"
   },
   "ja": {
     "back": "戻る",
@@ -1078,7 +1100,8 @@ const T = {
     "ootd.demo.d3.unplaced": "場所の記録がないもの：{n} 点",
     "ootd.demo.d4.t": "まだ着ていない服を見つける",
     "ootd.demo.d4.h": "絞り込みや並べ替えで、着る機会のなかったアイテムを探せます。",
-    "ootd.demo.d4.wornTimes": "着用 {n} 日"
+    "ootd.demo.d4.wornTimes": "着用 {n} 日",
+    "demo.sort": "並び順"
   }
 };
 Site.mount(T, render);
