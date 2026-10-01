@@ -4,6 +4,8 @@ window.Site = (() => {
   const KEY = 'yotenra.lang';
 
   function initial() {
+    const explicit = new URLSearchParams(location.search).get("lang");
+    if (LANGS.includes(explicit)) return explicit;
     try { const saved = localStorage.getItem(KEY); if (LANGS.includes(saved)) return saved; } catch (_) {}
     for (const l of navigator.languages || [navigator.language || '']) {
       const c = l.toLowerCase();
