@@ -29,3 +29,20 @@
   .job-body{grid-template-columns:1fr;gap:18px}
   .job-body .ui{max-width:340px}
 }
+
+/* Three business contexts share a single page and readable case headings. */
+[role="tabpanel"][hidden]{display:none}
+.work-tabs{display:flex;gap:8px;flex-wrap:wrap;padding:0 0 28px;border-bottom:1px solid var(--line)}
+.work-tabs button{font:inherit;font-size:13px;line-height:1.5;padding:11px 16px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--muted);cursor:pointer;white-space:normal;min-width:0}
+.work-tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.work-tabs button:focus-visible{outline:3px solid #527285;outline-offset:4px}
+.case-lead{font-size:15px;margin:28px 0;max-width:48em;color:#4a4340}
+.case-head{padding:32px 0 22px;border-bottom:1px solid var(--line)}
+.case-head h2{font-size:clamp(23px,3.5vw,31px);line-height:1.55;max-width:26em;margin:0 0 14px;overflow-wrap:anywhere}
+.case-role{font-size:13px;color:var(--muted);margin:0;max-width:54em}
+.case-copy{max-width:760px}
+.case-part{padding:26px 0}
+.case-part h3{font-size:18px;line-height:1.6;margin:0 0 12px}
+.case-part p{font-size:15px;margin:0 0 16px;line-height:1.95}
+.case-part p:last-child{margin-bottom:0}
+@media(max-width:520px){.work-tabs{gap:7px}.work-tabs button{padding:10px 12px;font-size:12px}.case-head{padding-top:26px}.case-part{padding:22px 0}}

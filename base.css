@@ -121,3 +121,14 @@ a:focus-visible,button:focus-visible{outline:3px solid #5a8879;outline-offset:5p
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
 .stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0 10px}.stat{padding:17px;border:1px solid var(--line);border-radius:12px;background:var(--card);display:flex;flex-direction:column;gap:6px}.stat strong{font-size:20px;line-height:1.4}.stat span,.stat-note{font-size:11px;color:var(--muted)}.work-links{display:flex;gap:22px;flex-wrap:wrap}.qualification{font-size:12px;color:var(--muted);padding-top:26px}@media(max-width:520px){.stat strong{font-size:16px}.stat{padding:13px}}
+
+/* Earlier work stays beside the current practice; the personal story is brief. */
+.earlier-work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:26px 0}
+.earlier-work-card{display:block;padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--card);text-decoration:none;transition:border-color .15s,transform .15s}
+.earlier-work-card:hover{border-color:#bdb4a9;transform:translateY(-2px)}
+.earlier-work-card h3{font-size:18px;line-height:1.5;margin:0 0 10px}
+.earlier-work-card p{font-size:14px;color:var(--muted);margin:0 0 18px;line-height:1.8}
+.reading-copy{max-width:48em;font-size:15px;line-height:1.95;color:#4a4340}
+.reading-copy p{margin:0 0 17px}.reading-copy p:last-child{margin-bottom:0}
+.personal-about .section-intro{margin-bottom:0;max-width:48em;line-height:1.95}
+@media(max-width:560px){.earlier-work-grid{grid-template-columns:1fr}.earlier-work-card{padding:20px}}

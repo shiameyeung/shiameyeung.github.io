@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>仕事での取り組み — 楊 天楽</title>
-<meta name="description" content="Baseconnectでの企業データの抽出と品質改善。原因の特定、評価方法の設計、ルールとモデルの選択、再利用できるデータ修正ツール、本番パイプラインの改善を紹介します。">
+<meta name="description" content="実際に使う人の困りごとから考えるのが好きです。まず何を解決したいのかを整理し、使って確かめ、改善を重ねられるツールにしていきます。">
 <meta property="og:title" content="仕事での取り組み — 楊 天楽">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://yotenra.com/work.html">
@@ -34,13 +34,21 @@
     <p class="page-note" data-t="figure.note"></p>
   </header>
 
-  <aside class="lead-card"><p data-t="lead.card"></p><a class="text-link" href="challenge.html" data-t="lead.link"></a></aside>
-  <main id="jobs"></main>
-
-  <section class="method" id="work-method">
-    <h2 data-t="method.title"></h2>
-    <p data-t="method.body"></p>
-  </section>
+  <div class="work-tabs" role="tablist" aria-label="Work experience">
+    <button id="tab-baseconnect" role="tab" aria-controls="baseconnect" type="button" data-case="baseconnect">Baseconnect</button>
+    <button id="tab-holly" role="tab" aria-controls="holly" type="button" data-case="holly">Holly Travel</button>
+    <button id="tab-studio" role="tab" aria-controls="studio" type="button" data-case="studio">Studio Keya_cc</button>
+  </div>
+  <main id="work-cases">
+    <article id="baseconnect" role="tabpanel" aria-labelledby="tab-baseconnect" tabindex="0">
+      <p class="case-lead" data-t="baseconnect.lead"></p>
+      <aside class="lead-card"><p data-t="lead.card"></p><a class="text-link" href="challenge.html" data-t="lead.link"></a></aside>
+      <div id="jobs"></div>
+      <section class="method" id="work-method"><h2 data-t="method.title"></h2><p data-t="method.body"></p></section>
+    </article>
+    <article id="holly" role="tabpanel" aria-labelledby="tab-holly" tabindex="0" hidden></article>
+    <article id="studio" role="tabpanel" aria-labelledby="tab-studio" tabindex="0" hidden></article>
+  </main>
 
   <footer>
     <span data-t="footer.left"></span>
@@ -90,7 +98,32 @@ const JOBS = [
   {id:'m6',mark:'♻',tint:'#eaf3e8',tone:'#527849',paper:'#fbfdf9',figure:t=>`<div class="ui-bar"><b>${t['m6.d.title']}</b></div><div class="layers">${['a','b','c'].map((x,i)=>`<div class="layer"><b>${i+1}</b><span>${t['m6.d.'+x]}</span></div>`).join('')}</div><p class="ui-note">${t['m6.d.note']}</p>`},
 ];
 
+let currentWorkLanguage, currentWorkText;
+const workCases = ['baseconnect', 'holly', 'studio'];
+function chosenCase() {
+  const url = new URL(location);
+  const legacy = url.hash.slice(1);
+  if (['holly', 'studio'].includes(legacy)) {
+    url.searchParams.set('case', legacy); url.hash = '';
+    history.replaceState(null, '', url);
+  }
+  const selected = url.searchParams.get('case');
+  return workCases.includes(selected) ? selected : 'baseconnect';
+}
 function render(lang, t) {
+  currentWorkLanguage = lang; currentWorkText = t;
+  const selected = chosenCase();
+  document.querySelector('.work-tabs').setAttribute('aria-label', t['page.title']);
+  document.querySelector('.page-note').hidden = selected !== 'baseconnect';
+  workCases.forEach(id => {
+    document.getElementById(id).hidden = id !== selected;
+    const tab = document.getElementById('tab-' + id);
+    tab.setAttribute('aria-selected', String(id === selected));
+    tab.tabIndex = id === selected ? 0 : -1;
+  });
+  ['holly', 'studio'].forEach(id => {
+    document.getElementById(id).innerHTML = `<header class="case-head"><h2 id="${id}-summary" data-rail-key="chapter.summary">${t[id + '.title']}</h2><p class="case-role">${t[id + '.role']}</p></header><div class="case-copy">${t[id + '.body']}</div>`;
+  });
   document.getElementById('jobs').innerHTML = JOBS.map(j => `
     <section class="job" id="work-${j.id}" data-rail-icon="work" style="--tint:${j.tint};--tone:${j.tone};--paper:${j.paper}">
       <div class="job-head">
@@ -104,11 +137,33 @@ function render(lang, t) {
     </section>`).join('');
 }
 
+function chooseWorkCase(id) {
+  const url = new URL(location); url.searchParams.set('case', id); url.hash = '';
+  history.pushState(null, '', url);
+  render(currentWorkLanguage, currentWorkText);
+  SiteNavigation.mount(currentWorkLanguage);
+  scrollTo({top: 0, behavior: 'instant'});
+}
+document.querySelector('.work-tabs').addEventListener('click', event => {
+  const tab = event.target.closest('[data-case]');
+  if (tab) chooseWorkCase(tab.dataset.case);
+});
+document.querySelector('.work-tabs').addEventListener('keydown', event => {
+  const index = workCases.indexOf(event.target.dataset.case);
+  if (index < 0 || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+  event.preventDefault();
+  const next = event.key === 'Home' ? 0 : event.key === 'End' ? workCases.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + workCases.length) % workCases.length;
+  chooseWorkCase(workCases[next]); document.getElementById('tab-' + workCases[next]).focus({preventScroll: true});
+});
+window.addEventListener('popstate', () => {
+  render(currentWorkLanguage, currentWorkText); SiteNavigation.mount(currentWorkLanguage);
+});
+
 const T = {
   "zh": {
     "back": "返回",
     "page.title": "工作实践",
-    "page.lead": "在 Baseconnect 实习期间，我参与企业数据抽取与质量改善：把网页和 PDF 里的企业信息整理成结构化数据，找出漏抽、误抽和错误数据的原因，修改数据生产 pipeline，再验证修改是否有效。三个月里提出并合并 190 个 PR，单一数据项精度从 40% 多提升到 85%，数据覆盖率从 30% 多提升到 75%。",
+    "page.lead": "我喜欢从实际使用中的问题出发：先弄清要解决什么，再把它变成能使用、能检查、能继续改进的工具。",
     "m1.title": "让网页里的企业信息能够被查询",
     "m1.sub": "从原始页面到结构化数据",
     "m1.desc": "企业官网上的部门、职位等信息格式各不相同，也会随页面变化。我参与改进采集、抽取和校验环节，沿着原文与处理日志查清信息在哪里漏掉、哪里被理解错，再调整对应步骤。",
@@ -146,7 +201,7 @@ const T = {
     "footer.right": "GitHub Pages 托管",
     "figure.note": "图为流程示意。",
     "meta.title": "工作实践 — 楊 天楽",
-    "meta.description": "在 Baseconnect 参与企业数据抽取与质量改善：问题定位、评估设计、规则与模型的选择、错误数据的可复用修正与生产 pipeline 修改。",
+    "meta.description": "我喜欢从实际使用中的问题出发：先弄清要解决什么，再把它变成能使用、能检查、能继续改进的工具。",
     "m5.title": "把调查记录做成能接着用的工作台",
     "m5.sub": "问题、证据、进展和下一步，放在一起",
     "m5.desc": "数据质量调查会跨很多轮 AI 对话推进。为了减少反复说明和信息遗漏，我为自己搭建了带数据库的工作台，把任务、处理批次、验证结果、下一步和负责人存下来。新会话先读记录再继续；我每天在用，也在用中继续改。完整故事见「最难的开发经验」。",
@@ -164,12 +219,19 @@ const T = {
     "m6.d.a": "现有数据：transform清理",
     "m6.d.b": "生产pipeline：对应修正PR",
     "m6.d.c": "后续批次：继续复用与验证",
-    "m6.d.note": "只读核对 → dry-run → 备份 → 执行 → 后检"
+    "m6.d.note": "只读核对 → dry-run → 备份 → 执行 → 后检",
+    "baseconnect.lead": "在 Baseconnect 实习期间，我参与企业数据抽取与质量改善：把网页和 PDF 里的企业信息整理成结构化数据，找出漏抽、误抽和错误数据的原因，修改数据生产 pipeline，再验证修改是否有效。三个月里提出并合并 190 个 PR，单一数据项精度从 40% 多提升到 85%，数据覆盖率从 30% 多提升到 75%。",
+    "holly.title": "让业务员能调整策略的酒店库存调价系统",
+    "holly.role": "Holly Travel｜2017.12—2021.12｜总经理助理，直接协助CEO，负责业务需求与研发协调",
+    "holly.body": "<section class=\"case-part\"><h3 id=\"holly-context\" data-rail-label=\"\" data-rail-icon=\"work\">这套系统做什么</h3><p>公司经营B2B酒店预订与分销，系统对接上游酒店／供应商，并支持向下游渠道提供房源、库存和价格。对于已安排销售的房间与房晚，业务员需要结合市场情况调整价格，尽量提高库存收益。</p></section><section class=\"case-part\"><h3 id=\"holly-use\" data-rail-label=\"\" data-rail-icon=\"work\">如何使用</h3><p>业务员在后台调整调价规则，系统通过接口执行，业务侧可以按实际情况继续调整策略。上下游接口、库存与价格管理是同一业务系统中的工作范围。</p></section><section class=\"case-part\"><h3 id=\"holly-role\" data-rail-label=\"\" data-rail-icon=\"work\">我做的事</h3><p>直接与了解市场和痛点的一线业务员沟通，整理需求文档，与约5–10人的研发团队讨论方案和开发顺序，跟进功能测试、多轮修改、上线培训和使用反馈。</p></section><section class=\"case-part\"><h3 id=\"holly-approach\" data-rail-label=\"\" data-rail-icon=\"work\">怎样推进</h3><p>用甘特图看任务顺序与依赖，结合工时、成本和成员可用时间安排进度。遇到卡点时，先听研发解释限制，再从业务目标出发讨论其他实现方式。要保持的是业务目的，实现路径可以一起调整。</p><p>我也参与招聘与新人培训：把一线工作需要整理成面试题和评分框架，参与评分并亲自面试，让选人和培训更贴近实际工作。</p></section>",
+    "studio.title": "用攻略和服务，帮助中文玩家参与韩服游戏",
+    "studio.role": "Studio Keya_cc｜2019.11—2025.12｜创办与运营",
+    "studio.body": "<section class=\"case-part\"><p>中文玩家接触《MapleStory M》韩服时，需要理解游戏规则、活动和投入，也有交易与支付协助的需求。我用短视频、攻略和咨询帮助他们作选择，再提供游戏相关物品／货币交易、支付协助与后续服务。</p><p>随着重复服务增加，我整理服务步骤和客服分工，并跟进客户问题。累计服务去重客户2,000+，高峰期聘用约3名实习生；整个经营期间累计客户收款约人民币1,500万元。</p><p>这段经历让我习惯先看用户到底需要什么，再考虑内容、流程和工具怎样配合，最终把服务交付出去。</p></section>"
   },
   "en": {
     "back": "Back",
     "page.title": "Work experience",
-    "page.lead": "As an intern at Baseconnect, I work on company data extraction and quality: structuring information from websites and PDFs, investigating missing or incorrect results, improving the production pipeline, and checking whether changes work. Over three months, I authored 190 PRs that were merged. During this work, accuracy for one data field rose from over 40% to 85%, and its coverage rose from over 30% to 75%.",
+    "page.lead": "I like starting with a problem people encounter in their day-to-day work: understand what needs to change, then turn that understanding into a tool they can use, test and improve.",
     "m1.title": "Making company information on websites searchable",
     "m1.sub": "From raw pages to structured data",
     "m1.desc": "Company websites present departments, job titles, and other information in different formats, which change as pages are updated. I help improve collection, extraction, and validation, tracing source text and processing logs to find where information was lost or misinterpreted and adjusting that step.",
@@ -207,7 +269,7 @@ const T = {
     "footer.right": "Hosted on GitHub Pages",
     "figure.note": "Diagrams illustrate the workflow.",
     "meta.title": "Work experience — Yo Tenra",
-    "meta.description": "Company data extraction and quality work at Baseconnect: investigation, evaluation design, choices between rules and models, reusable data correction tools, and production pipeline improvements.",
+    "meta.description": "I like starting with a problem people encounter in their day-to-day work: understand what needs to change, then turn that understanding into a tool they can use, test and improve.",
     "m5.title": "A workspace that keeps investigations moving",
     "m5.sub": "Problems, evidence, progress, and next steps together",
     "m5.desc": "Data quality investigations often span many AI conversations. To reduce repeated explanations and missing information, I built a database-backed workspace for my own use, storing tasks, processing batches, verification results, next steps, and owners. A new session reads the records before continuing. I use and refine it daily; the full story is in My toughest development project.",
@@ -225,12 +287,19 @@ const T = {
     "m6.d.a": "Existing data: reusable transformations",
     "m6.d.b": "Production pipeline: corresponding fix PRs",
     "m6.d.c": "Later batches: reuse and verify",
-    "m6.d.note": "Read-only check → dry run → backup → execute → post-check"
+    "m6.d.note": "Read-only check → dry run → backup → execute → post-check",
+    "baseconnect.lead": "As an intern at Baseconnect, I work on company data extraction and quality: structuring information from websites and PDFs, investigating missing or incorrect results, improving the production pipeline, and checking whether changes work. Over three months, I authored 190 PRs that were merged. During this work, accuracy for one data field rose from over 40% to 85%, and its coverage rose from over 30% to 75%.",
+    "holly.title": "Helping hotel sales staff adjust pricing strategies",
+    "holly.role": "<strong>Holly Travel | Dec 2017 – Dec 2021</strong>   <strong>Assistant to the CEO (Business Systems &amp; Development Coordination)</strong>",
+    "holly.body": "<section class=\"case-part\" id=\"holly-context\"><p>Holly Travel operated a B2B hotel booking and distribution business. Its business system connected upstream hotels and suppliers with downstream distribution channels, handling room availability, inventory and prices. Sales staff needed to adjust prices for rooms and room nights available for sale as market conditions changed, with the aim of improving returns on that inventory.</p></section><section class=\"case-part\"><h3 id=\"holly-use\" data-rail-label=\"\" data-rail-icon=\"work\">How the system worked</h3><p>Sales staff could adjust repricing rules in a back-office interface, and the system would apply them automatically through its integrations. The business team could continue adjusting its pricing strategies as circumstances changed. Supplier and distribution interfaces, inventory management and pricing were all part of this business system.</p></section><section class=\"case-part\"><h3 id=\"holly-role\" data-rail-label=\"\" data-rail-icon=\"work\">My role</h3><p>I worked directly with frontline sales staff to understand their needs and document requirements. I discussed possible solutions and development priorities with approximately 5–10 developers, then followed up on testing, revisions, rollout training and feedback from users.</p><p id=\"holly-approach\">I used Gantt charts to track task sequences and dependencies, and considered estimated hours, costs and team availability when planning schedules. When a task ran into technical constraints, I listened to the developers&#x27; explanation and discussed other ways to meet the business need. The goal gave us a shared reference point as we worked through the options.</p><p>I also contributed to hiring and onboarding for business roles. I helped turn day-to-day job requirements into interview questions and scoring criteria, took part in candidate assessments and conducted interviews and new-hire training.</p></section>",
+    "studio.title": "Guides and services for Chinese-speaking MapleStory M players",
+    "studio.role": "<strong>Studio Keya_cc | Nov 2019 – Dec 2025</strong>   <strong>Founder</strong>",
+    "studio.body": "<section class=\"case-part\"><p>Chinese-speaking players joining the Korean server of MapleStory M needed help understanding game mechanics, events and how much time or money to commit. Some also needed item and in-game currency transactions or payment assistance.</p><p>I used short videos, guides and consultations to help players make decisions, then provided transaction services, payment assistance and follow-up support. As recurring work grew, I documented service procedures, organised customer support responsibilities and followed up on customer issues.</p><p>Over the life of the business, I served <strong>2,000+ unique customers</strong> and received approximately <strong>CNY 15 million in cumulative customer payments</strong>. At its peak, the business employed approximately <strong>three interns</strong>.</p><p>This experience taught me to start with what customers actually needed, then bring content, processes and tools together to deliver the service.</p></section>"
   },
   "ja": {
     "back": "戻る",
     "page.title": "仕事での取り組み",
-    "page.lead": "Baseconnectのインターンで、企業データの抽出と品質改善に取り組んでいます。WebページやPDFから企業情報を構造化する過程を調べ、抽出漏れや誤抽出、データの誤りが生じる原因を特定。データ生成パイプラインを修正し、その効果を検証しています。3か月で190件のPRを作成し、マージまで進めました。取り組みの中で、特定のデータ項目の精度は40％台から85％に、データカバー率は30％台から75％に改善しました。",
+    "page.lead": "実際に使う人の困りごとから考えるのが好きです。まず何を解決したいのかを整理し、使って確かめ、改善を重ねられるツールにしていきます。",
     "m1.title": "Web上の企業情報を、検索できるデータにする",
     "m1.sub": "元のページから構造化データへ",
     "m1.desc": "企業サイトの部署や役職の情報は、書式がばらばらで、ページの更新に伴って変化します。私は収集・抽出・検証の改善に参加し、原文と処理ログをたどって、どこで情報が抜けたか、どこで解釈を誤ったかを確認し、該当する処理を修正しています。",
@@ -268,7 +337,7 @@ const T = {
     "footer.right": "GitHub Pagesで公開",
     "figure.note": "図は作業の流れを示したものです。",
     "meta.title": "仕事での取り組み — 楊 天楽",
-    "meta.description": "Baseconnectでの企業データの抽出と品質改善。原因の特定、評価方法の設計、ルールとモデルの選択、再利用できるデータ修正ツール、本番パイプラインの改善を紹介します。",
+    "meta.description": "実際に使う人の困りごとから考えるのが好きです。まず何を解決したいのかを整理し、使って確かめ、改善を重ねられるツールにしていきます。",
     "m5.title": "調査を引き継げる、自分用の作業ダッシュボード",
     "m5.sub": "課題、根拠、進捗、次の作業を一か所に",
     "m5.desc": "データ品質の調査は、複数のAIセッションにまたがります。説明の繰り返しや情報の抜けを減らすため、データベースを備えた自分用のダッシュボードをつくりました。タスク、処理バッチ、検証結果、次の作業、担当者を保存し、新しいセッションでは記録を読んで再開します。毎日使いながら改善を続けています。詳しい経緯は「最も難しかった開発経験」にまとめました。",
@@ -286,7 +355,14 @@ const T = {
     "m6.d.a": "既存データ：transformで修正",
     "m6.d.b": "本番パイプライン：対応する修正PR",
     "m6.d.c": "次のバッチでも再利用・検証",
-    "m6.d.note": "読み取りのみで確認 → dry-run → バックアップ → 実行 → 実行後の確認"
+    "m6.d.note": "読み取りのみで確認 → dry-run → バックアップ → 実行 → 実行後の確認",
+    "baseconnect.lead": "Baseconnectのインターンで、企業データの抽出と品質改善に取り組んでいます。WebページやPDFから企業情報を構造化する過程を調べ、抽出漏れや誤抽出、データの誤りが生じる原因を特定。データ生成パイプラインを修正し、その効果を検証しています。3か月で190件のPRを作成し、マージまで進めました。取り組みの中で、特定のデータ項目の精度は40％台から85％に、データカバー率は30％台から75％に改善しました。",
+    "holly.title": "販売担当者が価格戦略を調整できるホテル在庫・料金管理システム",
+    "holly.role": "<strong>Holly Travel（和旅）｜2017年12月〜2021年12月｜CEOアシスタント（業務改善・開発調整担当）</strong>",
+    "holly.body": "<section class=\"case-part\"><p>CEOの直接のアシスタントとして、業務要件の整理と開発チームとの調整を担当しました。</p></section><section class=\"case-part\"><h3 id=\"holly-context\" data-rail-label=\"\" data-rail-icon=\"work\">どのようなシステムか</h3><p>Holly Travelは、B2Bのホテル予約・販売事業を行っていました。システムはホテルや仕入先と連携し、販売先のチャネルに客室情報、在庫、料金を提供するものです。</p><p>販売担当者は、販売対象の客室や宿泊日ごとの在庫について、市場の状況に合わせて料金を調整します。このシステムは、その判断を日々の販売に反映し、在庫から得られる収益を高めることを目指したものでした。</p></section><section class=\"case-part\"><h3 id=\"holly-use\" data-rail-label=\"\" data-rail-icon=\"work\">どのように使うか</h3><p>販売担当者が管理画面で価格調整のルールを変更すると、システムがそのルールに基づいて、外部連携を通じた処理を自動で実行します。業務側では、実際の状況に合わせて価格戦略を調整できます。</p><p>仕入先・販売先とのシステム連携や、在庫・料金の管理も、同じ業務システムの中で扱っていました。</p></section><section class=\"case-part\"><h3 id=\"holly-role\" data-rail-label=\"\" data-rail-icon=\"work\">私が担当したこと</h3><p>市場や現場の課題を把握している販売担当者と直接話し、業務要件を文書にまとめました。そのうえで、約5〜10名の開発チームと実現方法や開発の順序を相談し、機能テスト、修正の調整、リリース時の利用者研修、利用後のフィードバックまで継続して関わりました。</p></section><section class=\"case-part\"><h3 id=\"holly-approach\" data-rail-label=\"\" data-rail-icon=\"work\">どのように進めたか</h3><p>ガントチャートで作業の順序と依存関係を整理し、工数、費用、メンバーの稼働状況を踏まえてスケジュールを調整しました。開発が行き詰まったときは、まず開発担当者から制約を聞き、業務上の目的を満たせる別の方法を一緒に考えました。目的を共有したうえで、実現方法を柔軟に調整することを大切にしていました。</p><p>採用や新人研修にも関わりました。現場で必要な仕事をもとに面接で使う設問や評価基準を整理し、評価と面接を担当しました。採用と研修の内容を、実際の業務に近づけるための取り組みでした。</p></section>",
+    "studio.title": "攻略とサービスで、中国語圏のプレイヤーを支える",
+    "studio.role": "<strong>Studio Keya_cc｜2019年11月〜2025年12月｜事業の立ち上げ・運営</strong>",
+    "studio.body": "<section class=\"case-part\"><p>韓国版『MapleStory M』を遊ぶ中国語圏のプレイヤーには、ゲームの仕組みやイベント、必要な費用や時間を理解したいというニーズに加え、ゲーム内アイテム・通貨の取引や決済のサポートを求めるニーズがありました。</p><p>私は短い動画、攻略情報、相談対応を通じて、プレイヤーが判断するための情報を提供しました。そこから、ゲーム内アイテム・通貨の取引、決済サポート、利用後の相談対応へとつなげていました。</p><p>同じ種類のサービスを繰り返し提供する中で、対応手順と顧客対応の役割分担を整理し、顧客からの問い合わせにも対応しました。事業期間を通じて、重複を除く累計顧客数は2,000名以上、顧客から受け取った金額は累計で約1,500万元（中国人民元）です。ピーク時には約3名のインターンを雇用していました。</p><p>この経験を通じて、まず利用者が何を必要としているのかを考え、情報発信、対応手順、ツールを組み合わせて、サービスを届けることが習慣になりました。</p></section>"
   }
 };
 Site.mount(T, render);

@@ -56,6 +56,10 @@
       <span class="eyebrow">Baseconnect</span>
       <h2 class="section-heading" data-nav="story.work"></h2>
       <p data-t="work.desc"></p><div class="stat-grid"><div class="stat"><strong data-t="stat.hours.v"></strong><span data-t="stat.hours.l"></span></div><div class="stat"><strong data-t="stat.prs.v"></strong><span data-t="stat.prs.l"></span></div><div class="stat"><strong data-t="stat.tasks.v"></strong><span data-t="stat.tasks.l"></span></div><div class="stat"><strong data-t="stat.quality.v"></strong><span data-t="stat.quality.l"></span></div></div><p class="stat-note" data-t="stat.note"></p>
+      <div class="earlier-work-grid">
+        <a class="earlier-work-card" href="work.html?case=holly"><span class="eyebrow">2017.12—2021.12</span><h3 data-t="holly.title"></h3><p data-t="holly.desc"></p><span class="card-link" data-t="work.link"></span></a>
+        <a class="earlier-work-card" href="work.html?case=studio"><span class="eyebrow">2019.11—2025.12</span><h3 data-t="studio.title"></h3><p data-t="studio.desc"></p><span class="card-link" data-t="work.link"></span></a>
+      </div>
       <div class="work-links"><a class="text-link" href="work.html"><span data-t="work.link"></span> ↗</a><a class="text-link" href="challenge.html"><span data-t="work.challenge"></span> ↗</a></div>
     </section>
 
@@ -80,10 +84,17 @@
         </a>
       </div>
     </section>
+    <section class="personal-principle" id="working-principle" data-rail-icon="design">
+      <h2 class="section-heading" data-t="principle.title"></h2>
+      <div class="reading-copy" data-t="principle.body"></div>
+    </section>
+    <section class="personal-about" id="about-me" data-rail-icon="section">
+      <h2 class="section-heading" data-t="about.title"></h2>
+      <p class="section-intro" data-t="about.body"></p>
+    </section>
     <section class="career-next" id="career-next"><h2 class="section-heading" data-nav="story.next"></h2><p data-t="direction"></p></section>
   </main>
 
-  <p class="qualification" data-t="qualification.aws"></p>
   <section id="profile-links" data-rail-exclude>
     <h2 class="section-label" data-t="contact.title"></h2>
     <div class="links">
@@ -164,7 +175,14 @@ const T = {
     "stat.tasks.l": "错误数据修正任务",
     "stat.quality.v": "40%多→85% · 30%多→75%",
     "stat.quality.l": "某一数据项精度 · 数据覆盖率",
-    "qualification.aws": "AWS Certified AI Practitioner · Cloud Practitioner · Solutions Architect – Associate（2026）"
+    "principle.title": "把需求想清楚，也把方案做出来",
+    "principle.body": "<p>我喜欢从实际使用中的问题出发：先弄清要解决什么，再把它变成能使用、能检查、能继续改进的工具。</p><p>过去在和旅，我更多通过整理需求、协调研发推进系统。现在，AI辅助开发让我能更直接地参与实现和验证。多个任务并行时，我需要想清楚目标和优先级，把背景交代清楚，检查各部分是否能合起来工作。我享受的，是让产品判断和工程实践连在一起，把想法变成真正用得上的东西。</p>",
+    "about.title": "从一个游戏社群论坛开始",
+    "about.body": "初中时用Discuz!和FTP搭游戏社群论坛；从那时起，我就喜欢用工具和规则把事情组织起来。",
+    "holly.title": "Holly Travel（和旅）",
+    "studio.title": "Studio Keya_cc",
+    "holly.desc": "让业务员能调整策略的酒店库存调价系统",
+    "studio.desc": "用攻略和服务，帮助中文玩家参与韩服游戏"
   },
   "en": {
     "name": "Yo Tenra",
@@ -218,7 +236,14 @@ const T = {
     "stat.tasks.l": "Data error corrections",
     "stat.quality.v": "40%+ → 85% · 30%+ → 75%",
     "stat.quality.l": "Accuracy for one data field · Data coverage",
-    "qualification.aws": "AWS Certified AI Practitioner · 2026 | AWS Certified Cloud Practitioner · 2026 | AWS Certified Solutions Architect – Associate · 2026"
+    "principle.title": "From practical needs to useful tools",
+    "principle.body": "<p>I like starting with a problem people encounter in their day-to-day work: understand what needs to change, then turn that understanding into a tool they can use, test and improve.</p><p>At Holly Travel, I did this by clarifying business requirements and coordinating with developers. Today, I use AI extensively in implementation, which lets me take a more direct part in building and testing tools. When I work on several tasks in parallel, I set the goals and priorities, provide the context, and check that the results work together.</p><p>I enjoy connecting product decisions with hands-on engineering—and seeing an idea become something useful.</p>",
+    "about.title": "It started with a gaming community",
+    "about.body": "My interest in making useful tools started in middle school, when I set up a gaming community forum using an existing Discuz! package and FTP.",
+    "holly.title": "Holly Travel",
+    "studio.title": "Studio Keya_cc",
+    "holly.desc": "Helping hotel sales staff adjust pricing strategies",
+    "studio.desc": "Guides and services for Chinese-speaking MapleStory M players"
   },
   "ja": {
     "name": "楊　天楽",
@@ -272,7 +297,14 @@ const T = {
     "stat.tasks.l": "データ修正タスク",
     "stat.quality.v": "40％台→85％ · 30％台→75％",
     "stat.quality.l": "特定のデータ項目の精度 · データカバー率",
-    "qualification.aws": "AWS Certified AI Practitioner · AWS Certified Cloud Practitioner · AWS Certified Solutions Architect – Associate（いずれも2026年）"
+    "principle.title": "課題を整理して、使えるものにする",
+    "principle.body": "<p>実際に使う人の困りごとから考えるのが好きです。まず何を解決したいのかを整理し、使って確かめ、改善を重ねられるツールにしていきます。</p><p>Holly Travelでは、主に業務要件を整理し、開発チームと調整しながらシステムづくりを進めていました。今はAIの力を借りて開発し、自分で動作を確かめながら、実装や改善にもより直接関わっています。</p><p>複数のタスクを並行して進める中では、目標と優先順位を決め、必要な背景を伝え、それぞれの成果を組み合わせて動くかを確かめることが大切だと感じています。何をつくるかを考えることと、実際につくって試すこと。その両方に関わりながら、アイデアを役に立つものにしていく過程を楽しんでいます。</p>",
+    "about.title": "始まりは、ゲーム仲間のためのフォーラム",
+    "about.body": "中学生の頃、Discuz!をFTPでサーバーに設置し、ゲーム仲間のためのフォーラムをつくりました。その頃から、ツールとルールで物事を整理し、使える形にすることが好きです。",
+    "holly.title": "Holly Travel（和旅）",
+    "studio.title": "Studio Keya_cc",
+    "holly.desc": "販売担当者が価格戦略を調整できるホテル在庫・料金管理システム",
+    "studio.desc": "攻略とサービスで、中国語圏のプレイヤーを支える"
   }
 };
 Site.mount(T);
