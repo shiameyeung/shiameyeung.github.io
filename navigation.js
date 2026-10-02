@@ -2,6 +2,7 @@
 window.SiteNavigation = (() => {
   const labels = {
   "zh": {
+    "nav.copy": "复制邮箱",
     "nav.contact": "联系我",
     "nav.home": "首页",
     "nav.projects": "项目",
@@ -38,6 +39,7 @@ window.SiteNavigation = (() => {
     "chapter.research": "研究与探索"
   },
   "ja": {
+    "nav.copy": "メールアドレスをコピー",
     "nav.contact": "連絡する",
     "nav.home": "ホーム",
     "nav.projects": "プロジェクト",
@@ -74,6 +76,7 @@ window.SiteNavigation = (() => {
     "chapter.research": "研究・探究"
   },
   "en": {
+    "nav.copy": "Copy email address",
     "nav.contact": "Contact me",
     "nav.home": "Home",
     "nav.projects": "Projects",
@@ -271,7 +274,7 @@ window.SiteNavigation = (() => {
     if (!header) { header = document.createElement('header'); header.id = 'site-header'; header.className = 'site-header'; document.body.prepend(header); }
     const langbar = document.querySelector('.langbar');
     const focusedLanguageButton = langbar?.contains(document.activeElement) ? document.activeElement : null;
-    header.innerHTML = `<div class="site-header-inner"><a class="site-brand" href="index.html">YO TENRA</a><nav class="site-nav" aria-label="${t['nav.menu']}">${[['index.html', 'nav.home'], ['apps.html', 'nav.projects'], ['work.html', 'nav.work'], ['resume.html', 'nav.resume']].map(([href, key]) => link(href, t[key], section === href)).join('')}</nav><div class="language-slot"></div></div>`;
+    header.innerHTML = `<div class="site-header-inner"><a class="site-brand" href="index.html"><img class="site-logo" src="assets/brand/kiwi-logo.png?v=20261002-kiwi2" width="44" height="44" alt=""><span>YO TENRA</span></a><nav class="site-nav" aria-label="${t['nav.menu']}">${[['index.html', 'nav.home'], ['apps.html', 'nav.projects'], ['work.html', 'nav.work'], ['resume.html', 'nav.resume']].map(([href, key]) => link(href, t[key], section === href)).join('')}</nav><div class="language-slot"></div></div>`;
     if (langbar) header.querySelector('.language-slot').append(langbar);
     focusedLanguageButton?.focus({preventScroll: true});
     document.querySelectorAll('[data-nav]').forEach(element => { if (t[element.dataset.nav]) element.textContent = t[element.dataset.nav]; });
@@ -289,7 +292,28 @@ window.SiteNavigation = (() => {
       let next = document.getElementById('reading-next');
       if (!next) { next = document.createElement('nav'); next.id = 'reading-next'; next.className = 'reading-next'; document.querySelector('footer').before(next); }
       next.setAttribute('aria-label', t['nav.related']);
-      next.innerHTML = `<span class="related-title">${escape(t['nav.related'])}</span>` + targets.map(([href, text]) => link(href, text + ' →')).join('') + link('mailto:1@yotenra.com', t['nav.contact'] + ' · 1@yotenra.com');
+      // Keep the copy control alive while a clipboard request or its feedback is active.
+      let contact = next.querySelector('.reading-contact');
+      if (contact) contact.remove();
+      next.innerHTML = `<span class="related-title">${escape(t['nav.related'])}</span>` + targets.map(([href, text]) => link(href, text + ' →')).join('');
+      if (!contact) {
+        contact = document.createElement('div');
+        contact.className = 'reading-contact';
+        contact.setAttribute('data-copy-group', '');
+        contact.innerHTML = `${link('mailto:1@yotenra.com', '')}<button type="button" class="copy-email-button" data-copy-email><span data-copy-label>${escape(t['nav.copy'])}</span></button><span class="copy-email-status" data-copy-status role="status" aria-live="polite"></span>`;
+      }
+      contact.querySelector('a').textContent = t['nav.contact'] + ' · 1@yotenra.com';
+      next.append(contact);
+    }
+    let finale = document.getElementById('kiwi-finale');
+    const footer = document.querySelector('footer');
+    if (!finale && footer) {
+      finale = document.createElement('div');
+      finale.id = 'kiwi-finale';
+      finale.className = 'kiwi-finale';
+      finale.setAttribute('aria-hidden', 'true');
+      finale.innerHTML = '<img src="assets/brand/kiwi-chase.png?v=20261002-kiwi2" width="1020" height="340" alt="" loading="lazy">';
+      footer.before(finale);
     }
     syncHeaderHeight();
     refresh();

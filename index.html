@@ -10,11 +10,12 @@
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://yotenra.com/">
 <meta property="og:image" content="https://yotenra.com/assets/portrait.jpg">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌿%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/brand/kiwi-favicon.png?v=20261002-kiwi2">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/kiwi-touch-icon.png?v=20261002-kiwi2">
 <link rel="stylesheet" href="base.css?v=20261002-m3">
 
-<link rel="stylesheet" href="navigation.css?v=20261002">
-<link rel="stylesheet" href="home.css?v=20261002-entry">
+<link rel="stylesheet" href="navigation.css?v=20261002-kiwi2">
+<link rel="stylesheet" href="home.css?v=20261002-kiwi2">
 </head>
 <body class="home-page">
 <div class="wrap">
@@ -49,7 +50,7 @@
     </div>
 
     <section class="everyday-feature" id="daily-tools">
-      <h2 class="section-heading" data-nav="story.tools"></h2>
+      <div class="mascot-heading"><h2 class="section-heading" data-nav="story.tools"></h2><img class="section-mascot" src="assets/brand/kiwi-curious.png?v=20261002-kiwi2" width="256" height="256" alt="" aria-hidden="true" loading="lazy"></div>
       <p class="section-intro" data-t="everyday.lead"></p>
       <div class="everyday-grid">
         <a class="small-project" href="apps.html?project=aws"><img class="project-cover" src="assets/shots/aws_home_ja.webp" data-home-shot="aws_home" alt="" loading="lazy"><h3 data-t="aws.title"></h3><p data-t="aws.desc"></p><span class="card-link"><span data-t="entry.demo"></span><span aria-hidden="true"> →</span></span></a>
@@ -96,15 +97,19 @@
       <div class="reading-copy" data-t="principle.body"></div>
     </section>
     <section class="personal-about" id="about-me" data-rail-icon="section">
-      <h2 class="section-heading" data-t="about.title"></h2>
+      <div class="mascot-heading"><h2 class="section-heading" data-t="about.title"></h2><img class="section-mascot" src="assets/brand/kiwi-peek.png?v=20261002-kiwi2" width="256" height="256" alt="" aria-hidden="true" loading="lazy"></div>
       <p class="section-intro" data-t="about.body"></p>
     </section>
     <section class="career-next" id="career-next"><h2 class="section-heading" data-nav="story.next"></h2><p data-t="direction"></p></section>
   </main>
 
   <section class="contact-panel" id="contact" data-rail-exclude>
-    <div><h2 data-t="contact.action"></h2><p data-t="contact.note"></p></div>
-    <a class="contact-button" href="mailto:1@yotenra.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg><span>1@yotenra.com</span><span aria-hidden="true">→</span></a>
+    <div class="contact-intro"><img class="contact-mascot" src="assets/brand/kiwi-rest.png?v=20261002-kiwi2" width="256" height="256" alt="" aria-hidden="true" loading="lazy"><div><h2 data-t="contact.action"></h2><p data-t="contact.note"></p></div></div>
+    <div class="contact-actions" data-copy-group>
+      <a class="contact-button" href="mailto:1@yotenra.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg><span>1@yotenra.com</span><span aria-hidden="true">→</span></a>
+      <button class="copy-email-button" type="button" data-copy-email><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><span data-copy-label data-t="contact.copy"></span></button>
+      <span class="copy-email-status" data-copy-status role="status" aria-live="polite"></span>
+    </div>
   </section>
 
   <section id="profile-links" data-rail-exclude>
@@ -131,11 +136,13 @@
   </footer>
 </div>
 
-<script src="navigation.js?v=20261002-entry"></script>
+<script src="navigation.js?v=20261002-kiwi2"></script>
 <script src="shared.js"></script>
+<script src="email-copy.js?v=20261002-kiwi2"></script>
 <script>
 const T = {
   "zh": {
+    "contact.copy": "复制邮箱",
     "entry.title": "从这里看详细内容",
     "entry.apps": "功能说明、操作演示和实际画面",
     "entry.work": "问题、判断过程和具体成果",
@@ -203,6 +210,7 @@ const T = {
     "studio.desc": "用数学期望与投入产出分析，给中文韩服玩家具体玩法和消费方案；通过攻略、PDF、文字和视频交付，累计服务2,000+去重客户。"
   },
   "en": {
+    "contact.copy": "Copy email address",
     "entry.title": "Explore the details",
     "entry.apps": "Features, demos and app screenshots",
     "entry.work": "Problems, decisions and results",
@@ -270,6 +278,7 @@ const T = {
     "studio.desc": "At Studio Keya_cc, my work combined Chinese-language game content with payment assistance, transaction handling, and game support for players on Korean servers. The videos reached approximately 500,000 cumulative video views, and the business served more than 2,000 unique customers."
   },
   "ja": {
+    "contact.copy": "メールアドレスをコピー",
     "entry.title": "詳しい内容はこちら",
     "entry.apps": "機能・操作デモ・実際の画面",
     "entry.work": "課題・判断の過程・成果",

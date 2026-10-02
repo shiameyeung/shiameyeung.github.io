@@ -23,5 +23,15 @@
 .contact-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;flex-shrink:0;padding:14px 20px;min-height:48px;border-radius:12px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;text-decoration:none}
 .contact-button:hover{background:#255b4d}
 .contact-button svg{width:20px;height:20px;flex-shrink:0}
+.contact-actions{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:10px;max-width:360px}
+.contact-actions .copy-email-button{min-height:48px}
+.contact-actions .copy-email-status{text-align:right}
+.mascot-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:18px}
+.mascot-heading .section-heading{margin-bottom:0;min-width:0}
+.section-mascot{width:112px;height:112px;object-fit:contain;flex:0 0 112px;pointer-events:none}
+.contact-intro{display:flex;align-items:center;gap:12px;min-width:0;flex:1}
+.contact-mascot{width:86px;height:86px;object-fit:contain;flex:0 0 86px;pointer-events:none}
+@media(max-width:650px){.mascot-heading{gap:12px}.section-mascot{width:76px;height:76px;flex-basis:76px}.contact-intro{gap:10px}.contact-mascot{width:64px;height:64px;flex-basis:64px}}
 @media(max-width:650px){.home-page .explore{grid-template-columns:1fr;gap:12px}.home-page .explore .entry-card{padding:20px;min-height:94px}.contact-panel{align-items:flex-start;flex-direction:column;padding:24px;gap:20px}.contact-button{width:100%}}
 @media(prefers-reduced-motion:reduce){.home-page .explore .entry-card{transition:none}}
+@media(max-width:650px){.contact-actions{width:100%;max-width:none;justify-content:flex-start}.contact-actions .copy-email-button{width:100%}.contact-actions .copy-email-status{text-align:left}}
