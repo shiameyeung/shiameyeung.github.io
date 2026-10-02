@@ -60,6 +60,10 @@ html.has-outline{scroll-padding-top:calc(var(--nav-height) + 80px)}
 .outline-list a>span{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere}
 .section-rail a:hover{background:#f2ede7;color:var(--ink)}
 .section-rail a[aria-current=location]{color:var(--accent);font-weight:600;background:var(--accent-soft)}
+@media(max-width:1279px){
+  .outline-list a[aria-current=location] svg{color:transparent;background:url('assets/brand/kiwi-fruit.svg?v=20261002-kiwi4') center/contain no-repeat}
+  .outline-current::before{content:'';display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-2px;background:url('assets/brand/kiwi-fruit.svg?v=20261002-kiwi4') center/contain no-repeat}
+}
 .outline-top{margin:0 16px 12px;border-top:1px solid var(--line);border-radius:0!important}
 .section-rail summary:focus-visible{outline:3px solid #5a8879;outline-offset:4px}
 .section-anchor:focus-visible{outline:3px solid #5a8879;outline-offset:6px}
@@ -68,11 +72,11 @@ html.has-outline{scroll-padding-top:calc(var(--nav-height) + 80px)}
   .section-rail{position:fixed;left:max(12px,calc((100vw - 940px)/2 - 188px));top:calc(var(--nav-height) + 40px);width:160px;max-height:calc(100vh - var(--nav-height) - 72px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;margin:0;z-index:10;background:none;box-shadow:none}
   .section-rail details{border:0;border-radius:0;background:none}
   .section-rail summary{display:none}
-  .outline-list{display:block;padding:0 0 0 11px;border-left:1px solid var(--line);margin-left:4px}
+  .outline-list{display:block;padding:0 0 0 11px;border-left:1px solid var(--line);margin-left:12px}
   .outline-list li+li{margin-top:4px}
   .outline-list a{padding:8px 8px;min-height:36px;gap:8px}
   .outline-list a::before{content:'';position:absolute;left:-15px;width:9px;height:1px;background:#cfc5ba}
-  .outline-list a[aria-current=location]::before{height:3px;width:13px;background:var(--accent)}
+  .outline-list a[aria-current=location]::before{left:-23px;width:22px;height:22px;background:var(--bg) url('assets/brand/kiwi-fruit.svg?v=20261002-kiwi4') center/contain no-repeat;border-radius:50%}
   .outline-top{margin:14px 0 0 16px;padding:12px 8px!important;font-size:11px}
 }
 @media(max-width:520px){.outline-list{grid-template-columns:1fr}.outline-current{max-width:42vw;font-size:11px;margin-left:8px}}
@@ -81,3 +85,18 @@ html.has-outline{scroll-padding-top:calc(var(--nav-height) + 80px)}
 @media print{.site-header,.page-navigation,.reading-next,.section-rail{display:none}}
 @media(max-width:360px){.site-nav{gap:0;justify-content:space-between}.site-nav a{font-size:11px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.project-overview-card{transition:none}}
+
+/* Small brand cues on interactive elements; native text and touch behavior stay intact. */
+@media(hover:hover) and (pointer:fine){
+  a[href],button:not(:disabled):not([aria-disabled=true]),summary{cursor:url('assets/brand/kiwi-pointer.svg?v=20261002-kiwi4') 4 4,pointer}
+  .site-logo{transition:transform .18s ease}
+  .site-brand:is(:hover,:focus-visible) .site-logo{transform:rotate(-8deg) translateY(-1px)}
+  .entry-card:is(:hover,:focus-visible) .entry-arrow{color:transparent;background:var(--accent-soft) url('assets/brand/kiwi-fruit.svg?v=20261002-kiwi4') center/25px no-repeat}
+  .primary-link:is(:hover,:focus-visible),.contact-button:is(:hover,:focus-visible){box-shadow:0 0 0 3px #c9ddcf}
+  .outline-top::after{content:'';position:absolute;right:4px;top:-14px;width:28px;height:28px;background:url('assets/brand/kiwi-peek.png?v=20261002-kiwi2') center/contain no-repeat;opacity:0;transform:translateY(3px);transition:opacity .18s ease,transform .18s ease;pointer-events:none}
+  .outline-top:is(:hover,:focus-visible)::after{opacity:1;transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .site-logo,.outline-top::after{transition:none!important;transform:none!important}
+  .project-overview-card:hover,.feature-card:hover,.small-project:hover,.earlier-work-card:hover,.links a:hover{transform:none!important}
+}
