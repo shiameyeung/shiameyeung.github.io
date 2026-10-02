@@ -32,8 +32,16 @@
 .reading-contact{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
 .kiwi-finale{display:flex;justify-content:center;padding:22px 0 12px;pointer-events:none}
 .kiwi-finale img{display:block;width:min(100%,480px);height:auto;aspect-ratio:3/1;object-fit:contain}
+.page-head.mascot-page-head{display:grid;grid-template-columns:minmax(0,1fr) 116px;column-gap:24px;align-items:start}
+.mascot-page-head>h1,.mascot-page-head>p{grid-column:1;min-width:0}
+.mascot-page-head>h1{grid-row:1}
+.page-mascot{grid-column:2;grid-row:1/4;align-self:center;width:116px;height:116px;object-fit:contain;pointer-events:none}
+.page-head.compact-mascot{grid-template-columns:minmax(0,1fr) 86px}
+.compact-mascot .page-mascot{width:86px;height:86px}
+@media(max-width:650px){.page-head.mascot-page-head{grid-template-columns:minmax(0,1fr) 68px;column-gap:12px}.mascot-page-head>h1{grid-column:1/-1}.page-mascot,.compact-mascot .page-mascot{grid-row:2/4;align-self:start;width:68px;height:68px}}
 @media(max-width:650px){.kiwi-finale{padding:16px 0 6px}.kiwi-finale img{width:min(100%,340px)}}
 @media print{.kiwi-finale,.section-mascot,.contact-mascot{display:none}}
+@media print{.page-mascot{display:none}.page-head.mascot-page-head{display:block}}
 @media(max-width:850px){.site-logo{width:32px;height:32px;flex-basis:32px}.site-brand{gap:7px}}
 @media(max-width:360px){.site-brand{font-size:12px}.site-logo{width:28px;height:28px;flex-basis:28px}.site-header .langbar button{font-size:10px;padding:5px 6px}}
 
