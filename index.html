@@ -14,8 +14,9 @@
 <link rel="stylesheet" href="base.css?v=20261002-m3">
 
 <link rel="stylesheet" href="navigation.css?v=20261002">
+<link rel="stylesheet" href="home.css?v=20261002-entry">
 </head>
-<body>
+<body class="home-page">
 <div class="wrap">
 
   <nav class="langbar" aria-label="Language">
@@ -38,29 +39,35 @@
     <div class="introduction">
       <p data-t="intro"></p>
 
-      <nav class="explore" aria-label="Explore"><a href="apps.html"><span data-t="apps.button"></span> →</a><a href="work.html"><span data-t="work.button"></span> →</a></nav>
+      <div class="entry-guide">
+        <p class="entry-label" data-t="entry.title"></p>
+        <nav class="explore" aria-label="Explore">
+          <a class="entry-card" href="apps.html"><span class="entry-copy"><strong data-t="apps.button"></strong><small data-t="entry.apps"></small></span><span class="entry-arrow" aria-hidden="true">→</span></a>
+          <a class="entry-card" href="work.html"><span class="entry-copy"><strong data-t="work.button"></strong><small data-t="entry.work"></small></span><span class="entry-arrow" aria-hidden="true">→</span></a>
+        </nav>
+      </div>
     </div>
 
     <section class="everyday-feature" id="daily-tools">
       <h2 class="section-heading" data-nav="story.tools"></h2>
       <p class="section-intro" data-t="everyday.lead"></p>
       <div class="everyday-grid">
-        <a class="small-project" href="apps.html?project=aws"><img class="project-cover" src="assets/shots/aws_home_ja.webp" data-home-shot="aws_home" alt="" loading="lazy"><h3 data-t="aws.title"></h3><p data-t="aws.desc"></p><span class="card-link"><span data-nav="nav.read"></span> →</span></a>
-        <a class="small-project" href="apps.html?project=ootd"><img class="project-cover" src="assets/shots/ootd_wardrobe_ja.webp" data-home-shot="ootd_wardrobe" alt="" loading="lazy"><h3 data-t="ootd.title"></h3><p data-t="ootd.desc"></p><span class="card-link"><span data-nav="nav.read"></span> →</span></a>
-        <a class="small-project" href="apps.html?project=cal"><img class="project-cover" src="assets/shots/cal_today_ja.webp" data-home-shot="cal_today" alt="" loading="lazy"><h3 data-t="cal.title"></h3><p data-t="cal.desc"></p><span class="card-link"><span data-nav="nav.read"></span> →</span></a>
+        <a class="small-project" href="apps.html?project=aws"><img class="project-cover" src="assets/shots/aws_home_ja.webp" data-home-shot="aws_home" alt="" loading="lazy"><h3 data-t="aws.title"></h3><p data-t="aws.desc"></p><span class="card-link"><span data-t="entry.demo"></span><span aria-hidden="true"> →</span></span></a>
+        <a class="small-project" href="apps.html?project=ootd"><img class="project-cover" src="assets/shots/ootd_wardrobe_ja.webp" data-home-shot="ootd_wardrobe" alt="" loading="lazy"><h3 data-t="ootd.title"></h3><p data-t="ootd.desc"></p><span class="card-link"><span data-t="entry.demo"></span><span aria-hidden="true"> →</span></span></a>
+        <a class="small-project" href="apps.html?project=cal"><img class="project-cover" src="assets/shots/cal_today_ja.webp" data-home-shot="cal_today" alt="" loading="lazy"><h3 data-t="cal.title"></h3><p data-t="cal.desc"></p><span class="card-link"><span data-t="entry.demo"></span><span aria-hidden="true"> →</span></span></a>
       </div>
-      <a class="text-link all-projects" href="apps.html"><span data-t="all.projects"></span><span aria-hidden="true"> ↗</span></a>
+      <a class="text-link all-projects" href="apps.html"><span data-t="all.projects"></span><span aria-hidden="true"> →</span></a>
     </section>
 
     <section class="work-preview" id="work-practice">
       <span class="eyebrow">Baseconnect</span>
       <h2 class="section-heading" data-nav="story.work"></h2>
       <p data-t="work.desc"></p><div class="stat-grid"><div class="stat"><strong data-t="stat.hours.v"></strong><span data-t="stat.hours.l"></span></div><div class="stat"><strong data-t="stat.prs.v"></strong><span data-t="stat.prs.l"></span></div><div class="stat"><strong data-t="stat.tasks.v"></strong><span data-t="stat.tasks.l"></span></div><div class="stat"><strong data-t="stat.quality.v"></strong><span data-t="stat.quality.l"></span></div></div><p class="stat-note" data-t="stat.note"></p>
+      <div class="work-links"><a class="text-link" href="work.html"><span data-t="work.link"></span><span aria-hidden="true"> →</span></a><a class="text-link" href="challenge.html"><span data-t="work.challenge"></span><span aria-hidden="true"> →</span></a></div>
       <div class="earlier-work-grid">
-        <a class="earlier-work-card" href="work.html?case=holly"><span class="eyebrow">2017.12—2021.12</span><h3 data-t="holly.title"></h3><p data-t="holly.desc"></p><span class="card-link" data-t="work.link"></span></a>
-        <a class="earlier-work-card" href="work.html?case=studio"><span class="eyebrow">2019.11—2025.12</span><h3 data-t="studio.title"></h3><p data-t="studio.desc"></p><span class="card-link" data-t="work.link"></span></a>
+        <a class="earlier-work-card" href="work.html?case=holly"><span class="eyebrow">2017.12—2021.12</span><h3 data-t="holly.title"></h3><p data-t="holly.desc"></p><span class="card-link"><span data-t="work.link"></span><span aria-hidden="true"> →</span></span></a>
+        <a class="earlier-work-card" href="work.html?case=studio"><span class="eyebrow">2019.11—2025.12</span><h3 data-t="studio.title"></h3><p data-t="studio.desc"></p><span class="card-link"><span data-t="work.link"></span><span aria-hidden="true"> →</span></span></a>
       </div>
-      <div class="work-links"><a class="text-link" href="work.html"><span data-t="work.link"></span> ↗</a><a class="text-link" href="challenge.html"><span data-t="work.challenge"></span> ↗</a></div>
     </section>
 
 
@@ -73,14 +80,14 @@
           <h3 data-t="corp.title"></h3>
           <p class="feature-purpose" data-t="corp.desc"></p>
           <p class="feature-thought" data-t="corp.thought"></p>
-          <span class="card-link"><span data-t="project.more"></span><span aria-hidden="true"> ↗</span></span>
+          <span class="card-link"><span data-t="project.more"></span><span aria-hidden="true"> →</span></span>
         </a>
         <a class="feature-card sna-card" href="apps.html?project=sna">
           <span class="eyebrow" data-t="sna.category"></span>
           <h3 data-t="sna.title"></h3>
           <p class="feature-purpose" data-t="sna.desc"></p>
           <p class="feature-thought" data-t="sna.thought"></p>
-          <span class="card-link"><span data-t="project.more"></span><span aria-hidden="true"> ↗</span></span>
+          <span class="card-link"><span data-t="project.more"></span><span aria-hidden="true"> →</span></span>
         </a>
       </div>
     </section>
@@ -94,6 +101,11 @@
     </section>
     <section class="career-next" id="career-next"><h2 class="section-heading" data-nav="story.next"></h2><p data-t="direction"></p></section>
   </main>
+
+  <section class="contact-panel" id="contact" data-rail-exclude>
+    <div><h2 data-t="contact.action"></h2><p data-t="contact.note"></p></div>
+    <a class="contact-button" href="mailto:1@yotenra.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg><span>1@yotenra.com</span><span aria-hidden="true">→</span></a>
+  </section>
 
   <section id="profile-links" data-rail-exclude>
     <h2 class="section-label" data-t="contact.title"></h2>
@@ -119,11 +131,17 @@
   </footer>
 </div>
 
-<script src="navigation.js?v=20261002"></script>
+<script src="navigation.js?v=20261002-entry"></script>
 <script src="shared.js"></script>
 <script>
 const T = {
   "zh": {
+    "entry.title": "从这里看详细内容",
+    "entry.apps": "功能说明、操作演示和实际画面",
+    "entry.work": "问题、判断过程和具体成果",
+    "entry.demo": "查看功能与演示",
+    "contact.action": "联系我",
+    "contact.note": "通过邮件聊聊项目、工作机会或想法。",
     "name": "楊　天楽",
     "romaji": "YO TENRA",
     "tagline": "关西大学综合信息学研究科硕士在读。<br>在 Baseconnect 做 AI 工程实习：修数据生产 pipeline，把错误数据的修正做成可迭代的工具。",
@@ -185,6 +203,12 @@ const T = {
     "studio.desc": "用数学期望与投入产出分析，给中文韩服玩家具体玩法和消费方案；通过攻略、PDF、文字和视频交付，累计服务2,000+去重客户。"
   },
   "en": {
+    "entry.title": "Explore the details",
+    "entry.apps": "Features, demos and app screenshots",
+    "entry.work": "Problems, decisions and results",
+    "entry.demo": "See features and demos",
+    "contact.action": "Contact me",
+    "contact.note": "Email me about projects, job opportunities or ideas.",
     "name": "Yo Tenra",
     "romaji": "YO TENRA",
     "tagline": "Master’s student in Informatics at Kansai University.<br>AI engineering intern at Baseconnect, improving data pipelines and building reusable tools for correcting data errors.",
@@ -246,6 +270,12 @@ const T = {
     "studio.desc": "At Studio Keya_cc, my work combined Chinese-language game content with payment assistance, transaction handling, and game support for players on Korean servers. The videos reached approximately 500,000 cumulative video views, and the business served more than 2,000 unique customers."
   },
   "ja": {
+    "entry.title": "詳しい内容はこちら",
+    "entry.apps": "機能・操作デモ・実際の画面",
+    "entry.work": "課題・判断の過程・成果",
+    "entry.demo": "機能とデモを見る",
+    "contact.action": "連絡する",
+    "contact.note": "プロジェクトやお仕事、アイデアについて、メールでお話ししましょう。",
     "name": "楊　天楽",
     "romaji": "YO TENRA",
     "tagline": "関西大学大学院 総合情報学研究科の修士課程に在籍。<br>BaseconnectでAIエンジニアのインターンとして、データ生成パイプラインの改善と、継続して使えるデータ修正ツールの開発に取り組んでいます。",

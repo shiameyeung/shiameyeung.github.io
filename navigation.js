@@ -2,6 +2,7 @@
 window.SiteNavigation = (() => {
   const labels = {
   "zh": {
+    "nav.contact": "联系我",
     "nav.home": "首页",
     "nav.projects": "项目",
     "nav.work": "工作实践",
@@ -37,6 +38,7 @@ window.SiteNavigation = (() => {
     "chapter.research": "研究与探索"
   },
   "ja": {
+    "nav.contact": "連絡する",
     "nav.home": "ホーム",
     "nav.projects": "プロジェクト",
     "nav.work": "仕事での取り組み",
@@ -72,6 +74,7 @@ window.SiteNavigation = (() => {
     "chapter.research": "研究・探究"
   },
   "en": {
+    "nav.contact": "Contact me",
     "nav.home": "Home",
     "nav.projects": "Projects",
     "nav.work": "Work",
@@ -286,7 +289,7 @@ window.SiteNavigation = (() => {
       let next = document.getElementById('reading-next');
       if (!next) { next = document.createElement('nav'); next.id = 'reading-next'; next.className = 'reading-next'; document.querySelector('footer').before(next); }
       next.setAttribute('aria-label', t['nav.related']);
-      next.innerHTML = `<span class="related-title">${escape(t['nav.related'])}</span>` + targets.map(([href, text]) => link(href, text + ' →')).join('');
+      next.innerHTML = `<span class="related-title">${escape(t['nav.related'])}</span>` + targets.map(([href, text]) => link(href, text + ' →')).join('') + link('mailto:1@yotenra.com', t['nav.contact'] + ' · 1@yotenra.com');
     }
     syncHeaderHeight();
     refresh();

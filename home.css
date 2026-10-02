@@ -1,0 +1,27 @@
+/* Visible paths into the details, without changing the shared page layout. */
+.home-page .introduction{max-width:none}
+.home-page .introduction>p{max-width:740px}
+.entry-guide{margin-top:28px}
+.entry-label{font-size:12px;font-weight:600;color:var(--muted);margin:0 0 12px}
+.home-page .explore{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
+.home-page .explore .entry-card{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:23px 25px;border-radius:16px;color:var(--ink);min-height:100px;transition:border-color .15s,background .15s}
+.home-page .explore .entry-card:hover{border-color:#a9bfb6;background:var(--accent-soft)}
+.entry-copy{display:flex;flex-direction:column;gap:7px;min-width:0}
+.entry-copy strong{font-size:19px;line-height:1.4}
+.entry-copy small{font-size:13px;line-height:1.6;font-weight:400;color:var(--muted)}
+.entry-arrow{flex:0 0 35px;display:grid;place-items:center;width:35px;height:35px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:22px}
+.home-page .card-link{display:inline-flex;align-items:center;justify-content:space-between;gap:14px;width:fit-content;max-width:100%;padding:9px 13px;border:1px solid #c4d4dc;border-radius:10px;color:var(--link);background:#f7fafb;line-height:1.5}
+.home-page .small-project:focus-visible,.home-page .feature-card:focus-visible,.home-page .earlier-work-card:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.home-page .work-links{gap:12px;margin:23px 0 4px}
+.home-page .work-links a,.home-page .all-projects{display:inline-flex;align-items:center;gap:12px;padding:12px 17px;border:1px solid #c4d4dc;border-radius:10px;background:var(--card);line-height:1.5;text-decoration:none}
+.home-page .work-links a:hover,.home-page .all-projects:hover{border-color:var(--link);background:#f7fafb}
+.home-page .earlier-work-card{display:flex;flex-direction:column}
+.home-page .earlier-work-card p{flex:1}
+.contact-panel{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:30px;margin:38px 0;background:var(--accent-soft);border:1px solid #dce5dd;border-radius:18px}
+.contact-panel h2{font-size:24px;line-height:1.4;margin:0 0 8px}
+.contact-panel p{font-size:14px;color:var(--muted);line-height:1.7;margin:0;max-width:35em}
+.contact-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;flex-shrink:0;padding:14px 20px;min-height:48px;border-radius:12px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;text-decoration:none}
+.contact-button:hover{background:#255b4d}
+.contact-button svg{width:20px;height:20px;flex-shrink:0}
+@media(max-width:650px){.home-page .explore{grid-template-columns:1fr;gap:12px}.home-page .explore .entry-card{padding:20px;min-height:94px}.contact-panel{align-items:flex-start;flex-direction:column;padding:24px;gap:20px}.contact-button{width:100%}}
+@media(prefers-reduced-motion:reduce){.home-page .explore .entry-card{transition:none}}

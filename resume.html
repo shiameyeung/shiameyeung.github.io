@@ -38,16 +38,16 @@
       <p class="eyebrow" data-t="natural.desc">プロジェクト重視</p>
       <h2 id="projects-title" data-t="natural.title">プロジェクト・取り組み</h2>
       <div class="resume-downloads">
-        <a class="primary-link" data-style="projects" data-format="pdf" href="assets/resumes/yo-tenra-ja-projects.pdf?v=20261002-m3.2" download="yo-tenra-ja-projects.pdf" hreflang="ja" data-t="download.pdf">PDF をダウンロード</a>
-        <a class="text-link" data-style="projects" data-format="docx" href="assets/resumes/yo-tenra-ja-projects.docx?v=20261002-m3.2" download="yo-tenra-ja-projects.docx" hreflang="ja" data-t="download.docx">Word (.docx) をダウンロード</a>
+        <a class="primary-link" data-style="projects" data-format="pdf" href="assets/resumes/ja/projects/%E6%A5%8A_%E5%A4%A9%E6%A5%BD%EF%BC%88Yo_Tenra%EF%BC%89_%E8%81%B7%E5%8B%99%E7%B5%8C%E6%AD%B4%E6%9B%B8.pdf?v=20261002-names" download="楊_天楽（Yo_Tenra）_職務経歴書.pdf" hreflang="ja" data-t="download.pdf">PDF をダウンロード</a>
+        <a class="text-link" data-style="projects" data-format="docx" href="assets/resumes/ja/projects/%E6%A5%8A_%E5%A4%A9%E6%A5%BD%EF%BC%88Yo_Tenra%EF%BC%89_%E8%81%B7%E5%8B%99%E7%B5%8C%E6%AD%B4%E6%9B%B8.docx?v=20261002-names" download="楊_天楽（Yo_Tenra）_職務経歴書.docx" hreflang="ja" data-t="download.docx">Word (.docx) をダウンロード</a>
       </div>
     </article>
     <article class="resume-card" aria-labelledby="experience-title">
       <p class="eyebrow" data-t="formal.desc">職務経歴重視</p>
       <h2 id="experience-title" data-t="formal.title">職務経歴・担当業務</h2>
       <div class="resume-downloads">
-        <a class="primary-link" data-style="experience" data-format="pdf" href="assets/resumes/yo-tenra-ja-experience.pdf?v=20261002-m3.2" download="yo-tenra-ja-experience.pdf" hreflang="ja" data-t="download.pdf">PDF をダウンロード</a>
-        <a class="text-link" data-style="experience" data-format="docx" href="assets/resumes/yo-tenra-ja-experience.docx?v=20261002-m3.2" download="yo-tenra-ja-experience.docx" hreflang="ja" data-t="download.docx">Word (.docx) をダウンロード</a>
+        <a class="primary-link" data-style="experience" data-format="pdf" href="assets/resumes/ja/experience/%E6%A5%8A_%E5%A4%A9%E6%A5%BD%EF%BC%88Yo_Tenra%EF%BC%89_%E8%81%B7%E5%8B%99%E7%B5%8C%E6%AD%B4%E6%9B%B8.pdf?v=20261002-names" download="楊_天楽（Yo_Tenra）_職務経歴書.pdf" hreflang="ja" data-t="download.pdf">PDF をダウンロード</a>
+        <a class="text-link" data-style="experience" data-format="docx" href="assets/resumes/ja/experience/%E6%A5%8A_%E5%A4%A9%E6%A5%BD%EF%BC%88Yo_Tenra%EF%BC%89_%E8%81%B7%E5%8B%99%E7%B5%8C%E6%AD%B4%E6%9B%B8.docx?v=20261002-names" download="楊_天楽（Yo_Tenra）_職務経歴書.docx" hreflang="ja" data-t="download.docx">Word (.docx) をダウンロード</a>
       </div>
     </article>
   </main>
@@ -58,15 +58,20 @@
   </footer>
 </div>
 
-<script src="navigation.js?v=20261002"></script>
+<script src="navigation.js?v=20261002-entry"></script>
 <script src="shared.js"></script>
 <script>
 function render(lang, t) {
+  const documents = {
+    zh: { name: '杨天乐（Yo_Tenra）', type: '简历' },
+    en: { name: 'Yo_Tenra', type: 'Resume' },
+    ja: { name: '楊_天楽（Yo_Tenra）', type: '職務経歴書' }
+  };
   document.querySelectorAll('[data-style][data-format]').forEach(link => {
     const style = link.dataset.style;
     const format = link.dataset.format;
-    const filename = `yo-tenra-${lang}-${style}.${format}`;
-    link.href = `assets/resumes/${filename}?v=20261002-m3.2`;
+    const filename = `${documents[lang].name}_${documents[lang].type}.${format}`;
+    link.href = `assets/resumes/${lang}/${style}/${encodeURIComponent(filename)}?v=20261002-names`;
     link.download = filename;
     link.hreflang = lang;
     const title = t[style === 'projects' ? 'natural.title' : 'formal.title'];
@@ -80,9 +85,9 @@ const T = {
     "page.title": "简历",
     "page.lead": "PDF / Word (.docx) · 2026-10-02",
     "natural.title": "项目与工作方式",
-    "natural.desc": "自然版",
+    "natural.desc": "项目与实践",
     "formal.title": "经历与职责",
-    "formal.desc": "正式版",
+    "formal.desc": "工作经历",
     "download.pdf": "下载 PDF",
     "download.docx": "下载 Word (.docx)",
     "footer.left": "© 2026 楊 天楽",
@@ -98,9 +103,9 @@ const T = {
     "page.title": "Résumé",
     "page.lead": "PDF / Word (.docx) · October 2, 2026",
     "natural.title": "Projects and how I work",
-    "natural.desc": "Narrative version",
+    "natural.desc": "Project highlights",
     "formal.title": "Experience and responsibilities",
-    "formal.desc": "Formal version",
+    "formal.desc": "Work experience",
     "download.pdf": "Download PDF",
     "download.docx": "Download Word (.docx)",
     "footer.left": "© 2026 Yo Tenra",
@@ -116,9 +121,9 @@ const T = {
     "page.title": "職務経歴書",
     "page.lead": "PDF / Word (.docx) · 2026-10-02",
     "natural.title": "プロジェクトと仕事の進め方",
-    "natural.desc": "取り組みを中心にまとめた版",
+    "natural.desc": "プロジェクト紹介",
     "formal.title": "職務経歴と担当業務",
-    "formal.desc": "職務経歴書形式の版",
+    "formal.desc": "職務経歴",
     "download.pdf": "PDFをダウンロード",
     "download.docx": "Word (.docx)をダウンロード",
     "footer.left": "© 2026 楊 天楽",
