@@ -153,6 +153,9 @@ const APPS = [
             <div class="ui-note">${t['cal.ui.calc']}</div>` ] },
 ];
 
+const FULL_DEMOS = {aws:"https://aws.yotenra.com/?demo=1"};
+const DEMO_ENTRY_COPY = {"ja": {"demoTitle": "体験版・ログイン不要", "demoBody": "サンプルの学習記録を用意しています。問題演習、間違えた問題の復習、模擬試験をすぐに試せます。変更内容はこのページ内でのみ保持され、ページを再読み込みするとサンプルの状態に戻ります。", "demoExit": "通常版へ", "demoEnter": "ログインなしで今すぐ試す"}, "en": {"demoTitle": "Demo · No sign-in required", "demoBody": "The demo includes sample study records. You can answer questions, review incorrect answers, and take mock exams right away. Changes are kept only on this page; refreshing the page restores the sample data.", "demoExit": "Go to the full app", "demoEnter": "Try it now — no sign-in required"}, "zh": {"demoTitle": "体验版 · 无需登录", "demoBody": "已预置学习记录，可以直接答题、复习错题和参加模拟考试。改动只保留在当前页面，刷新后恢复示例数据。", "demoEnter": "立即体验，无需登录", "demoExit": "打开正式版"}};
+
 const SHOTS={aws:['home','mock','modes','question','glossary','nav','result','guide'],cal:['today','trend','formula','daily','body'],ootd:['wardrobe','today','looks','places','item','spending']};
 function render(lang,t) {
   const all=['aws','cal','ootd','corp','sna'];
@@ -162,11 +165,17 @@ function render(lang,t) {
   if(!all.includes(selected)) selected=null;
   const order=selected?[selected]:[];
   const head=document.querySelector('.page-head');
+  head.querySelector('.project-demo-hero')?.remove();
   if(selected) {
     head.querySelector('h1').textContent=t[selected+'.title'];
     head.querySelector('[data-t="page.lead"]').textContent=t[selected+'.desc'];
     head.querySelector('.page-note').hidden=true;
     document.title=t[selected+'.title']+' — '+(lang==='en'?'Yo Tenra':'楊 天楽');
+    if(FULL_DEMOS[selected]) {
+      const app=APPS.find(x=>x.id===selected), copy=DEMO_ENTRY_COPY[lang], url=`${FULL_DEMOS[selected]}&lang=${lang}`;
+      const fullUrl=new URL(app.url);fullUrl.searchParams.set('lang',lang);
+      head.querySelector('h1').insertAdjacentHTML('afterend',`<div class="project-demo-hero"><div class="app-entry-links"><a class="enter enter-demo" href="${url}" target="_blank" rel="noopener">${copy.demoEnter}</a><a class="full-app-link" href="${fullUrl.href}" target="_blank" rel="noopener">${copy.demoExit}</a><span class="locked">${t[selected+'.locked']}</span></div></div>`);
+    }
   } else head.querySelector('.page-note').hidden=true;
   const card=id=>{const a=APPS.find(x=>x.id===id), actual=!!SHOTS[id];return `<a class="project-overview-card" href="apps.html?project=${id}">${actual?`<img src="assets/shots/${id}_${id==='aws'?'home':id==='cal'?'today':'wardrobe'}_${lang}.webp" alt="" loading="lazy">`:`<span class="overview-mark" aria-hidden="true">${a.mark}</span>`}<div><h2>${t[id+'.title'].split(' · ')[0]}</h2><p>${t[id+'.desc']}</p><span class="card-link">${SiteNavigation.label(lang,'nav.read')} →</span></div></a>`;};
   if(!selected) {
@@ -174,9 +183,10 @@ function render(lang,t) {
     return;
   }
   document.getElementById('apps').innerHTML=order.map(id=>{
-    const a=APPS.find(x=>x.id===id), actual=!!SHOTS[id];
+    const a=APPS.find(x=>x.id===id), actual=!!SHOTS[id], demo=FULL_DEMOS[id], demoCopy=DEMO_ENTRY_COPY[lang];
     return `<section class="app" id="${id}" style="--tint:${a.tint};--tone:${a.tone};--paper:${a.paper}">
-    <div class="app-head"><div class="app-title"><span class="app-badge" aria-hidden="true">${a.mark}</span><div><p class="host">${a.host}</p></div></div><div><a class="enter" href="${a.url}" target="_blank" rel="noopener">${t['enter']} ↗</a>${a.locked?`<span class="locked">${t[id+'.locked']||t['locked']}</span>`:''}</div></div>
+    <div class="app-head"><div class="app-title"><span class="app-badge" aria-hidden="true">${a.mark}</span><div><p class="host">${a.host}</p></div></div>${demo?'':`<div class="app-entry-links"><a class="enter" href="${a.url}" target="_blank" rel="noopener">${t['enter']} ↗</a>${a.locked?`<span class="locked">${t[id+'.locked']||t['locked']}</span>`:''}</div>`}</div>
+    ${demo?`<aside class="full-demo-notice"><strong>${demoCopy.demoTitle}</strong><p>${demoCopy.demoBody}</p></aside>`:''}
 
     ${actual?`<h2 class="app-section-heading" id="project-problem">${t['sec.problem']}</h2><p>${t[id+'.problem']}</p><h2 class="app-section-heading" id="project-features" data-rail-key="nav.features">${t['sec.features']}</h2><ul class="feature-list">${Array.from({length:id==='aws'?12:10},(_,i)=>`<li>${t[id+'.f'+(i+1)]}</li>`).join('')}</ul><h2 class="app-section-heading" id="project-demo" data-rail-key="nav.demo">${t['sec.demo']}</h2><div class="demo-grid" id="demos-${id}">${AppDemos.html(id,t)}</div><h2 class="app-section-heading" id="project-screens" data-rail-key="nav.screens">${t['sec.shots']}</h2><div class="shots">${SHOTS[id].map(v=>{const file=`assets/shots/${id}_${v}_${v==='guide'?'zh':lang}.webp`;return `<figure><a href="${file}" target="_blank" rel="noopener"><img src="${file}" loading="lazy" alt="${String(t[id+'.shot.'+v]).replaceAll('&','&amp;').replaceAll('"','&quot;')}" data-shot="${id}_${v}"></a><figcaption>${t[id+'.shot.'+v]}</figcaption></figure>`;}).join('')}</div><h2 class="app-section-heading" id="project-design" data-rail-key="nav.design">${t['sec.design']}</h2><p>${t[id+'.design']}</p><p class="stack"><b>${t['sec.stack']}</b> · ${t[id+'.stack']}</p>`:
     `<div class="scenes">${a.scenes.map((f,i)=>`<article class="scene"><div class="ui">${f(t)}</div><div class="scene-body"><span class="scene-step">${t['story.'+(i+1)]}</span><p class="scene-cap">${t[id+'.s'+(i+1)]}</p></div></article>`).join('')}</div>`}</section>`;
@@ -286,7 +296,7 @@ const T = {
     "corp.enter": "查看源码",
     "sna.enter": "打开演示",
     "resume.button": "简历",
-    "aws.locked": "需要 Google 登录 · 目前只开放给本人和少数朋友",
+    "aws.locked": "正式版需要通过 Google 登录，目前向我和少数朋友开放。",
     "aws.problem": "备考 AWS 认证时，我在中文、日文、英文的资料之间来回切换：概念要懂，三种语言里的术语也要认得。做题只知道对错不够，我想知道为什么对、为什么错、离合格线还有多远；卡住的题，最好能马上丢给 AI 继续讨论。于是做了一个自己用的刷题应用，考一门加一门题库，现在有 7 种考试。",
     "aws.f1": "7 种 AWS 认证（CLF-C02、SAA-C03、SAP-C02、AIF-C01、AIP-C01、DOP-C02、SCS-C03），顶栏切换，每门考试的进度分开保存。",
     "aws.f2": "每门考试按语言分别有题库：多数为中／英／日三语，AIF-C01 为中／英；各语言的题号和进度相互独立。",
@@ -310,7 +320,7 @@ const T = {
     "aws.shot.result": "模拟考成绩：题数、用时、折算分与合格线，可只看错题或逐题回顾。",
     "aws.shot.guide": "AIF-C01 备考指南（中文）：按官方考纲编写，分章节导航。",
     "aws.design": "把题库、术语表和解析放进同一个界面，复习时既能对照语言，也能回到具体概念。模拟考只抽原题、考中隐藏术语解释，交卷后回顾再显示，贴近真实考场；分数按练习目标折算到 100–1000 分制作参考。进度先存本机，登录只为跨设备同步，断网也能继续刷。",
-    "cal.locked": "需要登录 · 单用户",
+    "cal.locked": "正式版需要登录，供我个人使用。",
     "cal.problem": "2024 年 9 月到 2025 年 5 月，我从约 100 kg 减到约 65 kg，用的是一张表格：记每天吃了多少、体重怎么变，用这两样反推实际消耗，再按减重目标算出每天能吃多少，边观察边调整。减下来之后要维持，表格每天填太麻烦，我把同一套算法做成了 app：记录更快，目标自动算，进度实时看。",
     "cal.f1": "今天：还可以记多少 kcal、目标／已记录／最新体重、今日进度环；超过目标也只是提醒「明天继续就好」。",
     "cal.f2": "记一口吃的：食品库搜索（约 200 种，从原表格导入）、收藏与常用置顶、点食物即记录、自定义食品入库。",
@@ -329,7 +339,7 @@ const T = {
     "cal.shot.formula": "每日目标的算法写在页面上：30 日摄入均值 ＋ 双窗口体重校正 ＝ 推算消耗，减去月减目标折算的每日赤字。",
     "cal.shot.body": "身体尺寸：记录实测值，自动算围差、参考罩杯与尺码、腰臀比；空缺项沿用最近一次实测。",
     "cal.design": "保留表格时代那套算法，而不是换一个：每日目标的四步直接显示在页面上，数据不够时显示「—」和缺了几天，等记录补齐再给目标。记录尽量少按几下：常用食物置顶、最近吃过一键填、日期默认今天也随时可改。所有日界按日本时间划分，补录的日期不会被自动改写。",
-    "ootd.locked": "需要 Google 登录 · 白名单",
+    "ootd.locked": "正式版需要通过 Google 登录，仅授权账号可用。",
     "ootd.problem": "衣服太多，常常找不到；很多衣服买了没穿几次，利用率低；想穿某件又不知道怎么搭。购物记录和衣柜是分开的，买过什么、放在哪、穿过几次、怎么搭，这些信息连不起来。我把它们连成一份档案：从购买导入开始，到收纳位置、每天的穿着记录、搭配，再到每件衣服的平均每次花费。",
     "ootd.f1": "衣橱档案与检索：每件单品有编号（如 TOP-0179）、分类、颜色、品牌、照片、标签；按名称、编号、颜色、品牌、位置、标签搜索，按主类／分类／位置／标签筛选，「只看还没穿过的」，按随便逛逛／最近加入／最近穿过排序。",
     "ootd.f2": "今天穿了：首页列「最近穿过」和「当季还没穿过（按最近买的排）」，点选多件一起记录；同一件同一天只算一次，重复点不会多加；衣橱列表和单品页也能一键「今天穿了」。",
@@ -592,7 +602,7 @@ const T = {
     "corp.enter": "View source code",
     "sna.enter": "Open demo",
     "resume.button": "Résumé",
-    "aws.locked": "Google sign-in required · Currently limited to me and a few friends",
+    "aws.locked": "The full app requires Google sign-in. Access is currently limited to me and a few friends.",
     "aws.problem": "While studying for AWS certifications, I moved between Chinese, Japanese, and English materials. I needed to understand the concepts and recognize the terminology in all three languages. A right-or-wrong result was not enough: I wanted to understand each option and see how close I was to passing. When I got stuck, I wanted to send the question straight to an AI chat. I built a practice app for myself, adding a question bank as I prepared for each exam. It now covers seven exams.",
     "aws.f1": "Seven AWS certifications: CLF-C02, SAA-C03, SAP-C02, AIF-C01, AIP-C01, DOP-C02, and SCS-C03. Switch exams in the top bar, with progress saved separately for each.",
     "aws.f2": "Separate question banks by language for each exam. Most have Chinese, English, and Japanese banks; AIF-C01 has Chinese and English. Question numbers and progress are independent in each language.",
@@ -616,7 +626,7 @@ const T = {
     "aws.shot.result": "Mock exam results: question count, time taken, scaled score, and passing threshold. Review every question or only mistakes.",
     "aws.shot.guide": "Chinese AIF-C01 study guide: chapter navigation through material based on the official exam guide.",
     "aws.design": "Questions, glossary entries, and explanations share one interface, so I can compare languages while returning to the underlying concepts. Mock exams draw only from the original questions and hide definitions until review. Practice scores are scaled to 100–1000 as a study reference. Progress is saved locally first, with sign-in providing cross-device synchronization, so practice can continue offline.",
-    "cal.locked": "Sign-in required · Single user",
+    "cal.locked": "The full app requires sign-in and is for my personal use.",
     "cal.problem": "From September 2024 to May 2025, I went from about 100 kg to about 65 kg using a spreadsheet. I logged daily intake and weight changes, used them to estimate energy expenditure, then calculated a daily target and adjusted it as I observed the results. After losing the weight, I wanted to maintain it with less daily data entry. I turned the same calculations into an app for quicker logging, automatic targets, and progress updates.",
     "cal.f1": "Today: remaining calories, target, logged intake, latest weight, and a progress ring. Going over the target brings a simple reminder: keep going tomorrow.",
     "cal.f2": "Log a food with a click. Search a food database of about 200 items imported from the original spreadsheet, pin favorites and frequently used foods, or add custom foods.",
@@ -635,7 +645,7 @@ const T = {
     "cal.shot.formula": "The target calculation is visible on the page: 30-day average intake plus a correction from two weight windows gives estimated expenditure, then the daily deficit derived from the monthly goal is subtracted.",
     "cal.shot.body": "Body measurements: measured values, automatically calculated differences, reference cup and bra sizes, and waist-to-hip ratio. Blank fields use the latest measurement.",
     "cal.design": "I kept the spreadsheet’s calculations and show all four steps on the page. When records are incomplete, the target displays a dash and the number of missing days, then appears once the data is complete. Logging takes fewer clicks through pinned foods and reusable recent entries. Dates default to today but remain editable, and Japan-time day boundaries preserve the chosen dates of backdated entries.",
-    "ootd.locked": "Google sign-in required · Allowlisted accounts",
+    "ootd.locked": "The full app requires Google sign-in. Only authorized accounts can access it.",
     "ootd.problem": "I owned more clothes than I could easily find, often bought items I barely wore, and struggled to build outfits around particular pieces. Shopping records and the wardrobe were separate, so purchases, storage locations, wear history, and combinations were hard to connect. I brought them into one record, from purchase imports through storage and daily wear to outfit combinations and cost per wear.",
     "ootd.f1": "Wardrobe catalog and search: each item has an ID such as TOP-0179, category, color, brand, photo, and tags. Search names, IDs, colors, brands, locations, or tags; filter by main group, category, location, or tag; show only unworn items; and browse in casual, newest-added, or recently-worn order.",
     "ootd.f2": "Today’s outfit: the home screen lists recently worn items and seasonal unworn items ordered by recent purchase. Select several and log them together. Each item counts once per day, even after repeated clicks. The wardrobe list and item page also have a one-click wear action.",
@@ -898,7 +908,7 @@ const T = {
     "corp.enter": "ソースコードを見る",
     "sna.enter": "デモを開く",
     "resume.button": "職務経歴書",
-    "aws.locked": "Googleログインが必要 · 現在は本人と少数の友人向け",
+    "aws.locked": "正式版には Google ログインが必要です。現在は私と数人の友人のみが利用できます。",
     "aws.problem": "AWS認定試験の勉強では、中国語、日本語、英語の資料を行き来していました。概念を理解するだけでなく、3言語の用語も覚える必要があります。正誤だけでなく、各選択肢の理由や合格ラインまでの距離を確認し、分からない問題はすぐAIに相談したいと考えました。そこで、自分用の学習アプリをつくり、受ける試験に合わせて問題集を追加しました。現在は7種類の試験に対応しています。",
     "aws.f1": "7種類のAWS認定試験（CLF-C02、SAA-C03、SAP-C02、AIF-C01、AIP-C01、DOP-C02、SCS-C03）に対応。画面上部で切り替え、試験ごとに進捗を保存します。",
     "aws.f2": "言語ごとに問題集を用意しています。多くは日中英の3言語、AIF-C01は中英の2言語です。問題番号と学習進捗は言語ごとに独立しています。",
@@ -922,7 +932,7 @@ const T = {
     "aws.shot.result": "模試の結果：問題数、所要時間、換算スコア、合格ラインを表示。間違えた問題だけ、または全問を振り返れます。",
     "aws.shot.guide": "AIF-C01の中国語学習ガイド：公式試験ガイドに基づいて作成し、章ごとに閲覧できます。",
     "aws.design": "問題集、用語集、解説を同じ画面にまとめ、言語を比べながら具体的な概念に戻れるようにしました。模試には元の問題を使い、受験中は用語解説を隠し、提出後に表示します。スコアは練習用の目安として100〜1000点に換算。進捗はまず端末に保存し、ログイン後は端末間で同期するため、オフラインでも学習を続けられます。",
-    "cal.locked": "ログインが必要 · 個人用",
+    "cal.locked": "正式版はログインが必要で、私個人で使っています。",
     "cal.problem": "2024年9月から2025年5月にかけて、体重を約100kgから約65kgまで減らしました。そのとき使っていたのは表計算です。毎日の摂取量と体重を記録し、その変化から消費量を推定して、減量目標に応じた1日の摂取量を計算し、様子を見ながら調整しました。減量後も記録を続けて体重を維持するため、同じ計算方法をアプリにしました。記録を手軽にし、目標を自動計算し、進み具合をすぐ確認できるようにしています。",
     "cal.f1": "「今日」では、残りの摂取量、目標、記録済みのカロリー、最新の体重、進捗リングを表示します。目標を超えた場合も「明日また続けましょう」と案内します。",
     "cal.f2": "元の表計算から取り込んだ約200種類の食品を検索し、お気に入りやよく使う食品を上部に表示できます。食品をタップして記録し、自分で食品を登録することもできます。",
@@ -941,7 +951,7 @@ const T = {
     "cal.shot.formula": "計算方法：30日の平均摂取量に2期間の体重による補正を加えて消費量を推定し、月間減量目標を1日当たりに換算したエネルギー不足量を引きます。",
     "cal.shot.body": "身体サイズ：実測値からバスト差、参考カップとサイズ、ウエスト・ヒップ比などを計算します。未入力の項目には直近の実測値を使います。",
     "cal.design": "表計算で使っていた方法を引き継ぎ、目標を求める4段階の計算を画面に示しました。データが足りないときは「—」と不足日数を表示し、記録がそろってから目標を出します。よく使う食品の固定表示や最近の記録の再利用で、入力の操作を減らしました。日付は今日を初期値にし、いつでも変更できます。日本時間で日付を区切り、過去の日付で追加した記録も、その日付を保持します。",
-    "ootd.locked": "Googleログインが必要 · 許可リスト方式",
+    "ootd.locked": "正式版には Google ログインが必要です。承認済みのアカウントのみ利用できます。",
     "ootd.problem": "服が多くて見つからない、買っても数回しか着ない、着たい服の組み合わせが思い付かない。購入履歴とクローゼットが別々で、買ったもの、収納場所、着用回数、コーディネートをつなげて見られませんでした。そこで、購入履歴の取り込みから、収納場所、毎日の着用、コーディネート、1回当たりの費用まで、一つの記録にまとめました。",
     "ootd.f1": "各アイテムに番号（TOP-0179など）、分類、色、ブランド、写真、タグを登録します。名前、番号、色、ブランド、場所、タグで検索し、大分類・分類・場所・タグ・未着用で絞り込めます。ランダム、追加順、最近着た順に並べ替えられます。",
     "ootd.f2": "ホームには最近着たものと、今の季節でまだ着ていないものを最近の購入順に表示します。複数選んでまとめて記録でき、同じアイテムは1日1回だけ数えます。衣服の一覧や詳細画面からも、その日の着用を記録できます。",
