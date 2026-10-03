@@ -174,7 +174,7 @@ function render(lang,t) {
     if(FULL_DEMOS[selected]) {
       const app=APPS.find(x=>x.id===selected), copy=DEMO_ENTRY_COPY[lang], url=`${FULL_DEMOS[selected]}&lang=${lang}`;
       const fullUrl=new URL(app.url);fullUrl.searchParams.set('lang',lang);
-      head.querySelector('h1').insertAdjacentHTML('afterend',`<div class="project-demo-hero"><div class="app-entry-links"><a class="enter enter-demo" href="${url}" target="_blank" rel="noopener">${copy.demoEnter}</a><a class="full-app-link" href="${fullUrl.href}" target="_blank" rel="noopener">${copy.demoExit}</a><span class="locked">${t[selected+'.locked']}</span></div></div>`);
+      head.querySelector('h1').insertAdjacentHTML('afterend',`<div class="project-demo-hero" style="--tone:${app.tone};--tint:${app.tint};--paper:${app.paper}"><div class="app-entry-links"><a class="enter enter-demo" href="${url}" target="_blank" rel="noopener">${copy.demoEnter}</a><a class="full-app-link" href="${fullUrl.href}" target="_blank" rel="noopener">${copy.demoExit}</a><span class="locked">${t[selected+'.locked']}</span></div></div>`);
     }
   } else head.querySelector('.page-note').hidden=true;
   const card=id=>{const a=APPS.find(x=>x.id===id), actual=!!SHOTS[id];return `<a class="project-overview-card" href="apps.html?project=${id}">${actual?`<img src="assets/shots/${id}_${id==='aws'?'home':id==='cal'?'today':'wardrobe'}_${lang}.webp" alt="" loading="lazy">`:`<span class="overview-mark" aria-hidden="true">${a.mark}</span>`}<div><h2>${t[id+'.title'].split(' · ')[0]}</h2><p>${t[id+'.desc']}</p><span class="card-link">${SiteNavigation.label(lang,'nav.read')} →</span></div></a>`;};
