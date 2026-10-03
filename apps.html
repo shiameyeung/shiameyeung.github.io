@@ -153,10 +153,10 @@ const APPS = [
             <div class="ui-note">${t['cal.ui.calc']}</div>` ] },
 ];
 
-const FULL_DEMOS = {aws:"https://aws.yotenra.com/?demo=1",cal:"https://yotenra.com/demos/cal/"};
+const FULL_DEMOS = {aws:"https://aws.yotenra.com/?demo=1",cal:"https://yotenra.com/demos/cal/",ootd:"https://yotenra.com/demos/ootd/"};
 const DEMO_ENTRY_COPY = {"ja": {"demoTitle": "体験版・ログイン不要", "demoBody": "サンプルの学習記録を用意しています。問題演習、間違えた問題の復習、模擬試験をすぐに試せます。変更内容はこのページ内でのみ保持され、ページを再読み込みするとサンプルの状態に戻ります。", "demoExit": "正式版を開く", "demoEnter": "ログインなしで今すぐ試す"}, "en": {"demoTitle": "Demo · No sign-in required", "demoBody": "The demo includes sample study records. You can answer questions, review incorrect answers, and take mock exams right away. Changes are kept only on this page; refreshing the page restores the sample data.", "demoExit": "Open full app", "demoEnter": "Try it now — no sign-in required"}, "zh": {"demoTitle": "体验版 · 无需登录", "demoBody": "已预置学习记录，可以直接答题、复习错题和参加模拟考试。改动只保留在当前页面，刷新后恢复示例数据。", "demoEnter": "立即体验，无需登录", "demoExit": "打开正式版"}};
 
-const DEMO_NOTICES = {cal:{"zh": "使用示例数据体验饮食、体重和身体尺寸记录。修改仅保留在当前页面内存中，刷新页面后会恢复初始数据。记录不会上传。", "en": "Use sample data to try logging food, weight, and body measurements. Changes stay on this page and reset when you reload. Records are not uploaded.", "ja": "サンプルデータで食事・体重・身体サイズの記録を試せます。変更はこのページ内でのみ保持され、再読み込みすると初期状態に戻ります。記録はアップロードされません。"}};
+const DEMO_NOTICES = {"cal": {"zh": "使用示例数据体验饮食、体重和身体尺寸记录。修改仅保留在当前页面内存中，刷新页面后会恢复初始数据。记录不会上传。", "en": "Use sample data to try logging food, weight, and body measurements. Changes stay on this page and reset when you reload. Records are not uploaded.", "ja": "サンプルデータで食事・体重・身体サイズの記録を試せます。変更はこのページ内でのみ保持され、再読み込みすると初期状態に戻ります。記録はアップロードされません。"}, "ootd": {"zh": "体验版 · 30 件衣物与 20 件彩妆。名称、品牌与商品图来自真实档案；价格、日期、穿着记录和位置均为演示数据。所有修改只保留在当前页面内存，刷新或恢复样例即可还原。记录不会上传。", "en": "Demo · 30 clothing items and 20 makeup items. Names, brands and product photos come from real records. Prices, dates, wear records and locations are demo data. Changes are kept only in this page's memory. Refresh or reset the demo to restore the sample. Records are not uploaded.", "ja": "体験版 · 衣類30点・コスメ20点。名前・ブランド・商品画像は実際の登録情報です。価格・日付・着用記録・場所はデモ用データです。変更はこのページのメモリ内だけに保持されます。再読み込みかデモのリセットで元に戻ります。記録はアップロードされません。"}};
 
 const SHOTS={aws:['home','mock','modes','question','glossary','nav','result','guide'],cal:['today','trend','formula','daily','body'],ootd:['wardrobe','today','looks','places','item','spending']};
 function render(lang,t) {

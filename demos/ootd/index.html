@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'none'; font-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="OOTD · 我的衣橱">OOTD · 我的衣橱</title>
+<meta name="theme-color" content="#FBF8F5">
+<link rel="icon" type="image/svg+xml" href="static/favicon.svg">
+<!-- 站点在 Cloudflare Access 后面：manifest 请求默认不带登录态，会被挡到登录页，要显式带上 -->
+
+<!-- iOS 加到主屏幕只认 PNG，SVG 图标会被忽略、退化成网页截图 -->
+<link rel="apple-touch-icon" href="static/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="OOTD">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="static/style.css">
+<link rel="stylesheet" href="static/workflows.css">
+<link rel="stylesheet" href="static/detail-flow.css">
+<link rel="stylesheet" href="static/compose-flow.css">
+<link rel="stylesheet" href="static/attention-flow.css">
+<link rel="stylesheet" href="static/today.css">
+<link rel="stylesheet" href="static/spending.css">
+<link rel="stylesheet" href="static/storage.css">
+<link rel="stylesheet" href="static/refinements.css">
+<link rel="stylesheet" href="static/demo.css">
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="跳到主要内容">跳到主要内容</a>
+<div id="app">
+  <header class="top">
+    <div class="brand"><a class="logo" href="#/items" aria-label="OOTD 首页" data-i18n-aria="OOTD 首页"><img src="static/ootd-mark.svg" alt="OOTD" width="112" height="50"></a><div><div class="brand-name" data-i18n="我的衣橱">我的衣橱</div><div class="muted" data-i18n="让每一件喜欢，都有出场机会">让每一件喜欢，都有出场机会</div></div></div>
+    <div class="top-state"><div id="top-status" class="small"></div><button id="sync-status" type="button" class="small sync-status-button" aria-haspopup="dialog" aria-controls="sync-dialog"><span role="status" aria-live="polite" data-i18n="正在确认保存状态…">正在确认保存状态…</span></button></div>
+  </header>
+  <div class="shell">
+    <nav class="nav" aria-label="衣橱导航" data-i18n-aria="衣橱导航"><div class="nav-label" data-i18n="我的日常收藏">我的日常收藏</div>
+      <a href="#/items" data-nav="items" data-i18n="我的衣橱">我的衣橱</a>
+      <a href="#/today" data-nav="today" data-i18n="今天穿了">今天穿了</a>
+      <a href="#/looks" data-nav="looks" data-i18n="搭配本">搭配本</a>
+      <a href="#/places" data-nav="places" data-i18n="收纳位置">收纳位置</a>
+      <a href="#/history" data-nav="history" data-i18n="穿着记录">穿着记录</a>
+      <a href="#/attention" data-nav="attention" data-i18n="待补资料">待补资料</a>
+      <a href="#/spending" data-nav="spending" data-i18n="消费回顾">消费回顾</a>
+      <a href="#/import" data-nav="import" data-i18n="购买导入">购买导入</a>
+      <div class="nav-note"><span aria-hidden="true">✧</span><strong data-i18n="穿搭灵感，来自衣橱">穿搭灵感，来自衣橱</strong><p data-i18n="重遇那些已经拥有的喜欢。">重遇那些已经拥有的喜欢。</p><a href="#/looks"><span data-i18n="翻翻搭配本">翻翻搭配本</span> <span aria-hidden="true">↗</span></a></div>
+    </nav>
+    <main id="main" class="main" tabindex="-1"><div class="empty" data-i18n="正在加载…">正在加载…</div></main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</div>
+<script src="static/i18n-ui.js"></script>
+<script src="static/i18n-meta.js"></script>
+<script src="static/i18n.js"></script>
+<script>window.OOTD_DEMO=true;</script>
+<script src="static/demo-data.js"></script>
+<script src="static/demo-adapter.js"></script>
+<script src="static/app.js"></script>
+<script src="static/ui.js"></script>
+
+<script src="static/makeup-palettes.js"></script>
+<script src="static/today.js"></script>
+<script src="static/items.js"></script>
+<script src="static/detail.js"></script>
+<script src="static/form.js"></script>
+<script src="static/places.js"></script>
+<script src="static/history.js"></script>
+<script src="static/looks.js"></script>
+<script src="static/compose.js"></script>
+<script src="static/import.js"></script>
+<script src="static/attention.js"></script>
+<script src="static/spending.js"></script>
+</body>
+</html>

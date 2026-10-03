@@ -1,0 +1,33 @@
+.today-panel{margin:0 0 18px;padding:20px 22px;border:1px solid #ecdfe8;border-radius:26px;background:linear-gradient(180deg,#fffaf7,#fdf4f8)}
+.today-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px}
+.today-head h3{display:flex;align-items:center;gap:8px;margin:0 0 3px}
+.today-head h3 .icon{width:19px;height:19px;color:#5d8b78}
+.today-head p{margin:0;font-size:13px}
+.today-done{font-size:13px;color:#5d8b78;white-space:nowrap;padding-top:4px}
+.today-group+.today-group{margin-top:14px}
+.today-group-head{display:flex;align-items:baseline;gap:9px;margin-bottom:8px}
+.today-group-head .small{color:var(--muted)}
+.today-row{display:flex;gap:11px;overflow-x:auto;padding:2px 2px 8px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.today-pick{flex:0 0 84px;display:flex;flex-direction:column;gap:6px;padding:0;border:0;background:none;cursor:pointer;text-align:left;scroll-snap-align:start;color:inherit}
+.today-photo{position:relative;display:grid;place-items:center;width:84px;height:96px;border-radius:17px;overflow:hidden;background:#f4eef3;border:2px solid transparent;transition:border-color .12s}
+.today-photo img{width:100%;height:100%;object-fit:cover}
+.today-pick.on .today-photo{border-color:#7d5474}
+.today-check{position:absolute;inset:0;display:grid;place-items:center;background:#4a2c4499}
+.today-check .icon{width:27px;height:27px;color:#fff}
+.today-name{font-size:11.5px;line-height:1.45;max-height:34px;overflow:hidden;color:var(--muted)}
+.today-pick.on .today-name{color:inherit;font-weight:600}
+.today-bar{display:flex;align-items:center;gap:11px;margin-top:14px;padding-top:14px;border-top:1px solid #eddfe8}
+.today-bar span{font-weight:600}
+.today-bar button{border-radius:14px;padding:10px 17px}
+.today-more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;text-decoration:none}
+.never-worn-toggle{display:inline-flex;align-items:center;gap:7px;font-size:13px;padding:9px 13px;border:1px solid #e6d9e2;border-radius:14px;background:#fffdfe;cursor:pointer;white-space:nowrap}
+.never-worn-toggle input{accent-color:#7d5474}
+@media(max-width:600px){
+  .today-panel{padding:16px 14px;border-radius:22px;margin-bottom:14px}
+  .today-head{display:block}
+  .today-done{padding-top:6px}
+  .today-pick{flex-basis:76px}
+  .today-photo{width:76px;height:88px}
+  .today-bar{position:sticky;bottom:0;flex-wrap:wrap;background:#fdf4f8;margin:12px -14px -6px;padding:12px 14px;border-radius:0 0 22px 22px}
+  .today-bar button{flex:1}
+}
