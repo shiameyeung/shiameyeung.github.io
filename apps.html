@@ -153,8 +153,10 @@ const APPS = [
             <div class="ui-note">${t['cal.ui.calc']}</div>` ] },
 ];
 
-const FULL_DEMOS = {aws:"https://aws.yotenra.com/?demo=1"};
+const FULL_DEMOS = {aws:"https://aws.yotenra.com/?demo=1",cal:"https://yotenra.com/demos/cal/"};
 const DEMO_ENTRY_COPY = {"ja": {"demoTitle": "体験版・ログイン不要", "demoBody": "サンプルの学習記録を用意しています。問題演習、間違えた問題の復習、模擬試験をすぐに試せます。変更内容はこのページ内でのみ保持され、ページを再読み込みするとサンプルの状態に戻ります。", "demoExit": "正式版を開く", "demoEnter": "ログインなしで今すぐ試す"}, "en": {"demoTitle": "Demo · No sign-in required", "demoBody": "The demo includes sample study records. You can answer questions, review incorrect answers, and take mock exams right away. Changes are kept only on this page; refreshing the page restores the sample data.", "demoExit": "Open full app", "demoEnter": "Try it now — no sign-in required"}, "zh": {"demoTitle": "体验版 · 无需登录", "demoBody": "已预置学习记录，可以直接答题、复习错题和参加模拟考试。改动只保留在当前页面，刷新后恢复示例数据。", "demoEnter": "立即体验，无需登录", "demoExit": "打开正式版"}};
+
+const DEMO_NOTICES = {cal:{"zh": "使用示例数据体验饮食、体重和身体尺寸记录。修改仅保留在当前页面内存中，刷新页面后会恢复初始数据。记录不会上传。", "en": "Use sample data to try logging food, weight, and body measurements. Changes stay on this page and reset when you reload. Records are not uploaded.", "ja": "サンプルデータで食事・体重・身体サイズの記録を試せます。変更はこのページ内でのみ保持され、再読み込みすると初期状態に戻ります。記録はアップロードされません。"}};
 
 const SHOTS={aws:['home','mock','modes','question','glossary','nav','result','guide'],cal:['today','trend','formula','daily','body'],ootd:['wardrobe','today','looks','places','item','spending']};
 function render(lang,t) {
@@ -174,7 +176,7 @@ function render(lang,t) {
     head.querySelector('.page-note').hidden=true;
     document.title=t[selected+'.title']+' — '+(lang==='en'?'Yo Tenra':'楊 天楽');
     if(FULL_DEMOS[selected]) {
-      const app=APPS.find(x=>x.id===selected), copy=DEMO_ENTRY_COPY[lang], url=`${FULL_DEMOS[selected]}&lang=${lang}`;
+      const app=APPS.find(x=>x.id===selected), copy=DEMO_ENTRY_COPY[lang], demoUrl=new URL(FULL_DEMOS[selected]);demoUrl.searchParams.set("lang",lang);const url=demoUrl.href;
       const fullUrl=new URL(app.url);fullUrl.searchParams.set('lang',lang);
       head.querySelector('h1').insertAdjacentHTML('afterend',`<div class="project-demo-hero" style="--tone:${app.tone};--tint:${app.tint};--paper:${app.paper}"><div class="app-entry-links"><a class="enter enter-demo" href="${url}" target="_blank" rel="noopener">${copy.demoEnter}</a><a class="enter enter-secondary" href="${fullUrl.href}" target="_blank" rel="noopener">${copy.demoExit}</a></div><p class="app-access-note">${t[selected+'.locked']}</p></div>`);
       document.body.insertAdjacentHTML('beforeend',`<a class="enter enter-demo demo-floating-cta" href="${url}" target="_blank" rel="noopener" style="--tone:${app.tone};--tint:${app.tint}">${copy.demoEnter}</a>`);
@@ -189,7 +191,7 @@ function render(lang,t) {
     const a=APPS.find(x=>x.id===id), actual=!!SHOTS[id], demo=FULL_DEMOS[id], demoCopy=DEMO_ENTRY_COPY[lang];
     return `<section class="app" id="${id}" style="--tint:${a.tint};--tone:${a.tone};--paper:${a.paper}">
     <div class="app-head"><div class="app-title"><span class="app-badge" aria-hidden="true">${a.mark}</span><div><p class="host">${a.host}</p></div></div>${demo?'':`<div class="app-entry-links"><a class="enter" href="${a.url}" target="_blank" rel="noopener">${t['enter']} ↗</a>${a.locked?`<span class="locked">${t[id+'.locked']||t['locked']}</span>`:''}</div>`}</div>
-    ${demo?`<aside class="full-demo-notice"><strong>${demoCopy.demoTitle}</strong><p>${demoCopy.demoBody}</p></aside>`:''}
+    ${demo?`<aside class="full-demo-notice"><strong>${demoCopy.demoTitle}</strong><p>${DEMO_NOTICES[id]?.[lang]||demoCopy.demoBody}</p></aside>`:''}
 
     ${actual?`<h2 class="app-section-heading" id="project-problem">${t['sec.problem']}</h2><p>${t[id+'.problem']}</p><h2 class="app-section-heading" id="project-features" data-rail-key="nav.features">${t['sec.features']}</h2><ul class="feature-list">${Array.from({length:id==='aws'?12:10},(_,i)=>`<li>${t[id+'.f'+(i+1)]}</li>`).join('')}</ul>${demo?'':`<h2 class="app-section-heading" id="project-demo" data-rail-key="nav.demo">${t['sec.demo']}</h2><div class="demo-grid" id="demos-${id}">${AppDemos.html(id,t)}</div>`}<h2 class="app-section-heading" id="project-screens" data-rail-key="nav.screens">${t['sec.shots']}</h2><div class="shots">${SHOTS[id].map(v=>{const file=`assets/shots/${id}_${v}_${v==='guide'?'zh':lang}.webp`;return `<figure><a href="${file}" target="_blank" rel="noopener"><img src="${file}" loading="lazy" alt="${String(t[id+'.shot.'+v]).replaceAll('&','&amp;').replaceAll('"','&quot;')}" data-shot="${id}_${v}"></a><figcaption>${t[id+'.shot.'+v]}</figcaption></figure>`;}).join('')}</div><h2 class="app-section-heading" id="project-design" data-rail-key="nav.design">${t['sec.design']}</h2><p>${t[id+'.design']}</p><p class="stack"><b>${t['sec.stack']}</b> · ${t[id+'.stack']}</p>`:
     `<div class="scenes">${a.scenes.map((f,i)=>`<article class="scene"><div class="ui">${f(t)}</div><div class="scene-body"><span class="scene-step">${t['story.'+(i+1)]}</span><p class="scene-cap">${t[id+'.s'+(i+1)]}</p></div></article>`).join('')}</div>`}</section>`;
