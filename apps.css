@@ -105,11 +105,18 @@
 .project-demo-hero .locked{text-align:left;justify-content:flex-start}
 
 /* Keep both entry actions typographically consistent; separate access notes. */
-.project-demo-hero .enter,.demo-floating-cta{font-family:inherit;font-size:15px;font-weight:600;line-height:1.45;letter-spacing:normal;min-height:46px;box-sizing:border-box;padding:11px 18px;justify-content:center}
+.project-demo-hero .enter{font-family:inherit;font-size:15px;font-weight:600;line-height:1.45;letter-spacing:normal;min-height:46px;box-sizing:border-box;padding:11px 18px;justify-content:center}
 .enter-secondary{color:var(--tone);background:transparent;border-color:var(--line);white-space:normal;text-align:center}
 .enter-secondary:hover{background:var(--paper);border-color:var(--tone)}
 .app-access-note{display:block;font-size:13px!important;line-height:1.7;color:var(--muted);margin:14px 0 0!important;max-width:48em!important}
-.demo-floating-cta{position:fixed;right:max(24px,env(safe-area-inset-right));bottom:max(24px,env(safe-area-inset-bottom));z-index:45;max-width:300px;border-radius:999px;box-shadow:0 6px 22px #241b4930;white-space:normal;text-align:center;text-decoration:none}
-.has-demo-cta{padding-bottom:90px}
-@media(max-width:650px){.project-demo-hero .app-entry-links{align-items:stretch}.project-demo-hero .enter{flex:1 1 220px}.demo-floating-cta{right:18px;bottom:max(18px,env(safe-area-inset-bottom));max-width:calc(100vw - 36px);font-size:14px;padding:11px 17px}.has-demo-cta{padding-bottom:100px}}
-@media print{.demo-floating-cta{display:none}.has-demo-cta{padding-bottom:0}}
+/* Pin the original entry row; its slot preserves the hero layout. */
+.project-demo-slot{min-width:0}
+.project-demo-slot .app-entry-links{padding:12px 0}
+.project-demo-slot.is-pinned .app-entry-links{position:fixed;top:calc(var(--nav-height) + var(--page-nav-height));left:var(--entry-left);width:var(--entry-width);z-index:24;background:var(--bg);box-shadow:0 1px 0 var(--line)}
+@media(max-width:650px){
+  .project-demo-hero .app-entry-links{align-items:stretch;flex-wrap:nowrap;gap:8px}
+  .project-demo-hero .enter{font-size:13px;padding:10px 12px;min-width:0}
+  .project-demo-hero .enter-demo{flex:2 1 0}
+  .project-demo-hero .enter-secondary{flex:1 1 0}
+}
+@media print{.project-demo-slot{min-height:0!important}.project-demo-slot.is-pinned .app-entry-links{position:static;width:auto;box-shadow:none}}

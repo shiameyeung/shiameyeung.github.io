@@ -118,7 +118,7 @@ window.SiteNavigation = (() => {
   const link = (href, text, current = false) => `<a href="${escape(href)}"${current ? ' aria-current="page"' : ''}>${escape(text)}</a>`;
   const desktop = matchMedia('(min-width: 1280px)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  let language = 'ja', sections = [], signature = '', scrollFrame = 0, refreshFrame = 0, watching = false;
+  let language = 'ja', sections = [], signature = '', scrollFrame = 0, refreshFrame = 0, watching = false, layoutObserver = null;
 
   const icons = {
     top: '<path d="m5 10 7-7 7 7M12 3v18"/>',
@@ -165,15 +165,45 @@ window.SiteNavigation = (() => {
   }
 
   function syncHeaderHeight() {
-    const header = document.getElementById('site-header');
-    if (header) document.documentElement.style.setProperty('--nav-height', `${Math.ceil(header.getBoundingClientRect().height)}px`);
+    const root = document.documentElement;
+    const headerHeight = Math.ceil(document.getElementById('site-header')?.getBoundingClientRect().height || 0);
+    const localHeight = Math.ceil(document.getElementById('page-navigation')?.getBoundingClientRect().height || 0);
+    root.style.setProperty('--nav-height', `${headerHeight}px`);
+    root.style.setProperty('--page-nav-height', `${localHeight}px`);
+    const slot = document.querySelector('.project-demo-slot');
+    const entries = slot?.querySelector('.app-entry-links');
+    if (!entries) { root.style.setProperty('--demo-entry-height', '0px'); return; }
+    const rect = slot.getBoundingClientRect();
+    const pinned = rect.top <= headerHeight + localHeight;
+    slot.style.setProperty('--entry-left', `${rect.left}px`);
+    const wrap = document.querySelector('.wrap');
+    const wrapStyle = getComputedStyle(wrap);
+    const contentWidth = wrap.getBoundingClientRect().width - parseFloat(wrapStyle.paddingLeft) - parseFloat(wrapStyle.paddingRight);
+    slot.style.setProperty('--entry-width', `${contentWidth}px`);
+    slot.classList.toggle('is-pinned', pinned);
+    const entryHeight = Math.ceil(entries.getBoundingClientRect().height);
+    slot.style.minHeight = pinned ? `${entryHeight}px` : '';
+    // Reserve the eventual pinned height even before an anchor jump from the hero.
+    root.style.setProperty('--demo-entry-height', `${entryHeight}px`);
+  }
+
+  function observeLayout() {
+    if (!window.ResizeObserver) return;
+    if (!layoutObserver) layoutObserver = new ResizeObserver(() => { syncHeaderHeight(); onScroll(); });
+    layoutObserver.disconnect();
+    ['#site-header', '#page-navigation', '.project-demo-slot .app-entry-links'].forEach(selector => {
+      const element = document.querySelector(selector);
+      if (element) layoutObserver.observe(element);
+    });
   }
 
   function updateCurrent() {
     scrollFrame = 0;
+    syncHeaderHeight();
     const rail = document.getElementById('page-outline');
     if (!rail) return;
-    const line = (document.getElementById('site-header')?.getBoundingClientRect().bottom || 0) + (desktop.matches ? 32 : 92);
+    const rootStyle = document.documentElement.style;
+    const line = ['--nav-height', '--page-nav-height', '--demo-entry-height'].reduce((sum, key) => sum + (parseFloat(rootStyle.getPropertyValue(key)) || 0), 0) + (desktop.matches ? 32 : 92);
     let current = null;
     sections.forEach(item => { if (item.target.getBoundingClientRect().top <= line) current = item; });
     if (scrollY > 0 && innerHeight + scrollY >= document.documentElement.scrollHeight - 8) current = sections.at(-1);
@@ -253,7 +283,6 @@ window.SiteNavigation = (() => {
       if (records.some(record => !(record.target.nodeType === 1 ? record.target : record.target.parentElement)?.closest('#page-outline,#page-navigation,#reading-next'))) queueRefresh();
     });
     observer.observe(document.querySelector('.wrap'), {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['hidden', 'data-rail-label', 'data-rail-key']});
-    if (window.ResizeObserver) new ResizeObserver(syncHeaderHeight).observe(document.getElementById('site-header'));
     addEventListener('load', () => {
       syncHeaderHeight();
       try { scrollToTarget(decodeURIComponent(location.hash.slice(1))); } catch (_) {}
@@ -318,6 +347,7 @@ window.SiteNavigation = (() => {
     syncHeaderHeight();
     refresh();
     watchContent();
+    observeLayout();
     requestAnimationFrame(() => {
       syncHeaderHeight();
       try { scrollToTarget(decodeURIComponent(location.hash.slice(1))); } catch (_) {}

@@ -157,9 +157,11 @@ window.W = (() => {
     document.querySelectorAll('[data-i18n]').forEach(el => el.textContent=L.t(el.dataset.i18n));
     document.querySelectorAll('[data-i18n-aria]').forEach(el => el.setAttribute('aria-label',L.t(el.dataset.i18nAria)));
     document.title=L.t('OOTD · 我的衣橱');
+    const projectUrl=`https://yotenra.com/apps.html?project=ootd&lang=${L.lang}`;
+    document.querySelectorAll('[data-project-return]').forEach(link=>link.href=projectUrl);
     if (window.OOTD_DEMO) {
       const banner=document.createElement('aside'); banner.className='demo-banner';
-      banner.innerHTML=L.html`<div><strong>体验版 · 30 件衣物与 20 件彩妆</strong><p>名称、品牌与商品图来自真实档案；价格、日期、穿着记录和位置均为演示数据。</p><p>所有修改只保留在当前页面内存，刷新或恢复样例即可还原。</p></div><div class="actions"><button type="button" id="reset-demo">恢复样例</button><a href="https://yotenra.com">返回作品网站</a><a href="https://ootd.yotenra.com/?lang=${L.lang}">在正式版中登录</a></div>`;
+      banner.innerHTML=L.html`<div><strong>体验版 · 30 件衣物与 20 件彩妆</strong><p>名称、品牌与商品图来自真实档案；价格、日期、穿着记录和位置均为演示数据。</p><p>所有修改只保留在当前页面内存，刷新或恢复样例即可还原。</p></div><div class="actions"><button type="button" id="reset-demo">恢复样例</button><a href="${projectUrl}">回到项目介绍</a><a href="https://ootd.yotenra.com/?lang=${L.lang}">在正式版中登录</a></div>`;
       document.body.prepend(banner);
       document.querySelector('#reset-demo').onclick=()=>location.reload();
       const syncButton=document.querySelector('#sync-status'); syncButton.disabled=true;

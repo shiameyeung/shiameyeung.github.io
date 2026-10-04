@@ -12,8 +12,8 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/kiwi-touch-icon.png?v=20261002-kiwi2">
 <link rel="stylesheet" href="base.css">
 
-<link rel="stylesheet" href="apps.css?v=20261003-demo3">
-<link rel="stylesheet" href="navigation.css?v=20261002-kiwi6">
+<link rel="stylesheet" href="apps.css?v=20261004-sticky1">
+<link rel="stylesheet" href="navigation.css?v=20261004-sticky1">
 </head>
 <body>
 <div class="wrap">
@@ -43,7 +43,7 @@
   </footer>
 </div>
 
-<script src="navigation.js?v=20261002-kiwi2"></script>
+<script src="navigation.js?v=20261004-sticky1"></script>
 <script src="shared.js"></script>
 <script src="email-copy.js?v=20261002-kiwi2"></script>
 <script src="apps-demo.js"></script>
@@ -168,8 +168,6 @@ function render(lang,t) {
   const order=selected?[selected]:[];
   const head=document.querySelector('.page-head');
   head.querySelector('.project-demo-hero')?.remove();
-  document.querySelector('.demo-floating-cta')?.remove();
-  document.body.classList.toggle('has-demo-cta',Boolean(FULL_DEMOS[selected]));
   if(selected) {
     head.querySelector('h1').textContent=t[selected+'.title'];
     head.querySelector('[data-t="page.lead"]').textContent=t[selected+'.desc'];
@@ -178,8 +176,7 @@ function render(lang,t) {
     if(FULL_DEMOS[selected]) {
       const app=APPS.find(x=>x.id===selected), copy=DEMO_ENTRY_COPY[lang], demoUrl=new URL(FULL_DEMOS[selected]);demoUrl.searchParams.set("lang",lang);const url=demoUrl.href;
       const fullUrl=new URL(app.url);fullUrl.searchParams.set('lang',lang);
-      head.querySelector('h1').insertAdjacentHTML('afterend',`<div class="project-demo-hero" style="--tone:${app.tone};--tint:${app.tint};--paper:${app.paper}"><div class="app-entry-links"><a class="enter enter-demo" href="${url}" target="_blank" rel="noopener">${copy.demoEnter}</a><a class="enter enter-secondary" href="${fullUrl.href}" target="_blank" rel="noopener">${copy.demoExit}</a></div><p class="app-access-note">${t[selected+'.locked']}</p></div>`);
-      document.body.insertAdjacentHTML('beforeend',`<a class="enter enter-demo demo-floating-cta" href="${url}" target="_blank" rel="noopener" style="--tone:${app.tone};--tint:${app.tint}">${copy.demoEnter}</a>`);
+      head.querySelector('h1').insertAdjacentHTML('afterend',`<div class="project-demo-hero" style="--tone:${app.tone};--tint:${app.tint};--paper:${app.paper}"><div class="project-demo-slot"><div class="app-entry-links"><a class="enter enter-demo" href="${url}" target="_blank" rel="noopener">${copy.demoEnter}</a><a class="enter enter-secondary" href="${fullUrl.href}" target="_blank" rel="noopener">${copy.demoExit}</a></div></div><p class="app-access-note">${t[selected+'.locked']}</p></div>`);
     }
   } else head.querySelector('.page-note').hidden=true;
   const card=id=>{const a=APPS.find(x=>x.id===id), actual=!!SHOTS[id];return `<a class="project-overview-card" href="apps.html?project=${id}">${actual?`<img src="assets/shots/${id}_${id==='aws'?'home':id==='cal'?'today':'wardrobe'}_${lang}.webp" alt="" loading="lazy">`:`<span class="overview-mark" aria-hidden="true">${a.mark}</span>`}<div><h2>${t[id+'.title'].split(' · ')[0]}</h2><p>${t[id+'.desc']}</p><span class="card-link">${SiteNavigation.label(lang,'nav.read')} →</span></div></a>`;};
