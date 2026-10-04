@@ -11,8 +11,14 @@
   function reset() {
     (blobs || []).forEach(url => URL.revokeObjectURL(url)); blobs = [];
     model = copy(seed); model.meta.today = day();
+    model.items.forEach(item=>{
+      const name=window.OOTD_DEMO_CONTENT?.item_names?.[item.id]?.[window.L?.lang];
+      if(name){item.name=name;item.display_name=name;}
+    });
     model.locations.forEach(location=>{location.name=sampleName(location.name);});
     model.outfits.forEach(outfit=>{outfit.name=sampleName(outfit.name);});
+    const itemNames=new Map(model.items.map(item=>[item.id,item.display_name||item.name]));
+    model.actions.forEach(action=>action.items.forEach(item=>{if(itemNames.has(item.item_id))item.name=itemNames.get(item.item_id);}));
     nextItem = Math.max(0,...model.items.map(i=>i.id))+1;
     nextAction = Math.max(0,...model.actions.map(a=>a.action_id))+1;
     nextOutfit = Math.max(0,...model.outfits.map(o=>o.id))+1;

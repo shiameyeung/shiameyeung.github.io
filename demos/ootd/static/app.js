@@ -173,7 +173,8 @@ window.W = (() => {
       $('#top-status').textContent = L.t('今天 ') + state.meta.today;
     } catch (e) { $('#main').innerHTML = L.html`<div class="empty">连不上服务：${esc(e.message)}</div>`; return; }
     window.addEventListener('hashchange', render);
-    render();
+    await render();
+    if (window.OOTD_DEMO) window.OOTDDemoGuide?.start();
   }
   window.addEventListener('DOMContentLoaded', start);
 

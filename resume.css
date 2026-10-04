@@ -9,3 +9,5 @@
   .resume-grid{grid-template-columns:1fr;padding-bottom:32px}
   .resume-card{padding:24px}
 }
+
+.resume-use{font-size:14px;line-height:1.8;color:var(--muted);margin:0 0 16px}.resume-availability{font-size:15px;line-height:1.8;margin:0 0 28px;border-left:3px solid var(--accent);padding:10px 16px}.resume-pages{font-size:12px;color:var(--muted);margin:0 0 22px}

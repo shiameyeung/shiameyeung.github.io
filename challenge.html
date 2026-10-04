@@ -1,14 +1,15 @@
 <!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>最も難しかった開発経験 — 楊 天楽</title><meta name="description" content="BaseconnectでClaudeを調査・開発に活用。データ修正を再利用できるtransformにし、本番パイプラインも改善。記録と検証を支える自分用のダッシュボードをつくりました。"><meta property="og:title" content="最も難しかった開発経験 — 楊 天楽"><meta property="og:description" content="BaseconnectでClaudeを調査・開発に活用。データ修正を再利用できるtransformにし、本番パイプラインも改善。記録と検証を支える自分用のダッシュボードをつくりました。"><meta property="og:type" content="article"><meta property="og:url" content="https://yotenra.com/challenge.html"><link rel="stylesheet" href="base.css">
-<link rel="stylesheet" href="apps.css"><link rel="stylesheet" href="work.css"><link rel="stylesheet" href="challenge.css"><link rel="stylesheet" href="navigation.css?v=20261004-sticky1">
+<link rel="stylesheet" href="apps.css?v=20261004-review2"><link rel="stylesheet" href="work.css?v=20261004-review2"><link rel="stylesheet" href="challenge.css?v=20261004-review2"><link rel="stylesheet" href="navigation.css?v=20261004-review2">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/brand/kiwi-favicon.png?v=20261002-kiwi2">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/kiwi-touch-icon.png?v=20261002-kiwi2">
-</head><body><div class="wrap"><nav class="langbar" aria-label="Language"><button type="button" data-lang="zh" lang="zh-Hans">简体中文</button><button type="button" data-lang="en" lang="en">English</button><button type="button" data-lang="ja" lang="ja">日本語</button></nav><a href="index.html" class="back" data-t="back"></a><header class="page-head mascot-page-head"><h1 data-t="page.title"></h1><p data-t="page.lead"></p><img class="page-mascot" src="assets/brand/kiwi-curious.png?v=20261002-kiwi2" width="256" height="256" alt="" aria-hidden="true"></header><main><section id="summary" class="summary"><p data-t="tldr"></p><p data-t="tldr.more"></p></section><div id="facts" class="facts"></div><div id="article"></div></main><footer><span data-t="footer.left"></span><span data-t="footer.right"></span></footer></div><script src="navigation.js?v=20261004-sticky1"></script>
+</head><body><div class="wrap"><nav class="langbar" aria-label="Language"><button type="button" data-lang="zh" lang="zh-Hans">简体中文</button><button type="button" data-lang="en" lang="en">English</button><button type="button" data-lang="ja" lang="ja">日本語</button></nav><a href="index.html" class="back" data-t="back"></a><header class="page-head mascot-page-head"><h1 data-t="page.title"></h1><p data-t="page.lead"></p><img class="page-mascot" src="assets/brand/kiwi-curious.png?v=20261002-kiwi2" width="256" height="256" alt="" aria-hidden="true"></header><main><section id="summary" class="summary"><p data-t="tldr"></p><p data-t="tldr.more"></p></section><section id="featured-case" class="featured-case" data-rail-exclude></section><p class="metric-definition" data-t="metric.scope"></p><p class="metric-definition" data-t="metric.formula"></p><details id="full-process" class="full-process"><summary data-t="details.label"></summary><div id="facts" class="facts"></div><div id="article"></div></details></main><footer><span data-t="footer.left"></span><span data-t="footer.right"></span></footer></div><script src="navigation.js?v=20261004-review2"></script>
 <script src="shared.js"></script>
 <script src="email-copy.js?v=20261002-kiwi2"></script><script>
 function render(lang,t){
   document.getElementById('summary').dataset.railLabel=t['nav.summary'];
   document.getElementById('summary').dataset.railIcon='work';
   document.getElementById('summary').dataset.railKey='chapter.summary';
+  document.getElementById('featured-case').innerHTML=`<h2>${t['feature.title']}</h2><p>${t['feature.problem']}</p><p>${t['feature.decision']}</p><p class="feature-result">${t['feature.result']}</p><p class="feature-roles">${t['feature.roles']}</p><figure class="equivalent-example"><figcaption>${t['example.title']}</figcaption><p>${t['example.before']}</p><span aria-hidden="true">↓</span><p>${t['example.after']}</p><small>${t['example.note']}</small></figure>`;
   const chapterKeys=['context','workflow','records','tasks','dashboard','repair','tradeoffs','results','approach'];
   document.getElementById('facts').innerHTML=['stack','team','role','content','links'].map(x=>`<div><h2>${t['facts.'+x+'.t']}</h2><p>${t['facts.'+x+'.b']}</p></div>`).join('');
   const paragraphs=(n,count)=>Array.from({length:count},(_,i)=>`<p>${t[`s${n}.p${i+1}`]}</p>`).join('');
@@ -20,10 +21,14 @@ function render(lang,t){
     3:figure(t['fig.trace'],flow(['criteria','pr','verify','comment','log','next'])),
     5:figure(t['fig.dashboard'],`<p class="figure-note">${t['fig.example']}</p><div class="dashboard-preview"><table><thead><tr>${['task','stage','action','owner'].map(x=>`<th>${t['fig.'+x]}</th>`).join('')}</tr></thead><tbody>${['A','B'].map(x=>`<tr>${['task','stage','action'].map(k=>`<td>${t['fig.'+k+x]}</td>`).join('')}<td>${t['fig.me']}</td></tr>`).join('')}</tbody></table><div class="dashboard-widgets"><div><b>${t['fig.acceptance']}</b>${['check1','check2','check3'].map(x=>`<p>✓ ${t['fig.'+x]}</p>`).join('')}</div><div><b>${t['fig.rules']}</b><p>${t['fig.rule']} A · 12 → 8 → 3</p><p>${t['fig.rule']} B · 9 → 5 → 2</p></div></div></div>`),
     6:figure(t['fig.fix']+' / '+t['fig.source'],`<div class="two-tracks"><div><strong>${t['fig.fix']}</strong><p>${t['fig.transform']}</p></div><div><strong>${t['fig.source']}</strong><p>${t['fig.mirror']}</p></div></div><p class="figure-note">${t['fig.future']}</p>${flow(['read','dry','backup','execute','after'])}`),
-    8:figure(t['fig.period'],`<div class="result-stats"><strong>190 PR</strong><strong>38</strong><strong>40%+ → 85%</strong><strong>30%+ → 75%</strong></div><p class="figure-note">${t['fig.subperiod']}</p>`)
+    8:figure(t['fig.period'],`<div class="result-stats"><strong>190 PR</strong><strong>38</strong><strong>${t['metric.precision']}<small>${lang==='ja'?'40%台':lang==='en'?'over 40%':'40%多'} → 85%</small></strong><strong>${t['metric.coverage']}<small>${lang==='ja'?'30%台':lang==='en'?'over 30%':'30%多'} → 75%</small></strong></div><p class="figure-note">${t['fig.subperiod']}</p>`)
   };
-  document.getElementById('article').innerHTML=Array.from({length:9},(_,i)=>{const n=i+1;return `<section class="case-section" id="s${n}"><h2 data-rail-key="chapter.${chapterKeys[i]}"><span class="section-number" aria-hidden="true">${String(n).padStart(2,'0')}</span>${t['s'+n+'.title']}</h2>${n===7?`<div class="challenge-grid">${Array.from({length:6},(_,j)=>`<article><h3>${t[`s7.i${j+1}.t`]}</h3><p>${t[`s7.i${j+1}.b`]}</p></article>`).join('')}</div>`:paragraphs(n,n===1||n===2||n===3||n===4||n===5?2:n===6?3:1)}${figures[n]||''}${n===8?`<p class="stat-note">${t['s8.note']}</p>`:''}</section>`;}).join('')+`<section class="case-section"><h2 data-rail-key="chapter.references">${t['links.title']}</h2><p>${t['links.repo']}</p><ul class="reference-links"><li><a href="https://github.com/shiameyeung/CorpLink-AI">${t['links.corp']}</a></li><li><a href="resume.html">${t['links.resume']}</a></li></ul><button class="print-button" type="button" onclick="window.print()">${t['print.button']}</button></section>`;
+  document.getElementById('article').innerHTML=Array.from({length:9},(_,i)=>{const n=i+1;return `<section class="case-section" id="s${n}"><h2 data-rail-key="chapter.${chapterKeys[i]}"><span class="section-number" aria-hidden="true">${String(n).padStart(2,'0')}</span>${t['s'+n+'.title']}</h2>${n===7?`<div class="challenge-grid">${Array.from({length:6},(_,j)=>`<article><h3>${t[`s7.i${j+1}.t`]}</h3><p>${t[`s7.i${j+1}.b`]}</p></article>`).join('')}</div>`:paragraphs(n,n===1||n===2||n===3||n===4||n===5?2:n===6?3:1)}${n===6?`<p>${t['repair.extra']}</p>`:''}${figures[n]||''}${n===8?`<p class="stat-note">${t['s8.note']}</p>`:''}</section>`;}).join('')+`<section class="case-section"><h2 data-rail-key="chapter.references">${t['links.title']}</h2><p>${t['links.repo']}</p><ul class="reference-links"><li><a href="https://github.com/shiameyeung/CorpLink-AI">${t['links.corp']}</a></li><li><a href="resume.html">${t['links.resume']}</a></li></ul><button class="print-button" type="button" onclick="window.print()">${t['print.button']}</button></section>`;
 }
+document.getElementById('full-process').addEventListener('toggle',()=>SiteNavigation.mount(document.documentElement.lang==='zh-Hans'?'zh':document.documentElement.lang));
+function openLinkedDetail(){if(/^#s[1-9]$/.test(location.hash)){document.getElementById('full-process').open=true;requestAnimationFrame(()=>document.querySelector(location.hash)?.scrollIntoView());}}
+window.addEventListener('hashchange',openLinkedDetail);window.addEventListener('load',openLinkedDetail);
+let detailsWasOpen=false;window.addEventListener('beforeprint',()=>{detailsWasOpen=document.getElementById('full-process').open;document.getElementById('full-process').open=true;});window.addEventListener('afterprint',()=>{document.getElementById('full-process').open=detailsWasOpen;});
 const T = {
   "zh": {
     "back": "返回",
@@ -43,7 +48,7 @@ const T = {
     "facts.content.t": "开发内容",
     "facts.content.b": "① 沿「输入 → 前处理 → 模型抽取 → 校验 → 入库」各环节调查漏抽、误抽、错误数据的原因，提交修正 PR；② 评估方法：行粒度评分、含反例的验证、改动前后的双样本对照；③ 错误数据：可复用的 transform 清理工具＋镜像 PR 修正生产 pipeline＋生产修正的执行；④ 自用工作台：任务、批次、验证结果、下一步与日志。",
     "facts.links.t": "参考资料",
-    "facts.links.b": "实习代码在公司内部仓库；这一页用调查方法、判断依据和验证方式说明工作内容。个人开发：CorpLink-AI 源码（GitHub）、作品集（三个在用的 Web 应用）、職務経歴書（PDF）。链接见页末。",
+    "facts.links.b": "实习代码在公司内部仓库；这一页用调查方法、判断依据和验证方式说明工作内容。个人开发：CorpLink-AI 源码（GitHub）、作品集（三个在用的 Web 应用）、简历（PDF）。链接见页末。",
     "s1.title": "公司做什么，我做什么",
     "s1.p1": "Baseconnect 是一家企业信息数据库服务公司：把网页、PDF 等公开来源里的企业、部门、人物和联系方式整理成结构化数据，提供给客户使用。数据从采集、抽取、校验到入库有一条生产 pipeline，模型抽取是其中一环。",
     "s1.p2": "2026年，我在这里做 AI 工程实习，参与企业信息抽取的质量改善：找出漏抽、误抽和错误数据的原因，修改数据生产 pipeline 的代码，设计评估方法，修复既有数据。实际工作中，我直接在生产环境里处理S3 中直接提供给客户使用的生产数据：改完代码用同一份数据验证，再提 PR，数据修正也由我在生产环境执行。",
@@ -63,7 +68,7 @@ const T = {
     "s6.p1": "生产数据里可能出现部门名称混杂、人物归属错误或职位分类不一致等问题。这些数据保存在S3中，直接供客户使用。逐件修正能处理当前问题，但要减少反复修同类数据，还需要找到pipeline中产生错误的环节。",
     "s6.p2": "我走了两条路。一条针对现有数据：把每一类错误的修正逻辑写成可复用、可迭代的 transform 清理工具，而不是一次性的 SQL。transform 带 dry-run 和备份，明确哪些要修、哪些看起来异常但其实合法要保留。另一条针对源头：把同一套修正逻辑以镜像 PR 的形式提交到生产 pipeline 对应的环节（抽取、校验或入库），从源头减少同类错误再次出现。对以后可能出现的新形态，同一套 transform 可以继续补规则、验证和迭代。",
     "s6.p3": "执行也是我自己做：在生产环境里先 dry-run，核对差异，备份，再正式执行、后检，再把结果写进 PR 和任务记录。一个半月里，这样解决了 38 件错误数据任务。",
-    "s7.title": "苦労したこと・工夫したこと",
+    "s7.title": "开发中的难点与取舍",
     "s7.i1.t": "修了又来，先找错误产生的环节",
     "s7.i1.b": "错误出现在输出，原因却可能在输入、前处理、模型抽取或后段校验的任何一层。我的做法是沿处理链逐层比较：原文有、处理后没有，是哪一步丢的；原文没有、输出有，是哪一步造出来的。先确认信息有没有到模型手里，再怀疑模型能力。",
     "s7.i2.t": "假设要在实数据上再现之后再动手",
@@ -145,7 +150,22 @@ const T = {
     "nav.repair": "数据修正",
     "nav.lessons": "难点与判断",
     "nav.results": "结果",
-    "print.button": "打印或另存PDF"
+    "print.button": "打印或另存PDF",
+    "feature.title": "一个具体案例：先查清 PDF 为什么多出字符",
+    "feature.problem": "抽出的人名出现重复字符。最初的转换重排和内容变更假设都缺少支持，我要求先回到原始 PDF 核验。",
+    "feature.decision": "Claude 检查字符坐标后，发现同一字形被轻微错位重绘以表现粗体。去重方案经同事 review，又发现正常页也会多做计算，于是增加预判：没有重叠就保留原路径，并补短文档等边界验证。",
+    "feature.result": "取得成功的 73 份 PDF 中，68 份保持原结果，5 份发生符合预期的修正。修复同时验证异常是否消失、正常内容是否保留。",
+    "feature.roles": "分工：我要求实际核验、判断修正范围并推进验证；Claude 调查、实现与测试；同事提供性能和边界的审查意见。",
+    "example.title": "处理前后 · 等价示意",
+    "example.note": "姓名与坐标为虚构示例，用来说明重复字形；不是公司原始数据或代码。",
+    "example.before": "页面显示：青木 → 字形层读到：青青青青木木木木",
+    "example.after": "核对同一字形的重叠坐标后：青木",
+    "details.label": "展开完整开发过程与技术细节",
+    "repair.extra": "后续同类错误会按分类检测，触发告警并生成任务。我再判断是否复用原有 transform，还是补规则后再执行，同时修正源头 pipeline。执行前保留备份，必要时可恢复；迄今未遇到需要恢复的失败。",
+    "metric.precision": "精度",
+    "metric.coverage": "覆盖率",
+    "metric.scope": "2026 年 6 月初至 9 月初，由我负责的企业部门／组织信息字段；人工与 AI 辅助相结合。精度 40%多→85%，覆盖率 30%多→75%。",
+    "metric.formula": "精度＝正确抽出条目／全部抽出条目；覆盖率＝全部抽出条目／正解集条目。"
   },
   "en": {
     "back": "Back",
@@ -267,7 +287,22 @@ const T = {
     "nav.repair": "Data corrections",
     "nav.lessons": "Challenges and decisions",
     "nav.results": "Results",
-    "print.button": "Print or save as PDF"
+    "print.button": "Print or save as PDF",
+    "feature.title": "A concrete example: finding why a PDF produced repeated characters",
+    "feature.problem": "Names extracted from the PDF contained repeated characters. The initial hypotheses about reordering during conversion and content changes lacked evidence, so I asked to check the original PDF first.",
+    "feature.decision": "Claude checked the character coordinates and found that the same glyph was redrawn at slight offsets to simulate bold text. A colleague’s review of the deduplication approach identified unnecessary work on ordinary pages. The revised approach checks for overlap first and uses the original processing path when there is none, with additional checks for edge cases such as short documents.",
+    "feature.result": "Of the 73 PDFs successfully retrieved for validation, 68 kept the same output and five changed as expected. The checks confirmed both that the repeated characters were corrected and that ordinary content was preserved.",
+    "feature.roles": "Roles: I called for verification against the actual data, determined the scope of the fix and drove validation. Claude investigated, implemented and tested. A colleague reviewed performance and edge cases.",
+    "example.title": "Before and after · illustrative example",
+    "example.note": "The fictional name and coordinates illustrate duplicate glyphs. They are not company data or code.",
+    "example.before": "Visible text: 青木 → extracted glyphs: 青青青青木木木木",
+    "example.after": "After checking overlapping coordinates for the same glyph: 青木",
+    "details.label": "Read the full development process and technical details",
+    "repair.extra": "Similar errors are detected by category, triggering alerts and tasks. I decide whether to reuse the existing transform or update its rules before running it, and also fix the source pipeline. Backups are taken before execution so data can be restored if needed. No failure has required restoration so far.",
+    "metric.precision": "Accuracy",
+    "metric.coverage": "Coverage",
+    "metric.scope": "From early June to early September 2026, I was responsible for department and organisational information fields for companies, combining manual work with AI assistance. Accuracy: over 40% → 85%; coverage: over 30% → 75%.",
+    "metric.formula": "Accuracy = number of correctly extracted entries / total number of extracted entries; coverage = total number of extracted entries / number of entries in the ground-truth set."
   },
   "ja": {
     "back": "戻る",
@@ -389,7 +424,22 @@ const T = {
     "nav.repair": "データ修正",
     "nav.lessons": "難しかった点と判断",
     "nav.results": "結果",
-    "print.button": "印刷・PDFとして保存"
+    "print.button": "印刷・PDFとして保存",
+    "feature.title": "具体例：PDFから同じ文字が何度も抽出される原因を調べる",
+    "feature.problem": "抽出された人名に文字の重複がありました。当初の「変換時の並べ替え」や「内容の変更」という仮説には裏付けが足りず、まず元のPDFで確認するよう求めました。",
+    "feature.decision": "Claudeが文字の座標を調べ、太字を表すために同じ文字が少しずつずらして描かれていることを確認しました。同僚のレビューで通常ページにも余計な重複除去処理が走ると分かり、先に重なりを確認して、なければ従来の処理を使う判定を加えました。短い文書などの境界条件も検証しました。",
+    "feature.result": "検証用に取得できた73件のPDFのうち、68件は出力が変わらず、5件は想定どおりに修正されました。異常が解消されたかと、正常な内容が保たれたかを両方確認しました。",
+    "feature.roles": "分担：私は実データでの確認を求め、修正範囲の判断と検証の推進を担当しました。Claudeは調査・実装・テストを行い、同僚は性能と境界条件をレビューしました。",
+    "example.title": "処理前後のイメージ",
+    "example.note": "氏名と座標は架空の例です。文字の重複を説明するもので、社内の実データやコードではありません。",
+    "example.before": "画面上の表示：青木 → 文字情報の抽出：青青青青木木木木",
+    "example.after": "同じ文字の座標の重なりを確認した後：青木",
+    "details.label": "開発の流れと技術的な詳細を読む",
+    "repair.extra": "同種の不正データは分類ごとに検知し、アラートとタスクを作成します。私は既存のtransformを使えるか、ルールを追加してから実行するかを判断し、生成元のパイプラインも修正します。実行前にはバックアップを取り、必要なら復元できます。これまで復元が必要な失敗はありません。",
+    "metric.precision": "精度",
+    "metric.coverage": "カバレッジ",
+    "metric.scope": "2026年6月初旬から9月初旬まで、企業の部署・組織情報の項目を担当し、人による作業とAIの支援を組み合わせました。精度40%台→85%、カバレッジ30%台→75%。",
+    "metric.formula": "精度＝正しく抽出できた件数／抽出した総件数；カバレッジ＝抽出した総件数／正解データの件数。"
   }
 };
 Site.mount(T,render);

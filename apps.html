@@ -12,8 +12,8 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/kiwi-touch-icon.png?v=20261002-kiwi2">
 <link rel="stylesheet" href="base.css">
 
-<link rel="stylesheet" href="apps.css?v=20261004-sticky1">
-<link rel="stylesheet" href="navigation.css?v=20261004-sticky1">
+<link rel="stylesheet" href="apps.css?v=20261004-review2">
+<link rel="stylesheet" href="navigation.css?v=20261004-review2">
 </head>
 <body>
 <div class="wrap">
@@ -43,7 +43,7 @@
   </footer>
 </div>
 
-<script src="navigation.js?v=20261004-sticky1"></script>
+<script src="navigation.js?v=20261004-review2"></script>
 <script src="shared.js"></script>
 <script src="email-copy.js?v=20261002-kiwi2"></script>
 <script src="apps-demo.js"></script>
@@ -154,7 +154,26 @@ const APPS = [
 ];
 
 const FULL_DEMOS = {aws:"https://aws.yotenra.com/?demo=1",cal:"https://yotenra.com/demos/cal/",ootd:"https://yotenra.com/demos/ootd/"};
-const DEMO_ENTRY_COPY = {"ja": {"demoTitle": "体験版・ログイン不要", "demoBody": "サンプルの学習記録を用意しています。問題演習、間違えた問題の復習、模擬試験をすぐに試せます。変更内容はこのページ内でのみ保持され、ページを再読み込みするとサンプルの状態に戻ります。", "demoExit": "正式版を開く", "demoEnter": "ログインなしで今すぐ試す"}, "en": {"demoTitle": "Demo · No sign-in required", "demoBody": "The demo includes sample study records. You can answer questions, review incorrect answers, and take mock exams right away. Changes are kept only on this page; refreshing the page restores the sample data.", "demoExit": "Open full app", "demoEnter": "Try it now — no sign-in required"}, "zh": {"demoTitle": "体验版 · 无需登录", "demoBody": "已预置学习记录，可以直接答题、复习错题和参加模拟考试。改动只保留在当前页面，刷新后恢复示例数据。", "demoEnter": "立即体验，无需登录", "demoExit": "打开正式版"}};
+const DEMO_ENTRY_COPY = {
+  "ja": {
+    "demoTitle": "体験版・ログイン不要",
+    "demoBody": "サンプルの学習記録を用意しています。問題演習、間違えた問題の復習、模擬試験をすぐに試せます。変更内容はこのページ内でのみ保持され、ページを再読み込みするとサンプルの状態に戻ります。",
+    "demoExit": "通常版を開く",
+    "demoEnter": "ログインなしで試す"
+  },
+  "en": {
+    "demoTitle": "Demo · No sign-in required",
+    "demoBody": "The demo includes sample study records. You can answer questions, review incorrect answers, and take mock exams right away. Changes are kept only on this page; refreshing the page restores the sample data.",
+    "demoExit": "Open app",
+    "demoEnter": "Try demo"
+  },
+  "zh": {
+    "demoTitle": "体验版 · 无需登录",
+    "demoBody": "已预置学习记录，可以直接答题、复习错题和参加模拟考试。改动只保留在当前页面，刷新后恢复示例数据。",
+    "demoEnter": "无需登录体验",
+    "demoExit": "打开正式版"
+  }
+};
 
 const DEMO_NOTICES = {"cal": {"zh": "使用示例数据体验饮食、体重和身体尺寸记录。修改仅保留在当前页面内存中，刷新页面后会恢复初始数据。记录不会上传。", "en": "Use sample data to try logging food, weight, and body measurements. Changes stay on this page and reset when you reload. Records are not uploaded.", "ja": "サンプルデータで食事・体重・身体サイズの記録を試せます。変更はこのページ内でのみ保持され、再読み込みすると初期状態に戻ります。記録はアップロードされません。"}, "ootd": {"zh": "体验版 · 30 件衣物与 20 件彩妆。名称、品牌与商品图来自真实档案；价格、日期、穿着记录和位置均为演示数据。所有修改只保留在当前页面内存，刷新或恢复样例即可还原。记录不会上传。", "en": "Demo · 30 clothing items and 20 makeup items. Names, brands and product photos come from real records. Prices, dates, wear records and locations are demo data. Changes are kept only in this page's memory. Refresh or reset the demo to restore the sample. Records are not uploaded.", "ja": "体験版 · 衣類30点・コスメ20点。名前・ブランド・商品画像は実際の登録情報です。価格・日付・着用記録・場所はデモ用データです。変更はこのページのメモリ内だけに保持されます。再読み込みかデモのリセットで元に戻ります。記録はアップロードされません。"}};
 
@@ -190,7 +209,7 @@ function render(lang,t) {
     <div class="app-head"><div class="app-title"><span class="app-badge" aria-hidden="true">${a.mark}</span><div><p class="host">${a.host}</p></div></div>${demo?'':`<div class="app-entry-links"><a class="enter" href="${a.url}" target="_blank" rel="noopener">${t['enter']} ↗</a>${a.locked?`<span class="locked">${t[id+'.locked']||t['locked']}</span>`:''}</div>`}</div>
     ${demo?`<aside class="full-demo-notice"><strong>${demoCopy.demoTitle}</strong><p>${DEMO_NOTICES[id]?.[lang]||demoCopy.demoBody}</p></aside>`:''}
 
-    ${actual?`<h2 class="app-section-heading" id="project-problem">${t['sec.problem']}</h2><p>${t[id+'.problem']}</p><h2 class="app-section-heading" id="project-features" data-rail-key="nav.features">${t['sec.features']}</h2><ul class="feature-list">${Array.from({length:id==='aws'?12:10},(_,i)=>`<li>${t[id+'.f'+(i+1)]}</li>`).join('')}</ul>${demo?'':`<h2 class="app-section-heading" id="project-demo" data-rail-key="nav.demo">${t['sec.demo']}</h2><div class="demo-grid" id="demos-${id}">${AppDemos.html(id,t)}</div>`}<h2 class="app-section-heading" id="project-screens" data-rail-key="nav.screens">${t['sec.shots']}</h2><div class="shots">${SHOTS[id].map(v=>{const file=`assets/shots/${id}_${v}_${v==='guide'?'zh':lang}.webp`;return `<figure><a href="${file}" target="_blank" rel="noopener"><img src="${file}" loading="lazy" alt="${String(t[id+'.shot.'+v]).replaceAll('&','&amp;').replaceAll('"','&quot;')}" data-shot="${id}_${v}"></a><figcaption>${t[id+'.shot.'+v]}</figcaption></figure>`;}).join('')}</div><h2 class="app-section-heading" id="project-design" data-rail-key="nav.design">${t['sec.design']}</h2><p>${t[id+'.design']}</p><p class="stack"><b>${t['sec.stack']}</b> · ${t[id+'.stack']}</p>`:
+    ${actual?`<h2 class="app-section-heading" id="project-problem">${t['sec.problem']}</h2><p>${t[id+'.problem']}</p><h2 class="app-section-heading" id="project-features" data-rail-key="nav.features">${t['sec.features']}</h2><ul class="feature-list">${Array.from({length:id==='aws'?12:10},(_,i)=>`<li>${t[id+'.f'+(i+1)]}</li>`).join('')}</ul>${demo?`<p class="demo-suggested-action">${t['try.'+id]}</p>`:''}${demo?'':`<h2 class="app-section-heading" id="project-demo" data-rail-key="nav.demo">${t['sec.demo']}</h2><div class="demo-grid" id="demos-${id}">${AppDemos.html(id,t)}</div>`}<h2 class="app-section-heading" id="project-screens" data-rail-key="nav.screens">${t['sec.shots']}</h2><div class="shots">${SHOTS[id].map(v=>{const file=`assets/shots/${id}_${v}_${v==='guide'?'zh':lang}.webp`;return `<figure><a href="${file}" target="_blank" rel="noopener"><img src="${file}" loading="lazy" alt="${String(t[id+'.shot.'+v]).replaceAll('&','&amp;').replaceAll('"','&quot;')}" data-shot="${id}_${v}"></a><figcaption>${t[id+'.shot.'+v]}</figcaption></figure>`;}).join('')}</div><h2 class="app-section-heading" id="project-design" data-rail-key="nav.design">${t['sec.design']}</h2><p>${t[id+'.design']}</p><p class="stack"><b>${t['sec.stack']}</b> · ${t[id+'.stack']}</p>`:
     `<div class="scenes">${a.scenes.map((f,i)=>`<article class="scene"><div class="ui">${f(t)}</div><div class="scene-body"><span class="scene-step">${t['story.'+(i+1)]}</span><p class="scene-cap">${t[id+'.s'+(i+1)]}</p></div></article>`).join('')}</div>`}</section>`;
   }).join('');
   order.filter(id=>SHOTS[id]&&!FULL_DEMOS[id]).forEach(id=>AppDemos.bind(id,t));
@@ -501,7 +520,10 @@ const T = {
     "ootd.demo.d4.t": "把还没穿过的找出来",
     "ootd.demo.d4.h": "筛选与排序帮助发现一直闲置的单品。",
     "ootd.demo.d4.wornTimes": "穿过 {n} 天",
-    "demo.sort": "排序"
+    "demo.sort": "排序",
+    "try.aws": "建议先换一种考试，再答一道题、打开错题或模拟记录。",
+    "try.cal": "建议记录一次摄入，再看体重趋势与每日目标怎样联系起来。",
+    "try.ootd": "建议挑一件衣服记录今天穿过，再打开单品查看次数与位置。"
   },
   "en": {
     "back": "Back",
@@ -639,7 +661,7 @@ const T = {
     "cal.f7": "The daily target calculation is displayed on the page: ① average intake over 30 days + ② correction from weight averages in two windows = ③ estimated expenditure; ③ − ④ daily deficit derived from the monthly weight-loss goal = daily target. A footnote lists each window’s mean, measurement count, and energy coefficient.",
     "cal.f8": "The automatic target appears only when every day in the last 30 days has an intake record, both weight windows contain measurements, and the result is positive. Otherwise, the app shows recorded days, average intake, and missing dates. Missing days remain missing rather than being treated as zero calories.",
     "cal.f9": "Body measurements: record body fat percentage, waist, bust, underbust, hips, and thigh circumference. The app calculates the bust–underbust difference, reference cup and bra sizes commonly used in Japan, waist-to-hip and waist-to-height ratios, BMI, fat mass, and lean mass. Blank fields use the latest measured value, and size boundaries show two possible sizes.",
-    "cal.f10": "Chinese and Japanese interfaces, with all day boundaries set to Asia/Tokyo. Export all records as CSV or create a JSON backup including the food database, favorites, and target settings. Sync status and manual refresh are also available.",
+    "cal.f10": "The interface supports Chinese, English and Japanese.",
     "cal.stack": "Web app with data in Cloudflare D1 and dates grouped by Japan time. Separate tables store calorie, weight, and body measurement records, alongside a food database.",
     "cal.shot.today": "Today: remaining calories, target, logged intake, latest weight, and a progress ring. Food search and favorites sit on the right, with a quick-entry form below.",
     "cal.shot.daily": "Daily archive: a month’s calorie records, recorded-day count, daily average, and automatic target. Open a date to manage its entries.",
@@ -807,7 +829,10 @@ const T = {
     "ootd.demo.d4.t": "Find items you have never worn",
     "ootd.demo.d4.h": "Use filters and sorting to find items that have been sitting unused.",
     "ootd.demo.d4.wornTimes": "Worn on {n} days",
-    "demo.sort": "Sort by"
+    "demo.sort": "Sort by",
+    "try.aws": "Try switching exams and answering a question, then review incorrect answers or a mock exam record.",
+    "try.cal": "Try logging food, then see how weight trends relate to the daily target.",
+    "try.ootd": "Try logging an item as worn today, then open it to see its wear count and location."
   },
   "ja": {
     "back": "戻る",
@@ -1113,7 +1138,10 @@ const T = {
     "ootd.demo.d4.t": "まだ着ていない服を見つける",
     "ootd.demo.d4.h": "絞り込みや並べ替えで、着る機会のなかったアイテムを探せます。",
     "ootd.demo.d4.wornTimes": "着用 {n} 日",
-    "demo.sort": "並び順"
+    "demo.sort": "並び順",
+    "try.aws": "試験を切り替え、1問解いてから、間違えた問題や模擬試験の記録を見てみてください。",
+    "try.cal": "食事を1件記録して、体重の推移と1日の目標がどうつながるか見てみてください。",
+    "try.ootd": "今日着た服を1点記録し、詳細で着用回数と収納場所を見てみてください。"
   }
 };
 Site.mount(T, render);

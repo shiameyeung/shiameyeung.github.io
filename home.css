@@ -35,3 +35,5 @@
 @media(max-width:650px){.home-page .explore{grid-template-columns:1fr;gap:12px}.home-page .explore .entry-card{padding:20px;min-height:94px}.contact-panel{align-items:flex-start;flex-direction:column;padding:24px;gap:20px}.contact-button{width:100%}}
 @media(prefers-reduced-motion:reduce){.home-page .explore .entry-card{transition:none}}
 @media(max-width:650px){.contact-actions{width:100%;max-width:none;justify-content:flex-start}.contact-actions .copy-email-button{width:100%}.contact-actions .copy-email-status{text-align:left}}
+
+.quality-lines{font-size:17px!important;line-height:1.8!important}

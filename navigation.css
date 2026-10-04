@@ -100,3 +100,7 @@ html.has-outline{scroll-padding-top:calc(var(--reading-top) + 80px)}
   .site-logo,.outline-top::after{transition:none!important;transform:none!important}
   .project-overview-card:hover,.feature-card:hover,.small-project:hover,.earlier-work-card:hover,.links a:hover{transform:none!important}
 }
+
+/* Wordmark D: selected by the owner, 2026-10-04. */
+.site-wordmark.mark-d{font-family:system-ui,sans-serif;font-weight:750;letter-spacing:-.055em;color:#274d44;line-height:1.25}
+.site-wordmark.mark-d i{display:inline-block;transform:rotate(-9deg);font-style:normal}

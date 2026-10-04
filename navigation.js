@@ -36,7 +36,25 @@ window.SiteNavigation = (() => {
     "chapter.results": "成果",
     "chapter.approach": "工作方式",
     "chapter.references": "参考资料",
-    "chapter.research": "研究与探索"
+    "chapter.research": "研究与探索",
+    "chapter.m5": "工作台",
+    "chapter.m1": "数据抽取",
+    "chapter.m2": "对照验证",
+    "chapter.m3": "规则与模型",
+    "chapter.m4": "追查原因",
+    "chapter.m6": "数据修复",
+    "rail.work-method": "AI协作",
+    "rail.holly-context": "业务场景",
+    "rail.holly-role": "需求设计",
+    "rail.holly-approach": "开发推进",
+    "rail.holly-tradeoff": "审核导入",
+    "rail.studio-context": "玩家需求",
+    "rail.studio-service": "付费服务",
+    "rail.studio-approach": "方案计算",
+    "rail.studio-delivery": "持续服务",
+    "rail.studio-guides": "攻略样本",
+    "rail.studio-results": "经营规模",
+    "chapter.examples": "代表改动"
   },
   "ja": {
     "nav.copy": "メールアドレスをコピー",
@@ -73,7 +91,25 @@ window.SiteNavigation = (() => {
     "chapter.results": "成果",
     "chapter.approach": "仕事の進め方",
     "chapter.references": "参考資料",
-    "chapter.research": "研究・探究"
+    "chapter.research": "研究・探究",
+    "chapter.m5": "作業ダッシュボード",
+    "chapter.m1": "データ抽出",
+    "chapter.m2": "検証",
+    "chapter.m3": "ルールとモデル",
+    "chapter.m4": "原因調査",
+    "chapter.m6": "データ修正",
+    "rail.work-method": "AIとの協働",
+    "rail.holly-context": "業務の背景",
+    "rail.holly-role": "要件整理",
+    "rail.holly-approach": "開発の進め方",
+    "rail.holly-tradeoff": "確認と取り込み",
+    "rail.studio-context": "プレイヤーのニーズ",
+    "rail.studio-service": "有料サービス",
+    "rail.studio-approach": "プランの試算",
+    "rail.studio-delivery": "継続的な支援",
+    "rail.studio-guides": "攻略資料の例",
+    "rail.studio-results": "事業の規模",
+    "chapter.examples": "変更の具体例"
   },
   "en": {
     "nav.copy": "Copy email address",
@@ -110,7 +146,25 @@ window.SiteNavigation = (() => {
     "chapter.results": "Results",
     "chapter.approach": "How I work",
     "chapter.references": "References",
-    "chapter.research": "Research & exploration"
+    "chapter.research": "Research & exploration",
+    "chapter.m5": "Dashboard",
+    "chapter.m1": "Data extraction",
+    "chapter.m2": "Validation",
+    "chapter.m3": "Rules and models",
+    "chapter.m4": "Cause analysis",
+    "chapter.m6": "Data repair",
+    "rail.work-method": "AI collaboration",
+    "rail.holly-context": "Business context",
+    "rail.holly-role": "Requirements",
+    "rail.holly-approach": "Development",
+    "rail.holly-tradeoff": "Review and import",
+    "rail.studio-context": "Player needs",
+    "rail.studio-service": "Paid services",
+    "rail.studio-approach": "Calculations",
+    "rail.studio-delivery": "Ongoing support",
+    "rail.studio-guides": "Guide samples",
+    "rail.studio-results": "Business scale",
+    "chapter.examples": "Selected changes"
   }
 };
   const label = (lang, key) => labels[lang]?.[key];
@@ -143,7 +197,7 @@ window.SiteNavigation = (() => {
   function collectSections() {
     const used = new Set();
     return [...document.querySelectorAll('.wrap h2,.wrap [data-rail-label]')].flatMap((heading, index) => {
-      if (heading.closest('a,nav,footer,.facts,.resume-card,[data-rail-exclude],[hidden]')) return [];
+      if (heading.closest('a,nav,footer,.facts,.resume-card,[data-rail-exclude],[hidden],details:not([open])')) return [];
       if (!heading.closest('main,section') && !heading.hasAttribute('data-rail-label')) return [];
       const text = heading.dataset.railLabel || headingText(heading);
       if (!text || /^\d+$/.test(text)) return [];
@@ -160,7 +214,7 @@ window.SiteNavigation = (() => {
       const hint = heading.dataset.railIcon || heading.dataset.nav || target.id;
       const kind = Object.keys(icons).find(key => hint.includes(key)) || (hint.includes('daily') ? 'tools' : hint.includes('method') ? 'design' : 'section');
       target.classList.add('section-anchor');
-      return [{target, text, short: labels[language][heading.dataset.railKey] || text, kind}];
+      return [{target, text, short: labels[language]['rail.'+target.id] || labels[language][heading.dataset.railKey] || text, kind}];
     });
   }
 
@@ -303,7 +357,7 @@ window.SiteNavigation = (() => {
     if (!header) { header = document.createElement('header'); header.id = 'site-header'; header.className = 'site-header'; document.body.prepend(header); }
     const langbar = document.querySelector('.langbar');
     const focusedLanguageButton = langbar?.contains(document.activeElement) ? document.activeElement : null;
-    header.innerHTML = `<div class="site-header-inner"><a class="site-brand" href="index.html"><img class="site-logo" src="assets/brand/kiwi-logo.png?v=20261002-kiwi2" width="44" height="44" alt=""><span>YO TENRA</span></a><nav class="site-nav" aria-label="${t['nav.menu']}">${[['index.html', 'nav.home'], ['apps.html', 'nav.projects'], ['work.html', 'nav.work'], ['resume.html', 'nav.resume']].map(([href, key]) => link(href, t[key], section === href)).join('')}</nav><div class="language-slot"></div></div>`;
+    header.innerHTML = `<div class="site-header-inner"><a class="site-brand" href="index.html"><img class="site-logo" src="assets/brand/kiwi-logo.png?v=20261002-kiwi2" width="44" height="44" alt=""><span class="site-wordmark mark-d"><i>Y</i>O TENRA</span></a><nav class="site-nav" aria-label="${t['nav.menu']}">${[['index.html', 'nav.home'], ['apps.html', 'nav.projects'], ['work.html', 'nav.work'], ['resume.html', 'nav.resume']].map(([href, key]) => link(href, t[key], section === href)).join('')}</nav><div class="language-slot"></div></div>`;
     if (langbar) header.querySelector('.language-slot').append(langbar);
     focusedLanguageButton?.focus({preventScroll: true});
     document.querySelectorAll('[data-nav]').forEach(element => { if (t[element.dataset.nav]) element.textContent = t[element.dataset.nav]; });

@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/kiwi-touch-icon.png?v=20261002-kiwi2">
 <link rel="stylesheet" href="base.css?v=20261002-m3">
 
-<link rel="stylesheet" href="navigation.css?v=20261004-sticky1">
-<link rel="stylesheet" href="home.css?v=20261002-kiwi2">
+<link rel="stylesheet" href="navigation.css?v=20261004-review2">
+<link rel="stylesheet" href="home.css?v=20261004-review2">
 </head>
 <body class="home-page">
 <div class="wrap">
@@ -63,7 +63,7 @@
     <section class="work-preview" id="work-practice">
       <span class="eyebrow">Baseconnect</span>
       <h2 class="section-heading" data-nav="story.work"></h2>
-      <p data-t="work.desc"></p><div class="stat-grid"><div class="stat"><strong data-t="stat.hours.v"></strong><span data-t="stat.hours.l"></span></div><div class="stat"><strong data-t="stat.prs.v"></strong><span data-t="stat.prs.l"></span></div><div class="stat"><strong data-t="stat.tasks.v"></strong><span data-t="stat.tasks.l"></span></div><div class="stat"><strong data-t="stat.quality.v"></strong><span data-t="stat.quality.l"></span></div></div><p class="stat-note" data-t="stat.note"></p>
+      <p data-t="work.desc"></p><div class="stat-grid"><div class="stat"><strong data-t="stat.hours.v"></strong><span data-t="stat.hours.l"></span></div><div class="stat"><strong data-t="stat.prs.v"></strong><span data-t="stat.prs.l"></span></div><div class="stat"><strong data-t="stat.tasks.v"></strong><span data-t="stat.tasks.l"></span></div><div class="stat"><strong class="quality-lines" data-t="stat.quality.v"></strong><span data-t="stat.quality.l"></span></div></div><p class="stat-note" data-t="stat.note"></p><p class="stat-note" data-t="metric.scope"></p><p class="stat-note" data-t="metric.formula"></p>
       <div class="work-links"><a class="text-link" href="work.html"><span data-t="work.link"></span><span aria-hidden="true"> →</span></a><a class="text-link" href="challenge.html"><span data-t="work.challenge"></span><span aria-hidden="true"> →</span></a></div>
       <div class="earlier-work-grid">
         <a class="earlier-work-card" href="work.html?case=holly"><span class="eyebrow">2017.12—2021.12</span><h3 data-t="holly.title"></h3><p data-t="holly.desc"></p><span class="card-link"><span data-t="work.link"></span><span aria-hidden="true"> →</span></span></a>
@@ -136,22 +136,22 @@
   </footer>
 </div>
 
-<script src="navigation.js?v=20261004-sticky1"></script>
+<script src="navigation.js?v=20261004-review2"></script>
 <script src="shared.js"></script>
 <script src="email-copy.js?v=20261002-kiwi2"></script>
 <script>
 const T = {
   "zh": {
     "contact.copy": "复制邮箱",
-    "entry.title": "从这里看详细内容",
-    "entry.apps": "功能说明、操作演示和实际画面",
-    "entry.work": "问题、判断过程和具体成果",
+    "entry.title": "想看哪一面？",
+    "entry.apps": "从生活与研究中的需求，到可以实际操作的工具",
+    "entry.work": "从一线业务问题，到需求、取舍与交付；开发细节在案例内展开",
     "entry.demo": "查看功能与演示",
     "contact.action": "联系我",
     "contact.note": "通过邮件聊聊项目、工作机会或想法。",
     "name": "楊　天楽",
     "romaji": "YO TENRA",
-    "tagline": "关西大学综合信息学研究科硕士在读。<br>在 Baseconnect 做 AI 工程实习：修数据生产 pipeline，把错误数据的修正做成可迭代的工具。",
+    "tagline": "关西大学硕士在读，在 Baseconnect 做 AI 工程实习。<br>从具体需求出发，自己弄清问题、设计方案，再用软件、数据和 AI 把它做成能用的东西。",
     "contact.title": "更多关于我",
     "contact.wantedly": "职业经历",
     "contact.jglobal": "研究者信息",
@@ -198,7 +198,7 @@ const T = {
     "stat.prs.l": "提出并合并",
     "stat.tasks.v": "38件",
     "stat.tasks.l": "错误数据修正任务",
-    "stat.quality.v": "40%多→85% · 30%多→75%",
+    "stat.quality.v": "精度 40%多→85%<br>覆盖率 30%多→75%",
     "stat.quality.l": "某一数据项精度 · 数据覆盖率",
     "principle.title": "把需求想清楚，也把方案做出来",
     "principle.body": "<p>我喜欢从实际使用中的问题出发：先弄清要解决什么，再把它变成能使用、能检查、能继续改进的工具。</p><p>过去在和旅，我更多通过整理需求、协调研发推进系统。现在，AI辅助开发让我能更直接地参与实现和验证。多个任务并行时，我需要想清楚目标和优先级，把背景交代清楚，检查各部分是否能合起来工作。我享受的，是让产品判断和工程实践连在一起，把想法变成真正用得上的东西。</p>",
@@ -207,19 +207,21 @@ const T = {
     "holly.title": "Holly Travel（和旅）",
     "studio.title": "Studio Keya_cc",
     "holly.desc": "观察业务调价操作，结合开发难度确定UI方案、制作demo与需求文档，并推进约5–10名研发成员协作。",
-    "studio.desc": "用数学期望与投入产出分析，给中文韩服玩家具体玩法和消费方案；通过攻略、PDF、文字和视频交付，累计服务2,000+去重客户。"
+    "studio.desc": "用数学期望与投入产出分析，给中文韩服玩家具体玩法和消费方案；通过攻略、PDF、文字和视频交付，累计服务2,000+去重客户。",
+    "metric.scope": "2026 年 6 月初至 9 月初，由我负责的企业部门／组织信息字段；人工与 AI 辅助相结合。精度 40%多→85%，覆盖率 30%多→75%。",
+    "metric.formula": "精度＝正确抽出条目／全部抽出条目；覆盖率＝全部抽出条目／正解集条目。"
   },
   "en": {
     "contact.copy": "Copy email address",
-    "entry.title": "Explore the details",
-    "entry.apps": "Features, demos and app screenshots",
-    "entry.work": "Problems, decisions and results",
+    "entry.title": "Where would you like to start?",
+    "entry.apps": "From everyday and research needs to tools you can try",
+    "entry.work": "From business problems to requirements, trade-offs and delivery. Development details are in each case study.",
     "entry.demo": "See features and demos",
     "contact.action": "Contact me",
     "contact.note": "Email me about projects, job opportunities or ideas.",
     "name": "Yo Tenra",
     "romaji": "YO TENRA",
-    "tagline": "Master’s student in Informatics at Kansai University.<br>AI engineering intern at Baseconnect, improving data pipelines and building reusable tools for correcting data errors.",
+    "tagline": "Kansai University master’s student and AI engineering intern at Baseconnect.<br>I start with a practical need, define the problem and design a solution, then use software, data and AI to build something people can use.",
     "contact.title": "More about me",
     "contact.wantedly": "Career profile",
     "contact.jglobal": "Researcher profile",
@@ -266,7 +268,7 @@ const T = {
     "stat.prs.l": "Authored and merged",
     "stat.tasks.v": "38 tasks",
     "stat.tasks.l": "Data error corrections",
-    "stat.quality.v": "40%+ → 85% · 30%+ → 75%",
+    "stat.quality.v": "Accuracy: over 40% → 85%<br>Coverage: over 30% → 75%",
     "stat.quality.l": "Accuracy for one data field · Data coverage",
     "principle.title": "From practical needs to useful tools",
     "principle.body": "<p>I like starting with a problem people encounter in their day-to-day work: understand what needs to change, then turn that understanding into a tool they can use, test and improve.</p><p>At Holly Travel, I did this by clarifying business requirements and coordinating with developers. Today, I use AI extensively in implementation, which lets me take a more direct part in building and testing tools. When I work on several tasks in parallel, I set the goals and priorities, provide the context, and check that the results work together.</p><p>I enjoy connecting product decisions with hands-on engineering—and seeing an idea become something useful.</p>",
@@ -275,19 +277,21 @@ const T = {
     "holly.title": "Holly Travel",
     "studio.title": "Studio Keya_cc",
     "holly.desc": "At Holly Travel, I directly supported the CEO and coordinated business requirements with approximately 5–10 developers. My work focused on translating day-to-day business needs into workable system designs and keeping implementation moving.",
-    "studio.desc": "At Studio Keya_cc, my work combined Chinese-language game content with payment assistance, transaction handling, and game support for players on Korean servers. The videos reached approximately 500,000 cumulative video views, and the business served more than 2,000 unique customers."
+    "studio.desc": "At Studio Keya_cc, my work combined Chinese-language game content with payment assistance, transaction handling, and game support for players on Korean servers. The videos reached approximately 500,000 cumulative video views, and the business served more than 2,000 unique customers.",
+    "metric.scope": "From early June to early September 2026, I was responsible for department and organisational information fields for companies, combining manual work with AI assistance. Accuracy: over 40% → 85%; coverage: over 30% → 75%.",
+    "metric.formula": "Accuracy = number of correctly extracted entries / total number of extracted entries; coverage = total number of extracted entries / number of entries in the ground-truth set."
   },
   "ja": {
     "contact.copy": "メールアドレスをコピー",
-    "entry.title": "詳しい内容はこちら",
-    "entry.apps": "機能・操作デモ・実際の画面",
-    "entry.work": "課題・判断の過程・成果",
+    "entry.title": "どこから見ますか？",
+    "entry.apps": "生活や研究の困りごとから、実際に使えるツールへ",
+    "entry.work": "現場の課題から、要件の整理・判断・実装・提供まで。開発の詳細は各事例で紹介しています。",
     "entry.demo": "機能とデモを見る",
     "contact.action": "連絡する",
     "contact.note": "プロジェクトやお仕事、アイデアについて、メールでお話ししましょう。",
     "name": "楊　天楽",
     "romaji": "YO TENRA",
-    "tagline": "関西大学大学院 総合情報学研究科の修士課程に在籍。<br>BaseconnectでAIエンジニアのインターンとして、データ生成パイプラインの改善と、継続して使えるデータ修正ツールの開発に取り組んでいます。",
+    "tagline": "関西大学大学院の修士課程に在籍し、BaseconnectでAIエンジニアのインターンをしています。<br>具体的な困りごとをもとに、自分で課題を整理して解決策を考え、ソフトウェア・データ・AIを使って実際に使えるものを作っています。",
     "contact.title": "プロフィール",
     "contact.wantedly": "職務経歴",
     "contact.jglobal": "研究者情報",
@@ -334,7 +338,7 @@ const T = {
     "stat.prs.l": "作成し、マージまで実施",
     "stat.tasks.v": "38件",
     "stat.tasks.l": "データ修正タスク",
-    "stat.quality.v": "40％台→85％ · 30％台→75％",
+    "stat.quality.v": "精度 40%台→85%<br>カバレッジ 30%台→75%",
     "stat.quality.l": "特定のデータ項目の精度 · データカバー率",
     "principle.title": "課題を整理して、使えるものにする",
     "principle.body": "<p>実際に使う人の困りごとから考えるのが好きです。まず何を解決したいのかを整理し、使って確かめ、改善を重ねられるツールにしていきます。</p><p>Holly Travelでは、主に業務要件を整理し、開発チームと調整しながらシステムづくりを進めていました。今はAIの力を借りて開発し、自分で動作を確かめながら、実装や改善にもより直接関わっています。</p><p>複数のタスクを並行して進める中では、目標と優先順位を決め、必要な背景を伝え、それぞれの成果を組み合わせて動くかを確かめることが大切だと感じています。何をつくるかを考えることと、実際につくって試すこと。その両方に関わりながら、アイデアを役に立つものにしていく過程を楽しんでいます。</p>",
@@ -343,7 +347,9 @@ const T = {
     "holly.title": "Holly Travel（和旅）",
     "studio.title": "Studio Keya_cc",
     "holly.desc": "CEO直属のアシスタントとして、ホテル料金調整などの業務要件を整理し、約5〜10名の開発メンバーと開発を進めました。現場の操作を踏まえた画面案・デモ・要件文書の作成と、工数や依存関係を考慮した進捗管理を担当しました。",
-    "studio.desc": "韓国語の情報を読めない中国語圏のプレイヤー向けに、ゲームのルールと費用対効果を分析し、支出を抑える攻略案を届けました。攻略画像の制作にも参加し、動画・PDF・文章での配信と相談・支払いサポート・取引サービスを通じて、累計2,000名以上の顧客に対応しました（重複を除く）。"
+    "studio.desc": "韓国語の情報を読めない中国語圏のプレイヤー向けに、ゲームのルールと費用対効果を分析し、支出を抑える攻略案を届けました。攻略画像の制作にも参加し、動画・PDF・文章での配信と相談・支払いサポート・取引サービスを通じて、累計2,000名以上の顧客に対応しました（重複を除く）。",
+    "metric.scope": "2026年6月初旬から9月初旬まで、企業の部署・組織情報の項目を担当し、人による作業とAIの支援を組み合わせました。精度40%台→85%、カバレッジ30%台→75%。",
+    "metric.formula": "精度＝正しく抽出できた件数／抽出した総件数；カバレッジ＝抽出した総件数／正解データの件数。"
   }
 };
 Site.mount(T);

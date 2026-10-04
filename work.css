@@ -63,3 +63,5 @@
 .case-facts li:first-child{padding-top:0}
 .case-facts li:last-child{border-bottom:0;padding-bottom:0}
 @media(max-width:640px){.guide-gallery{grid-template-columns:1fr;gap:20px}.guide-image-link{height:clamp(340px,92vw,500px)}.guide-card figcaption{padding:18px 16px}}
+
+.metric-definition{font-size:13px;line-height:1.8;color:var(--muted);margin:10px 0}
