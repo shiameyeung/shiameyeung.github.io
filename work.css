@@ -65,3 +65,13 @@
 @media(max-width:640px){.guide-gallery{grid-template-columns:1fr;gap:20px}.guide-image-link{height:clamp(340px,92vw,500px)}.guide-card figcaption{padding:18px 16px}}
 
 .metric-definition{font-size:13px;line-height:1.8;color:var(--muted);margin:10px 0}
+
+/* Keep one prominent entry after the concrete engineering examples. */
+.challenge-entry{margin:22px 0 0;background:var(--accent-soft);border-color:#c9d8cd}
+.challenge-entry p{line-height:1.85;font-size:14px;margin:0 0 18px;max-width:48em}
+.challenge-button{display:inline-flex;align-items:center;justify-content:center;gap:16px;max-width:100%;box-sizing:border-box;padding:15px 22px;border:1px solid var(--accent);border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;font:inherit;font-size:15px;font-weight:650;line-height:1.6}
+.challenge-button:hover{background:#365447;border-color:#365447;box-shadow:0 4px 14px #274d4420}
+.challenge-button:focus-visible{outline:3px solid #5a8879;outline-offset:4px}
+.challenge-button span:first-child{min-width:0;overflow-wrap:anywhere}
+.challenge-button span:last-child{flex-shrink:0}
+@media(max-width:520px){.challenge-button{width:100%;padding:14px 16px;text-align:center}}
