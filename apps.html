@@ -209,7 +209,7 @@ function render(lang,t) {
     <div class="app-head"><div class="app-title"><span class="app-badge" aria-hidden="true">${a.mark}</span><div><p class="host">${a.host}</p></div></div>${demo?'':`<div class="app-entry-links"><a class="enter" href="${a.url}" target="_blank" rel="noopener">${t['enter']} ↗</a>${a.locked?`<span class="locked">${t[id+'.locked']||t['locked']}</span>`:''}</div>`}</div>
     ${demo?`<aside class="full-demo-notice"><strong>${demoCopy.demoTitle}</strong><p>${DEMO_NOTICES[id]?.[lang]||demoCopy.demoBody}</p></aside>`:''}
 
-    ${actual?`<h2 class="app-section-heading" id="project-problem">${t['sec.problem']}</h2><p>${t[id+'.problem']}</p><h2 class="app-section-heading" id="project-features" data-rail-key="nav.features">${t['sec.features']}</h2><ul class="feature-list">${Array.from({length:id==='aws'?12:10},(_,i)=>`<li>${t[id+'.f'+(i+1)]}</li>`).join('')}</ul>${demo?`<p class="demo-suggested-action">${t['try.'+id]}</p>`:''}${demo?'':`<h2 class="app-section-heading" id="project-demo" data-rail-key="nav.demo">${t['sec.demo']}</h2><div class="demo-grid" id="demos-${id}">${AppDemos.html(id,t)}</div>`}<h2 class="app-section-heading" id="project-screens" data-rail-key="nav.screens">${t['sec.shots']}</h2><div class="shots">${SHOTS[id].map(v=>{const file=`assets/shots/${id}_${v}_${v==='guide'?'zh':lang}.webp`;return `<figure><a href="${file}" target="_blank" rel="noopener"><img src="${file}" loading="lazy" alt="${String(t[id+'.shot.'+v]).replaceAll('&','&amp;').replaceAll('"','&quot;')}" data-shot="${id}_${v}"></a><figcaption>${t[id+'.shot.'+v]}</figcaption></figure>`;}).join('')}</div><h2 class="app-section-heading" id="project-design" data-rail-key="nav.design">${t['sec.design']}</h2><p>${t[id+'.design']}</p><p class="stack"><b>${t['sec.stack']}</b> · ${t[id+'.stack']}</p>`:
+    ${actual?`<h2 class="app-section-heading" id="project-problem">${t['sec.problem']}</h2><p>${t[id+'.problem']}</p><h2 class="app-section-heading" id="project-features" data-rail-key="nav.features">${t['sec.features']}</h2><ul class="feature-list">${Array.from({length:id==='aws'?12:10},(_,i)=>`<li>${t[id+'.f'+(i+1)]}</li>`).join('')}</ul>${demo?`<p class="demo-suggested-action">${t['try.'+id]}</p>`:''}${demo?'':`<h2 class="app-section-heading" id="project-demo" data-rail-key="nav.demo">${t['sec.demo']}</h2><div class="demo-grid" id="demos-${id}">${AppDemos.html(id,t)}</div>`}<h2 class="app-section-heading" id="project-screens" data-rail-key="nav.screens">${t['sec.shots']}</h2><div class="shots">${SHOTS[id].map(v=>{const file=`assets/shots/${id}_${v}_${v==='guide'&&lang==='en'?'zh':lang}.webp`;return `<figure><a href="${file}" target="_blank" rel="noopener"><img src="${file}" loading="lazy" alt="${String(t[id+'.shot.'+v]).replaceAll('&','&amp;').replaceAll('"','&quot;')}" data-shot="${id}_${v}"></a><figcaption>${t[id+'.shot.'+v]}</figcaption></figure>`;}).join('')}</div><h2 class="app-section-heading" id="project-design" data-rail-key="nav.design">${t['sec.design']}</h2><p>${t[id+'.design']}</p><p class="stack"><b>${t['sec.stack']}</b> · ${t[id+'.stack']}</p>`:
     `<div class="scenes">${a.scenes.map((f,i)=>`<article class="scene"><div class="ui">${f(t)}</div><div class="scene-body"><span class="scene-step">${t['story.'+(i+1)]}</span><p class="scene-cap">${t[id+'.s'+(i+1)]}</p></div></article>`).join('')}</div>`}</section>`;
   }).join('');
   order.filter(id=>SHOTS[id]&&!FULL_DEMOS[id]).forEach(id=>AppDemos.bind(id,t));
@@ -328,7 +328,7 @@ const T = {
     "aws.f7": "错题本与进度：做错的题自动进错题本，可以只练错题；首页显示题库总数、已练习、正确率、错题数。",
     "aws.f8": "术语悬停解释：题干、选项和解析里的术语自动加虚线下划线，悬停或点击显示解释；三种界面语言各有词表；模拟考进行中隐藏解释，交卷回顾时恢复。",
     "aws.f9": "一键复制题目给 AI：把当前题整理成 Markdown——开头是给 AI 的「回答要求」提示词，接着是考试、题库语言、题型、当前选择、题干、选项；作答或回顾之后才附答案与解析，作答前复制不剧透。粘到任何 AI 对话里就能继续学。",
-    "aws.f10": "备考指南：AIF-C01 有一份按官方考纲 v1.1 编写的中文「考前冲刺手册」——考试规则、服务名翻译、「看到 X 选 Y」速查表、概念图解、易混对决、排除法、考场策略、新考点、自测题、速记卡、中英术语对照，共 13 章，首页有入口。",
+    "aws.f10": "备考指南：AIF-C01 和 CLF-C02 各有一份按官方考纲编写的「考前冲刺手册」——考试规则、服务名解读、「看到 X 选 Y」速查表、概念图解、易混对决、排除法、考场策略、新考点、自测题、速记卡、术语对照，共 13 章，首页有入口。",
     "aws.f11": "Google 登录与跨设备同步：登录后进度按账号存到云端，多台设备合并（逐题按时间戳取新）；账号白名单，目前只开放给本人和少数朋友。",
     "aws.f12": "可安装、可离线：装到桌面或手机主屏，缓存过的题库断网也能刷。另有题目导航（按答对／答错／未做／收藏筛选，搜题干或题号）、考试成绩记录（录入 AWS 成绩单分数，首页显示通过状态）、深浅色。",
     "aws.stack": "单页 Web 应用（HTML／CSS／JS），Cloudflare Pages 托管，Pages Functions 做同步后端，Cloudflare Access＋Google 身份源登录，KV 存进度；题库由 Python 脚本从 PDF 解析、清洗并生成，有结构与文本质量的校验脚本。",
@@ -339,7 +339,7 @@ const T = {
     "aws.shot.nav": "题目导航：按答对／答错／未做／收藏筛选，可搜题干或题号。",
     "aws.shot.mock": "模拟考分析：按最近 3 次加权预测实考分数与区间，对比合格线，列出近期成绩。",
     "aws.shot.result": "模拟考成绩：题数、用时、折算分与合格线，可只看错题或逐题回顾。",
-    "aws.shot.guide": "AIF-C01 备考指南（中文）：按官方考纲编写，分章节导航。",
+    "aws.shot.guide": "AIF-C01 备考指南：按官方考纲编写，分章节导航。",
     "aws.design": "把题库、术语表和解析放进同一个界面，复习时既能对照语言，也能回到具体概念。模拟考只抽原题、考中隐藏术语解释，交卷后回顾再显示，贴近真实考场；分数按练习目标折算到 100–1000 分制作参考。进度先存本机，登录只为跨设备同步，断网也能继续刷。",
     "cal.locked": "正式版需要登录，供我个人使用。",
     "cal.problem": "2024 年 9 月到 2025 年 5 月，我从约 100 kg 减到约 65 kg，用的是一张表格：记每天吃了多少、体重怎么变，用这两样反推实际消耗，再按减重目标算出每天能吃多少，边观察边调整。减下来之后要维持，表格每天填太麻烦，我把同一套算法做成了 app：记录更快，目标自动算，进度实时看。",
@@ -637,7 +637,7 @@ const T = {
     "aws.f7": "Incorrect answers are added automatically to a mistake review list for targeted practice. The home screen shows the bank size, questions practiced, accuracy, and mistake count.",
     "aws.f8": "Terms in questions, options, and explanations receive dotted underlines. Hover or click to see a definition, with a glossary for each interface language. Definitions are hidden during mock exams and return during review.",
     "aws.f9": "Copy a question into an AI chat with one click. The Markdown begins with a prompt describing how to answer, followed by the exam, bank language, question type, selected option, question, and choices. Answers and explanations are included after answering or during review, keeping them hidden when copying before an answer. Paste the text into an AI chat to continue studying.",
-    "aws.f10": "A Chinese AIF-C01 revision handbook based on version 1.1 of the official exam guide. Its 13 chapters cover exam rules, translated service names, quick selection cues, concept diagrams, commonly confused concepts, elimination techniques, exam strategy, new topics, self-tests, memory cards, and a Chinese–English glossary. It is linked from the home screen.",
+    "aws.f10": "Revision handbooks for AIF-C01 and CLF-C02, based on the official exam guides. Their 13 chapters cover exam rules, what each service name means, quick selection cues, concept diagrams, commonly confused concepts, elimination techniques, exam strategy, new topics, self-tests, memory cards, and a terminology table. They are linked from the home screen.",
     "aws.f11": "Google sign-in and cross-device synchronization. Progress is saved to the cloud by account and merged across devices using the latest timestamp for each question. Access currently uses an allowlist for me and a few friends.",
     "aws.f12": "Install the app on a desktop or mobile home screen and practice offline with cached question banks. Other features include question navigation with status filters and text or number search, official exam score records with pass status on the home screen, and light and dark themes.",
     "aws.stack": "Single-page web app using HTML, CSS, and JavaScript, hosted on Cloudflare Pages. Pages Functions handle synchronization, Cloudflare Access uses Google as the identity provider, and KV stores progress. Python scripts parse and clean PDFs into question banks, with scripts checking structure and text quality.",
@@ -648,7 +648,7 @@ const T = {
     "aws.shot.nav": "Question navigation: filter by correct, incorrect, unanswered, or favorited, and search by text or question number.",
     "aws.shot.mock": "Mock exam analysis: an estimated exam score and range weighted across the three latest mocks, comparison with the passing threshold, and recent results.",
     "aws.shot.result": "Mock exam results: question count, time taken, scaled score, and passing threshold. Review every question or only mistakes.",
-    "aws.shot.guide": "Chinese AIF-C01 study guide: chapter navigation through material based on the official exam guide.",
+    "aws.shot.guide": "AIF-C01 study guide: chapter navigation through material based on the official exam guide.",
     "aws.design": "Questions, glossary entries, and explanations share one interface, so I can compare languages while returning to the underlying concepts. Mock exams draw only from the original questions and hide definitions until review. Practice scores are scaled to 100–1000 as a study reference. Progress is saved locally first, with sign-in providing cross-device synchronization, so practice can continue offline.",
     "cal.locked": "The full app requires sign-in and is for my personal use.",
     "cal.problem": "From September 2024 to May 2025, I went from about 100 kg to about 65 kg using a spreadsheet. I logged daily intake and weight changes, used them to estimate energy expenditure, then calculated a daily target and adjusted it as I observed the results. After losing the weight, I wanted to maintain it with less daily data entry. I turned the same calculations into an app for quicker logging, automatic targets, and progress updates.",
@@ -946,7 +946,7 @@ const T = {
     "aws.f7": "間違えた問題を自動で保存し、その問題だけを復習できます。ホームには問題数、回答済みの数、正答率、間違えた問題の数を表示します。",
     "aws.f8": "問題文、選択肢、解説の用語に点線の下線を付け、マウスを重ねるかタップすると説明を表示します。3つの画面言語にそれぞれ用語集があります。模試中は説明を隠し、提出後の振り返りで表示します。",
     "aws.f9": "現在の問題を、AIに質問しやすいMarkdown形式でコピーできます。AIへの回答指示に続けて、試験、問題集の言語、問題形式、現在の選択、問題文、選択肢を記載します。正解と解説は回答後・振り返り時にのみ含めるため、回答前には答えが出ません。AIの会話に貼り付けて、続けて学習できます。",
-    "aws.f10": "AIF-C01には、公式試験ガイドv1.1に基づいた中国語の直前対策ガイドがあります。試験ルール、サービス名の訳、問題の手掛かりと選択肢の早見表、概念図、混同しやすい概念の比較、消去法、受験時の戦略、新しい出題項目、確認問題、暗記カード、中英の用語対照など、全13章で構成。ホームから開けます。",
+    "aws.f10": "AIF-C01とCLF-C02には、公式試験ガイドに基づいた直前対策ガイドがあります。試験ルール、サービス名の解説、問題の手掛かりと選択肢の早見表、概念図、混同しやすい概念の比較、消去法、受験時の戦略、新しい出題項目、確認問題、暗記カード、用語対照など、全13章で構成。ホームから開けます。",
     "aws.f11": "Googleでログインすると、学習進捗をアカウントごとにクラウドへ保存します。複数端末の記録は、問題ごとに新しいタイムスタンプを優先して統合します。許可リスト方式で、現在は本人と少数の友人が利用しています。",
     "aws.f12": "PCやスマートフォンのホーム画面にインストールでき、キャッシュ済みの問題集はオフラインでも利用できます。正解・不正解・未回答・お気に入りで絞り込む問題一覧、問題文・番号の検索、AWSのスコアレポートを入力する成績記録、合格状況の表示、ライト・ダークモードもあります。",
     "aws.stack": "HTML/CSS/JavaScriptのシングルページWebアプリ。Cloudflare Pagesで公開し、Pages Functionsを同期用のバックエンド、KVを進捗の保存に使用。Cloudflare AccessとGoogleの認証を利用しています。問題集はPythonスクリプトでPDFから解析・整理して生成し、構造とテキスト品質を検証しています。",
@@ -957,7 +957,7 @@ const T = {
     "aws.shot.nav": "問題一覧：正解・不正解・未回答・お気に入りで絞り込み、問題文や番号で検索できます。",
     "aws.shot.mock": "模試の分析：直近3回を重み付けしてスコアと範囲を予測し、合格ラインや最近の成績と比較します。",
     "aws.shot.result": "模試の結果：問題数、所要時間、換算スコア、合格ラインを表示。間違えた問題だけ、または全問を振り返れます。",
-    "aws.shot.guide": "AIF-C01の中国語学習ガイド：公式試験ガイドに基づいて作成し、章ごとに閲覧できます。",
+    "aws.shot.guide": "AIF-C01の学習ガイド：公式試験ガイドに基づいて作成し、章ごとに閲覧できます。",
     "aws.design": "問題集、用語集、解説を同じ画面にまとめ、言語を比べながら具体的な概念に戻れるようにしました。模試には元の問題を使い、受験中は用語解説を隠し、提出後に表示します。スコアは練習用の目安として100〜1000点に換算。進捗はまず端末に保存し、ログイン後は端末間で同期するため、オフラインでも学習を続けられます。",
     "cal.locked": "正式版はログインが必要で、私個人で使っています。",
     "cal.problem": "2024年9月から2025年5月にかけて、体重を約100kgから約65kgまで減らしました。そのとき使っていたのは表計算です。毎日の摂取量と体重を記録し、その変化から消費量を推定して、減量目標に応じた1日の摂取量を計算し、様子を見ながら調整しました。減量後も記録を続けて体重を維持するため、同じ計算方法をアプリにしました。記録を手軽にし、目標を自動計算し、進み具合をすぐ確認できるようにしています。",
