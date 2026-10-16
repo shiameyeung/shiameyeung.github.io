@@ -7,7 +7,7 @@
     {title:'按搭配取衣',purpose:'把搭配和收纳位置连起来，选好一套就知道去哪里找每件。',how:'这里打开了一套示例搭配。“组成”显示单品，“取衣清单”按位置分组；可以打开单品查看详情，也可以点“今天穿了这套”一起记录。',route:'looks/1',focus:'#wear-outfit',highlight:'.two > section:nth-child(2)'}
   ];
   let panel,launcher,current=0,busy=false;
-  const t=source=>window.L?.lang==='zh'?source:(window.OOTD_DEMO_CONTENT?.ui?.[source]?.[window.L?.lang]||source);
+  const t=source=>window.OOTD_DEMO_CONTENT?.ui?.[source]?.[window.L?.lang]||source;
   function clearHighlight(){document.querySelectorAll('.demo-guide-target').forEach(el=>el.classList.remove('demo-guide-target'));}
   function draw(){
     const step=steps[current],esc=W.esc;
