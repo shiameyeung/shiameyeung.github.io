@@ -18,6 +18,7 @@ window.Site = (() => {
 
   function mount(T, after) {
     const apply = lang => {
+      window.SiteReading?.remember();
       const t = T[lang];
       document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : lang;
       if (t['meta.title']) {
@@ -35,6 +36,7 @@ window.Site = (() => {
       document.querySelectorAll('.langbar button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
       const url=new URL(location); url.searchParams.set('lang',lang); history.replaceState(null,'',url);
       if (after) after(lang, t);
+      window.SiteReading?.mount(lang, t);
       if(window.SiteNavigation) SiteNavigation.mount(lang);
       document.querySelectorAll('[data-home-shot]').forEach(img=>{img.src=`assets/shots/${img.dataset.homeShot}_${lang}.webp`;});
       document.querySelectorAll('a[href]').forEach(a=>{

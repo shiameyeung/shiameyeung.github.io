@@ -4,25 +4,25 @@
 .job-head h2{margin:0;font-size:20px;letter-spacing:.03em}
 .job-head .step{margin:2px 0 0;font-size:12px;color:var(--muted);letter-spacing:.06em}
 .job-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:26px;align-items:start}
-.job-body p{margin:0;color:#4a4340;font-size:14.5px;max-width:40em}
-.comparison{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #e3d9d1;border-radius:9px;padding:14px 10px;background:#fff;font-size:12px}
+.job-body p{margin:0;color:#1d1d1f;font-size:14.5px;max-width:40em}
+.comparison{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #d2d2d7;border-radius:9px;padding:14px 10px;background:#ffffff;font-size:12px}
 
 /* 流れ：上から下へ四段 */
 .flow{display:flex;flex-direction:column;gap:0}
-.flow-step{border:1px solid #e3d9d1;background:#fff;border-radius:9px;padding:7px 10px;font-size:11px;text-align:center}
-.flow-step.done{border-color:var(--tone,#555);background:var(--tint,#eee);font-weight:700;color:var(--tone,#555)}
-.flow-arrow{height:13px;width:1px;margin:0 auto;background:#d9cec5;position:relative}
-.flow-arrow::after{content:'';position:absolute;left:-3px;bottom:0;border:3px solid transparent;border-top-color:#d9cec5}
+.flow-step{border:1px solid #d2d2d7;background:#ffffff;border-radius:9px;padding:7px 10px;font-size:11px;text-align:center}
+.flow-step.done{border-color:var(--tone,#d2d2d7);background:var(--tint,#f5f5f7);font-weight:700;color:var(--tone,#424245)}
+.flow-arrow{height:13px;width:1px;margin:0 auto;background:#d2d2d7;position:relative}
+.flow-arrow::after{content:'';position:absolute;left:-3px;bottom:0;border:3px solid transparent;border-top-color:#d2d2d7}
 
 /* 三つの防線：外から内へ */
 .layers{display:flex;flex-direction:column;gap:7px}
-.layer{display:flex;align-items:center;gap:9px;border:1px solid #e3d9d1;background:#fff;border-radius:9px;padding:7px 10px;font-size:11px}
+.layer{display:flex;align-items:center;gap:9px;border:1px solid #d2d2d7;background:#ffffff;border-radius:9px;padding:7px 10px;font-size:11px}
 .layer b{flex:0 0 19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:10px;
-         background:var(--tint,#eee);color:var(--tone,#555)}
+         background:var(--tint,#f5f5f7);color:var(--tone,#424245)}
 
 .method{border-top:1px solid var(--line);padding:38px 0 8px}
 .method h2{margin:0 0 10px;font-size:17px;letter-spacing:.03em}
-.method p{margin:0;color:#4a4340;font-size:14.5px;max-width:40em}
+.method p{margin:0;color:#1d1d1f;font-size:14.5px;max-width:40em}
 
 @media(max-width:860px){
   .job{padding:32px 0}
@@ -34,9 +34,9 @@
 [role="tabpanel"][hidden]{display:none}
 .work-tabs{display:flex;gap:8px;flex-wrap:wrap;padding:0 0 28px;border-bottom:1px solid var(--line)}
 .work-tabs button{font:inherit;font-size:13px;line-height:1.5;padding:11px 16px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--muted);cursor:pointer;white-space:normal;min-width:0}
-.work-tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
-.work-tabs button:focus-visible{outline:3px solid #527285;outline-offset:4px}
-.case-lead{font-size:15px;margin:28px 0;max-width:48em;color:#4a4340}
+.work-tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#ffffff;font-weight:600}
+.work-tabs button:focus-visible{outline:3px solid #d2d2d7;outline-offset:4px}
+.case-lead{font-size:15px;margin:28px 0;max-width:48em;color:#1d1d1f}
 .case-head{padding:32px 0 22px;border-bottom:1px solid var(--line)}
 .case-head h2{font-size:clamp(23px,3.5vw,31px);line-height:1.55;max-width:26em;margin:0 0 14px;overflow-wrap:anywhere}
 .case-role{font-size:13px;color:var(--muted);margin:0;max-width:54em}
@@ -52,10 +52,10 @@
 .guide-card{margin:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card);min-width:0;display:flex;flex-direction:column}
 .guide-card figcaption{padding:19px 18px 16px}
 .guide-card h4{font-size:16px;line-height:1.65;margin:0 0 10px;overflow-wrap:anywhere}
-.guide-card figcaption p{font-size:13.5px;line-height:1.8;margin:0;color:#4a4340}
+.guide-card figcaption p{font-size:13.5px;line-height:1.8;margin:0;color:#1d1d1f}
 .guide-original{text-decoration:none;text-underline-offset:4px}
 .guide-original:hover{text-decoration:underline}
-.guide-image-link{display:grid;place-items:center;height:400px;padding:12px;background:#f2eee9;border-top:1px solid var(--line);margin-top:auto}
+.guide-image-link{display:grid;place-items:center;height:400px;padding:12px;background:#f5f5f7;border-top:1px solid var(--line);margin-top:auto}
 .guide-image-link img{display:block;width:100%;height:100%;object-fit:contain}
 .guide-original:focus-visible,.guide-image-link:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
 .case-facts{margin:0;padding:0;list-style:none}
@@ -67,11 +67,21 @@
 .metric-definition{font-size:13px;line-height:1.8;color:var(--muted);margin:10px 0}
 
 /* Keep one prominent entry after the concrete engineering examples. */
-.challenge-entry{margin:22px 0 0;background:var(--accent-soft);border-color:#c9d8cd}
+.challenge-entry{margin:22px 0 0;background:var(--accent-soft);border-color:#d2d2d7}
 .challenge-entry p{line-height:1.85;font-size:14px;margin:0 0 18px;max-width:48em}
-.challenge-button{display:inline-flex;align-items:center;justify-content:center;gap:16px;max-width:100%;box-sizing:border-box;padding:15px 22px;border:1px solid var(--accent);border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;font:inherit;font-size:15px;font-weight:650;line-height:1.6}
-.challenge-button:hover{background:#365447;border-color:#365447;box-shadow:0 4px 14px #274d4420}
-.challenge-button:focus-visible{outline:3px solid #5a8879;outline-offset:4px}
+.challenge-button{display:inline-flex;align-items:center;justify-content:center;gap:16px;max-width:100%;box-sizing:border-box;padding:15px 22px;border:1px solid var(--accent);border-radius:12px;background:var(--accent);color:#ffffff;text-decoration:none;font:inherit;font-size:15px;font-weight:650;line-height:1.6}
+.challenge-button:hover{background:#424245;border-color:#d2d2d7;box-shadow:0 4px 14px #00000020}
+.challenge-button:focus-visible{outline:3px solid #d2d2d7;outline-offset:4px}
 .challenge-button span:first-child{min-width:0;overflow-wrap:anywhere}
 .challenge-button span:last-child{flex-shrink:0}
 @media(max-width:520px){.challenge-button{width:100%;padding:14px 16px;text-align:center}}
+/* Method titles remain scanable; each full explanation opens in place. */
+#jobs>.job{padding:0;border-top:0}
+.job>.reading-detail{margin:0;border-bottom:0}
+.job .reading-detail>summary .job-head{margin:0}
+.job .reading-detail>summary .job-head h2{font-size:20px}
+.job .reading-detail-body{padding-bottom:30px}
+.case-part:has(>.reading-detail){padding:0}
+.case-part>.reading-detail{margin:0;border-bottom:0}
+.method:has(>.reading-detail){padding:0;border-top:0}
+@media(max-width:650px){.job .reading-detail>summary .job-head h2{font-size:18px}}

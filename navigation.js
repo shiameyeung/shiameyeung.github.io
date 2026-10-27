@@ -197,7 +197,7 @@ window.SiteNavigation = (() => {
   function collectSections() {
     const used = new Set();
     return [...document.querySelectorAll('.wrap h2,.wrap [data-rail-label]')].flatMap((heading, index) => {
-      if (heading.closest('a,nav,footer,.facts,.resume-card,[data-rail-exclude],[hidden],details:not([open])')) return [];
+      if (heading.closest('a,nav,footer,.facts,.resume-card,[data-rail-exclude],[hidden],details.reading-detail,details:not([open])')) return [];
       if (!heading.closest('main,section') && !heading.hasAttribute('data-rail-label')) return [];
       const text = heading.dataset.railLabel || headingText(heading);
       if (!text || /^\d+$/.test(text)) return [];
@@ -276,6 +276,7 @@ window.SiteNavigation = (() => {
   function scrollToTarget(id, focus = false, smooth = false) {
     const target = id === 'page-top' ? document.getElementById('site-header') : document.getElementById(id);
     if (!target) return;
+    window.SiteReading?.reveal(target);
     if (id === 'page-top') window.scrollTo({top: 0, behavior: smooth && !reducedMotion.matches ? 'smooth' : 'auto'});
     else target.scrollIntoView({block: 'start', behavior: smooth && !reducedMotion.matches ? 'smooth' : 'auto'});
     if (focus) {
@@ -336,7 +337,7 @@ window.SiteNavigation = (() => {
     const observer = new MutationObserver(records => {
       if (records.some(record => !(record.target.nodeType === 1 ? record.target : record.target.parentElement)?.closest('#page-outline,#page-navigation,#reading-next'))) queueRefresh();
     });
-    observer.observe(document.querySelector('.wrap'), {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['hidden', 'data-rail-label', 'data-rail-key']});
+    observer.observe(document.querySelector('.wrap'), {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['hidden', 'data-rail-label', 'data-rail-key', 'open']});
     addEventListener('load', () => {
       syncHeaderHeight();
       try { scrollToTarget(decodeURIComponent(location.hash.slice(1))); } catch (_) {}

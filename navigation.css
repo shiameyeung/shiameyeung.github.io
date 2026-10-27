@@ -1,6 +1,6 @@
 /* A quiet global bar, a local page bar, and a clear next step. */
-:root{--nav-height:64px;--page-nav-height:0px;--demo-entry-height:0px;--reading-top:calc(var(--nav-height) + var(--page-nav-height) + var(--demo-entry-height));--link:#216b9c}
-.site-header{position:sticky;top:0;z-index:30;background:#fbf9f6ed;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+:root{--nav-height:64px;--page-nav-height:0px;--demo-entry-height:0px;--reading-top:calc(var(--nav-height) + var(--page-nav-height) + var(--demo-entry-height));--link:#1d1d1f}
+.site-header{position:sticky;top:0;z-index:30;background:#f5f5f7ed;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
 .site-header-inner{max-width:1120px;margin:auto;min-height:64px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .site-brand{font-size:15px;font-weight:700;letter-spacing:.12em;text-decoration:none;white-space:nowrap}
 .site-nav{display:flex;gap:26px;align-items:center}.site-nav a{font-size:13px;text-decoration:none;color:var(--muted);white-space:nowrap;padding:19px 0;position:relative}
@@ -11,9 +11,9 @@
 .section-nav{display:flex;gap:22px;overflow-x:auto;scrollbar-width:thin}.section-nav:empty{display:none}.section-nav a{font-size:12px;text-decoration:none;color:var(--muted);white-space:nowrap;padding:9px 0 2px}.section-nav a[aria-current=page]{color:var(--ink);font-weight:700}
 [hidden]{display:none!important}html{scroll-padding-top:calc(var(--reading-top) + 24px)}.section-anchor,.app,[id^=project-],.case-section{scroll-margin-top:0}
 .breadcrumbs [aria-current=page]{color:var(--ink);font-weight:600}
-.explore{gap:18px}.explore a{font-size:14px;font-weight:600;color:var(--link);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:9px 18px;background:var(--card)}.explore a:hover{background:#edf2f4}
+.explore{gap:18px}.explore a{font-size:14px;font-weight:600;color:var(--link);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:9px 18px;background:var(--card)}.explore a:hover{background:#f5f5f7}
 .everyday-feature{padding:48px 0 68px}.everyday-feature .section-heading{font-size:clamp(30px,4.4vw,42px);letter-spacing:-.03em;line-height:1.3;margin-bottom:18px}.everyday-feature .section-intro{font-size:16px;max-width:44em;margin-bottom:30px}
-.everyday-grid{gap:20px}.small-project{padding:0;overflow:hidden;display:flex;flex-direction:column}.project-cover{width:100%;height:190px;object-fit:cover;object-position:top;background:#fff;border-bottom:1px solid var(--line)}.small-project h3{font-size:22px;margin:22px 22px 10px}.small-project p{margin:0 22px 24px;font-size:14px;flex:1}.small-project .card-link{margin:0 22px 22px;color:var(--link)}
+.everyday-grid{gap:20px}.small-project{padding:0;overflow:hidden;display:flex;flex-direction:column}.project-cover{width:100%;height:190px;object-fit:cover;object-position:top;background:#ffffff;border-bottom:1px solid var(--line)}.small-project h3{font-size:22px;margin:22px 22px 10px}.small-project p{margin:0 22px 24px;font-size:14px;flex:1}.small-project .card-link{margin:0 22px 22px;color:var(--link)}
 .work-preview{margin:0 0 30px}.selected-projects{padding:54px 0}.career-next p{font-size:18px;max-width:43em}.section-heading{font-size:clamp(25px,3.6vw,34px);line-height:1.4}
 .reading-next{display:flex;gap:12px;flex-wrap:wrap;padding:30px 0;border-top:1px solid var(--line);margin-top:24px}.reading-next a{font-size:14px;color:var(--link);padding:10px 16px;border:1px solid var(--line);border-radius:12px;text-decoration:none;background:var(--card)}.reading-next a:hover{text-decoration:underline;text-underline-offset:4px}
 .project-overview-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.project-overview-card{border:1px solid var(--line);border-radius:20px;background:white;text-decoration:none;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s}.project-overview-card:hover{transform:translateY(-3px)}.project-overview-card img{width:100%;height:200px;object-fit:cover;object-position:top;background:white}.project-overview-card>div{padding:24px;display:flex;flex-direction:column;flex:1}.project-overview-card h2{font-size:23px;line-height:1.35;margin:0 0 16px}.project-overview-card p{font-size:14px;color:var(--muted);flex:1;margin:0 0 22px}.project-overview-card .card-link{color:var(--link)}.overview-mark{font-size:34px;margin:24px 24px 0}.research-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.research-overview{margin-top:32px}.research-overview h2{margin-bottom:24px}
@@ -23,10 +23,10 @@
 
 .site-brand{display:inline-flex;align-items:center;gap:10px}
 .site-logo{width:44px;height:44px;object-fit:contain;flex:0 0 44px}
-.copy-email-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:11px 14px;min-height:44px;border:1px solid #c4d4dc;border-radius:10px;background:var(--card);color:var(--link);font:inherit;font-size:13px;font-weight:600;line-height:1.5;cursor:pointer}
-.copy-email-button:hover{background:#f7fafb;border-color:var(--link)}
+.copy-email-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:11px 14px;min-height:44px;border:1px solid #d2d2d7;border-radius:10px;background:var(--card);color:var(--link);font:inherit;font-size:13px;font-weight:600;line-height:1.5;cursor:pointer}
+.copy-email-button:hover{background:#f5f5f7;border-color:var(--link)}
 .copy-email-button svg{width:17px;height:17px;flex-shrink:0}
-.copy-email-button[data-copy-state=success]{color:var(--accent);border-color:#a9bfb6;background:var(--accent-soft)}
+.copy-email-button[data-copy-state=success]{color:var(--accent);border-color:#d2d2d7;background:var(--accent-soft)}
 .copy-email-status{display:block;width:100%;font-size:12px;line-height:1.6;color:var(--muted)}
 .copy-email-status:empty{display:none}
 .reading-contact{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
@@ -58,15 +58,15 @@ html.has-outline{scroll-padding-top:calc(var(--reading-top) + 80px)}
 .section-rail a{display:flex;align-items:center;gap:10px;padding:9px 12px;color:var(--muted);text-decoration:none;border-radius:7px;line-height:1.45;position:relative}
 .section-rail a svg{width:17px;height:17px;flex:0 0 17px}
 .outline-list a>span{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere}
-.section-rail a:hover{background:#f2ede7;color:var(--ink)}
+.section-rail a:hover{background:#f5f5f7;color:var(--ink)}
 .section-rail a[aria-current=location]{color:var(--accent);font-weight:600;background:var(--accent-soft)}
 @media(max-width:1279px){
   .outline-list a[aria-current=location] svg{color:transparent;background:url('assets/brand/kiwi-fruit.svg?v=20261002-kiwi4') center/contain no-repeat}
   .outline-current::before{content:'';display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-2px;background:url('assets/brand/kiwi-fruit.svg?v=20261002-kiwi4') center/contain no-repeat}
 }
 .outline-top{margin:0 16px 12px;border-top:1px solid var(--line);border-radius:0!important}
-.section-rail summary:focus-visible{outline:3px solid #5a8879;outline-offset:4px}
-.section-anchor:focus-visible{outline:3px solid #5a8879;outline-offset:6px}
+.section-rail summary:focus-visible{outline:3px solid #d2d2d7;outline-offset:4px}
+.section-anchor:focus-visible{outline:3px solid #d2d2d7;outline-offset:6px}
 @media(min-width:1280px){
   html.has-outline{scroll-padding-top:calc(var(--reading-top) + 24px)}
   .section-rail{position:fixed;left:max(12px,calc((100vw - 940px)/2 - 188px));top:calc(var(--reading-top) + 40px);width:160px;max-height:calc(100dvh - var(--reading-top) - 72px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;margin:0;z-index:10;background:none;box-shadow:none}
@@ -75,7 +75,7 @@ html.has-outline{scroll-padding-top:calc(var(--reading-top) + 80px)}
   .outline-list{display:block;padding:0 0 0 11px;border-left:1px solid var(--line);margin-left:12px}
   .outline-list li+li{margin-top:4px}
   .outline-list a{padding:8px 8px;min-height:36px;gap:8px}
-  .outline-list a::before{content:'';position:absolute;left:-15px;width:9px;height:1px;background:#cfc5ba}
+  .outline-list a::before{content:'';position:absolute;left:-15px;width:9px;height:1px;background:#d2d2d7}
   .outline-list a[aria-current=location]::before{left:-23px;width:22px;height:22px;background:var(--bg) url('assets/brand/kiwi-fruit.svg?v=20261002-kiwi4') center/contain no-repeat;border-radius:50%}
   .outline-top{margin:14px 0 0 16px;padding:12px 8px!important;font-size:11px}
 }
@@ -92,7 +92,7 @@ html.has-outline{scroll-padding-top:calc(var(--reading-top) + 80px)}
   .site-logo{transition:transform .18s ease}
   .site-brand:is(:hover,:focus-visible) .site-logo{transform:rotate(-8deg) translateY(-1px)}
   .entry-card:is(:hover,:focus-visible) .entry-arrow{color:transparent;background:var(--accent-soft) url('assets/brand/kiwi-fruit.svg?v=20261002-kiwi4') center/25px no-repeat}
-  .primary-link:is(:hover,:focus-visible),.contact-button:is(:hover,:focus-visible){box-shadow:0 0 0 3px #c9ddcf}
+  .primary-link:is(:hover,:focus-visible),.contact-button:is(:hover,:focus-visible){box-shadow:0 0 0 3px #000000}
   .outline-top::after{content:'';position:absolute;right:4px;top:-14px;width:28px;height:28px;background:url('assets/brand/kiwi-peek.png?v=20261002-kiwi2') center/contain no-repeat;opacity:0;transform:translateY(3px);transition:opacity .18s ease,transform .18s ease;pointer-events:none}
   .outline-top:is(:hover,:focus-visible)::after{opacity:1;transform:none}
 }
@@ -102,5 +102,13 @@ html.has-outline{scroll-padding-top:calc(var(--reading-top) + 80px)}
 }
 
 /* Wordmark D: selected by the owner, 2026-10-04. */
-.site-wordmark.mark-d{font-family:system-ui,sans-serif;font-weight:750;letter-spacing:-.055em;color:#274d44;line-height:1.25}
+.site-wordmark.mark-d{font-family:var(--latin),sans-serif;font-weight:750;letter-spacing:-.055em;color:#1d1d1f;line-height:1.25}
 .site-wordmark.mark-d i{display:inline-block;transform:rotate(-9deg);font-style:normal}
+
+/* Monochrome display preserves source image files and original evidence links. */
+.site-logo,.page-mascot,.section-mascot,.contact-mascot,.kiwi-finale img,
+.outline-top::after,.project-cover,.project-overview-card img,.shots img,
+.overview-mark,.small-mark,.app-badge{filter:grayscale(1)}
+.site-header{background:#ffffffed}
+.section-rail a[aria-current=location]{box-shadow:inset 3px 0 #1d1d1f}
+.copy-email-button[data-copy-state=success]{border-style:double;border-width:3px;padding:9px 12px}
