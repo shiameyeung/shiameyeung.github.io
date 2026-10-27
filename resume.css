@@ -12,13 +12,5 @@
 
 .resume-use{font-size:14px;line-height:1.8;color:var(--muted);margin:0 0 16px}.resume-availability{font-size:15px;line-height:1.8;margin:0 0 28px;border-left:3px solid var(--accent);padding:10px 16px}.resume-pages{font-size:12px;color:var(--muted);margin:0 0 22px}
 
-/* Role-specific résumé downloads, approved 2026-10-26. */
-.role-resumes{grid-column:1/-1;margin-top:22px}
-.role-resumes>h2{margin:0 0 10px;font-size:24px;line-height:1.45}
-.role-resume-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:20px}
-.role-card h3{margin:0 0 10px;font-size:20px;line-height:1.45}
-@media(max-width:650px){.role-resume-grid{grid-template-columns:1fr;gap:18px}}
-/* Two general-purpose versions stay above a distinct role-specific section. */
+/* General-purpose résumé downloads. */
 .resume-card{background:#f5f5f7}
-.role-resumes{padding-top:38px;border-top:1px solid var(--line)}
-.role-card{background:#ffffff}
