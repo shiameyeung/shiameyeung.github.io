@@ -104,11 +104,6 @@ html.has-outline{scroll-padding-top:calc(var(--reading-top) + 80px)}
 /* Wordmark D: selected by the owner, 2026-10-04. */
 .site-wordmark.mark-d{font-family:var(--latin),sans-serif;font-weight:750;letter-spacing:-.055em;color:#1d1d1f;line-height:1.25}
 .site-wordmark.mark-d i{display:inline-block;transform:rotate(-9deg);font-style:normal}
-
-/* Monochrome display preserves source image files and original evidence links. */
-.site-logo,.page-mascot,.section-mascot,.contact-mascot,.kiwi-finale img,
-.outline-top::after,.project-cover,.project-overview-card img,.shots img,
-.overview-mark,.small-mark,.app-badge{filter:grayscale(1)}
 .site-header{background:#ffffffed}
 .section-rail a[aria-current=location]{box-shadow:inset 3px 0 #1d1d1f}
 .copy-email-button[data-copy-state=success]{border-style:double;border-width:3px;padding:9px 12px}

@@ -69,8 +69,13 @@ window.SiteReading = (() => {
       jobs.classList.add('reading-chapter'); jobs.prepend(heading('chapter.approach'));
     }
     ['holly', 'studio'].forEach(id => {
-      document.querySelectorAll('#' + id + ' .case-part').forEach((s, i) => { if (i > 0) foldSection(s, s.id + '-detail'); });
+      document.querySelectorAll('#' + id + ' .case-part').forEach((s, i) => {
+        if (i > 0 && !['holly-role', 'studio-results'].includes(s.id)) foldSection(s, s.id + '-detail');
+      });
     });
+    const studioResults = document.getElementById('studio-results');
+    const studioContext = document.getElementById('studio-context');
+    if (studioResults && studioContext) studioContext.after(studioResults);
     foldSection(document.getElementById('work-method'), 'work-method-detail');
   }
   function apps() {

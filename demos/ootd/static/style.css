@@ -46,4 +46,4 @@ html[lang^="zh"],:lang(zh){--apple-font:var(--apple-font-zh)}
 body,button,input,select,textarea,canvas{font-family:var(--apple-font)}
 
 :root{--bg:#f5f5f7;--panel:#fff;--paper:#fff;--ink:#1d1d1f;--muted:#6e6e73;--line:#d2d2d7;--primary:#1d1d1f;--on:#fff;--danger:#1d1d1f;--pink:#e8e8ed;--mint:#e8e8ed;--lilac:#f5f5f7;--lemon:#f5f5f7;--shadow:0 6px 20px rgba(0,0,0,.05)}
-body{font-family:var(--apple-font)}button.danger{border-style:dashed}.error{font-weight:600}.project-footer img{filter:grayscale(1)}
+body{font-family:var(--apple-font)}button.danger{border-style:dashed}.error{font-weight:600}
