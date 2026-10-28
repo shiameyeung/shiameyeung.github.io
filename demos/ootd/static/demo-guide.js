@@ -2,7 +2,7 @@
 (() => {
   if (!window.OOTD_DEMO) return;
   const steps=[
-    {title:'找单品',purpose:'看清自己已经有什么，不靠记忆翻找衣物和彩妆。',how:'切换“衣橱 / 彩妆”，在搜索框输入名称、品牌或编号，也可以按分类筛选。点开一件查看它的资料、位置和使用次数。',route:'items',focus:'#q',highlight:'.filter-panel'},
+    {title:'找单品',purpose:'查找已有的衣物和彩妆，清楚看到自己拥有哪些单品。',how:'切换“衣橱 / 彩妆”，在搜索框输入名称、品牌或编号，也可以按分类筛选。点开一件查看它的资料、位置和使用次数。',route:'items',focus:'#q',highlight:'.filter-panel'},
     {title:'记录今天穿了什么',purpose:'把实际穿着变成记录，累计次数与每次成本会跟着更新。',how:'点选一件或几件，再点“记录今天穿了”。同一件同一天只计一次；点进已记录的单品，可以查看次数、费用并撤销今天的记录。',route:'today/apparel',focus:'.today-panel button[data-pick]',highlight:'.today-panel'},
     {title:'按搭配取衣',purpose:'把搭配和收纳位置连起来，选好一套就知道去哪里找每件。',how:'这里打开了一套示例搭配。“组成”显示单品，“取衣清单”按位置分组；可以打开单品查看详情，也可以点“今天穿了这套”一起记录。',route:'looks/1',focus:'#wear-outfit',highlight:'.two > section:nth-child(2)'}
   ];
