@@ -38,7 +38,7 @@ window.Site = (() => {
       if (after) after(lang, t);
       window.SiteReading?.mount(lang, t);
       if(window.SiteNavigation) SiteNavigation.mount(lang);
-      document.querySelectorAll('[data-home-shot]').forEach(img=>{img.src=`assets/shots/${img.dataset.homeShot}_${lang}.webp${/^(aws|cal)_/.test(img.dataset.homeShot)?"?v=20261030":""}`;});
+      document.querySelectorAll('[data-home-shot]').forEach(img=>{img.src=`assets/shots/${img.dataset.homeShot}_${lang}.webp${/^(aws|cal|ootd)_/.test(img.dataset.homeShot)?"?v=20261030":""}`;});
       document.querySelectorAll('a[href]').forEach(a=>{
         const u=new URL(a.getAttribute('href'),location);
         if(u.origin===location.origin && /(?:index|apps|work|challenge|resume)\.html$/.test(u.pathname)){u.searchParams.set('lang',lang);a.setAttribute('href',u.pathname.split('/').pop()+u.search+u.hash);}
