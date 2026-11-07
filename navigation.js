@@ -197,7 +197,7 @@ window.SiteNavigation = (() => {
   function collectSections() {
     const used = new Set();
     return [...document.querySelectorAll('.wrap h2,.wrap [data-rail-label]')].flatMap((heading, index) => {
-      if (heading.closest('a,nav,footer,.facts,.resume-card,[data-rail-exclude],[hidden],details.reading-detail,details:not([open])')) return [];
+      if (heading.closest('a,nav,footer,.facts,.resume-card,[data-rail-exclude],[hidden]')) return [];
       if (!heading.closest('main,section') && !heading.hasAttribute('data-rail-label')) return [];
       const text = heading.dataset.railLabel || headingText(heading);
       if (!text || /^\d+$/.test(text)) return [];
@@ -308,13 +308,12 @@ window.SiteNavigation = (() => {
         event.preventDefault();
         const hash = '#' + encodeURIComponent(anchor.dataset.target);
         if (location.hash !== hash) history.pushState(null, '', hash);
-        if (!desktop.matches) rail.querySelector('details').open = false;
         scrollToTarget(anchor.dataset.target, true, true);
       });
     }
     const t = labels[language];
     rail.setAttribute('aria-label', t['nav.chapters']);
-    rail.innerHTML = `<details${desktop.matches ? ' open' : ''}><summary><span>${escape(t['nav.chapters'])}</span><span class="outline-current"></span></summary><ul class="outline-list">${sections.map(item => `<li><a href="#${encodeURIComponent(item.target.id)}" data-target="${escape(item.target.id)}" title="${escape(item.text)}">${icon(item.kind)}<span>${escape(item.short)}</span></a></li>`).join('')}</ul><a class="outline-top" href="#page-top" data-target="page-top">${icon('top')}<span>${escape(t['nav.top'])}</span></a></details>`;
+    rail.innerHTML = `<div class="outline-content"><div class="outline-heading"><span>${escape(t['nav.chapters'])}</span><span class="outline-current"></span></div><ul class="outline-list">${sections.map(item => `<li><a href="#${encodeURIComponent(item.target.id)}" data-target="${escape(item.target.id)}" title="${escape(item.text)}">${icon(item.kind)}<span>${escape(item.short)}</span></a></li>`).join('')}</ul><a class="outline-top" href="#page-top" data-target="page-top">${icon('top')}<span>${escape(t['nav.top'])}</span></a></div>`;
     updateCurrent();
   }
 
@@ -327,10 +326,6 @@ window.SiteNavigation = (() => {
     watching = true;
     addEventListener('scroll', onScroll, {passive: true});
     addEventListener('resize', () => { syncHeaderHeight(); onScroll(); }, {passive: true});
-    desktop.addEventListener('change', () => {
-      const details = document.querySelector('#page-outline details');
-      if (details) details.open = desktop.matches;
-    });
     addEventListener('hashchange', () => {
       try { scrollToTarget(decodeURIComponent(location.hash.slice(1))); } catch (_) {}
     });

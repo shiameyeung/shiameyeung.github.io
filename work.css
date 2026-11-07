@@ -31,11 +31,12 @@
 }
 
 /* Three business contexts share a single page and readable case headings. */
-[role="tabpanel"][hidden]{display:none}
+.work-case+.work-case{margin-top:56px;border-top:2px solid var(--line)}
+.work-case{scroll-margin-top:calc(var(--reading-top,100px) + 20px)}
 .work-tabs{display:flex;gap:8px;flex-wrap:wrap;padding:0 0 28px;border-bottom:1px solid var(--line)}
-.work-tabs button{font:inherit;font-size:13px;line-height:1.5;padding:11px 16px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--muted);cursor:pointer;white-space:normal;min-width:0}
-.work-tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#ffffff;font-weight:600}
-.work-tabs button:focus-visible{outline:3px solid #d2d2d7;outline-offset:4px}
+.work-tabs a{font:inherit;font-size:13px;line-height:1.5;padding:11px 16px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--muted);text-decoration:none;white-space:normal;min-width:0}
+.work-tabs a:hover{background:var(--accent-soft);color:var(--ink)}
+.work-tabs a:focus-visible{outline:3px solid #d2d2d7;outline-offset:4px}
 .case-lead{font-size:15px;margin:28px 0;max-width:48em;color:#1d1d1f}
 .case-head{padding:32px 0 22px;border-bottom:1px solid var(--line)}
 .case-head h2{font-size:clamp(23px,3.5vw,31px);line-height:1.55;max-width:26em;margin:0 0 14px;overflow-wrap:anywhere}
@@ -45,7 +46,7 @@
 .case-part h3{font-size:18px;line-height:1.6;margin:0 0 12px}
 .case-part p{font-size:15px;margin:0 0 16px;line-height:1.95}
 .case-part p:last-child{margin-bottom:0}
-@media(max-width:520px){.work-tabs{gap:7px}.work-tabs button{padding:10px 12px;font-size:12px}.case-head{padding-top:26px}.case-part{padding:22px 0}}
+@media(max-width:520px){.work-tabs{gap:7px}.work-tabs a{padding:10px 12px;font-size:12px}.case-head{padding-top:26px}.case-part{padding:22px 0}}
 
 /* Historical guide examples retain the original image contents and aspect ratio. */
 .guide-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:22px}
@@ -75,16 +76,16 @@
 .challenge-button span:first-child{min-width:0;overflow-wrap:anywhere}
 .challenge-button span:last-child{flex-shrink:0}
 @media(max-width:520px){.challenge-button{width:100%;padding:14px 16px;text-align:center}}
-/* Method titles remain scanable; each full explanation opens in place. */
+/* Method titles lead directly into each complete explanation. */
 #jobs>.job{padding:0;border-top:0}
 .job>.reading-detail{margin:0;border-bottom:0}
-.job .reading-detail>summary .job-head{margin:0}
-.job .reading-detail>summary .job-head h2{font-size:20px}
+.job .reading-detail>[data-reading-heading] .job-head{margin:0}
+.job .reading-detail>[data-reading-heading] .job-head h2{font-size:20px}
 .job .reading-detail-body{padding-bottom:30px}
 .case-part:has(>.reading-detail){padding:0}
 .case-part>.reading-detail{margin:0;border-bottom:0}
 .method:has(>.reading-detail){padding:0;border-top:0}
-@media(max-width:650px){.job .reading-detail>summary .job-head h2{font-size:18px}}
+@media(max-width:650px){.job .reading-detail>[data-reading-heading] .job-head h2{font-size:18px}}
 
 /* Studio: key figures first, with the full amount definitions available in place. */
 .studio-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:20px 0 22px;padding:0;list-style:none}
@@ -93,7 +94,7 @@
 .studio-metric-label{display:block;margin-top:12px;font-size:14px;line-height:1.55;font-weight:600}
 .studio-metric small{display:block;margin-top:8px;color:var(--muted);font-size:11.5px;line-height:1.65}
 .studio-amounts{margin:0 0 28px}
-.studio-amounts>summary{font-size:13px}
+.studio-amounts>[data-reading-heading]{font-size:13px}
 .studio-amounts .reading-detail-body p{font-size:13px;line-height:1.85;color:var(--muted)}
 .studio-reflection{padding:25px 0 4px;border-top:1px solid var(--line)}
 .studio-reflection h4{font-size:19px;line-height:1.55;margin:0 0 13px}

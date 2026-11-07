@@ -7,11 +7,11 @@
 
 .metric-definition{font-size:13px;line-height:1.8;color:var(--muted);margin:10px 0}
 /* A result snapshot precedes the full process and supporting details. */
-#summary>.reading-detail>summary h2,#featured-case>.reading-detail>summary h2{font-size:16px}
+#summary>.reading-detail>[data-reading-heading] h2,#featured-case>.reading-detail>[data-reading-heading] h2{font-size:16px}
 .reading-evidence{margin:24px 0 36px;background:#f5f5f7;border-color:#d2d2d7;padding:28px}
 .reading-evidence .result-stats strong{color:#1d1d1f;font-size:clamp(22px,3.2vw,34px)}
 #article>.case-section:has(>.reading-detail){padding:0;border-top:0;margin-top:0}
 .case-section>.reading-detail{margin:0;border-bottom:0}
-.case-section .reading-detail>summary h2{display:flex;gap:14px;align-items:baseline}
+.case-section .reading-detail>[data-reading-heading] h2{display:flex;gap:14px;align-items:baseline}
 .case-section .reading-detail-body>p{max-width:52em}
 #full-process>.reading-detail{margin-bottom:30px}
