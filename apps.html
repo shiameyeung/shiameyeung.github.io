@@ -33,7 +33,7 @@
   <header class="page-head mascot-page-head">
     <h1 data-t="page.title">個人でつくったアプリと研究用ツール</h1>
     <p data-t="page.lead">日々使っている3つのWebアプリと、2つの研究用ツールを紹介。機能や実際の画面、操作できるデモに加え、資料を整理・更新する進め方も掲載。</p>
-    <p class="page-note" data-t="page.note" hidden="">各プロジェクトでは、私が要件とルールを決め、結果を検証しています。実装にはAIの支援を多く取り入れています。このページの操作デモはサンプルデータを使用しています。AWS Pass Itのスクリーンショットも、サンプルデータを使う体験版の画面です。ほかのスクリーンショットは実際のアプリをもとに、個人データと一部の画面の文言を公開向けに調整しました。</p>
+
   <img class="page-mascot" src="assets/brand/kiwi-curious.png?v=20261002-kiwi2" width="256" height="256" alt="" aria-hidden="true"></header>
 
 
@@ -204,14 +204,13 @@ function render(lang,t) {
   if(selected) {
     head.querySelector('h1').textContent=t[selected+'.title'];
     head.querySelector('[data-t="page.lead"]').textContent=t[selected+'.desc'];
-    head.querySelector('.page-note').hidden=false;
     document.title=t[selected+'.title']+' — '+(lang==='en'?'Yo Tenra':'楊 天楽');
     if(FULL_DEMOS[selected]) {
       const app=APPS.find(x=>x.id===selected), copy=DEMO_ENTRY_COPY[lang], demoUrl=new URL(FULL_DEMOS[selected]);demoUrl.searchParams.set("lang",lang);const url=demoUrl.href;
       const fullUrl=new URL(app.url);fullUrl.searchParams.set('lang',lang);
       head.querySelector('h1').insertAdjacentHTML('afterend',`<div class="project-demo-hero" style="--tone:${app.tone};--tint:${app.tint};--paper:${app.paper}"><div class="project-demo-slot"><div class="app-entry-links"><a class="enter enter-demo" href="${url}" target="_blank" rel="noopener">${copy.demoEnter}</a><a class="enter enter-secondary" href="${fullUrl.href}" target="_blank" rel="noopener">${copy.demoExit}</a></div></div><p class="app-access-note">${t[selected+'.locked']}</p></div>`);
     }
-  } else head.querySelector('.page-note').hidden=false;
+  }
   const card=id=>{const a=APPS.find(x=>x.id===id), actual=!!SHOTS[id];return `<a class="project-overview-card" href="apps.html?project=${id}">${actual?`<img src="assets/shots/${id}_${id==='aws'?'home':id==='cal'?'today':'wardrobe'}_${lang}.webp${id==='aws'||id==='cal'||id==='ootd'?'?v=20261030':''}" alt="" loading="lazy">`:`<span class="overview-mark" aria-hidden="true">${a.mark}</span>`}<div><h2>${t[id+'.title'].split(' · ')[0]}</h2><p>${t[id+'.desc']}</p><span class="card-link">${SiteNavigation.label(lang,'nav.read')} →</span></div></a>`;};
   if(!selected) {
     document.getElementById('apps').innerHTML=`<div class="project-overview-grid">${all.slice(0,3).map(card).join('')}</div><section class="research-overview"><h2 class="section-heading" data-rail-key="chapter.research">${SiteNavigation.label(lang,'story.research')}</h2><div class="project-overview-grid research-grid">${all.slice(3).map(card).join('')}</div></section>${renderJobWorkflow(t)}`;
@@ -319,7 +318,7 @@ const T = {
     "sna.ui.cut": "显示连接网络不同部分的节点",
     "sna.ui.top": "被依赖数量排名",
     "sna.ui.rule": "可对照指标与规则核实的说明",
-    "page.note": "各项目的需求和规则由我确定，结果由我验证，大量实现借助 AI 完成。本页的交互演示使用示例数据；AWS Pass It 的截图也来自使用示例数据的体验版。其他截图取自实际应用，个人数据和部分界面文字已为公开展示做了调整。",
+
     "story.1": "想解决的问题",
     "story.2": "设计与选择",
     "story.3": "做成了什么",
@@ -659,7 +658,7 @@ const T = {
     "sna.ui.cut": "Show nodes that connect different parts of the network",
     "sna.ui.top": "Top packages by dependent count",
     "sna.ui.rule": "Explanations you can check against metrics and rules",
-    "page.note": "I define the requirements and rules for each project and verify the results, with extensive AI assistance in implementation. The interactive demos on this page use sample data. The AWS Pass It screenshots also show its demo version with sample data. Other screenshots are based on the actual apps, with personal data and some interface wording adjusted for public viewing.",
+
     "story.1": "The problem I wanted to solve",
     "story.2": "Design choices",
     "story.3": "What I built",
@@ -999,7 +998,7 @@ const T = {
     "sna.ui.cut": "ネットワークの異なる部分をつなぐノードを表示",
     "sna.ui.top": "依存される数の上位",
     "sna.ui.rule": "指標やルールと照らし合わせられる説明",
-    "page.note": "各プロジェクトでは、私が要件とルールを決め、結果を検証しています。実装にはAIの支援を多く取り入れています。このページの操作デモはサンプルデータを使用しています。AWS Pass Itのスクリーンショットも、サンプルデータを使う体験版の画面です。ほかのスクリーンショットは実際のアプリをもとに、個人データと一部の画面の文言を公開向けに調整しました。",
+
     "story.1": "解決したかった課題",
     "story.2": "設計と選択",
     "story.3": "できあがったもの",
