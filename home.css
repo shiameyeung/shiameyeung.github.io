@@ -47,3 +47,10 @@
 .home-page .personal-principle>.reading-detail,.home-page .personal-about>.reading-detail{margin:0;border-bottom:0}
 .home-page .personal-about .reading-detail>summary .mascot-heading{margin:0}
 @media(max-width:650px){.home-page .work-preview{padding:24px}}
+
+footer { align-items: center; }
+.footer-end, .footer-kiwi { display: inline-flex; align-items: center; }
+.footer-end { gap: 2px; }
+.footer-kiwi { justify-content: center; width: 44px; height: 44px; border-radius: 8px; }
+.footer-kiwi img { display: block; }
+.footer-kiwi:focus-visible { outline: 2px solid currentColor; }
