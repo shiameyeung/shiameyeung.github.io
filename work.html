@@ -99,6 +99,26 @@
       <div class="ui-opt">出力を原文と照合</div></div>
       </div>
     </div></div></section>
+    <section class="job" id="work-model-cost" data-rail-icon="work" style="--tint:#f5f5f7;--tone:#424245;--paper:#ffffff">
+      <div id="work-model-cost-detail" class="reading-detail"><div data-reading-heading><div class="job-head">
+        <span class="app-badge" aria-hidden="true">⚙</span>
+        <div><h2 data-rail-key="chapter.model-cost">低コストのモデルで修正候補を絞り込む</h2><p class="step">ルールとモデルの判定を、人が確認したサンプルで検証</p></div>
+      </div></div><div class="reading-detail-body"><div class="job-body">
+        <p>Web上の情報をまとめて確認する際、全件に有料モデルを使うと費用がかかります。低コストのモデルだけでは、正しい記録まで修正候補に入ることがあります。そこで、確度が高いと判定した修正候補のうち、実際に修正が必要なものの割合を95％以上にすることを目標にしました。</p>
+        <p>ルールでの絞り込みと、低コストのモデルによる二つの確認を組み合わせる取り組みに携わりました。複数の条件を満たした記録だけを、確度の高い修正候補としました。まず人が判定済みのサンプルと照合し、その後、新たに抽出したサンプルで事前の判定を伏せ、基準を満たすかを検証しました。</p>
+        <p>検証基準を満たしたグループの候補は低コストで選別でき、有料モデルの利用を大きく減らせました。判断の難しいケースには、有料モデルで追加確認する選択肢も残しました。</p>
+      </div></div></div>
+    </section>
+    <section class="job" id="work-source-evidence" data-rail-icon="work" style="--tint:#f5f5f7;--tone:#424245;--paper:#ffffff">
+      <div id="work-source-evidence-detail" class="reading-detail"><div data-reading-heading><div class="job-head">
+        <span class="app-badge" aria-hidden="true">🔎</span>
+        <div><h2 data-rail-key="chapter.source-evidence">複数の情報源を照合して、見落としを減らす</h2><p class="step">根拠の強さと情報の一致度を評価</p></div>
+      </div></div><div class="reading-detail-body"><div class="job-body">
+        <p>Web上では、一つの情報源から得られる情報だけでは判断材料が足りないことがあります。一つの情報源で確認できることを採用の条件にすると、正しい情報まで取りこぼすことがあります。</p>
+        <p>確認が必要な情報は候補として残し、互いに独立した情報源の内容や日付を突き合わせました。根拠の強さと情報の一致度を点数にし、基準を満たしたものを採用しました。情報が食い違うものや、根拠が足りないものは追加確認に回しました。</p>
+        <p>複数の根拠に支えられた記録を拾い上げ、同じ精度基準を保ちながら、収録できる情報の範囲を広げました。</p>
+      </div></div></div>
+    </section>
     <section class="job" id="work-m4" data-rail-icon="work" style="--tint:#f5f5f7;--tone:#424245;--paper:#ffffff"><div id="work-m4-detail" class="reading-detail"><div data-reading-heading><div class="job-head">
         <span class="app-badge" aria-hidden="true">🧹</span>
         <div><h2 data-rail-key="chapter.m4">一つの誤りから、同じ原因のデータを調べる</h2><p class="step">対象範囲の確認から、dry-run・本番実行・実行後の確認まで</p></div>
@@ -170,6 +190,8 @@ const JOBS = [
       <div class="ui-opt">${t['m3.d.model']}</div>
       <div class="ui-opt">${t['m3.d.guard']}</div>` },
 
+  { id:'model-cost', mark:'⚙', tint:'#f5f5f7', tone:'#424245', paper:'#ffffff' },
+  { id:'source-evidence', mark:'🔎', tint:'#f5f5f7', tone:'#424245', paper:'#ffffff' },
   { id:'m4', mark:'🧹', tint:'#f5f5f7', tone:'#424245', paper:'#ffffff',
     figure: t => `<div class="ui-bar"><span class="ui-title">${t['m4.d.title']}</span></div>
       <div class="layers">
@@ -208,7 +230,7 @@ function render(lang, t) {
       </div>
       <div class="job-body">
         <p>${t[j.id + '.desc']}</p>
-        <div class="ui">${j.figure(t)}</div>
+        ${j.figure ? `<div class="ui">${j.figure(t)}</div>` : `<p>${t[j.id + '.action']}</p><p>${t[j.id + '.result']}</p>`}
       </div>
     </section>`).join('');
 }
@@ -296,7 +318,17 @@ const T = {
     "metric.scope": "2026 年 6 月初至 9 月初，我结合人工工作和 AI 协助，改进我负责的一个仍在开发、优化中的数据项。这段期间，该项精度由 40% 多变为 85%，覆盖率由 30% 多变为 75%。",
     "metric.formula": "精度＝正确抽取条目数 ÷ 抽取条目总数；覆盖率＝抽取条目总数 ÷ 标准答案集中的条目数。",
     "job.body": "在自己的求职中，也用出处与进度记录来组织工作。",
-    "job.link_label": "查看资料与进度管理案例"
+    "job.link_label": "查看资料与进度管理案例",
+    "model-cost.title": "用低成本 LLM 做批量初筛",
+    "model-cost.sub": "规则缩小范围 · 标注样本检验精度",
+    "model-cost.desc": "批量核对网页信息时，全量调用付费模型成本很高。只靠低成本模型判断，也容易把正确记录混入待修正名单。目标是让高置信待修正名单里至少 95% 确实需要修正，同时减少付费调用。",
+    "model-cost.action": "我参与把规则筛查与低成本模型的两道判断结合，只有多项条件相符才进入高置信候选。先对照已人工判定的样本，再用新样本单独验收。边界记录另行复核。",
+    "model-cost.result": "通过验收的候选可用低成本流程完成筛查，把付费模型留给疑难案例，显著减少了付费调用。",
+    "source-evidence.title": "用多来源证据找回遗漏的记录",
+    "source-evidence.sub": "交叉核对 · 按证据强弱评分",
+    "source-evidence.desc": "网页上的线索常常缺了一部分。仅采用单个来源就能确认的记录，会漏掉一些真实信息。",
+    "source-evidence.action": "我会先保留有待核实的线索，把它们和独立来源的内容、时间及一致性一起检查。按证据强弱综合评分，达到采用标准再保留，冲突或证据不足的记录留待复核。",
+    "source-evidence.result": "有多项证据支持的记录得以保留，扩大了覆盖范围，同时维持了精度要求。"
   },
   "en": {
     "back": "Back",
@@ -371,7 +403,17 @@ const T = {
     "metric.scope": "From early June to early September 2026, I combined manual work and AI assistance to improve a data field I was responsible for that was still under development. During this period, its precision rose from the 40% range to 85%, and its coverage from the 30% range to 75%.",
     "metric.formula": "Precision = correctly extracted entries ÷ all extracted entries. Coverage = all extracted entries ÷ entries in the ground-truth data.",
     "job.body": "I also use source and progress records to manage my own job search.",
-    "job.link_label": "See how I manage materials and progress"
+    "job.link_label": "See how I manage materials and progress",
+    "model-cost.title": "Screen records in bulk with a lower-cost model",
+    "model-cost.sub": "Rule-based filtering and validation against human-labeled examples",
+    "model-cost.desc": "Checking every record with a paid model would have been costly. A lower-cost model on its own could flag records that were already correct. We aimed to reduce paid model use and reach 95% precision among the records flagged with high confidence as needing correction.",
+    "model-cost.action": "I helped combine rule-based filtering with two checks using a lower-cost model. Multiple checks had to agree before a record received a high-confidence flag. We compared the results with human judgments on one set of examples, then validated the process on a separate sample. Ambiguous cases were set aside for separate review.",
+    "model-cost.result": "The lower-cost workflow handled the screening for candidates that met the validation criteria. This substantially reduced paid model use and kept paid review available for harder cases.",
+    "source-evidence.title": "Recover missed records with evidence from multiple sources",
+    "source-evidence.sub": "Cross-check independent sources and score records by evidence strength",
+    "source-evidence.desc": "Web sources often provide only part of the information needed to verify a record. Requiring confirmation from a single source can leave valid records out.",
+    "source-evidence.action": "I kept tentative leads open while I compared the details and dates across independent sources. I scored each record by the strength and consistency of the evidence and accepted records that met the threshold. I set aside records with conflicting or incomplete evidence for further review.",
+    "source-evidence.result": "This brought more well-supported records into the dataset while keeping the same precision requirement."
   },
   "ja": {
     "back": "戻る",
@@ -446,7 +488,17 @@ const T = {
     "metric.scope": "2026年6月初旬〜9月初旬、担当した開発中のデータ項目で、人による作業とAIの支援を組み合わせて改善を進めました。この期間に、精度は40％台から85％、データカバー率は30％台から75％へと変化しました。",
     "metric.formula": "精度＝正しく抽出できた件数 ÷ 抽出した総件数。データカバー率＝抽出した総件数 ÷ 正解データの件数。",
     "job.body": "出典や進捗を記録する進め方を、自分の就職活動にも活用。",
-    "job.link_label": "資料と進捗の管理例を見る"
+    "job.link_label": "資料と進捗の管理例を見る",
+    "model-cost.title": "低コストのモデルで修正候補を絞り込む",
+    "model-cost.sub": "ルールとモデルの判定を、人が確認したサンプルで検証",
+    "model-cost.desc": "Web上の情報をまとめて確認する際、全件に有料モデルを使うと費用がかかります。低コストのモデルだけでは、正しい記録まで修正候補に入ることがあります。そこで、確度が高いと判定した修正候補のうち、実際に修正が必要なものの割合を95％以上にすることを目標にしました。",
+    "model-cost.action": "ルールでの絞り込みと、低コストのモデルによる二つの確認を組み合わせる取り組みに携わりました。複数の条件を満たした記録だけを、確度の高い修正候補としました。まず人が判定済みのサンプルと照合し、その後、新たに抽出したサンプルで事前の判定を伏せ、基準を満たすかを検証しました。",
+    "model-cost.result": "検証基準を満たしたグループの候補は低コストで選別でき、有料モデルの利用を大きく減らせました。判断の難しいケースには、有料モデルで追加確認する選択肢も残しました。",
+    "source-evidence.title": "複数の情報源を照合して、見落としを減らす",
+    "source-evidence.sub": "根拠の強さと情報の一致度を評価",
+    "source-evidence.desc": "Web上では、一つの情報源から得られる情報だけでは判断材料が足りないことがあります。一つの情報源で確認できることを採用の条件にすると、正しい情報まで取りこぼすことがあります。",
+    "source-evidence.action": "確認が必要な情報は候補として残し、互いに独立した情報源の内容や日付を突き合わせました。根拠の強さと情報の一致度を点数にし、基準を満たしたものを採用しました。情報が食い違うものや、根拠が足りないものは追加確認に回しました。",
+    "source-evidence.result": "複数の根拠に支えられた記録を拾い上げ、同じ精度基準を保ちながら、収録できる情報の範囲を広げました。"
   }
 };
 Site.mount(T, render);
