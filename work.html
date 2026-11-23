@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="base.css?v=20261108-fulltext1">
 
 <link rel="stylesheet" href="apps.css?v=20261027-monochrome-apple">
-<link rel="stylesheet" href="work.css?v=20261110-gross1">
+<link rel="stylesheet" href="work.css?v=20261123-proof-flow">
 <link rel="stylesheet" href="navigation.css?v=20261108-fulltext2">
 <link rel="stylesheet" href="capability-diagrams.css?v=20261108-diagrams1">
 <script src="capability-diagrams.js?v=20261111-direct1" defer></script>
@@ -103,7 +103,7 @@
       <div id="work-model-cost-detail" class="reading-detail"><div data-reading-heading><div class="job-head">
         <span class="app-badge" aria-hidden="true">⚙</span>
         <div><h2 data-rail-key="chapter.model-cost">低コストのモデルで修正候補を絞り込む</h2><p class="step">ルールとモデルの判定を、人が確認したサンプルで検証</p></div>
-      </div></div><div class="reading-detail-body"><div class="job-body">
+      </div></div><div class="reading-detail-body"><div class="job-body job-prose">
         <p>Web上の情報をまとめて確認する際、全件に有料モデルを使うと費用がかかります。低コストのモデルだけでは、正しい記録まで修正候補に入ることがあります。そこで、確度が高いと判定した修正候補のうち、実際に修正が必要なものの割合を95％以上にすることを目標にしました。</p>
         <p>ルールでの絞り込みと、低コストのモデルによる二つの確認を組み合わせる取り組みに携わりました。複数の条件を満たした記録だけを、確度の高い修正候補としました。まず人が判定済みのサンプルと照合し、その後、新たに抽出したサンプルで事前の判定を伏せ、基準を満たすかを検証しました。</p>
         <p>検証基準を満たしたグループの候補は低コストで選別でき、有料モデルの利用を大きく減らせました。判断の難しいケースには、有料モデルで追加確認する選択肢も残しました。</p>
@@ -113,7 +113,7 @@
       <div id="work-source-evidence-detail" class="reading-detail"><div data-reading-heading><div class="job-head">
         <span class="app-badge" aria-hidden="true">🔎</span>
         <div><h2 data-rail-key="chapter.source-evidence">複数の情報源を照合して、見落としを減らす</h2><p class="step">根拠の強さと情報の一致度を評価</p></div>
-      </div></div><div class="reading-detail-body"><div class="job-body">
+      </div></div><div class="reading-detail-body"><div class="job-body job-prose">
         <p>Web上では、一つの情報源から得られる情報だけでは判断材料が足りないことがあります。一つの情報源で確認できることを採用の条件にすると、正しい情報まで取りこぼすことがあります。</p>
         <p>確認が必要な情報は候補として残し、互いに独立した情報源の内容や日付を突き合わせました。根拠の強さと情報の一致度を点数にし、基準を満たしたものを採用しました。情報が食い違うものや、根拠が足りないものは追加確認に回しました。</p>
         <p>複数の根拠に支えられた記録を拾い上げ、同じ精度基準を保ちながら、収録できる情報の範囲を広げました。</p>
@@ -228,7 +228,7 @@ function render(lang, t) {
         <span class="app-badge" aria-hidden="true">${j.mark}</span>
         <div><h2 data-rail-key="chapter.${j.id}">${t[j.id + '.title']}</h2><p class="step">${t[j.id + '.sub']}</p></div>
       </div>
-      <div class="job-body">
+      <div class="job-body${j.figure ? '' : ' job-prose'}">
         <p>${t[j.id + '.desc']}</p>
         ${j.figure ? `<div class="ui">${j.figure(t)}</div>` : `<p>${t[j.id + '.action']}</p><p>${t[j.id + '.result']}</p>`}
       </div>
